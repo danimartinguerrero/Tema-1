@@ -1,24 +1,280 @@
 % Figura (Problema 1.11): campo vectorial tridimensional de los tres planos (sigma_a = sigma_b = sigma_c).
+% Generada con un script (orden de dibujo de atrás hacia delante y tono según la profundidad).
 \begin{figure}[ht]
 \centering
 \tdplotsetmaincoords{66}{118}
-\begin{tikzpicture}[tdplot_main_coords, scale=1.05]
+\begin{tikzpicture}[tdplot_main_coords, scale=1.1]
   \def\L{2.5}
-  % caja (aristas traseras discontinuas)
-  \draw[grispizarra!60, line width=0.4pt, densely dashed] (-\L,-\L,-\L) -- (\L,-\L,-\L) (-\L,-\L,-\L) -- (-\L,\L,-\L) (-\L,-\L,-\L) -- (-\L,-\L,\L);
-  % flechas: en cada punto de la malla, E ∝ (sgn x, sgn y, sgn z); se dibujan de atrás hacia delante
-  \foreach \x in {-2,-1,1,2}{\foreach \y in {2,1,-1,-2}{\foreach \z in {-2,-1,1,2}{%
-    \pgfmathsetmacro{\sx}{sign(\x)}\pgfmathsetmacro{\sy}{sign(\y)}\pgfmathsetmacro{\sz}{sign(\z)}%
-    \pgfmathsetmacro{\ft}{0.15+0.12*(\x+2.0)+0.06*(2.0-\y)}%
-    \mapcolor{\ft}%
-    \draw[-{Stealth[length=4.2pt,width=4pt]}, line width=1.1pt, mapc]
-      ({\x-0.33*\sx},{\y-0.33*\sy},{\z-0.33*\sz}) -- ++({0.66*\sx},{0.66*\sy},{0.66*\sz});}}}
-  % puntos sobre los planos: el campo no está definido (salto); se marcan con un punto
-  \foreach \x in {-2,-1,1,2}{\foreach \y in {-2,-1,1,2}{\fill[azulprof!70] (\x,\y,0) circle (0.9pt);}}
-  % caja (aristas delanteras)
-  \draw[grispizarra!80, line width=0.5pt] (\L,\L,\L) -- (-\L,\L,\L) -- (-\L,-\L,\L) -- (\L,-\L,\L) -- cycle;
-  \draw[grispizarra!80, line width=0.5pt] (\L,\L,\L) -- (\L,\L,-\L) -- (\L,-\L,-\L) -- (\L,-\L,\L);
-  \draw[grispizarra!80, line width=0.5pt] (\L,\L,-\L) -- (-\L,\L,-\L) -- (-\L,\L,\L);
+  % caja: aristas traseras
+  \draw[grispizarra!50, line width=0.4pt] (-\L,-\L,-\L) -- (\L,-\L,-\L) (-\L,-\L,-\L) -- (-\L,\L,-\L) (-\L,-\L,-\L) -- (-\L,-\L,\L);
+  \draw[grispizarra!50, line width=0.4pt] (-\L,\L,-\L) -- (-\L,\L,\L) -- (-\L,-\L,\L) -- (\L,-\L,\L) -- (\L,-\L,-\L);
+  % campo (flechas) y puntos de los planos de carga
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!35!azulclaro] (-1.821,-1.821,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!38!azulclaro] (-1.821,-1.821,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!38!azulclaro] (-1.821,-1.021,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!41!azulclaro] (-1.021,-1.821,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!41!azulclaro] (-1.821,-1.821,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!41!azulclaro] (-1.821,-1.021,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!41!azulclaro] (-1.821,-0.221,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!44!azulclaro] (-1.021,-1.821,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!44!azulclaro] (-1.821,-1.821,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!44!azulclaro] (-1.021,-1.021,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!44!azulclaro] (-1.821,-1.021,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!45!azulclaro] (-1.821,-0.221,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!45!azulclaro] (-1.821,0.221,-1.821) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!47!azulclaro] (-0.221,-1.821,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!47!azulclaro] (-1.021,-1.821,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!47!azulclaro] (-1.821,-1.821,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!48!azulclaro] (-1.021,-1.021,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!48!azulclaro] (-1.821,-1.021,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!48!azulclaro] (-1.021,-0.221,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!48!azulclaro] (-1.821,-0.221,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!48!azulclaro] (-1.821,0.221,-1.021) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!48!azulclaro] (-1.821,1.021,-1.821) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!50!azulclaro] (-0.221,-1.821,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.021,-1.821,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.821,-1.821,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-0.221,-1.021,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.021,-1.021,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.821,-1.021,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.021,-0.221,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.821,-0.221,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.021,0.221,-1.821) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.821,0.221,-0.221) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.821,1.021,-1.021) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!51!azulclaro] (-1.821,1.821,-1.821) -- ++(-0.358,0.358,-0.358);
+  \shade[ball color=azulprof!52!azulclaro] (-1.20,-1.20,0.00) circle (1.73pt);
+  \shade[ball color=azulprof!53!azulclaro] (-1.20,0.00,-1.20) circle (1.73pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (0.221,-1.821,-1.821) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-0.221,-1.821,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-1.021,-1.821,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-0.221,-1.021,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-1.021,-1.021,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-1.821,-1.021,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-0.221,-0.221,-1.821) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-1.021,-0.221,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-1.821,-0.221,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-1.021,0.221,-1.021) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-1.821,0.221,0.221) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!54!azulclaro] (-1.021,1.021,-1.821) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!55!azulclaro] (-1.821,1.021,-0.221) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!55!azulclaro] (-1.821,1.821,-1.021) -- ++(-0.358,0.358,-0.358);
+  \shade[ball color=azulprof!56!azulclaro] (-1.20,-0.40,0.00) circle (1.79pt);
+  \shade[ball color=azulprof!56!azulclaro] (-1.20,0.00,-0.40) circle (1.79pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (0.221,-1.821,-1.021) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (-0.221,-1.821,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (-1.021,-1.821,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (0.221,-1.021,-1.821) -- ++(0.358,-0.358,-0.358);
+  \shade[ball color=azulprof!57!azulclaro] (0.00,-1.20,-1.20) circle (1.82pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (-0.221,-1.021,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (-1.021,-1.021,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (-0.221,-0.221,-1.021) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (-1.021,-0.221,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (-1.821,-0.221,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!57!azulclaro] (-0.221,0.221,-1.821) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!58!azulclaro] (-1.021,0.221,-0.221) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!58!azulclaro] (-1.821,0.221,1.021) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!58!azulclaro] (-1.021,1.021,-1.021) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!58!azulclaro] (-1.821,1.021,0.221) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!58!azulclaro] (-1.021,1.821,-1.821) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!58!azulclaro] (-1.821,1.821,-0.221) -- ++(-0.358,0.358,-0.358);
+  \shade[ball color=azulprof!59!azulclaro] (-0.40,-1.20,0.00) circle (1.85pt);
+  \shade[ball color=azulprof!59!azulclaro] (-0.40,0.00,-1.20) circle (1.85pt);
+  \shade[ball color=azulprof!59!azulclaro] (-1.20,0.00,0.40) circle (1.85pt);
+  \shade[ball color=azulprof!59!azulclaro] (-1.20,0.40,0.00) circle (1.85pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!60!azulclaro] (1.021,-1.821,-1.821) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!60!azulclaro] (0.221,-1.821,-0.221) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!60!azulclaro] (-0.221,-1.821,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!60!azulclaro] (0.221,-1.021,-1.021) -- ++(0.358,-0.358,-0.358);
+  \shade[ball color=azulprof!60!azulclaro] (0.00,-1.20,-0.40) circle (1.88pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!60!azulclaro] (-0.221,-1.021,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!60!azulclaro] (-1.021,-1.021,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!60!azulclaro] (0.221,-0.221,-1.821) -- ++(0.358,-0.358,-0.358);
+  \shade[ball color=azulprof!60!azulclaro] (0.00,-0.40,-1.20) circle (1.88pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-0.221,-0.221,-0.221) -- ++(-0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-1.021,-0.221,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-0.221,0.221,-1.021) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-1.021,0.221,0.221) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-1.821,0.221,1.821) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-0.221,1.021,-1.821) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-1.021,1.021,-0.221) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-1.821,1.021,1.021) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-1.021,1.821,-1.021) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!61!azulclaro] (-1.821,1.821,0.221) -- ++(-0.358,0.358,0.358);
+  \shade[ball color=azulprof!62!azulclaro] (-0.40,-0.40,0.00) circle (1.91pt);
+  \shade[ball color=azulprof!62!azulclaro] (-0.40,0.00,-0.40) circle (1.91pt);
+  \shade[ball color=azulprof!62!azulclaro] (-1.20,0.00,1.20) circle (1.91pt);
+  \shade[ball color=azulprof!63!azulclaro] (-1.20,1.20,0.00) circle (1.92pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!63!azulclaro] (1.021,-1.821,-1.021) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!63!azulclaro] (0.221,-1.821,0.221) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!63!azulclaro] (-0.221,-1.821,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!63!azulclaro] (1.021,-1.021,-1.821) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!63!azulclaro] (0.221,-1.021,-0.221) -- ++(0.358,-0.358,-0.358);
+  \shade[ball color=azulprof!64!azulclaro] (0.00,-1.20,0.40) circle (1.94pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-0.221,-1.021,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (0.221,-0.221,-1.021) -- ++(0.358,-0.358,-0.358);
+  \shade[ball color=azulprof!64!azulclaro] (0.00,-0.40,-0.40) circle (1.94pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-0.221,-0.221,0.221) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-1.021,-0.221,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (0.221,0.221,-1.821) -- ++(0.358,0.358,-0.358);
+  \shade[ball color=azulprof!64!azulclaro] (0.00,0.40,-1.20) circle (1.94pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-0.221,0.221,-0.221) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-1.021,0.221,1.021) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-0.221,1.021,-1.021) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-1.021,1.021,0.221) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-1.821,1.021,1.821) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-0.221,1.821,-1.821) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-1.021,1.821,-0.221) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!64!azulclaro] (-1.821,1.821,1.021) -- ++(-0.358,0.358,0.358);
+  \shade[ball color=azulprof!65!azulclaro] (0.40,-1.20,0.00) circle (1.96pt);
+  \shade[ball color=azulprof!65!azulclaro] (0.40,0.00,-1.20) circle (1.97pt);
+  \shade[ball color=azulprof!65!azulclaro] (-0.40,0.00,0.40) circle (1.97pt);
+  \shade[ball color=azulprof!66!azulclaro] (-0.40,0.40,0.00) circle (1.97pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!66!azulclaro] (1.821,-1.821,-1.821) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!66!azulclaro] (1.021,-1.821,-0.221) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (0.221,-1.821,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (1.021,-1.021,-1.021) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (0.221,-1.021,0.221) -- ++(0.358,-0.358,0.358);
+  \shade[ball color=azulprof!67!azulclaro] (0.00,-1.20,1.20) circle (2.00pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (-0.221,-1.021,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (1.021,-0.221,-1.821) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (0.221,-0.221,-0.221) -- ++(0.358,-0.358,-0.358);
+  \shade[ball color=azulprof!67!azulclaro] (0.00,-0.40,0.40) circle (2.00pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (-0.221,-0.221,1.021) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (0.221,0.221,-1.021) -- ++(0.358,0.358,-0.358);
+  \shade[ball color=azulprof!67!azulclaro] (0.00,0.40,-0.40) circle (2.00pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (-0.221,0.221,0.221) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (-1.021,0.221,1.821) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (0.221,1.021,-1.821) -- ++(0.358,0.358,-0.358);
+  \shade[ball color=azulprof!67!azulclaro] (0.00,1.20,-1.20) circle (2.00pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (-0.221,1.021,-0.221) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (-1.021,1.021,1.021) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!67!azulclaro] (-0.221,1.821,-1.021) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!68!azulclaro] (-1.021,1.821,0.221) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!68!azulclaro] (-1.821,1.821,1.821) -- ++(-0.358,0.358,0.358);
+  \shade[ball color=azulprof!68!azulclaro] (0.40,-0.40,0.00) circle (2.03pt);
+  \shade[ball color=azulprof!69!azulclaro] (0.40,0.00,-0.40) circle (2.03pt);
+  \shade[ball color=azulprof!69!azulclaro] (-0.40,0.00,1.20) circle (2.03pt);
+  \shade[ball color=azulprof!69!azulclaro] (-0.40,1.20,0.00) circle (2.04pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (1.821,-1.821,-1.021) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (1.021,-1.821,0.221) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (0.221,-1.821,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (1.821,-1.021,-1.821) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (1.021,-1.021,-0.221) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (0.221,-1.021,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (1.021,-0.221,-1.021) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (0.221,-0.221,0.221) -- ++(0.358,-0.358,0.358);
+  \shade[ball color=azulprof!70!azulclaro] (0.00,-0.40,1.20) circle (2.06pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (-0.221,-0.221,1.821) -- ++(-0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (1.021,0.221,-1.821) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (0.221,0.221,-0.221) -- ++(0.358,0.358,-0.358);
+  \shade[ball color=azulprof!70!azulclaro] (0.00,0.40,0.40) circle (2.06pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (-0.221,0.221,1.021) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!70!azulclaro] (0.221,1.021,-1.021) -- ++(0.358,0.358,-0.358);
+  \shade[ball color=azulprof!70!azulclaro] (0.00,1.20,-0.40) circle (2.06pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!71!azulclaro] (-0.221,1.021,0.221) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!71!azulclaro] (-1.021,1.021,1.821) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!71!azulclaro] (0.221,1.821,-1.821) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!71!azulclaro] (-0.221,1.821,-0.221) -- ++(-0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!71!azulclaro] (-1.021,1.821,1.021) -- ++(-0.358,0.358,0.358);
+  \shade[ball color=azulprof!71!azulclaro] (1.20,-1.20,0.00) circle (2.08pt);
+  \shade[ball color=azulprof!72!azulclaro] (1.20,0.00,-1.20) circle (2.09pt);
+  \shade[ball color=azulprof!72!azulclaro] (0.40,0.00,0.40) circle (2.09pt);
+  \shade[ball color=azulprof!72!azulclaro] (0.40,0.40,0.00) circle (2.09pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (1.821,-1.821,-0.221) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (1.021,-1.821,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (1.821,-1.021,-1.021) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (1.021,-1.021,0.221) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (0.221,-1.021,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (1.821,-0.221,-1.821) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (1.021,-0.221,-0.221) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (0.221,-0.221,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!73!azulclaro] (1.021,0.221,-1.021) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!74!azulclaro] (0.221,0.221,0.221) -- ++(0.358,0.358,0.358);
+  \shade[ball color=azulprof!74!azulclaro] (0.00,0.40,1.20) circle (2.12pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!74!azulclaro] (-0.221,0.221,1.821) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!74!azulclaro] (1.021,1.021,-1.821) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!74!azulclaro] (0.221,1.021,-0.221) -- ++(0.358,0.358,-0.358);
+  \shade[ball color=azulprof!74!azulclaro] (0.00,1.20,0.40) circle (2.12pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!74!azulclaro] (-0.221,1.021,1.021) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!74!azulclaro] (0.221,1.821,-1.021) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!74!azulclaro] (-0.221,1.821,0.221) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!74!azulclaro] (-1.021,1.821,1.821) -- ++(-0.358,0.358,0.358);
+  \shade[ball color=azulprof!75!azulclaro] (1.20,-0.40,0.00) circle (2.15pt);
+  \shade[ball color=azulprof!75!azulclaro] (1.20,0.00,-0.40) circle (2.15pt);
+  \shade[ball color=azulprof!75!azulclaro] (0.40,0.00,1.20) circle (2.15pt);
+  \shade[ball color=azulprof!75!azulclaro] (0.40,1.20,0.00) circle (2.15pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!76!azulclaro] (1.821,-1.821,0.221) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!76!azulclaro] (1.021,-1.821,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!76!azulclaro] (1.821,-1.021,-0.221) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!76!azulclaro] (1.021,-1.021,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!76!azulclaro] (1.821,-0.221,-1.021) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!76!azulclaro] (1.021,-0.221,0.221) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (0.221,-0.221,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (1.821,0.221,-1.821) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (1.021,0.221,-0.221) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (0.221,0.221,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (1.021,1.021,-1.021) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (0.221,1.021,0.221) -- ++(0.358,0.358,0.358);
+  \shade[ball color=azulprof!77!azulclaro] (0.00,1.20,1.20) circle (2.18pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (-0.221,1.021,1.821) -- ++(-0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (1.021,1.821,-1.821) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (0.221,1.821,-0.221) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!77!azulclaro] (-0.221,1.821,1.021) -- ++(-0.358,0.358,0.358);
+  \shade[ball color=azulprof!78!azulclaro] (1.20,0.00,0.40) circle (2.21pt);
+  \shade[ball color=azulprof!78!azulclaro] (1.20,0.40,0.00) circle (2.21pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!79!azulclaro] (1.821,-1.821,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!79!azulclaro] (1.821,-1.021,0.221) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (1.021,-1.021,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (1.821,-0.221,-0.221) -- ++(0.358,-0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (1.021,-0.221,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (1.821,0.221,-1.021) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (1.021,0.221,0.221) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (0.221,0.221,1.821) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (1.821,1.021,-1.821) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (1.021,1.021,-0.221) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (0.221,1.021,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (1.021,1.821,-1.021) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (0.221,1.821,0.221) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!80!azulclaro] (-0.221,1.821,1.821) -- ++(-0.358,0.358,0.358);
+  \shade[ball color=azulprof!81!azulclaro] (1.20,0.00,1.20) circle (2.27pt);
+  \shade[ball color=azulprof!82!azulclaro] (1.20,1.20,0.00) circle (2.27pt);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.821,-1.821,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.821,-1.021,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.821,-0.221,0.221) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.021,-0.221,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.821,0.221,-0.221) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.021,0.221,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.821,1.021,-1.021) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.021,1.021,0.221) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (0.221,1.021,1.821) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.821,1.821,-1.821) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!83!azulclaro] (1.021,1.821,-0.221) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!84!azulclaro] (0.221,1.821,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!86!azulclaro] (1.821,-1.021,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!86!azulclaro] (1.821,-0.221,1.021) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!86!azulclaro] (1.821,0.221,0.221) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!86!azulclaro] (1.021,0.221,1.821) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!86!azulclaro] (1.821,1.021,-0.221) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!87!azulclaro] (1.021,1.021,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!87!azulclaro] (1.821,1.821,-1.021) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!87!azulclaro] (1.021,1.821,0.221) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!87!azulclaro] (0.221,1.821,1.821) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!89!azulclaro] (1.821,-0.221,1.821) -- ++(0.358,-0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!89!azulclaro] (1.821,0.221,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!90!azulclaro] (1.821,1.021,0.221) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!90!azulclaro] (1.021,1.021,1.821) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!90!azulclaro] (1.821,1.821,-0.221) -- ++(0.358,0.358,-0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!90!azulclaro] (1.021,1.821,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!93!azulclaro] (1.821,0.221,1.821) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!93!azulclaro] (1.821,1.021,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!93!azulclaro] (1.821,1.821,0.221) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!93!azulclaro] (1.021,1.821,1.821) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!96!azulclaro] (1.821,1.021,1.821) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!96!azulclaro] (1.821,1.821,1.021) -- ++(0.358,0.358,0.358);
+  \draw[-{Stealth[length=5pt,width=4.5pt]}, line width=1.25pt, azulprof!100!azulclaro] (1.821,1.821,1.821) -- ++(0.358,0.358,0.358);
+  % caja: aristas delanteras
+  \draw[grispizarra, line width=0.5pt] (\L,\L,\L) -- (-\L,\L,\L) (\L,\L,\L) -- (\L,-\L,\L) (\L,\L,\L) -- (\L,\L,-\L) -- (\L,-\L,-\L) (\L,\L,-\L) -- (-\L,\L,-\L);
   % marcas y rótulos de ejes
   \foreach \t in {-2,0,2}{
     \draw[grispizarra, line width=0.4pt] (\t,\L,-\L) -- ++(0,0.12,0);
@@ -27,12 +283,12 @@
     \node[font=\scriptsize, anchor=north east] at (\L+0.1,\t,-\L) {$\t$};
     \draw[grispizarra, line width=0.4pt] (\L,-\L,\t) -- ++(0.12,0,0);
     \node[font=\scriptsize, anchor=east] at (\L+0.15,-\L,\t) {$\t$};}
-  \node[font=\small] at (0,\L+0.75,-\L-0.2) {$x$};
-  \node[font=\small] at (\L+0.85,0,-\L-0.2) {$y$};
-  \node[font=\small] at (\L+0.75,-\L-0.2,0) {$z$};
+  \node[font=\small] at (0,\L+0.8,-\L-0.2) {$x$};
+  \node[font=\small] at (\L+0.9,0,-\L-0.2) {$y$};
+  \node[font=\small] at (\L+0.8,-\L-0.2,0) {$z$};
 \end{tikzpicture}
 \caption{Problema 1.11. Campo $\vE=\frac{\sigma}{2\eo}\bigl(\sgn x\,\ux+\sgn y\,\uy+\sgn z\,\uz\bigr)$ de los tres planos con $\sigma_a=\sigma_b=\sigma_c=\sigma>0$, en el cubo $[-2,2]^{3}$
-(unidades arbitrarias). Las flechas, de igual módulo $\sqrt3\,\sigma/2\eo$, divergen desde los planos: en cada octante el campo es uniforme y apunta hacia fuera; los puntos
-marcan los planos de carga, donde la componente normal salta en $\sigma/\eo$. El color solo indica la profundidad.}
+(unidades arbitrarias). Las flechas, de igual módulo $\sqrt3\,\sigma/2\eo$, divergen desde los planos: en cada octante el campo es uniforme y apunta hacia fuera. Las esferas
+marcan puntos de los planos de carga, donde la componente normal del campo salta en $\sigma/\eo$. El tono más oscuro indica los elementos más próximos al observador.}
 \label{fig:sem-planos-campo}
 \end{figure}

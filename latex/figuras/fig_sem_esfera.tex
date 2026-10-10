@@ -7,7 +7,7 @@
   \draw[eje] (0,0,0) -- (0,3.2,0) node[right] {\small $y$};
   \draw[eje] (0,0,0) -- (3.1,0,0) node[below left] {\small $x$};
   \tdEsfera{\RR}{azulprof}
-  \draw[eje] (0,0,0) -- (0,0,4.6) node[above] {\small $z$};
+  \draw[eje] (0,0,0) -- (0,0,4.8) node[above] {\small $z$};
   \coordinate (P) at (0,0,3.5);
   \coordinate (S) at (0.2,1.35,0.6);
   % vectores
@@ -17,20 +17,24 @@
   \node[font=\small, text=azulprof, anchor=west] at ($(S)!0.55!(P)+(0.0,0.18,0)$) {$\vc{R}$};
   \draw[->, azulacero, line width=1.1pt] (0,0,0) -- (P);
   \node[font=\small, text=azulprof, anchor=east] at (0,0,2.9) {$\vc{r}=z\,\uz$};
-  \draw[vectrojo, line width=1.5pt] (P) -- (0,0,4.2);
-  \node[font=\small, text=acento, anchor=west] at (0,0,4.15) {$\vE$};
-  \fill[azulprof] (P) circle (1.5pt) node[above right, font=\small] {$P$};
+  \draw[vectrojo, line width=1.5pt] (P) -- (0,0,4.3);
+  \node[font=\small, text=acento, anchor=east] at (0,-0.08,4.2) {$\vE$};
+  \fill[azulprof] (P) circle (1.5pt) node[right=2pt, font=\small] {$P$};
   % elemento de volumen
   \tdParche[acento, fill=acento!35, line width=0.6pt]{0.2,1.35,0.6}{0.13,-0.03,0}{0.03,0.12,0.1}
   \fill[acento] (S) circle (1.2pt);
   \node[font=\small, text=acento, anchor=north west] at ($(S)+(0.12,0.1,-0.05)$) {$\dV'$};
-  % ángulo theta' entre el eje z y r'
-  \draw[verdeteo, line width=0.55pt, domain=0:66, samples=20, variable=\tth]
-    plot ({0.55*sin(\tth)*cos(81.6)},{0.55*sin(\tth)*sin(81.6)},{0.55*cos(\tth)});
-  \node[font=\scriptsize, text=verdeteo] at (-0.05,0.1,1.0) {$\theta'$};
-  \node[font=\small, text=azulprof] at (-0.2,-1.1,-0.75) {$\rho$};
-  % radio a
-  \draw[verdeteo, <->, line width=0.5pt] (0,0,0) -- ({1.7*cos(215)},{1.7*sin(215)},0) node[pos=0.6, above, font=\scriptsize] {$a$};
+  % ángulo theta' entre el eje z y r' (arco en el plano que contiene a ambos)
+  \draw[verdeteo, line width=0.7pt, -{Stealth[length=3.5pt]}, domain=0:62, samples=24, variable=\tth]
+    plot ({0.85*sin(\tth)*cos(81.6)},{0.85*sin(\tth)*sin(81.6)},{0.85*cos(\tth)});
+  \node[font=\small, text=verdeteo, fill=white, fill opacity=0.8, text opacity=1, inner sep=1pt]
+    at ({1.2*sin(30)*cos(81.6)},{1.2*sin(30)*sin(81.6)},{1.2*cos(30)}) {$\theta'$};
+  % radio a (en el plano de la pantalla)
+  \begin{scope}[tdplot_screen_coords]
+    \draw[grispizarra, arrows={Stealth[length=3.5pt]-Stealth[length=3.5pt]}, line width=0.5pt] (0,-0.05) -- (-\RR,-0.05);
+    \node[font=\small, text=azulprof, anchor=north] at (-0.85,-0.08) {$a$};
+    \node[font=\small, text=azulprof] at (0.55,-1.15) {$\rho$};
+  \end{scope}
 \end{tikzpicture}
 \caption{Problema 1.1. Esfera de radio $a$ con densidad volúmica uniforme $\rho$. El punto campo $P$ está en el eje $z$ a distancia $z>a$ del centro,
 $\vc{r}=z\,\uz$; el elemento $\dV'$ está en $\vc{r}\,'=r'\,\uh{r'}$ y $\vc{R}=\vc{r}-\vc{r}\,'$ lo une con $P$. Por simetría
