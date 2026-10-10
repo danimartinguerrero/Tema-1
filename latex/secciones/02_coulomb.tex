@@ -1,0 +1,171 @@
+% =========================================================================
+\section{La ley de Coulomb}\label{sec:coulomb}
+% =========================================================================
+% -------------------------------------------------------------------------
+\subsection{La carga eléctrica}\label{sec:carga}
+% -------------------------------------------------------------------------
+La materia está formada por cargas eléctricas positivas y negativas que, en la materia
+ordinaria, se compensan: los cuerpos son neutros. Recoge este equilibrio el siguiente
+ejemplo, que da una idea de la enorme intensidad de la fuerza eléctrica.
+
+\begin{ejemplo}[¿Cuánta carga sobra si se rompe la neutralidad?]\label{ej:neutralidad}
+Una persona de $70\,\mathrm{kg}$ contiene unos $2\cdot10^{28}$ electrones. Si cada una de
+dos personas situadas a $1\,\mathrm{m}$ tuviese un 1\,\% más de electrones que de protones,
+cada una llevaría una carga $Q\approx2\cdot10^{26}\times1{,}6\cdot10^{-19}\,\mathrm{C}\approx3\cdot10^{7}\,\mathrm{C}$,
+y la fuerza de repulsión sería
+\[
+  F\approx\frac{1}{4\pi\eo}\frac{Q^{2}}{d^{2}}\approx9\cdot10^{9}\cdot\frac{(3\cdot10^{7})^{2}}{1^{2}}\,\mathrm{N}\sim10^{25}\,\mathrm{N},
+\]
+del orden del peso de toda la Tierra ($\sim6\cdot10^{25}\,\mathrm{N}$).
+\end{ejemplo}
+
+Se puede suministrar o extraer carga a un cuerpo neutro, por ejemplo frotando unos materiales
+con otros (vidrio con seda): el vidrio queda cargado positivamente (con defecto de electrones) y la
+seda negativamente (con exceso). Pero la carga total del sistema se \emph{conserva}: la carga no se
+crea ni se destruye. Además, está \emph{cuantizada}: cualquier carga $q$ es un múltiplo entero
+de la carga elemental, $e=1{,}6\cdot10^{-19}\,\mathrm{C}$ (carga del electrón, $-e$). Entre dos cuerpos cargados aparecen
+fuerzas que dependen de la cantidad de carga y de cómo está distribuida sobre el volumen o la superficie
+de cada cuerpo. Por eso es útil la idealización de \emph{carga puntual}: toda la carga concentrada
+en un punto geométrico. Es una buena aproximación cuando la distancia entre los cuerpos es mucho mayor que
+sus dimensiones.
+
+% -------------------------------------------------------------------------
+\subsection{Evidencia experimental: de la balanza de torsión a Cavendish}\label{sec:coulomb-exp}
+% -------------------------------------------------------------------------
+La primera investigación cuantitativa de la dependencia de esta fuerza con la distancia fue
+realizada por Coulomb en 1785~\cite{COULOMB} con una \emph{balanza de torsión}
+(\cref{fig:torsion}). Una aguja aislante, colgada de un hilo fino, lleva una esfera cargada en un extremo
+y un contrapeso en el otro; otra esfera cargada, fija, repele a la primera. En el equilibrio, el par
+de torsión del hilo, proporcional al ángulo girado, iguala al par de la fuerza electrostática: midiendo ángulos se miden
+fuerzas. Es un experimento muy delicado, sujeto a pérdidas de carga y a fuerzas de inducción sobre las esferas, y de él
+solo se obtiene con precisión modesta la ley $1/r^{2}$.
+
+\input{figuras/fig_torsion}
+
+Mucho antes que Coulomb, y con mayor precisión, Cavendish había contrastado el exponente
+por un camino indirecto (1771--73), que merece la pena entender porque es una de las pruebas más
+limpias de la ley (\cref{fig:cavendish}). El argumento descansa en un resultado geométrico: una
+cáscara esférica cargada uniformemente ejerce una fuerza nula en su interior \emph{si y solo si} la fuerza
+decae como $1/r^{2}$. Este hecho aparece ya, sin demostración, en Franklin y Priestley, y es el análogo
+eléctrico del teorema de Newton para la gravedad.
+
+\begin{proposicion}[Argumento de Cavendish]\label{prop:cavendish}
+Sea una cáscara esférica con densidad superficial de carga uniforme $\sigma$ y supongamos que
+la fuerza entre cargas puntuales es central, repulsiva (para cargas iguales) y de módulo
+$K\,q_1q_2/R^{\,n}$. Una carga $q$ en cualquier punto $P$ interior a la cáscara sufre fuerza neta nula
+si y solo si $n=2$.
+\end{proposicion}
+\begin{proof}
+Tracemos desde $P$ un cono estrecho de ángulo sólido $\dOm$ y su prolongación opuesta
+(\cref{fig:cavendish}b). Los dos conos recortan en la cáscara sendos elementos
+$\dif S_1$ y $\dif S_2$ a distancias $r_1$ y $r_2$ de $P$. El ángulo $\alpha$ entre la cuerda y la
+normal a la esfera (el radio) es el mismo en ambos extremos, porque el triángulo formado por los dos
+radios y la cuerda es isósceles. Por tanto, $\dif S_i=r_i^{2}\,\dOm/\cos\alpha$ y las fuerzas
+sobre $q$ actúan a lo largo de la cuerda y en sentidos opuestos,
+\[
+  \dif F_i=K\,q\,\frac{\sigma\,\dif S_i}{r_i^{\,n}}=\frac{K q\sigma\,\dOm}{\cos\alpha}\;r_i^{\,2-n},
+  \qquad
+  \dif F_{\mathrm{neta}}=\frac{K q\sigma\,\dOm}{\cos\alpha}\left(r_2^{\,2-n}-r_1^{\,2-n}\right).
+\]
+Para $n=2$ esta cantidad se anula para cada par de elementos opuestos, y la fuerza total, suma
+(integral) sobre todos ellos, es nula. Si $n\neq2$ y $P$ no es el centro, $r_1\neq r_2$ y
+$r_2^{\,2-n}\neq r_1^{\,2-n}$, de modo que la contribución de cada pareja no es nula y la
+fuerza total es, en general, distinta de cero.
+\end{proof}
+
+\input{figuras/fig_cavendish}
+
+Cavendish consiguió la configuración de la \cref{fig:cavendish}a: una esfera conductora dentro de
+una cáscara, unidas por un hilo, de modo que ambas forman un único conductor. Se cargan, se retira
+el hilo y se abre la cáscara. Si la ley fuese exactamente $1/r^{2}$, la carga residiría
+toda en la cáscara y la esfera interior quedaría descargada, como en efecto observó: con electrómetros de
+la época concluyó que el exponente era $2\pm0{,}02$. Los experimentos posteriores, siguiendo la misma idea, han
+reducido la incertidumbre en muchos órdenes de magnitud. Si escribimos el exponente como $2+\varepsilon$:
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Experimento & Año & $\lvert\varepsilon\rvert<$\\
+\midrule
+Cavendish~\cite{CAVENDISH-ELEC} & 1773 & $0{,}02$\\
+Maxwell~\cite{MAXWELL} & 1873 & $5\cdot10^{-5}$\\
+Plimpton y Lawton~\cite{PLIMPTON} & 1936 & $2\cdot10^{-9}$\\
+Williams, Faller y Hill~\cite{WILLIAMS} & 1971 & $\sim3\cdot10^{-16}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+El exponente 2 es, así, una de las constantes mejor comprobadas de la física~\cite{FEYNMAN}; sin embargo, la ley de Coulomb
+sigue siendo una ley \emph{experimental}, que no admite demostración desde otros principios dentro de
+la electrostática.
+
+% -------------------------------------------------------------------------
+\subsection{Enunciado de la ley}\label{sec:coulomb-ley}
+% -------------------------------------------------------------------------
+Elegido un sistema de coordenadas y dos cargas puntuales $q_1$ y $q_2$ en reposo, en el vacío, situadas
+en $\vc{r}_1$ y $\vc{r}_2$ (\cref{fig:coulomb}a), la ley de Coulomb afirma que la fuerza es proporcional al
+producto de las cargas, inversamente proporcional al cuadrado de la distancia que las separa, está dirigida
+a lo largo de la recta que las une, y es atractiva si las cargas son de signos opuestos y repulsiva si
+tienen el mismo signo. Matemáticamente:
+
+\begin{definicion}[Ley de Coulomb]\label{def:coulomb}
+La fuerza que la carga puntual $q_1$ ejerce sobre la carga puntual $q_2$, en reposo y en el vacío, es
+\begin{equation}\label{eq:coulomb}
+  \boxed{\;\vc{F}_{12}=K\,\frac{q_1q_2}{R_{12}^{2}}\,\uh{R_{12}}
+  =\frac{1}{4\pi\eo}\,\frac{q_1q_2}{\norm{\vc{R}_{12}}^{3}}\,\vc{R}_{12},\qquad
+  \vc{R}_{12}=\vc{r}_2-\vc{r}_1\;}
+\end{equation}
+con $\uh{R_{12}}=\vc{R}_{12}/R_{12}$ y $R_{12}=\norm{\vc{R}_{12}}$. Si $q_1q_2>0$ la fuerza es
+repulsiva y, si $q_1q_2<0$, atractiva.
+\end{definicion}
+
+\input{figuras/fig_coulomb}
+
+\begin{observacion}[Sobre la ley de Coulomb]\label{obs:coulomb}
+\begin{enumerate}[label=(\alph*)]
+  \item \emph{Acción y reacción.} Al intercambiar las cargas, $\vc{R}_{12}=-\vc{R}_{21}$ y por tanto
+        $\vc{F}_{21}=-\vc{F}_{12}$: se cumple la tercera ley de Newton.
+  \item \emph{La constante.} En el SI, $K=8{,}988\cdot10^{9}\,\mathrm{N\,m^{2}/C^{2}}$ y la unidad de carga,
+        el culombio, se define a partir de la unidad de corriente (amperio): es la carga que atraviesa en
+        un segundo la sección de un conductor por el que circula $1\,\mathrm{A}$. Se escribe habitualmente
+        \[
+          K=\frac{1}{4\pi\eo},\qquad
+          \eo=\frac{1}{4\pi K}=8{,}85\cdot10^{-12}\,\frac{\mathrm{C^{2}}}{\mathrm{N\,m^{2}}}\;\Bigl(=\frac{\mathrm{F}}{\mathrm{m}}\Bigr),
+        \]
+        la \emph{permitividad del vacío}, muy próxima a la del aire seco, que es el medio donde Coulomb
+        experimentó. Más adelante, en las ecuaciones de Maxwell, aparecerá la relación
+        $c^{2}=1/(\eo\mu_0)$ con $c\simeq2{,}998\cdot10^{8}\,\mathrm{m/s}$ la velocidad de la luz y
+        $\mu_0\approx4\pi\cdot10^{-7}\,\mathrm{H/m}$ la permeabilidad magnética del vacío~\cite{CODATA}.
+  \item \emph{Alcance de validez.} La ley es experimental y su exponente está comprobado con enorme precisión
+        (\cref{sec:coulomb-exp}). Aunque se estableció en condiciones macroscópicas, se aplica hasta distancias
+        de $10^{-15}\,\mathrm{m}$.
+  \item \emph{Tres restricciones.} (i)~\emph{Cargas puntuales}: es una idealización; las cargas deben ser pequeñas
+        frente a su separación. (ii)~\emph{Cargas en reposo}: si se mueven aparece además una interacción
+        magnética; el estudio de las cargas en reposo es la \emph{electrostática}. Para que se mantengan en
+        reposo han de aparecer fuerzas mecánicas tales que $\sum\vF=\vc{0}$. (iii)~\emph{Cargas en el vacío}: en
+        presencia de materiales aparecerían fuerzas adicionales (en los conductores, por redistribución de
+        sus cargas por influencia; en los dieléctricos, por su polarización).
+\end{enumerate}
+\end{observacion}
+
+% -------------------------------------------------------------------------
+\subsection{Principio de superposición}\label{sec:superposicion}
+% -------------------------------------------------------------------------
+La fuerza entre dos cargas no cambia por la presencia de una tercera. Este hecho, resultado de la observación
+experimental, es la base del \emph{principio de superposición}.
+
+\begin{definicion}[Principio de superposición]\label{def:superposicion}
+La fuerza que un sistema de cargas puntuales $q_1,\dots,q_N$ ejerce sobre una carga puntual $q$ es la suma
+vectorial de las fuerzas que cada una de ellas ejerce por separado:
+\begin{equation}\label{eq:superposicion}
+  \vc{F}_q=\sum_{i=1}^{N}\vc{F}_{iq}=\frac{q}{4\pi\eo}\sum_{i=1}^{N}\frac{q_i}{R_i^{3}}\,\vc{R}_i
+  =\frac{q}{4\pi\eo}\sum_{i=1}^{N}\frac{q_i}{R_i^{2}}\,\uh{R_i},
+\end{equation}
+donde $\vc{R}_i$ es el vector que une cada carga $q_i$ con la carga $q$ (\cref{fig:coulomb}b).
+\end{definicion}
+
+\begin{observacion}[Validez]\label{obs:superposicion}
+La superposición se ha comprobado válida para campos tan intensos como $10^{21}\,\mathrm{V/m}$ y distancias
+tan pequeñas como $10^{-10}\,\mathrm{m}$. Expresa la \emph{linealidad} del medio: vale en el vacío, pero
+no necesariamente en todos los materiales. Es, junto con la ley de Coulomb, el segundo dato de partida que usaremos:
+con \cref{eq:coulomb,eq:superposicion} basta para deducir el resto de la electrostática en el vacío.
+\end{observacion}

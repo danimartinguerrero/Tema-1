@@ -1,0 +1,35 @@
+% Figura: tres campos planos de referencia: uniforme, F=x ux (divergencia
+% positiva) y F=y ux (cizalla: rotacional no nulo, divergencia nula).
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.325\textwidth}\centering
+\begin{tikzpicture}[x=0.68cm, y=0.68cm, baseline=(current bounding box.north)]
+  \marcoD{-2.7}{2.7}{-2.7}{2.7}{-2,-1,0,1,2}{-2,-1,0,1,2}
+  \ejesD{-2.7}{2.7}{-2.7}{2.7}
+  \foreach \x in {-2.4,-1.8,...,2.4}{\foreach \y in {-2.4,-1.8,...,2.4}{%
+    \draw[-{Stealth[length=4.5pt,width=4.5pt]}, line width=0.7pt, azulprof]
+      (\x-0.17,\y-0.17) -- ++(0.34,0.34);}}
+\end{tikzpicture}\\[3pt]{\small $\vc{F}_1=\ux+\uy$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.325\textwidth}\centering
+\begin{tikzpicture}[x=1.12cm, y=1.12cm, baseline=(current bounding box.north)]
+  \marcoD{0}{3.2}{0}{3.2}{0,1,2,3}{0,1,2,3}
+  \ejesD{0}{3.2}{0}{3.2}
+  \clipD{0}{3.2}{0}{3.2}{\flechas{\x}{0}{0.2,0.575,...,3.1}{0.2,0.575,...,3.1}{0.30}{3.1}}
+\end{tikzpicture}\\[3pt]{\small $\vc{F}_2=x\,\ux$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.325\textwidth}\centering
+\begin{tikzpicture}[x=1.12cm, y=1.12cm, baseline=(current bounding box.north)]
+  \marcoD{0}{3.2}{0}{3.2}{0,1,2,3}{0,1,2,3}
+  \ejesD{0}{3.2}{0}{3.2}
+  \clipD{0}{3.2}{0}{3.2}{\flechas{\y}{0}{0.2,0.575,...,3.1}{0.2,0.575,...,3.1}{0.30}{3.1}}
+\end{tikzpicture}\\[3pt]{\small $\vc{F}_3=y\,\ux$}
+\end{minipage}
+\caption{Tres campos vectoriales planos. $\vc{F}_1=\ux+\uy$ es uniforme:
+ni diverge ni rota. En $\vc{F}_2=x\,\ux$ el módulo crece \emph{en la dirección
+del campo}, lo que da $\nab\cdot\vc{F}_2=1>0$ (expansión) y
+$\nab\times\vc{F}_2=\vc{0}$. En $\vc{F}_3=y\,\ux$ el módulo crece
+\emph{perpendicularmente} al campo: $\nab\cdot\vc{F}_3=0$ pero
+$\nab\times\vc{F}_3=-\uz$ (cizalla). El color codifica $\norm{\vc{F}}$.}
+\label{fig:campos_div}
+\end{figure}

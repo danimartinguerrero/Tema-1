@@ -1,0 +1,77 @@
+\documentclass[a4paper,11pt]{amsart}
+
+% =========================================================================
+%  Electromagnetismo I — Tema 1: Leyes básicas de la electrostática
+%  Apuntes formalizados. Compilar con: pdflatex + biber + pdflatex ×2
+%  (o latexmk -pdf main.tex).  Todo el preámbulo está en preambulo.tex.
+% =========================================================================
+\input{preambulo}
+
+% =========================================================================
+%                     VARIABLES PARA LA PORTADA
+% =========================================================================
+\newcommand{\Universidad}{Universidad de Salamanca}
+\newcommand{\Facultad}{Facultad de Ciencias}
+\newcommand{\Titulacion}{Grado en Física}
+\newcommand{\Asignatura}{Electromagnetismo I}
+\newcommand{\NumTema}{Tema 1}
+\newcommand{\TituloTema}{Leyes básicas\\de la electrostática}
+\newcommand{\tipotrabajo}{Apuntes formalizados con seminarios prácticos}
+\newcommand{\miNombre}{Daniel Martín Guerrero}
+\newcommand{\miProfesor}{Luis López Díaz}
+\newcommand{\SubtituloTema}{Ley de Coulomb, campo eléctrico, ley de Gauss,\\potencial y condiciones de contorno}
+\newcommand{\miUbicacion}{Salamanca, curso 2026/2027}
+
+% =========================================================================
+%                     DATOS DEL ARTÍCULO (cabecera)
+% =========================================================================
+\title{Leyes básicas de la electrostática en el vacío}
+\author{Daniel Martín Guerrero}
+\address{Grado en Física, Facultad de Ciencias, Universidad de Salamanca,
+         Salamanca, España}
+\date{}
+
+% =========================================================================
+%                                DOCUMENTO
+% =========================================================================
+\begin{document}
+% --- PORTADA ----------------------------------------------------------------
+\pagenumbering{alph}
+\input{portada}
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\begin{abstract}
+Formalizamos las leyes básicas de la electrostática en el vacío a partir de
+dos datos experimentales: la ley de Coulomb y el principio de superposición.
+Tras situar el problema en su contexto histórico y en el marco de las teorías
+de campos, definimos el campo eléctrico de distribuciones discretas y continuas
+de carga, demostramos la ley de Gauss mediante el ángulo sólido, la expresamos
+en forma diferencial con ayuda de la delta de Dirac, y probamos que el campo
+electrostático es irrotacional, lo que permite introducir el potencial y las
+ecuaciones de Poisson y de Laplace. El tema se cierra con las condiciones de
+contorno de los campos al atravesar una superficie cargada. Cada resultado se
+enuncia con rigor, se demuestra o se justifica geométricamente, y se acompaña de
+diagramas y gráficas; los seminarios finales resuelven, con todo detalle,
+los doce problemas de la lista del tema.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+\input{secciones/01_introduccion}
+\input{secciones/02_coulomb}
+\input{secciones/03_campo}
+\input{secciones/04_gauss}
+\input{secciones/05_potencial}
+\input{secciones/06_contorno}
+\input{secciones/07_seminarios}
+\input{secciones/08_apendice}
+
+% =========================================================================
+%                              BIBLIOGRAFÍA
+% =========================================================================
+\printbibliography[title={Referencias}]
+
+\end{document}

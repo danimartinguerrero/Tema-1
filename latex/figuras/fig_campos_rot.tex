@@ -1,0 +1,25 @@
+% Figura: campos con rotacional: F=-y ux + x uy (giro) y F=y ux (cizalla).
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.47\textwidth}\centering
+\begin{tikzpicture}[x=0.58cm, y=0.58cm, baseline=(current bounding box.north)]
+  \marcoD{-2.7}{2.7}{-2.7}{2.7}{-2,-1,0,1,2}{-2,-1,0,1,2}
+  \ejesD{-2.7}{2.7}{-2.7}{2.7}
+  \clipD{-2.7}{2.7}{-2.7}{2.7}{\flechas{-\y}{\x}{-2.4,-1.8,...,2.4}{-2.4,-1.8,...,2.4}{0.34}{3.4}}
+\end{tikzpicture}\\[3pt]{\small $\vc{F}(\vc{r})=-y\,\ux+x\,\uy$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\textwidth}\centering
+\begin{tikzpicture}[x=0.58cm, y=0.58cm, baseline=(current bounding box.north)]
+  \marcoD{-2.7}{2.7}{-2.7}{2.7}{-2,-1,0,1,2}{-2,-1,0,1,2}
+  \ejesD{-2.7}{2.7}{-2.7}{2.7}
+  \clipD{-2.7}{2.7}{-2.7}{2.7}{\flechas{\y}{0}{-2.4,-1.8,...,2.4}{-2.4,-1.8,...,2.4}{0.34}{2.5}}
+\end{tikzpicture}\\[3pt]{\small $\vc{F}(\vc{r})=y\,\ux$}
+\end{minipage}
+\caption{Campos con rotacional no nulo. (Izquierda) Giro rígido
+$\vc{F}=-y\,\ux+x\,\uy$ (sentido antihorario): $\nab\times\vc{F}=2\,\uz$. Una
+pequeña rueda colocada en cualquier punto gira con velocidad angular
+constante. (Derecha) Cizalla $\vc{F}=y\,\ux$, de rotacional $-\uz$: no hay
+líneas de corriente cerradas, pero la rueda gira igualmente (sentido horario)
+porque el flujo es más rápido por un lado que por el otro.}
+\label{fig:campos_rot}
+\end{figure}

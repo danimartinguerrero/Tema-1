@@ -1,0 +1,217 @@
+% =========================================================================
+\section{Introducción y contexto histórico}\label{sec:introduccion}
+% =========================================================================
+La electrostática estudia las interacciones entre cargas eléctricas \emph{en
+reposo}. Es el escalón más sencillo del electromagnetismo y, a la vez, el lugar
+donde aparecen por primera vez las ideas que sostienen toda la teoría: el
+\emph{campo} como intermediario de la interacción, las \emph{fuentes} que lo
+generan, y la pareja de ecuaciones, una para la divergencia y otra para el
+rotacional, que lo determinan por completo. Este tema parte de un único dato
+experimental (la ley de Coulomb) y de un principio (la superposición), y de ellos
+deduce, con las herramientas del Tema~0~\cite{TEMA0}, la ley de Gauss, el potencial
+electrostático y las condiciones que cumplen los campos en una frontera. Seguimos
+el programa de los apuntes de la asignatura~\cite{APUNTES-T1} y los desarrollos de
+la clase, y nos apoyamos en los textos clásicos~\cite{GRIFFITHS,WANGSNESS,JACKSON,PURCELL}. Las
+figuras reproducen, como diagramas en TikZ y gráficas en pgfplots, las del material
+de figuras del curso~\cite{FIGURAS-T1} (preparadas con Mathematica) y las
+completan con esquemas propios de la teoría y de los problemas~\cite{PROBLEMAS-T1}.
+
+% -------------------------------------------------------------------------
+\subsection{El electromagnetismo clásico y sus límites de validez}\label{sec:limites}
+% -------------------------------------------------------------------------
+Electromagnetismo~I y~II se enmarcan en la \emph{física clásica}. A comienzos del
+siglo~XX se comprobó que la mecánica de Newton resulta «inadecuada» fuera de su
+dominio natural: para objetos que se mueven a velocidades próximas a la de la luz
+hay que sustituirla por la relatividad especial; para objetos muy pequeños, a escala
+atómica, por la mecánica cuántica; y cuando ambas circunstancias se dan a la vez, por
+la teoría cuántica de campos (\cref{fig:teorias}).
+
+\input{figuras/fig_teorias}
+
+La pregunta natural es entonces si tiene sentido emplear la descripción
+\emph{ondulatoria} de Maxwell. Hoy sabemos que toda radiación electromagnética
+admite una descripción corpuscular (fotones) y otra ondulatoria, y que cuál de las
+dos resulta más útil depende de la energía de los fotones. A frecuencias bajas, un
+fotón transporta tan poca energía que cualquier detector responde a un número
+enorme de ellos y solo registra su promedio: el campo se comporta como una onda
+continua. Al subir la frecuencia, la naturaleza corpuscular se vuelve evidente
+(por ejemplo, en los experimentos con rayos~X).
+
+\begin{ejemplo}[Cuántos fotones hay en una onda clásica]\label{ej:fotones}
+El flujo de fotones a una distancia $d$ de una fuente isótropa de potencia $P$ y
+frecuencia $f$ es $\Phi_\gamma=P/(4\pi d^{2}\,hf)$, con $h=6{,}63\cdot10^{-34}\,\mathrm{J\,s}$.
+\begin{itemize}
+  \item \emph{Antena de FM}: $f=200\,\mathrm{MHz}$, $P=10\,\mathrm{kW}$, $d=10\,\mathrm{km}$.
+        Con $hf\simeq1{,}3\cdot10^{-25}\,\mathrm{J}$ resulta
+        $\Phi_\gamma\sim10^{19}$--$10^{20}\ \mathrm{fotones/(m^{2}\,s)}$.
+  \item \emph{Bombilla}: $P=100\,\mathrm{W}$, luz visible ($\lambda\sim500\,\mathrm{nm}$,
+        $f\sim10^{14}\,\mathrm{Hz}$, $hf\simeq4\cdot10^{-19}\,\mathrm{J}$), a $d=1\,\mathrm{m}$:
+        $\Phi_\gamma\sim2\cdot10^{19}\ \mathrm{fotones/(m^{2}\,s)}$.
+\end{itemize}
+En ambos casos el sensor recibe una cantidad tan grande de fotones que responde a su
+promedio, como lo haría ante una onda continua, y el planteamiento ondulatorio es
+legítimo.
+\end{ejemplo}
+
+Dos hechos explican por qué la descripción clásica sigue siendo esencial en la física
+moderna. Primero, la relatividad especial se apoyó en experimentos electromagnéticos y las
+ecuaciones de Maxwell resultaron ser ya compatibles con ella. Segundo, las correcciones
+cuánticas a la fuerza electromagnética son muy pequeñas incluso a distancias del orden de
+$10^{-10}\,\mathrm{cm}$, cien veces menores que el tamaño de un átomo: las mismas leyes
+describen la atracción y la repulsión entre partículas dentro del átomo y entre cuerpos
+macroscópicos (aunque luego sea preciso recurrir a la mecánica cuántica para predecir cómo
+se mueven esas partículas bajo tales fuerzas) y, a distancias aún menores, la teoría
+electromagnética se funde con la cuántica en la electrodinámica cuántica. Por «clásico»
+entendemos, por tanto, «no cuántico»: todas las magnitudes (posiciones, velocidades,
+campos) se consideran medibles con precisión ilimitada.
+
+% -------------------------------------------------------------------------
+\subsection{La interacción electromagnética entre las cuatro fuerzas de la naturaleza}\label{sec:fuerzas}
+% -------------------------------------------------------------------------
+La mecánica dice cómo responde un sistema a una fuerza dada; la pregunta de fondo es de
+dónde vienen las fuerzas. Todas las que conocemos se reducen a cuatro interacciones
+fundamentales, que ordenamos por intensidad relativa, dando el valor~1 a la más intensa
+(\cref{tab:fuerzas}).
+
+\begin{table}[ht]
+\centering
+\caption{Las cuatro interacciones fundamentales. La intensidad es la relativa entre
+dos protones, tomando como unidad la fuerza nuclear fuerte.}
+\label{tab:fuerzas}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lccl@{}}
+\toprule
+Interacción & Intensidad relativa & Alcance & Magnitud a la que se acopla\\
+\midrule
+Fuerte          & $1$          & corto ($\sim10^{-15}\,\mathrm{m}$) & carga de color\\
+Electromagnética& $10^{-2}$    & largo                              & carga eléctrica\\
+Débil           & $10^{-5}$    & muy corto                          & carga débil\\
+Gravitatoria    & $10^{-38}$   & largo                              & masa-energía\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Conviene darse cuenta de la amplitud del dominio electromagnético. La fricción, la fuerza
+normal que sostiene los cuerpos sobre el suelo, la que mantiene unidos los enlaces
+moleculares o la que actúa en el choque de dos bolas de billar son, todas, fuerzas
+electromagnéticas. La fuerza nuclear fuerte mantiene unidos los protones en el núcleo, pero
+es de muy corto alcance: en un núcleo con muchos protones (como el uranio, con 92) el equilibrio es
+frágil y el núcleo puede romperse. La interacción débil, responsable de ciertos procesos de
+desintegración nuclear, es también de corto alcance y mucho menos intensa. La
+electromagnética, asociada a la carga eléctrica, es de largo alcance y domina la escala
+atómica en cuanto se supera la nuclear. La gravitatoria, asociada a la masa, es también de
+largo alcance, pero extraordinariamente débil en comparación.
+
+\begin{observacion}[Electricidad frente a gravedad]\label{obs:gravedad}
+La repulsión eléctrica entre dos electrones es unas $4\cdot10^{42}$ veces mayor que su
+atracción gravitatoria; el cociente $e^{2}/(4\pi\eo\,Gm_e^{2})$ no depende de la distancia, pues ambas
+fuerzas decaen como $1/r^{2}$. Si la gravedad, y no la electricidad, mantuviese ligado al
+electrón en el átomo de hidrógeno, el análogo del radio de Bohr,
+$a_G=\hbar^{2}/(Gm_e^{2}m_p)\approx10^{29}\,\mathrm{m}$, sería mayor que el radio del
+universo observable ($\sim4\cdot10^{26}\,\mathrm{m}$).
+\end{observacion}
+
+% -------------------------------------------------------------------------
+\subsection{Breve historia: de la piedra de imán a la teoría de Maxwell}\label{sec:historia}
+% -------------------------------------------------------------------------
+Una exposición correcta del electromagnetismo pasa por conocer su historia, y el
+planteamiento de este curso, que va de lo más sencillo a lo más complicado, es parecido a su
+desarrollo histórico (\cref{fig:historia})~\cite{WHITTAKER,HEILBRON}.
+
+\input{figuras/fig_historia}
+
+Las raíces de las palabras \emph{electricidad} y \emph{magnetismo} se remontan a la
+Antigüedad. Tales de Mileto (siglo~VI a.\,C.) observó que el ámbar (en griego
+$\ddot{\eta}\lambda\epsilon\kappa\tau\rho o\nu$, \emph{élektron}), al ser frotado, atraía
+pajitas. El conocimiento del magnetismo nace de la observación de las fuerzas entre un mineral,
+la «piedra de imán», y trozos de hierro; el origen de la palabra es oscuro. Lucrecio la
+hace derivar de Magnesia, en Asia Menor, y Plinio refiere la leyenda del pastor Magnes, cuyo
+cayado de hierro quedó prendido a una roca cercana. En 1600, William Gilbert separó con
+cuidado los fenómenos eléctricos de los magnéticos en su \emph{De Magnete}.
+
+El salto cuantitativo llega en el siglo~XVIII. En 1771 Henry Cavendish demostró, con un
+experimento de esferas concéntricas (\cref{sec:coulomb-exp}), que la fuerza eléctrica
+decae con el cuadrado de la distancia; sus resultados no se publicaron hasta que
+Maxwell los editó en 1879~\cite{CAVENDISH-ELEC}. En 1785 Charles-Augustin de
+Coulomb publicó con una balanza de torsión la ley que lleva su nombre~\cite{COULOMB}.
+
+Electricidad y magnetismo fueron dos ciencias independientes hasta 1820, cuando Hans Christian
+Oersted descubrió (casi por accidente) que una corriente eléctrica desvía una brújula: nacía el
+electromagnetismo. Pocos meses después, André-Marie Ampère desarrolló una teoría matemática de
+la fuerza entre elementos de corriente. Michael Faraday introdujo una idea nueva, distinta de
+la acción a distancia de la mecánica newtoniana: el concepto de \emph{campo}, y en 1831
+descubrió las corrientes de inducción que aparecen en conductores sometidos a un flujo magnético
+variable, base de generadores, motores y transformadores. A partir de los experimentos de
+Faraday, James Clerk Maxwell reunió en 1873, en su \emph{Tratado de electricidad y
+magnetismo}~\cite{MAXWELL}, todo el formalismo matemático, incluidas las ecuaciones que hoy
+llevan su nombre: un campo magnético variable crea un campo eléctrico sin necesidad de soporte
+material, la corriente de desplazamiento y la teoría electromagnética de la luz. Su predicción de
+las ondas electromagnéticas fue confirmada por Heinrich Hertz en 1888, y abrió el camino de las
+telecomunicaciones (Marconi, 1896). Ni la teoría de los cuantos (Planck, 1900) ni la relatividad
+especial (Einstein, 1905) han empañado el brillo de las ecuaciones de Maxwell.
+
+% -------------------------------------------------------------------------
+\subsection{De la acción a distancia al concepto de campo}\label{sec:campo-idea}
+% -------------------------------------------------------------------------
+La ley de Coulomb es un ejemplo de \emph{acción a distancia}: dos cargas separadas se
+atraen o repelen sin que nada ocupe el espacio entre ellas. Esa idea es heredera de la gravitación
+newtoniana. Sin embargo, esta interacción (como otras) se estudia con mucha más comodidad
+como el encadenamiento de dos procesos: en el primero, un grupo de cargas, las \emph{fuentes},
+perturban el espacio que las rodea, dotándolo de propiedades que no tenía antes; en el segundo,
+otra carga sufre una fuerza neta por interactuar con ese campo previamente creado. El campo es,
+pues, una propiedad de cada punto del espacio, que el teórico puede estudiar sin saber quién va
+a ser la carga que lo sienta. Lo que hace a esta descripción tan fecunda es que relacionar
+campos con fuentes es un problema mucho más rico que calcular fuerzas.
+
+El plan del tema sigue una cadena lógica sencilla (\cref{fig:esquema}). La \emph{ley de
+Coulomb} junto con el \emph{principio de superposición} determinan el campo eléctrico
+$\vE(\vc{r})$. De la forma $1/R^{2}$ de la ley se deduce la \emph{divergencia} del campo
+(ley de Gauss) y, de su carácter central, su \emph{rotacional} (nulo), de modo que $\vE$ deriva
+de un potencial. Como el teorema de Helmholtz asegura que un campo queda determinado cuando se
+conocen su divergencia y su rotacional (con condiciones de regularidad en el infinito), esas dos
+ecuaciones, junto con las condiciones de contorno, contienen \emph{toda} la información de la
+electrostática en el vacío.
+
+\input{figuras/fig_esquema}
+
+% -------------------------------------------------------------------------
+\subsection{Notación y convenios del tema}\label{sec:notacion}
+% -------------------------------------------------------------------------
+Mantenemos la notación del Tema~0~\cite{TEMA0,NAVAS} y las expresiones del
+formulario~\cite{FORMULARIO}. Los vectores llevan flecha, los versores sombrero, y con
+$\vc{r}$ designamos el punto en el que se evalúa el campo (\emph{punto campo}) y con
+$\vc{r}\,'$ el punto donde está la carga que lo crea (\emph{punto fuente}). Como en el
+Tema~0, usamos $\sen$ para el seno.
+
+\begin{table}[ht]
+\centering
+\caption{Notación específica del Tema~1.}
+\label{tab:notacion1}
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}p{4.4cm}p{9.4cm}@{}}
+\toprule
+Símbolo & Significado\\
+\midrule
+$q,\ \qp$ & Carga de prueba y carga fuente (en C).\\
+$\vc{r},\ \vc{r}\,'$ & Posición del punto campo y del punto fuente.\\
+$\vc{R}=\vc{r}-\vc{r}\,',\ R=\norm{\vc{R}},\ \uR=\vc{R}/R$ &
+  Vector de posición relativa (de la fuente al punto campo), su módulo y su versor.\\
+$\vE(\vc{r}),\ \vF$ & Campo eléctrico (V/m) y fuerza (N).\\
+$\rho,\ \sigma,\ \lambda$ & Densidades volúmica (C/m$^{3}$), superficial (C/m$^{2}$) y lineal (C/m) de carga.\\
+$\phi(\vc{r})$ & Potencial electrostático (V).\\
+$\flujo=\oiint_{S}\vE\cdot\dS$ & Flujo eléctrico a través de una superficie cerrada.\\
+$\dOm$ & Elemento de ángulo sólido (sr).\\
+$\eo,\ \mu_{0},\ c$ & Permitividad y permeabilidad del vacío; velocidad de la luz.\\
+$\delta(x),\ \delta^{3}(\vc{r})$ & Delta de Dirac en una y en tres dimensiones.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{notacion}[Convenios del tema]\label{not:convenios1}
+Trabajamos en el vacío, con cargas en reposo (estática) y campos de clase $C^{1}$ salvo en
+las superficies y curvas de carga, que se tratan como idealizaciones (\cref{sec:contorno}). Las
+superficies cerradas se orientan con la normal exterior $\un$ y escribimos $\dS=\un\,\dsc$.
+Las unidades son las del Sistema Internacional (SI).
+\end{notacion}

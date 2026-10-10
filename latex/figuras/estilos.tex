@@ -1,0 +1,134 @@
+% =========================================================================
+%  Estilos y macros gráficas comunes
+%  - \mapcolor{t}: escala cromática «campo» (t en [0,1]); define el color mapc
+%  - \flechas{u}{v}{lista x}{lista y}{escala}{|F|max}: campo vectorial 2D
+%  - \flechasIII{u}{v}{w}{...}: campo vectorial 3D (con tikz-3dplot)
+% =========================================================================
+
+% --- Escala cromática (5 tramos entre cm0 y cm4) ------------------------
+\newcommand{\mapcolor}[1]{%
+  \pgfmathsetmacro{\mt}{min(max(#1,0),0.9999)*4}%
+  \pgfmathtruncatemacro{\mi}{floor(\mt)}%
+  \pgfmathtruncatemacro{\mj}{\mi+1}%
+  \pgfmathsetmacro{\mf}{100*(\mt-\mi)}%
+  \colorlet{mapc}{cm\mj!\mf!cm\mi}}
+
+% --- Estilos TikZ generales ------------------------------------------------
+\tikzset{
+  >=Stealth,
+  eje/.style={->, line width=0.6pt, grispizarra},
+  ejeprof/.style={->, line width=0.7pt, azulprof},
+  vect/.style={->, line width=1pt, azulprof},
+  vectrojo/.style={->, line width=1pt, rojoteo},
+  vectverde/.style={->, line width=1pt, verdeteo},
+  fino/.style={line width=0.4pt, grispizarra},
+  punteado/.style={densely dotted, line width=0.5pt, grispizarra},
+  etiq/.style={font=\small, text=black!85},
+  cuadro/.style={draw=grispizarra!60, line width=0.4pt, fill=white, inner sep=2pt},
+  trayecto/.style={line width=1.1pt, rojoteo},
+  orienta/.style={decoration={markings, mark=at position 0.55 with {\arrow{Stealth[length=5pt]}}}, postaction={decorate}},
+}
+
+% --- Marco con marcas para gráficas de campos 2D ---------------------------
+% \marco2D{xmin}{xmax}{ymin}{ymax}{xticks}{yticks}  (unidades TikZ = unidades del campo)
+\newcommand{\marcoD}[6]{%
+  \draw[grispizarra, line width=0.5pt] (#1,#3) rectangle (#2,#4);
+  \foreach \t in {#5}{%
+     \draw[grispizarra, line width=0.4pt] (\t,#3) -- ++(0,0.08);
+     \draw[grispizarra, line width=0.4pt] (\t,#4) -- ++(0,-0.08);
+     \node[below=1pt, font=\scriptsize] at (\t,#3) {\pgfmathprintnumber[fixed,precision=1,use comma,zerofill=false]{\t}};}%
+  \foreach \t in {#6}{%
+     \draw[grispizarra, line width=0.4pt] (#1,\t) -- ++(0.08,0);
+     \draw[grispizarra, line width=0.4pt] (#2,\t) -- ++(-0.08,0);
+     \node[left=1pt, font=\scriptsize] at (#1,\t) {\pgfmathprintnumber[fixed,precision=1,use comma,zerofill=false]{\t}};}%
+}
+
+% --- Campo vectorial plano: flechas centradas en cada nudo de la malla ---
+% #1,#2: componentes u(x,y), v(x,y) (en términos de \x e \y)
+% #3,#4: listas de abscisas y ordenadas; #5: factor de escala de longitud
+% #6: módulo máximo (normaliza el color)
+\newcommand{\flechas}[6]{%
+  \foreach \x in {#3}{\foreach \y in {#4}{%
+    \pgfmathsetmacro{\fu}{#1}\pgfmathsetmacro{\fv}{#2}%
+    \pgfmathsetmacro{\fm}{sqrt(\fu*\fu+\fv*\fv)}%
+    \pgfmathsetmacro{\ft}{\fm/(#6)}%
+    \mapcolor{\ft}%
+    \ifdim\fm pt>0.001pt
+      \pgfmathsetmacro{\hl}{2.2+4.2*\ft}%
+      \pgfmathsetmacro{\lw}{0.35+0.5*\ft}%
+      \draw[-{Stealth[length=\hl pt,width=\hl pt]}, line width=\lw pt, mapc]
+        (\x-0.5*#5*\fu,\y-0.5*#5*\fv) -- ++(#5*\fu,#5*\fv);
+    \else
+      \fill[mapc] (\x,\y) circle (0.7pt);
+    \fi}}}
+
+% --- Campo vectorial espacial (tikz-3dplot): lo mismo en 3D ----------------
+\newcommand{\flechasIII}[8]{%
+  \foreach \x in {#4}{\foreach \y in {#5}{\foreach \z in {#6}{%
+    \pgfmathsetmacro{\fu}{#1}\pgfmathsetmacro{\fv}{#2}\pgfmathsetmacro{\fw}{#3}%
+    \pgfmathsetmacro{\fm}{sqrt(\fu*\fu+\fv*\fv+\fw*\fw)}%
+    \pgfmathsetmacro{\ft}{\fm/(#8)}%
+    \mapcolor{\ft}%
+    \ifdim\fm pt>0.001pt
+      \pgfmathsetmacro{\hl}{2.0+3.6*\ft}%
+      \pgfmathsetmacro{\lw}{0.35+0.5*\ft}%
+      \draw[-{Stealth[length=\hl pt,width=\hl pt]}, line width=\lw pt, mapc]
+        (\x-0.5*#7*\fu,\y-0.5*#7*\fv,\z-0.5*#7*\fw) -- ++(#7*\fu,#7*\fv,#7*\fw);
+    \else
+      \fill[mapc] (\x,\y,\z) circle (0.7pt);
+    \fi}}}}
+
+% --- Estilo base de ejes pgfplots (como en la figura del efecto Doppler) --
+\pgfplotsset{
+  tema/.style={
+    tick label style={font=\scriptsize}, label style={font=\small},
+    axis lines=left, axis line style={grispizarra},
+    grid=major, grid style={grisclaro, line width=0.4pt},
+    every tick/.style={grispizarra},
+    legend style={font=\scriptsize, draw=none, fill=white, fill opacity=0.85,
+                  text opacity=1},
+    /pgf/number format/use comma,
+  },
+  mapa/.style={
+    tick label style={font=\scriptsize}, label style={font=\small},
+    axis line style={grispizarra}, every tick/.style={grispizarra},
+    /pgf/number format/use comma,
+    colormap name=campo,
+  },
+  superficie/.style={
+    tick label style={font=\scriptsize}, label style={font=\small},
+    axis line style={grispizarra}, every tick/.style={grispizarra},
+    grid=none, /pgf/number format/use comma,
+    colormap name=campo,
+  },
+}
+
+% Rótulos de ejes para marcoD:  \ejesD{xmin}{xmax}{ymin}{ymax}
+\newcommand{\ejesD}[4]{%
+  \node[font=\small, anchor=north] at ($({(#1+#2)/2},#3)+(0,-13pt)$) {$x$ (u.\,arb.)};
+  \node[font=\small, rotate=90, anchor=south] at ($(#1,{(#3+#4)/2})+(-17pt,0)$) {$y$ (u.\,arb.)};}
+
+% Recorta el contenido #5 al rectángulo [#1,#2]x[#3,#4]
+\newcommand{\clipD}[5]{\begin{scope}\clip (#1,#3) rectangle (#2,#4); #5 \end{scope}}
+
+% Versor dibujado en el punto (#1,#2,#3) con desplazamiento #4 (coordenadas 3D)
+\newcommand{\uvect}[5]{%  versor en P: origen (#1,#2,#3), dirección (#4) y rótulo (#5)
+  \draw[-{Stealth[length=4.5pt,width=4pt]}, rojoteo, line width=1.1pt] (#1,#2,#3) -- ++#4 node[#5] {};}
+
+% Mapa de calor de f=exp(-r^2) (anillos concéntricos) con curvas de nivel y marco; #1 = extras
+\newcommand{\mapaGauss}[1]{%
+  \begin{scope}
+    \clip (-2,-2) rectangle (2,2);
+    \foreach \k in {0,...,90}{%
+      \pgfmathsetmacro{\rk}{3.0*(1-\k/91)}%
+      \pgfmathsetmacro{\fk}{exp(-\rk*\rk)}%
+      \mapcolor{\fk}%
+      \fill[mapc] (0,0) circle (\rk);}
+    \foreach \lv in {0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1}{%
+      \pgfmathsetmacro{\rl}{sqrt(-ln(\lv))}%
+      \draw[black!75, line width=0.45pt] (0,0) circle (\rl);}
+    #1
+  \end{scope}
+  \marcoD{-2}{2}{-2}{2}{-2,-1,0,1,2}{-2,-1,0,1,2}
+  \ejesD{-2}{2}{-2}{2}}
+

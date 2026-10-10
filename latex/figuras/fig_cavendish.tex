@@ -1,0 +1,57 @@
+% Figura: experimento de Cavendish y argumento de la cáscara esférica.
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.47\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  % (a) esfera interior dentro de dos hemisferios conductores
+  \shade[ball color=azulclaro!55, opacity=0.35] (0,0) circle (1.7);
+  \draw[azulprof, line width=0.8pt] (0,0) circle (1.7);
+  \draw[azulprof, densely dashed, line width=0.5pt] (-1.7,0) -- (1.7,0);
+  \shade[ball color=azulacero!60, opacity=0.8] (0,0) circle (0.5);
+  \draw[azulprof, line width=0.6pt] (0,0) circle (0.5);
+  \draw[grispizarra, line width=0.7pt] (0.5,0) -- (2.4,0.9) -- (2.9,0.9);
+  \node[font=\footnotesize, anchor=west] at (2.0,1.35) {hilo conductor};
+  \draw[grispizarra, line width=0.3pt] (2.2,1.2) -- (1.9,0.83);
+  \node[font=\footnotesize, anchor=west] at (1.85,-1.0) {cáscara};
+  \node[font=\footnotesize] at (0,-0.1) {$a$};
+  \node[font=\footnotesize, anchor=north] at (0,-1.8) {esfera interior};
+  \draw[grispizarra, line width=0.3pt] (0,-1.78) -- (0,-0.52);
+\end{tikzpicture}\\[2pt]{\small\scshape (a)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.50\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  % (b) cono de ángulo sólido que corta a la cáscara en dos elementos
+  \def\Rr{1.75}
+  \draw[azulprof, line width=0.8pt, name path=circ] (0,0) circle (\Rr);
+  \coordinate (P) at (0.55,0.30);
+  \foreach \dir/\nm in {14/a,26/b}{
+    \path[name path=ray\nm] (P) -- ++(\dir:4);
+    \path[name path=rev\nm] (P) -- ++({\dir+180}:4);
+    \path[name intersections={of=circ and ray\nm, by=A\nm}];
+    \path[name intersections={of=circ and rev\nm, by=B\nm}];
+    \draw[azulacero, line width=0.5pt] (B\nm) -- (A\nm);}
+  \draw[acento, line width=2.4pt] (Aa) -- (Ab);
+  \draw[acento, line width=2.4pt] (Ba) -- (Bb);
+  \fill[azulclaro, opacity=0.25] (P) -- (Aa) -- (Ab) -- cycle;
+  \fill[azulclaro, opacity=0.25] (P) -- (Ba) -- (Bb) -- cycle;
+  \fill[azulprof] (P) circle (1.6pt) node[below right, font=\small] {$P$};
+  % normales en los puntos de impacto, con el mismo ángulo respecto a la cuerda
+  \path (Aa) -- (Ab) coordinate[pos=0.5] (A);
+  \path (Ba) -- (Bb) coordinate[pos=0.5] (B);
+  \draw[verdeteo, ->, line width=0.6pt, shorten >=0pt] (0,0) -- (A);
+  \draw[verdeteo, ->, line width=0.6pt] (0,0) -- (B);
+  \node[font=\small, text=acento, anchor=west] at ($(A)+(0.12,0.12)$) {$\dif S_2$};
+  \node[font=\small, text=acento, anchor=east] at ($(B)+(-0.1,-0.1)$) {$\dif S_1$};
+  \node[font=\scriptsize, text=azulprof, anchor=south west] at ($(P)!0.55!(A)$) {$r_2$};
+  \node[font=\scriptsize, text=azulprof, anchor=north east] at ($(P)!0.6!(B)$) {$r_1$};
+  \node[font=\scriptsize, text=verdeteo] at ($(A)!0.5!(0,0)+(0.1,-0.12)$) {};
+\end{tikzpicture}\\[2pt]{\small\scshape (b)}
+\end{minipage}
+\caption{(a)~Experimento de Cavendish: una esfera conductora interior se conecta, mediante un hilo,
+a una cáscara formada por dos hemisferios, y se cargan; al retirar el hilo y separar los hemisferios,
+la esfera interior resulta descargada. (b)~Argumento geométrico: un cono de ángulo sólido
+$\dOm$ con vértice en un punto interior $P$ recorta dos elementos, $\dif S_1$ y $\dif S_2$, a
+distancias $r_1$ y $r_2$ de $P$; ambos forman con la cuerda el mismo ángulo $\alpha$ (el triángulo
+formado por los radios y la cuerda es isósceles).}
+\label{fig:cavendish}
+\end{figure}

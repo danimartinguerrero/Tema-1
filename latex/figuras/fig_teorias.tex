@@ -1,0 +1,24 @@
+% Figura: las cuatro teorías de la física y el dominio de la electrodinámica clásica.
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+    caja/.style={draw=azulclaro, fill=azulfondo, line width=0.5pt, text width=4.6cm,
+                 align=center, inner sep=6pt, font=\small},
+    caja0/.style={caja, draw=azulacero, line width=0.9pt},
+    flecha/.style={->, line width=0.7pt, azulacero, shorten >=2pt, shorten <=2pt},
+    rotulo/.style={font=\scriptsize, text=grispizarra, align=center, fill=white, inner sep=1.5pt}]
+  \node[caja0] (A) at (0,0) {\textbf{Mecánica clásica}\\[1pt]{\footnotesize Newton}};
+  \node[caja]  (B) at (8.8,0) {\textbf{Mecánica cuántica}\\[1pt]{\footnotesize Bohr, Heisenberg, Schrödinger}};
+  \node[caja]  (C) at (0,-2.5) {\textbf{Relatividad especial}\\[1pt]{\footnotesize Einstein}};
+  \node[caja]  (D) at (8.8,-2.5) {\textbf{Teoría cuántica de campos}\\[1pt]{\footnotesize Dirac, Pauli, Feynman}};
+  \draw[flecha] (A) -- node[rotulo] {objetos muy pequeños\\$S\sim\hbar$} (B);
+  \draw[flecha] (A) -- node[rotulo] {velocidades $v\sim c$} (C);
+  \draw[flecha] (C) -- node[rotulo] {objetos muy pequeños\\$S\sim\hbar$} (D);
+  \draw[flecha] (B) -- node[rotulo] {velocidades $v\sim c$} (D);
+\end{tikzpicture}
+\caption{Dominio de validez de las teorías de la física. El recuadro resaltado es la
+física clásica, que incluye el electromagnetismo de Maxwell; este, a diferencia de la
+mecánica de Newton, ya es compatible con la relatividad especial y se funde con la
+cuántica en la electrodinámica cuántica.}
+\label{fig:teorias}
+\end{figure}

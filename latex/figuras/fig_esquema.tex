@@ -1,0 +1,30 @@
+% Figura: esquema lógico del tema (equivalente al esquema de los apuntes manuscritos).
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+    caja/.style={draw=azulclaro, fill=azulfondo, line width=0.5pt, align=center,
+                 inner sep=5pt, font=\small, minimum height=1.0cm},
+    final/.style={draw=azulacero, fill=white, line width=0.8pt, align=center,
+                  inner sep=5pt, font=\small, minimum height=1.0cm},
+    fl/.style={->, line width=0.7pt, azulacero, shorten >=2pt, shorten <=2pt},
+    nota/.style={font=\scriptsize, text=grispizarra, align=center}]
+  \node[caja] (L) at (0,0) {Ley de Coulomb\\[-1pt]{\footnotesize (experimental)}};
+  \node[caja] (S) at (0,-1.75) {Principio de\\superposición};
+  \node[caja] (E) at (3.7,-0.87) {Campo eléctrico\\$\vE(\vc{r})$};
+  \node[caja] (D) at (7.5,0.35) {$\nab\cdot\vE=\rho/\eo$\\[-1pt]{\footnotesize (ley de Gauss)}};
+  \node[caja] (R) at (7.5,-2.1) {$\nab\times\vE=\vc{0}$\\[-1pt]{\footnotesize $\vE=-\nab\phi$}};
+  \node[final] (H) at (11.5,-0.87) {Condiciones\\de contorno};
+  \draw[fl] (L.east) -- (E.north west);
+  \draw[fl] (S.east) -- (E.south west);
+  \draw[fl] (E.east) -- (D.west);
+  \draw[fl] (E.east) -- (R.west);
+  \draw[fl] (D.east) -- (H.north west);
+  \draw[fl] (R.east) -- (H.south west);
+  \node[nota] at (7.5,-0.87) {teorema de\\Helmholtz};
+\end{tikzpicture}
+\caption{Estructura lógica del tema. De la ley de Coulomb y la superposición se deduce
+el campo; su divergencia (ley de Gauss) y su rotacional (campo conservativo, potencial)
+lo determinan por el teorema de Helmholtz, y, aplicadas a una frontera, dan las
+condiciones de contorno.}
+\label{fig:esquema}
+\end{figure}
