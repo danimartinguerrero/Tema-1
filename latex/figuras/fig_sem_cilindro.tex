@@ -1,49 +1,100 @@
-% Figura (Problema 1.10): cilindro infinito con densidad volúmica; campo y potencial.
+% Figura (Problema 1.10): cilindro infinito cargado y superficies gaussianas coaxiales (r>a y r<a).
 \begin{figure}[ht]
 \centering
-\begin{minipage}[t]{0.34\textwidth}\centering
-\tdplotsetmaincoords{66}{125}
-\begin{tikzpicture}[tdplot_main_coords, scale=0.80, baseline=(current bounding box.north)]
-  \def\Rc{1.1}\def\Rg{1.9}
-  \tdCilindro[azulclaro!45]{\Rc}{-1.6}{1.9}{azulprof}{0.8pt}
-  \node[font=\small, text=azulprof] at (0,0,-0.9) {$\rho$};
-  % gaussiana exterior coaxial
-  \tdCilindro[verdeteo, fill opacity=0.05]{\Rg}{-0.2}{1.5}{verdeteo}{0.8pt}
-  \foreach \zz in {0.2,0.9}{\foreach \aa in {35,125,215,305}{
-    \draw[-{Stealth[length=4pt]}, cm1, line width=0.65pt] ({\Rg*cos(\aa)},{\Rg*sin(\aa)},\zz) -- ({(\Rg+0.65)*cos(\aa)},{(\Rg+0.65)*sin(\aa)},\zz);}}
-  \draw[grispizarra, <->, line width=0.4pt] ({(\Rg+0.9)*cos(125)},{(\Rg+0.9)*sin(125)},-0.2) -- ({(\Rg+0.9)*cos(125)},{(\Rg+0.9)*sin(125)},1.5) node[midway, left, font=\scriptsize] {$h$};
-  \draw[grispizarra, <->, line width=0.4pt] (0,0,-1.6) -- ({\Rc*cos(125)},{\Rc*sin(125)},-1.6) node[pos=0.5, below, font=\scriptsize, text=azulprof] {$a$};
-  \node[font=\scriptsize, text=verdeteo, anchor=west] at ({\Rg*cos(125)+0.1},{\Rg*sin(125)},1.7) {$S_{\mathrm{G}}$};
-\end{tikzpicture}\\[2pt]{\small\scshape (a)}
+\tikzset{
+  ejeC/.style={-{Stealth[length=5pt]}, line width=0.6pt, black!80},
+  cotaC/.style={arrows={Stealth[length=4pt]-Stealth[length=4pt]}, line width=0.5pt, black!85},
+  fondoB/.style={fill=white, fill opacity=0.85, text opacity=1, inner sep=1pt, rounded corners=1pt}}
+% \cilCarga{rx}{ry}{y0}{y1}: cilindro cargado (sombreado)
+\newcommand{\cilCarga}[4]{%
+  \shade[left color=azulacero!55, right color=azulclaro!55, middle color=azulclaro!30]
+     (-#1,#3) -- (-#1,#4) arc (180:360:{#1} and #2) -- (#1,#3) arc (0:-180:{#1} and #2) -- cycle;
+  \draw[azulprof, line width=0.6pt] (-#1,#3) -- (-#1,#4) (#1,#3) -- (#1,#4);
+  \draw[azulprof, line width=0.6pt] (-#1,#3) arc (180:360:{#1} and #2);
+  \fill[azulclaro!45] (0,#4) ellipse ({#1} and #2);
+  \draw[azulprof, line width=0.6pt] (0,#4) ellipse ({#1} and #2);}
+% \cilGaussAtras / \cilGaussDelante{rx}{ry}{y0}{y1}
+\newcommand{\cilGaussAtras}[4]{%
+  \draw[verdeteo, line width=0.5pt, densely dashed] (-#1,#3) arc (180:0:{#1} and #2);
+  \draw[verdeteo, line width=0.5pt, densely dashed] (-#1,#4) arc (180:0:{#1} and #2);}
+\newcommand{\cilGaussDelante}[4]{%
+  \fill[verdeteo, opacity=0.08] (-#1,#3) -- (-#1,#4) arc (180:360:{#1} and #2) -- (#1,#3) arc (0:-180:{#1} and #2) -- cycle;
+  \draw[verdeteo, line width=0.8pt] (-#1,#3) -- (-#1,#4) (#1,#3) -- (#1,#4);
+  \draw[verdeteo, line width=0.8pt] (-#1,#3) arc (180:360:{#1} and #2);
+  \draw[verdeteo, line width=0.8pt] (-#1,#4) arc (180:360:{#1} and #2);}
+% ---------------------------------------------------------------- (a) r > a
+\begin{minipage}[b]{0.5\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \def\ra{0.62}\def\rya{0.17}\def\rg{1.55}\def\ryg{0.42}
+  \cilGaussAtras{\rg}{\ryg}{-1.25}{1.25}
+  \cilCarga{\ra}{\rya}{-2.3}{2.1}
+  % ejes (el eje z sale de la tapa superior)
+  \draw[ejeC] (0,0) -- (0,2.75) node[above, font=\small] {$z$};
+  \draw[ejeC] (0,0) -- (2.15,-0.23) node[below right=-1pt, font=\small, fill=white, fill opacity=0.85, text opacity=1, inner sep=1pt] {$y$};
+  \draw[ejeC] (0,0) -- (-1.15,-0.85) node[below left=-1pt, font=\small, fill=white, fill opacity=0.85, text opacity=1, inner sep=1pt] {$x$};
+  \cilGaussDelante{\rg}{\ryg}{-1.25}{1.25}
+  % radios a y r, altura h
+  \draw[-{Stealth[length=4.5pt]}, line width=0.8pt, azulprof] (0,2.1) -- (\ra,2.1);
+  \node[font=\small, text=azulprof, anchor=south] at (0.31,2.12) {$a$};
+  \draw[-{Stealth[length=4.5pt]}, line width=0.8pt, verdeteo] (0,1.25) -- (\rg,1.25);
+  \node[font=\small, text=verdeteo, fondoB, anchor=south] at (1.15,1.27) {$r$};
+  \draw[cotaC] (\rg+0.85,-1.25) -- (\rg+0.85,1.25) node[midway, right, font=\small] {$h$};
+  \node[font=\small, text=azulprof, fondoB] at (-0.32,-1.75) {$\rho$};
+  \node[font=\small, text=verdeteo, anchor=east] at (-\rg-0.05,1.35) {$S_{\mathrm{G}}$};
+\end{tikzpicture}\\[2pt]{\small\scshape (a)\; $r>a$}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.32\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north)]
-  \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$r/a$}, ylabel={$E/(\rho a/2\eo)$}, xmin=0, xmax=3, ymin=0, ymax=1.2,
-     xtick={0,1,2,3}, ytick={0,0.5,1}, domain=0:3, samples=120]
-    \addplot[azulprof, line width=1.1pt, domain=0:1] {x};
-    \addplot[azulprof, line width=1.1pt, domain=1:3] {1/x};
-    \addplot[grispizarra, densely dashed] coordinates {(1,0) (1,1)};
-    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:1.8,0.75) {$\propto 1/r$};
-    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:0.1,0.45) {$\propto r$};
-  \end{axis}
-\end{tikzpicture}\\[2pt]{\small\scshape (b)}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.32\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north)]
-  \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$r/a$}, ylabel={$\phi/(\rho a^{2}/2\eo)$}, xmin=0, xmax=3, ymin=-2.4, ymax=1.9,
-     xtick={0,1,2,3}, ytick={-2,-1,0,1}, domain=0:3, samples=120, legend style={at={(0.03,0.04)}, anchor=south west, font=\tiny}]
-    % phi(r0)=0 con r0=3a
-    \addplot[azulacero, line width=1.1pt, domain=0.001:1] {0.5*(1-x^2)+ln(3)};
-    \addplot[azulacero, line width=1.1pt, domain=1:3] {ln(3/x)};
-    % phi(0)=0
-    \addplot[acento, line width=1.1pt, domain=0.001:1] {-x^2/2};
-    \addplot[acento, line width=1.1pt, domain=1:3] {-ln(x)-0.5};
-    \legend{$\phi(r_0)=0$,,$\phi(0)=0$}
-  \end{axis}
-\end{tikzpicture}\\[2pt]{\small\scshape (c)}
+% ---------------------------------------------------------------- (b) r < a
+\begin{minipage}[b]{0.46\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \def\ra{1.15}\def\rya{0.3}\def\rg{0.62}\def\ryg{0.17}
+  \cilCarga{\ra}{\rya}{-2.3}{2.1}
+  \cilGaussAtras{\rg}{\ryg}{-1.1}{1.1}
+  \draw[ejeC] (0,0) -- (0,2.75) node[above, font=\small] {$z$};
+  \draw[ejeC] (0,0) -- (2.3,-0.25) node[right, font=\small] {$y$};
+  \draw[ejeC] (0,0) -- (-1.15,-0.85) node[below left=-1pt, font=\small, fill=white, fill opacity=0.85, text opacity=1, inner sep=1pt] {$x$};
+  \cilGaussDelante{\rg}{\ryg}{-1.1}{1.1}
+  \draw[-{Stealth[length=4.5pt]}, line width=0.8pt, azulprof] (0,2.1) -- (\ra,2.1);
+  \node[font=\small, text=azulprof, anchor=south] at (0.6,2.12) {$a$};
+  \draw[-{Stealth[length=4.5pt]}, line width=0.8pt, verdeteo] (0,1.1) -- (\rg,1.1);
+  \node[font=\small, text=verdeteo, fondoB, anchor=south] at (0.36,1.12) {$r$};
+  \draw[cotaC] (\ra+0.35,-1.1) -- (\ra+0.35,1.1) node[midway, right, font=\small] {$h$};
+  \draw[grispizarra, line width=0.3pt] (\rg+0.05,0.55) -- (\ra+0.35,0.55);
+  \draw[grispizarra, line width=0.3pt] (\rg+0.05,-0.55) -- (\ra+0.35,-0.55);
+  \node[font=\small, text=azulprof, fondoB] at (-0.85,-1.75) {$\rho$};
+  \node[font=\small, text=verdeteo, fondoB, anchor=east] at (-\rg-0.08,0.6) {$S_{\mathrm{G}}$};
+\end{tikzpicture}\\[2pt]{\small\scshape (b)\; $r<a$}
 \end{minipage}
-\caption{Problema 1.10. (a)~Cilindro infinito de radio $a$ con densidad uniforme $\rho$ y superficie gaussiana exterior (coaxial, de radio $r>a$ y altura $h$).
-(b)~El campo, radial, crece linealmente en el interior y decae como $1/r$ fuera. (c)~Potencial con dos elecciones de referencia, para $r_0=3a$: $\phi(r_0)=0$ (azul) y
-$\phi(0)=0$ (ocre). Al ser la carga infinita no puede tomarse $\phi(\infty)=0$; la diferencia $\phi(0)-\phi(a)=\rho a^{2}/4\eo$ no depende de la referencia.}
+\caption{Problema 1.10. Cilindro infinito de radio $a$ con densidad volúmica uniforme $\rho$ (en azul) y superficie gaussiana coaxial $S_{\mathrm{G}}$ (en verde) de radio $r$ y
+altura $h$: (a)~exterior ($r>a$), que encierra $\rho\pi a^{2}h$; (b)~interior ($r<a$), que encierra $\rho\pi r^{2}h$. Solo la superficie lateral contribuye al flujo.}
 \label{fig:sem-cilindro}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+  \begin{axis}[tema, name=EA, width=0.47\textwidth, height=5.0cm, xlabel={$r/a$}, ylabel={$E\,\big/\,(\rho a/2\eo)$}, xmin=0, xmax=6, ymin=0, ymax=1.15,
+     xtick={0,1,2,3,4,5,6}, ytick={0,0.2,0.4,0.6,0.8,1}, domain=0:6, samples=150]
+    \addplot[azulacero, line width=1.4pt, domain=0:1] {x};
+    \addplot[azulacero, line width=1.4pt, domain=1:6] {1/x};
+    \addplot[grispizarra, densely dashed] coordinates {(1,0) (1,1)};
+    \node[font=\small, text=azulacero, anchor=south east] at (axis cs:0.95,0.08) {$\propto r$};
+    \node[font=\small, text=azulacero, anchor=south west] at (axis cs:2.2,0.5) {$\propto 1/r$};
+  \end{axis}
+  \begin{axis}[tema, at={(EA.east)}, anchor=west, xshift=1.6cm, width=0.47\textwidth, height=5.0cm, xlabel={$r/a$}, ylabel={$\phi\,\big/\,(\rho a^{2}/2\eo)$},
+     xmin=0, xmax=6, ymin=-2.5, ymax=2.0, xtick={0,1,2,3,4,5,6}, ytick={-2,-1,0,1}, domain=0:6, samples=150]
+    \addplot[grispizarra, densely dashed] coordinates {(1,-2.5) (1,2.0)};
+    % phi(r0)=0 con r0=3a
+    \addplot[azulacero, line width=1.4pt, domain=0.001:1] {0.5*(1-x^2)+ln(3)};
+    \addplot[azulacero, line width=1.4pt, domain=1:6] {ln(3/x)};
+    % phi(0)=0
+    \addplot[acento, line width=1.4pt, domain=0.001:1] {-x^2/2};
+    \addplot[acento, line width=1.4pt, domain=1:6] {-ln(x)-0.5};
+    \node[font=\small, text=azulacero, anchor=south west] at (axis cs:2.3,0.25) {$\phi(r_0)=0$};
+    \node[font=\small, text=acento, anchor=south east] at (axis cs:5.9,-1.95) {$\phi(0)=0$};
+  \end{axis}
+\end{tikzpicture}
+\caption{Problema 1.10. (Izquierda) Módulo del campo: crece linealmente en el interior del cilindro y decae como $1/r$ fuera. (Derecha) Potencial con dos elecciones de
+referencia, $\phi(r_0)=0$ con $r_0=3a$ (azul) y $\phi(0)=0$ (ámbar). Al extenderse la carga hasta el infinito no puede tomarse $\phi(\infty)=0$; las dos curvas difieren en una
+constante, y la diferencia $\phi(0)-\phi(a)=\rho a^{2}/4\eo$ no depende de la referencia.}
+\label{fig:sem-cilindro-graf}
 \end{figure}

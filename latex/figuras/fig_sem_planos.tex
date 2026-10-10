@@ -5,25 +5,25 @@
 \begin{minipage}[t]{0.48\textwidth}\centering
 \begin{tikzpicture}[tdplot_main_coords, scale=0.92, baseline=(current bounding box.north)]
   \def\L{2.3}
-  \draw[eje] (0,0,0) -- (3.1,0,0) node[below left] {\small $x$};
-  \draw[eje] (0,0,0) -- (0,3.1,0) node[right] {\small $y$};
-  \draw[eje] (0,0,0) -- (0,0,3.1) node[above] {\small $z$};
+  \draw[eje] (0,0,0) -- (3.1,0,0) node[below left, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] {\small $x$};
+  \draw[eje] (0,0,0) -- (0,3.1,0) node[right, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] {\small $y$};
+  \draw[eje] (0,0,0) -- (0,0,3.1) node[above, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] {\small $z$};
   \fill[azulclaro, opacity=0.32] (0,-\L,-\L) -- (0,\L,-\L) -- (0,\L,\L) -- (0,-\L,\L) -- cycle;
   \fill[verdeteo, opacity=0.18] (-\L,0,-\L) -- (\L,0,-\L) -- (\L,0,\L) -- (-\L,0,\L) -- cycle;
   \fill[acento, opacity=0.22] (-\L,-\L,0) -- (\L,-\L,0) -- (\L,\L,0) -- (-\L,\L,0) -- cycle;
   \draw[azulacero, line width=0.45pt] (0,-\L,-\L) -- (0,\L,-\L) -- (0,\L,\L) -- (0,-\L,\L) -- cycle;
   \draw[verdeteo, line width=0.45pt] (-\L,0,-\L) -- (\L,0,-\L) -- (\L,0,\L) -- (-\L,0,\L) -- cycle;
   \draw[acento, line width=0.45pt] (-\L,-\L,0) -- (\L,-\L,0) -- (\L,\L,0) -- (-\L,\L,0) -- cycle;
-  \node[font=\small, text=azulacero, anchor=south] at (0,-1.5,1.7) {$\sigma_a$};
-  \node[font=\small, text=verdeteo, anchor=south] at (-1.5,0,1.7) {$\sigma_b$};
-  \node[font=\small, text=acento, anchor=north] at (1.7,1.7,0) {$\sigma_c$};
+  \node[font=\small, text=azulacero, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] at (0,-1.6,1.9) {$\sigma_a$};
+  \node[font=\small, text=verdeteo, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] at (-1.6,0,1.9) {$\sigma_b$};
+  \node[font=\small, text=acento!80!black, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] at (1.75,1.75,0) {$\sigma_c$};
 \end{tikzpicture}\\[2pt]{\small\scshape (a)\; planos $x=0$, $y=0$, $z=0$}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}\centering
 \begin{tikzpicture}[tdplot_main_coords, scale=0.92, baseline=(current bounding box.north)]
-  \draw[eje] (-2.9,0,0) -- (3.1,0,0) node[below left] {\small $x$};
-  \draw[eje] (0,-2.9,0) -- (0,3.1,0) node[right] {\small $y$};
-  \draw[eje] (0,0,-2.9) -- (0,0,3.1) node[above] {\small $z$};
+  \draw[eje] (-2.9,0,0) -- (3.1,0,0) node[below left, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] {\small $x$};
+  \draw[eje] (0,-2.9,0) -- (0,3.1,0) node[right, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] {\small $y$};
+  \draw[eje] (0,0,-2.9) -- (0,0,3.1) node[above, fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt] {\small $z$};
   \fill[azulclaro, opacity=0.14] (0,-2.6,-2.6) -- (0,2.6,-2.6) -- (0,2.6,2.6) -- (0,-2.6,2.6) -- cycle;
   \fill[verdeteo, opacity=0.08] (-2.6,0,-2.6) -- (2.6,0,-2.6) -- (2.6,0,2.6) -- (-2.6,0,2.6) -- cycle;
   \fill[acento, opacity=0.10] (-2.6,-2.6,0) -- (2.6,-2.6,0) -- (2.6,2.6,0) -- (-2.6,2.6,0) -- cycle;

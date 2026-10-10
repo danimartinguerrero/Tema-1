@@ -1,36 +1,63 @@
-% Figura (Problema 1.12): semiesfera cargada; campo en el centro.
+% Figura (Problema 1.12): semicáscara esférica cargada; campo en el centro.
 \begin{figure}[ht]
 \centering
-\tdplotsetmaincoords{66}{125}
-\begin{tikzpicture}[tdplot_main_coords, scale=1.25]
+\tdplotsetmaincoords{64}{125}
+\begin{tikzpicture}[tdplot_main_coords, scale=1.3]
   \def\RR{1.8}
-  % semicáscara inferior: casquete sombreado, borde ecuatorial y meridianos
-  \begin{scope}
-    \clip plot[domain=\VA-180:\VA, samples=40, variable=\tdt] ({\RR*cos(\tdt)},{\RR*sin(\tdt)},0) -- plot[domain=\VA:\VA-180, samples=2, variable=\tdt] ({\RR*cos(\tdt)},{\RR*sin(\tdt)},0) -- (0,0,-\RR*1.01) -- cycle;
+  % punto de la esfera: (theta, phi) con theta en [90,180] (mitad z<0)
+  % casquete: exterior visible (entre la semicircunferencia aparente inferior y el arco frontal del ecuador)
+  \begin{scope}[tdplot_screen_coords]
+    \def\ey{\RR*cos(64)}
+    \shade[left color=azulclaro!30, right color=azulclaro!80, opacity=0.85]
+      (-\RR,0) arc[start angle=180, end angle=360, radius=\RR] arc[start angle=360, end angle=180, x radius=\RR, y radius=\ey] -- cycle;
+    \fill[azulclaro!18, opacity=0.9] (0,0) ellipse ({\RR} and {\ey});
   \end{scope}
-  \shade[left color=azulclaro!30, right color=azulclaro!80, opacity=0.85]
-    plot[domain=0:180, samples=60, variable=\tdt] ({\RR*cos(\VA)*cos(\tdt)},{\RR*sin(\VA)*cos(\tdt)},{-\RR*sin(\tdt)})
-    -- plot[domain=\VA-180:\VA, samples=40, variable=\tdt] ({\RR*cos(\tdt)},{\RR*sin(\tdt)},0) -- cycle;
-  \draw[azulprof, line width=0.8pt] plot[domain=0:180, samples=60, variable=\tdt] ({\RR*cos(\VA)*cos(\tdt)},{\RR*sin(\VA)*cos(\tdt)},{-\RR*sin(\tdt)});
+  % cuadrícula sobre la superficie: meridianos (phi fijo) y paralelos (theta fijo); parte trasera más tenue
+  \foreach \mm in {0,30,...,330}{
+    \pgfmathtruncatemacro{\fr}{(cos(\mm-(\VA-90))>0)?1:0}
+    \ifnum\fr=1 \def\cc{grispizarra!70}\else \def\cc{grispizarra!30}\fi
+    \draw[\cc, line width=0.35pt, domain=90:180, samples=30, variable=\tth]
+      plot ({\RR*sin(\tth)*cos(\mm)},{\RR*sin(\tth)*sin(\mm)},{\RR*cos(\tth)});}
+  \foreach \tp in {115,140,162}{
+    \draw[grispizarra!70, line width=0.35pt, domain=\VA-180:\VA, samples=40, variable=\tdt]
+      plot ({\RR*sin(\tp)*cos(\tdt)},{\RR*sin(\tp)*sin(\tdt)},{\RR*cos(\tp)});
+    \draw[grispizarra!30, line width=0.35pt, domain=\VA:\VA+180, samples=40, variable=\tdt]
+      plot ({\RR*sin(\tp)*cos(\tdt)},{\RR*sin(\tp)*sin(\tdt)},{\RR*cos(\tp)});}
+  % contornos: semicircunferencia aparente y ecuador
+  \begin{scope}[tdplot_screen_coords]
+    \draw[azulprof, line width=0.8pt] (-\RR,0) arc[start angle=180, end angle=360, radius=\RR];
+  \end{scope}
   \tdCirc[azulprof, line width=0.8pt]{\RR}{0}
-  \foreach \mm in {35,80,170,215,260,305}{
-    \draw[azulprof!45, line width=0.4pt, domain=0:90, samples=30, variable=\tdt] plot ({\RR*cos(\mm)*sin(\tdt)},{\RR*sin(\mm)*sin(\tdt)},{-\RR*cos(\tdt)});}
-  \draw[eje] (0,0,-2.3) -- (0,0,0); \draw[eje] (0,0,0) -- (0,0,2.6) node[above] {\small $z$};
+  % ejes
+  \draw[eje] (0,0,-2.4) -- (0,0,0); \draw[eje] (0,0,0) -- (0,0,2.6) node[above] {\small $z$};
   \draw[eje] (0,0,0) -- (2.9,0,0) node[below left] {\small $x$};
   \draw[eje] (0,0,0) -- (0,2.9,0) node[right] {\small $y$};
-  \def\ph{60}\def\th{140}
-  \coordinate (S) at ({\RR*sin(\th)*cos(\ph)},{\RR*sin(\th)*sin(\ph)},{\RR*cos(\th)});
+  % elemento dS' sobre la propia superficie: celda theta in [130,150], phi in [45,75]
+  \def\ta{120}\def\tb{138}\def\pa{55}\def\pb{80}
+  \fill[acento!55, draw=acento!80!black, line width=0.6pt]
+    plot[domain=\pa:\pb, samples=10, variable=\tdt] ({\RR*sin(\ta)*cos(\tdt)},{\RR*sin(\ta)*sin(\tdt)},{\RR*cos(\ta)})
+    -- plot[domain=\ta:\tb, samples=10, variable=\tth] ({\RR*sin(\tth)*cos(\pb)},{\RR*sin(\tth)*sin(\pb)},{\RR*cos(\tth)})
+    -- plot[domain=\pb:\pa, samples=10, variable=\tdt] ({\RR*sin(\tb)*cos(\tdt)},{\RR*sin(\tb)*sin(\tdt)},{\RR*cos(\tb)})
+    -- plot[domain=\tb:\ta, samples=10, variable=\tth] ({\RR*sin(\tth)*cos(\pa)},{\RR*sin(\tth)*sin(\pa)},{\RR*cos(\tth)}) -- cycle;
+  \coordinate (S) at ({\RR*sin(129)*cos(67)},{\RR*sin(129)*sin(67)},{\RR*cos(129)});
+  \fill[acento!60!black] (S) circle (1.1pt);
+  % vectores
   \draw[vect, azulprof, line width=1.0pt] (S) -- (0,0,0);
-  \node[font=\small, text=azulprof, anchor=west] at ($(S)!0.5!(0,0,0)+(0.06,0,0)$) {$\vc{R}=-\vc{r}\,'$};
-  \draw[vectrojo, line width=1.0pt] (0,0,0) -- ({0.75*sin(\th)*cos(\ph)*(-1)},{0.75*sin(\th)*sin(\ph)*(-1)},{0.75*cos(\th)*(-1)}) node[left=1pt, font=\scriptsize, text=acento] {$\dif\vE$};
-  \draw[vectrojo, line width=1.7pt] (0,0,0) -- (0,0,1.7) node[left, font=\small, text=acento] {$\vE_{0}$};
-  \tdParche[acento, fill=acento!45, line width=0.6pt]{\RR*sin(\th)*cos(\ph)*0.985,\RR*sin(\th)*sin(\ph)*0.985,\RR*cos(\th)*0.985}{0.2,-0.1,0}{0.0,0.0,0.2}
-  \fill[acento] (S) circle (1.2pt);
-  \node[font=\small, text=acento, anchor=north west] at ($(S)+(0.05,0.05,-0.12)$) {$\dif S'$};
-  \node[font=\small, text=azulprof] at (1.1,-0.5,-1.3) {$\sigma$};
-  \fill[azulprof] (0,0,0) circle (1.4pt) node[above right=1pt, font=\small] {$O$};
+  \draw[vectrojo, line width=1.0pt] (0,0,0) -- ({-0.8*sin(129)*cos(67)},{-0.8*sin(129)*sin(67)},{-0.8*cos(129)});
+  \draw[vectrojo, line width=1.7pt] (0,0,0) -- (0,0,1.75);
+  % rótulos con fondo blanco
+  \tikzset{fb/.style={fill=white, fill opacity=0.85, text opacity=1, inner sep=1.5pt, rounded corners=1pt}}
+  \node[font=\small, text=acento!80!black, fb, anchor=west] at (0,0,1.55) {$\vE_{0}$};
+  \node[font=\scriptsize, text=acento!80!black, fb, anchor=east] at ({-0.8*sin(129)*cos(67)},{-0.8*sin(129)*sin(67)},{-0.8*cos(129)+0.05}) {$\dif\vE$};
+  \node[font=\small, text=azulprof, fb, anchor=east] at ($(S)!0.5!(0,0,0)+(0,-0.1,0)$) {$\vc{R}=-\vc{r}\,'$};
+  \draw[grispizarra, line width=0.35pt] (S) -- ($(S)+(0,1.0,-0.4)$);
+  \node[font=\small, text=acento!80!black, fb, anchor=west] at ($(S)+(0,1.0,-0.4)$) {$\dif S'$};
+  \node[font=\small, text=azulprof, fb] at ({\RR*sin(150)*cos(-60)},{\RR*sin(150)*sin(-60)},{\RR*cos(150)}) {$\sigma$};
+  \fill[azulprof] (0,0,0) circle (1.4pt);
+  \node[font=\small, fb, anchor=north east] at (0,-0.08,-0.05) {$O$};
 \end{tikzpicture}
-\caption{Problema 1.12. Semicáscara esférica de radio $a$ (la mitad $z<0$) con carga $Q$ uniforme. El campo creado en el centro $O$ por un elemento $\dif S'$ apunta
-según $\vc{R}=-\vc{r}\,'$; las componentes horizontales se cancelan por simetría y el campo total $\vE_0$ es axial (positivo en $z$).}
+\caption{Problema 1.12. Semicáscara esférica de radio $a$ (la mitad $z<0$) con carga $Q$ uniforme. El elemento $\dif S'=a^{2}\sen\theta'\,\dif\theta'\,\dif\varphi'$ (en ámbar) es una celda de la
+propia superficie, limitada por dos meridianos y dos paralelos. El campo que crea en el centro $O$ apunta según $\vc{R}=-\vc{r}\,'$; las componentes horizontales se cancelan por
+simetría y el campo total $\vE_0$ es axial (positivo en $z$).}
 \label{fig:sem-semiesfera}
 \end{figure}

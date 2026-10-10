@@ -1,0 +1,38 @@
+% Figura (Problema 1.11): campo vectorial tridimensional de los tres planos (sigma_a = sigma_b = sigma_c).
+\begin{figure}[ht]
+\centering
+\tdplotsetmaincoords{66}{118}
+\begin{tikzpicture}[tdplot_main_coords, scale=1.05]
+  \def\L{2.5}
+  % caja (aristas traseras discontinuas)
+  \draw[grispizarra!60, line width=0.4pt, densely dashed] (-\L,-\L,-\L) -- (\L,-\L,-\L) (-\L,-\L,-\L) -- (-\L,\L,-\L) (-\L,-\L,-\L) -- (-\L,-\L,\L);
+  % flechas: en cada punto de la malla, E ∝ (sgn x, sgn y, sgn z); se dibujan de atrás hacia delante
+  \foreach \x in {-2,-1,1,2}{\foreach \y in {2,1,-1,-2}{\foreach \z in {-2,-1,1,2}{%
+    \pgfmathsetmacro{\sx}{sign(\x)}\pgfmathsetmacro{\sy}{sign(\y)}\pgfmathsetmacro{\sz}{sign(\z)}%
+    \pgfmathsetmacro{\ft}{0.15+0.12*(\x+2.0)+0.06*(2.0-\y)}%
+    \mapcolor{\ft}%
+    \draw[-{Stealth[length=4.2pt,width=4pt]}, line width=1.1pt, mapc]
+      ({\x-0.33*\sx},{\y-0.33*\sy},{\z-0.33*\sz}) -- ++({0.66*\sx},{0.66*\sy},{0.66*\sz});}}}
+  % puntos sobre los planos: el campo no está definido (salto); se marcan con un punto
+  \foreach \x in {-2,-1,1,2}{\foreach \y in {-2,-1,1,2}{\fill[azulprof!70] (\x,\y,0) circle (0.9pt);}}
+  % caja (aristas delanteras)
+  \draw[grispizarra!80, line width=0.5pt] (\L,\L,\L) -- (-\L,\L,\L) -- (-\L,-\L,\L) -- (\L,-\L,\L) -- cycle;
+  \draw[grispizarra!80, line width=0.5pt] (\L,\L,\L) -- (\L,\L,-\L) -- (\L,-\L,-\L) -- (\L,-\L,\L);
+  \draw[grispizarra!80, line width=0.5pt] (\L,\L,-\L) -- (-\L,\L,-\L) -- (-\L,\L,\L);
+  % marcas y rótulos de ejes
+  \foreach \t in {-2,0,2}{
+    \draw[grispizarra, line width=0.4pt] (\t,\L,-\L) -- ++(0,0.12,0);
+    \node[font=\scriptsize, anchor=north west] at (\t,\L+0.1,-\L) {$\t$};
+    \draw[grispizarra, line width=0.4pt] (\L,\t,-\L) -- ++(0.12,0,0);
+    \node[font=\scriptsize, anchor=north east] at (\L+0.1,\t,-\L) {$\t$};
+    \draw[grispizarra, line width=0.4pt] (\L,-\L,\t) -- ++(0.12,0,0);
+    \node[font=\scriptsize, anchor=east] at (\L+0.15,-\L,\t) {$\t$};}
+  \node[font=\small] at (0,\L+0.75,-\L-0.2) {$x$};
+  \node[font=\small] at (\L+0.85,0,-\L-0.2) {$y$};
+  \node[font=\small] at (\L+0.75,-\L-0.2,0) {$z$};
+\end{tikzpicture}
+\caption{Problema 1.11. Campo $\vE=\frac{\sigma}{2\eo}\bigl(\sgn x\,\ux+\sgn y\,\uy+\sgn z\,\uz\bigr)$ de los tres planos con $\sigma_a=\sigma_b=\sigma_c=\sigma>0$, en el cubo $[-2,2]^{3}$
+(unidades arbitrarias). Las flechas, de igual módulo $\sqrt3\,\sigma/2\eo$, divergen desde los planos: en cada octante el campo es uniforme y apunta hacia fuera; los puntos
+marcan los planos de carga, donde la componente normal salta en $\sigma/\eo$. El color solo indica la profundidad.}
+\label{fig:sem-planos-campo}
+\end{figure}
