@@ -2,27 +2,33 @@
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[x=1cm, y=1cm]
-  \def\rx{1.4}\def\ry{0.42}\def\hc{3.2}
+  \def\rx{1.6}\def\ry{0.55}\def\hc{3.0}
+  \tikzset{nvec/.style={-{Stealth[length=5pt,width=4.5pt]}, line width=1.0pt, verdeteo},
+           evec/.style={-{Stealth[length=5pt,width=4.5pt]}, line width=1.0pt, cm1}}
+  % cilindro (solo contorno)
+  \fill[azulfondo] (-\rx,0) -- (-\rx,\hc) arc (180:360:{\rx} and \ry) -- (\rx,0) arc (0:-180:{\rx} and \ry) -- cycle;
+  \draw[azulprof, line width=0.7pt] (-\rx,0) -- (-\rx,\hc) (\rx,0) -- (\rx,\hc);
+  \draw[azulprof, line width=0.7pt] (0,\hc) ellipse ({\rx} and \ry);
+  \draw[azulprof, line width=0.7pt] (-\rx,0) arc (180:360:{\rx} and \ry);
+  \draw[azulprof, line width=0.5pt, densely dashed] (-\rx,0) arc (180:0:{\rx} and \ry);
+  % hilo
   \draw[line width=2.2pt, azulprof] (0,-0.9) -- (0,\hc+0.9);
-  \node[font=\small, text=azulprof, anchor=west] at (0.08,\hc+0.7) {$\lambda$};
-  % cilindro de Gauss
-  \fill[verdeteo, opacity=0.06] (-\rx,0) -- (-\rx,\hc) arc (180:360:{\rx} and \ry) -- (\rx,0) arc (0:-180:{\rx} and \ry) -- cycle;
-  \draw[verdeteo, line width=0.8pt] (-\rx,0) -- (-\rx,\hc) (\rx,0) -- (\rx,\hc);
-  \draw[verdeteo, line width=0.8pt] (0,\hc) ellipse ({\rx} and \ry);
-  \draw[verdeteo, line width=0.8pt] (-\rx,0) arc (180:360:{\rx} and \ry);
-  \draw[verdeteo, line width=0.5pt, densely dashed] (-\rx,0) arc (180:0:{\rx} and \ry);
-  \node[font=\small, text=verdeteo, anchor=east] at (-\rx-0.05,\hc-0.2) {$S_{\mathrm{G}}$};
-  % campo radial sobre la superficie lateral
-  \foreach \z in {0.6,1.6,2.6}{
-    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (\rx,\z) -- (\rx+0.8,\z);
-    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (-\rx,\z) -- (-\rx-0.8,\z);
-    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (0.5,\z-\ry-0.0) ++(0,-0.0) -- ++(0.28,-0.38);
-    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (-0.5,\z-\ry-0.0) -- ++(-0.28,-0.38);}
-  \draw[vectverde, line width=0.9pt] (\rx,1.1) -- ++(0.5,0) node[right, font=\scriptsize, text=verdeteo] {$\dS$};
-  \draw[grispizarra, <->, line width=0.4pt] (0,2.15) -- (\rx,2.15) node[midway, above, font=\scriptsize, text=azulprof] {$r$};
-  \draw[grispizarra, <->, line width=0.4pt] (\rx+1.25,0) -- (\rx+1.25,\hc) node[midway, right, font=\small] {$\ell$};
+  \node[font=\small, text=azulprof, anchor=west] at (0.1,\hc+0.75) {$\lambda$};
+  % superficie lateral: normal y campo (paralelos)
+  \draw[nvec] (\rx,1.95) -- ++(0.8,0) node[right, font=\small] {$\un$};
+  \draw[evec] (\rx,1.05) -- ++(0.8,0) node[right, font=\small, text=cm1] {$\vE$};
+  \draw[evec] (-\rx,1.5) -- ++(-0.8,0) node[left, font=\small, text=cm1] {$\vE$};
+  % tapa superior: normal vertical y campo radial (perpendiculares)
+  \draw[nvec] (-0.55,\hc+0.1) -- ++(0,0.85) node[above, font=\small] {$\un$};
+  \draw[evec] (-0.55,\hc+0.1) -- ++(-0.45,0.0) node[below right=-1pt, font=\small, text=cm1] {$\vE$};
+  % tapa inferior
+  \draw[nvec] (-0.7,-\ry) -- ++(0,-0.75) node[below, font=\small] {$\un$};
+  % cotas
+  \draw[grispizarra, <->, line width=0.4pt] (0.05,\hc) -- (\rx,\hc) node[midway, above, font=\scriptsize, text=azulprof] {$r$};
+  \draw[grispizarra, <->, line width=0.4pt] (\rx+1.75,0) -- (\rx+1.75,\hc) node[midway, right, font=\small] {$\ell$};
+  \node[font=\small, text=azulprof, anchor=east] at (-\rx-0.05,0.4) {$S_{\mathrm{G}}$};
 \end{tikzpicture}
-\caption{Problema 1.4. Superficie gaussiana cilíndrica, coaxial con el hilo, de radio $r$ y altura $\ell$. El campo es radial, de módulo constante sobre la
-superficie lateral y paralelo a $\dS$ ($\vE\parallel\dS$); en las tapas $\vE\perp\dS$ y no hay flujo.}
+\caption{Problema 1.4. Superficie gaussiana cilíndrica, coaxial con el hilo, de radio $r$ y altura $\ell$. En la superficie lateral el campo es radial y de módulo
+constante, paralelo a la normal $\un$ ($\vE\parallel\dS$); en las tapas $\vE\perp\un$ y el flujo es nulo.}
 \label{fig:sem-gauss-cil}
 \end{figure}
