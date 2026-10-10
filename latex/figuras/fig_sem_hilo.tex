@@ -14,23 +14,30 @@
   \pgfmathparse{100*abs(2/(#1)-sqrt(Erfin(#1,#2)*Erfin(#1,#2)+Ezfin(#1,#2)*Ezfin(#1,#2)))/sqrt(Erfin(#1,#2)*Erfin(#1,#2)+Ezfin(#1,#2)*Ezfin(#1,#2))}%
   \pgfmathsmuggle\pgfmathresult\endgroup}
 \begin{minipage}[t]{0.36\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  \draw[eje] (-0.2,0) -- (3.4,0) node[below] {\small $x$};
-  \draw[line width=2.2pt, azulprof] (0,-2.0) -- (0,2.3);
-  \draw[eje] (0,2.3) -- (0,2.8) node[above] {\small $z$};
-  \fill[azulprof] (0,0) circle (1.4pt);
-  \coordinate (P) at (2.3,0);
-  \coordinate (A) at (0,1.2); \coordinate (B) at (0,-1.2);
-  \fill[azulacero] (A) circle (2pt) node[left, font=\small] {$\dif q'$};
-  \fill[azulacero] (B) circle (2pt) node[left, font=\small] {$\dif q'$};
-  \draw[->, azulclaro!70!azulacero, line width=0.7pt] (A) -- (P) node[pos=0.45, above right, font=\small, text=azulprof] {$\vc{R}$};
-  \draw[->, azulclaro!70!azulacero, line width=0.7pt] (B) -- (P);
-  \draw[vectrojo] (P) -- ++(0.55,0.28) node[above right, font=\scriptsize, text=acento] {$\dif\vE_{1}$};
-  \draw[vectrojo] (P) -- ++(0.55,-0.28) node[below right, font=\scriptsize, text=acento] {$\dif\vE_{2}$};
-  \draw[vect, azulprof, line width=1.2pt] (P) -- ++(1.1,0) node[right, font=\small] {$\vE$};
-  \draw[grispizarra, densely dotted] (0,0) -- (P) node[midway, below, font=\small, text=azulprof] {$r$};
-  \node[font=\scriptsize, text=grispizarra, anchor=west] at (-1.5,1.2) {$z'$};
-  \node[font=\scriptsize, text=grispizarra, anchor=west] at (-1.5,-1.2) {$-z'$};
+\begin{tikzpicture}[baseline=(current bounding box.north), x=0.82cm, y=0.82cm]
+  \def\xp{2.7}\def\zp{1.35}
+  \draw[eje] (-0.4,0) -- (4.9,0) node[below] {\small $x$};
+  \draw[line width=2.4pt, azulprof] (0,-2.2) -- (0,2.2);
+  \draw[eje] (0,2.2) -- (0,2.9) node[above] {\small $z$};
+  \node[font=\small, text=azulprof, anchor=east] at (-0.15,1.9) {$\lambda$};
+  \coordinate (P) at (\xp,0);
+  \coordinate (A) at (0,\zp); \coordinate (B) at (0,-\zp);
+  \fill[acento] (A) circle (2.2pt); \fill[acento] (B) circle (2.2pt);
+  \node[font=\small, text=acento, anchor=east] at (-0.15,\zp) {$\dif q'$};
+  \node[font=\small, text=acento, anchor=east] at (-0.15,-\zp) {$\dif q'$};
+  % vectores R
+  \draw[->, azulclaro!70!azulacero, line width=0.8pt] (A) -- (P);
+  \draw[->, azulclaro!70!azulacero, line width=0.8pt] (B) -- (P);
+  \node[font=\small, text=azulprof, anchor=south west] at ($(A)!0.5!(P)$) {$\vc{R}$};
+  % campos elementales y componentes
+  \pgfmathsetmacro{\dxx}{0.95}\pgfmathsetmacro{\dzz}{0.95*\zp/\xp}
+  \draw[vectrojo, line width=1.0pt] (P) -- ++(\dxx,\dzz) node[above right, font=\scriptsize, text=acento] {$\dif\vE_{1}$};
+  \draw[vectrojo, line width=1.0pt] (P) -- ++(\dxx,-\dzz) node[below right, font=\scriptsize, text=acento] {$\dif\vE_{2}$};
+  \draw[acento, densely dashed, line width=0.5pt] ($(P)+(\dxx,\dzz)$) -- ($(P)+(\dxx,0)$) ($(P)+(\dxx,-\dzz)$) -- ($(P)+(\dxx,0)$);
+  \draw[vect, azulprof, line width=1.5pt] (P) -- ++(1.9,0) node[above right, font=\small] {$\vE$};
+  \fill[azulprof] (P) circle (1.5pt);
+  \draw[grispizarra, <->, line width=0.4pt] (0,-0.35) -- (\xp,-0.35) node[midway, below, font=\small, text=azulprof] {$r$};
+  \draw[grispizarra, <->, line width=0.4pt] (-1.35,0) -- (-1.35,\zp) node[midway, left, font=\scriptsize] {$z'$};
 \end{tikzpicture}\\[2pt]{\small\scshape (a)}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.62\textwidth}\centering

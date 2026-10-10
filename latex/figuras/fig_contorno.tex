@@ -1,82 +1,108 @@
 % Figura: construcciones para las condiciones de contorno (cilindro, circuito, camino del potencial).
 \begin{figure}[ht]
 \centering
-\tikzset{medio/.style={font=\small, circle, draw=grispizarra, line width=0.4pt, inner sep=1.2pt, fill=white},
-         lamina/.style={fill=grisclaro!60, draw=grispizarra!70, line width=0.4pt}}
-% (a) cilindro de altura h
+\tikzset{
+  medio/.style={font=\small, circle, draw=grispizarra, line width=0.4pt, inner sep=1.1pt, fill=white},
+  lamina/.style={fill=grisclaro!70, draw=grispizarra!70, line width=0.4pt},
+  seccion/.style={line width=2.2pt, grisclaro!90!black},
+  vn/.style={-{Stealth[length=5pt,width=4.5pt]}, line width=0.9pt, azulprof},
+  ct/.style={draw=acento, line width=0.9pt},
+  fa/.style={font=\small, text=acento}, fb/.style={font=\small, text=azulacero}}
+% --- macro: lámina en perspectiva con medios 1 y 2 y normal
+\newcommand{\laminaIII}{%
+  \path[lamina] (0,0) -- (3.9,0) -- (4.8,1.0) -- (0.9,1.0) -- cycle;
+  \node[medio] at (-0.35,0.42) {2}; \node[medio] at (-0.35,-0.3) {1};
+  \draw[vn] (0.65,0.5) -- ++(0,1.75) node[above, font=\small] {$\un$};}
+% (a) componente normal
 \begin{minipage}[t]{0.98\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  % vista oblicua
-  \fill[lamina] (0,0) -- (3.4,0) -- (4.3,0.9) -- (0.9,0.9) -- cycle;
-  \draw[vect, azulprof] (0.55,0.45) -- ++(0,1.5) node[above, font=\small] {$\un$};
-  \node[medio] at (0.3,0.12) {2}; \node[medio] at (0.3,-0.35) {1};
-  \draw[rojoteo, line width=0.7pt] (2.0,0.2) -- (2.0,0.95); \draw[rojoteo, line width=0.7pt] (2.9,0.2) -- (2.9,0.95);
-  \draw[rojoteo, line width=0.7pt, fill=white, fill opacity=0.6] (2.45,0.95) ellipse (0.45 and 0.15);
-  \draw[rojoteo, line width=0.7pt] (2.0,0.2) arc (180:360:0.45 and 0.15);
-  \draw[rojoteo, line width=0.4pt, densely dashed] (2.0,0.2) arc (180:0:0.45 and 0.15);
-  \node[font=\scriptsize, text=rojoteo, anchor=west] at (3.0,0.6) {$h$};
+\begin{tikzpicture}[x=1cm, y=1cm, baseline=(current bounding box.north)]
+  \laminaIII
+  % cilindro: base en la capa de transición
+  \def\cx{2.9}\def\cy{0.5}\def\ra{0.62}\def\rb{0.2}\def\hh{0.95}
+  \draw[ct, densely dashed] (\cx-\ra,\cy-\hh/2) arc (180:0:{\ra} and \rb);
+  \draw[ct] (\cx-\ra,\cy-\hh/2) -- (\cx-\ra,\cy+\hh/2) (\cx+\ra,\cy-\hh/2) -- (\cx+\ra,\cy+\hh/2);
+  \draw[ct] (\cx-\ra,\cy-\hh/2) arc (180:360:{\ra} and \rb);
+  \draw[ct, fill=acento!12] (\cx,\cy+\hh/2) ellipse ({\ra} and \rb);
+  \draw[<->, acento, line width=0.5pt] (\cx+\ra+0.2,\cy-\hh/2) -- (\cx+\ra+0.2,\cy+\hh/2) node[midway, right, font=\small] {$h$};
   % corte transversal
-  \begin{scope}[shift={(6.3,0.2)}]
-    \fill[lamina] (-0.2,-0.04) rectangle (3.6,0.04);
-    \draw[grispizarra, line width=0.5pt] (-0.2,0) -- (3.6,0);
-    \draw[azulprof, ->, line width=0.8pt] (-0.1,-0.5) -- (-0.1,1.0) node[above, font=\small] {$\un$};
-    \node[medio] at (-0.45,0.35) {2}; \node[medio] at (-0.45,-0.35) {1};
-    \draw[rojoteo, line width=0.9pt] (1.2,-0.6) rectangle (2.4,0.6);
-    \draw[->, line width=0.9pt, azulacero] (1.8,0.6) -- ++(0,0.55) node[right, font=\scriptsize] {$\un_2=\un$};
-    \draw[->, line width=0.9pt, azulacero] (1.8,-0.6) -- ++(0,-0.55) node[right, font=\scriptsize] {$\un_1=-\un$};
-    \draw[<->, rojoteo, line width=0.5pt] (2.7,-0.6) -- (2.7,0.6) node[midway, right, font=\scriptsize] {$h$};
-    \draw[<->, rojoteo, line width=0.5pt] (1.2,-0.85) -- (2.4,-0.85) node[midway, below, font=\scriptsize] {$\Delta S$};
+  \begin{scope}[shift={(7.4,0.5)}]
+    \draw[seccion] (-0.3,0) -- (4.3,0);
+    \node[medio] at (-0.65,0.4) {2}; \node[medio] at (-0.65,-0.4) {1};
+    \draw[vn] (-0.15,-0.4) -- ++(0,1.9) node[above, font=\small] {$\un$};
+    \draw[ct] (1.2,-0.75) rectangle (3.0,0.75);
+    \draw[vn, azulacero] (2.1,0.75) -- ++(0,0.65) node[right, font=\scriptsize] {$\un_2=\un$};
+    \draw[vn, azulacero] (2.1,-0.75) -- ++(0,-0.5) node[left=1pt, font=\scriptsize] {$\un_1=-\un$};
+    \draw[<->, acento, line width=0.5pt] (3.3,-0.75) -- (3.3,0.75) node[midway, right, font=\small] {$h$};
+    \draw[<->, acento, line width=0.5pt] (1.2,-1.0) -- (3.0,-1.0);
+    \draw[acento, line width=0.5pt] (1.2,-0.8) -- (1.2,-1.1) (3.0,-0.8) -- (3.0,-1.1);
+    \node[font=\small, text=acento, anchor=north] at (2.65,-1.0) {$\Delta S$};
   \end{scope}
-\end{tikzpicture}\\[2pt]{\small\scshape (a)\; componente normal: cilindro de altura $h$ en la capa de transición}
-\end{minipage}\\[10pt]
-% (b) circuito
+\end{tikzpicture}\\[3pt]
+{\small\scshape (a)\; componente normal: cilindro de altura $h$}\\[1pt]
+{\footnotesize $\color{acento}F_{2n}-F_{1n}=\displaystyle\lim_{h\to0}\bigl(h\,\nab\cdot\vc{F}\bigr)$\qquad\qquad $\color{azulacero}E_{2n}-E_{1n}=\dfrac{\sigma}{\eo}$}
+\end{minipage}\\[14pt]
+% (b) componente tangencial
 \begin{minipage}[t]{0.98\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  \fill[lamina] (0,0) -- (3.4,0) -- (4.3,0.9) -- (0.9,0.9) -- cycle;
-  \draw[azulprof, ->, line width=0.8pt] (0.55,0.45) -- ++(0,1.5) node[above, font=\small] {$\un$};
-  \node[medio] at (0.3,0.12) {2}; \node[medio] at (0.3,-0.35) {1};
-  \draw[rojoteo, line width=0.8pt] (1.8,-0.3) rectangle (3.3,1.1);
-  \begin{scope}[shift={(6.3,0.2)}]
-    \fill[lamina] (-0.2,-0.04) rectangle (3.6,0.04);
-    \draw[azulprof, ->, line width=0.8pt] (-0.1,-0.5) -- (-0.1,1.0) node[above, font=\small] {$\un$};
-    \node[medio] at (-0.45,0.35) {2}; \node[medio] at (-0.45,-0.35) {1};
-    \draw[rojoteo, line width=0.9pt, orienta] (1.0,-0.6) -- (1.0,0.6) -- (2.6,0.6) -- (2.6,-0.6) -- cycle;
-    \draw[->, azulacero, line width=0.9pt] (1.8,0.6) -- ++(0.7,0) node[above, font=\scriptsize] {$\vc{t}$};
-    \draw[->, azulacero, line width=0.9pt] (1.8,-0.6) -- ++(-0.7,0);
-    \node[font=\scriptsize, text=azulacero, anchor=north] at (1.1,-0.64) {$\Delta\vc{l}_1=-\Delta l\,\vc{t}$};
-    \node[font=\scriptsize, text=azulacero, anchor=south west] at (1.4,0.66) {$\Delta\vc{l}_2=\Delta l\,\vc{t}$};
-    \node[font=\scriptsize, text=rojoteo, anchor=west] at (2.65,0) {$h$};
-    \draw[azulprof, line width=0.7pt] (1.8,0) circle (0.12);
-    \fill[azulprof] (1.8,0) circle (0.9pt);
-    \node[font=\scriptsize, text=azulprof, anchor=north west] at (1.85,-0.08) {$\un'$};
+\begin{tikzpicture}[x=1cm, y=1cm, baseline=(current bounding box.north)]
+  \laminaIII
+  % circuito vertical en el plano x-z, atravesando la lámina
+  \draw[ct, densely dashed] (2.2,0.42) -- (3.9,0.42);
+  \draw[ct] (2.2,-0.55) -- (2.2,0.42) (3.9,-0.55) -- (3.9,0.42);
+  \draw[ct] (2.2,-0.55) -- (3.9,-0.55);
+  \draw[ct] (2.2,0.42) -- (2.2,1.5) -- (3.9,1.5) -- (3.9,0.42);
+  \draw[ct] (2.2,0.42) -- (3.9,0.42);
+  \path[fill=acento, fill opacity=0.07] (2.2,-0.55) rectangle (3.9,1.5);
+  \draw[ct, -{Stealth[length=4pt]}] (3.05,1.5) -- (3.35,1.5);
+  \draw[ct, -{Stealth[length=4pt]}] (3.05,-0.55) -- (2.75,-0.55);
+  \draw[ct, -{Stealth[length=4pt]}] (3.9,0.9) -- (3.9,0.95);
+  \draw[<->, acento, line width=0.5pt] (4.2,-0.55) -- (4.2,1.5) node[midway, right, font=\small] {$h$};
+  \node[fa, anchor=south] at (3.05,1.55) {$\Delta\vc{l}_2$};
+  \node[fa, anchor=north] at (3.05,-0.6) {$\Delta\vc{l}_1$};
+  % corte transversal con sentido de circulación
+  \begin{scope}[shift={(7.4,0.5)}]
+    \draw[seccion] (-0.3,0) -- (4.3,0);
+    \node[medio] at (-0.65,0.4) {2}; \node[medio] at (-0.65,-0.4) {1};
+    \draw[vn] (-0.15,-0.4) -- ++(0,1.9) node[above, font=\small] {$\un$};
+    \draw[ct] (1.2,-0.75) rectangle (3.0,0.75);
+    \draw[ct, -{Stealth[length=5pt]}] (2.1,0.75) -- (2.45,0.75);
+    \draw[ct, -{Stealth[length=5pt]}] (2.1,-0.75) -- (1.75,-0.75);
+    \draw[ct, -{Stealth[length=5pt]}] (3.0,0.05) -- (3.0,0.12);
+    \draw[ct, -{Stealth[length=5pt]}] (1.2,0.12) -- (1.2,0.05);
+    \node[fa, anchor=south] at (2.1,0.8) {$\Delta\vc{l}_2=\Delta l\,\vc{t}$};
+    \node[fa, anchor=north] at (2.1,-0.8) {$\Delta\vc{l}_1=-\Delta l\,\vc{t}$};
+    \draw[azulprof, line width=0.7pt] (2.1,0) circle (0.13); \fill[azulprof] (2.1,0) circle (1.0pt);
+    \node[font=\scriptsize, text=azulprof, anchor=north west] at (2.2,-0.08) {$\un'$};
+    \draw[<->, acento, line width=0.5pt] (3.3,-0.75) -- (3.3,0.75) node[midway, right, font=\small] {$h$};
   \end{scope}
-\end{tikzpicture}\\[2pt]{\small\scshape (b)\; componente tangencial: circuito rectangular $C$ ($\un'$ sale de la figura)}
-\end{minipage}\\[10pt]
-% (c) camino del potencial
+\end{tikzpicture}\\[3pt]
+{\small\scshape (b)\; componente tangencial: circuito rectangular ($\un'$ sale de la figura)}\\[1pt]
+{\footnotesize $\color{acento}\vc{F}_{2t}-\vc{F}_{1t}=\displaystyle\lim_{h\to0}h\,\bigl(\nab\times\vc{F}\bigr)\times\un$\qquad\qquad $\color{azulacero}\vE_{2t}=\vE_{1t}$}
+\end{minipage}\\[14pt]
+% (c) potencial
 \begin{minipage}[t]{0.98\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  \fill[lamina] (0,0) -- (3.4,0) -- (4.3,0.9) -- (0.9,0.9) -- cycle;
-  \draw[azulprof, ->, line width=0.8pt] (0.55,0.45) -- ++(0,1.5) node[above, font=\small] {$\un$};
-  \node[medio] at (0.3,0.12) {2}; \node[medio] at (0.3,-0.35) {1};
-  \draw[rojoteo, line width=0.9pt] (2.2,-0.55) -- (2.2,0.55);
-  \fill[rojoteo] (2.2,0.55) circle (1.6pt) node[above right, font=\small] {$B$};
-  \fill[rojoteo] (2.2,-0.55) circle (1.6pt) node[below right, font=\small] {$A$};
-  \begin{scope}[shift={(6.3,0.2)}]
-    \fill[lamina] (-0.2,-0.04) rectangle (3.6,0.04);
-    \draw[azulprof, ->, line width=0.8pt] (-0.1,-0.5) -- (-0.1,1.0) node[above, font=\small] {$\un$};
-    \node[medio] at (-0.45,0.35) {2}; \node[medio] at (-0.45,-0.35) {1};
-    \draw[rojoteo, line width=0.9pt, orienta] (1.8,-0.6) -- (1.8,0.6);
-    \fill[rojoteo] (1.8,0.6) circle (1.6pt) node[above right, font=\small] {$B$};
-    \fill[rojoteo] (1.8,-0.6) circle (1.6pt) node[below right, font=\small] {$A$};
-    \draw[<->, rojoteo, line width=0.5pt] (2.5,-0.6) -- (2.5,0.6) node[midway, right, font=\scriptsize] {$h$};
+\begin{tikzpicture}[x=1cm, y=1cm, baseline=(current bounding box.north)]
+  \laminaIII
+  \draw[ct, densely dashed] (3.1,0.42) -- (3.1,0.9);
+  \draw[ct] (3.1,-0.55) -- (3.1,0.42) (3.1,0.9) -- (3.1,1.5);
+  \fill[acento] (3.1,1.5) circle (1.7pt) node[right, fa] {$B$};
+  \fill[acento] (3.1,-0.55) circle (1.7pt) node[right, fa] {$A$};
+  \draw[<->, acento, line width=0.5pt] (3.5,-0.55) -- (3.5,1.5) node[midway, right, font=\small] {$h$};
+  \begin{scope}[shift={(7.4,0.5)}]
+    \draw[seccion] (-0.3,0) -- (4.3,0);
+    \node[medio] at (-0.65,0.4) {2}; \node[medio] at (-0.65,-0.4) {1};
+    \draw[vn] (-0.15,-0.4) -- ++(0,1.9) node[above, font=\small] {$\un$};
+    \draw[ct, -{Stealth[length=5pt]}] (2.1,-0.8) -- (2.1,0.8);
+    \fill[acento] (2.1,0.8) circle (1.7pt) node[right, fa] {$B$};
+    \fill[acento] (2.1,-0.8) circle (1.7pt) node[right, fa] {$A$};
+    \draw[<->, acento, line width=0.5pt] (2.9,-0.8) -- (2.9,0.8) node[midway, right, font=\small] {$h$};
   \end{scope}
-\end{tikzpicture}\\[2pt]{\small\scshape (c)\; potencial: camino $A\to B$ perpendicular a la superficie}
+\end{tikzpicture}\\[3pt]
+{\small\scshape (c)\; potencial: camino $A\to B$ perpendicular a la superficie}\\[1pt]
+{\footnotesize $\color{azulacero}\phi_2=\phi_1$}
 \end{minipage}
-\caption{Construcciones geométricas para obtener las condiciones de contorno (la región 1 está
-debajo de la superficie y la 2 encima; $\un$ apunta de 1 a 2). (a)~Un cilindro de bases de área $\Delta S$ paralelas a la
-superficie y altura $h$, contenido en la capa de transición, para integrar la divergencia. (b)~Un
-rectángulo, con dos lados de longitud $\Delta l$ paralelos a la superficie y dos de longitud $h$ (los
-dos lados verticales), para integrar el rotacional. (c)~Un camino perpendicular a la
-superficie, de $A$ a $B$, para el potencial.}
+\caption{Construcciones geométricas para obtener las condiciones de contorno (la región 1 está debajo de la superficie y la 2 encima; $\un$ apunta de 1 a 2).
+(a)~Un cilindro de bases de área $\Delta S$ paralelas a la superficie y altura $h$, contenido en la capa de transición, para integrar la divergencia.
+(b)~Un rectángulo, con dos lados de longitud $\Delta l$ paralelos a la superficie y dos de longitud $h$, para integrar el rotacional; $\un'$ es la normal al plano del circuito y $\vc{t}=\un'\times\un$.
+(c)~Un camino perpendicular a la superficie, de $A$ a $B$, para el potencial. Debajo de cada esquema, la condición general (ámbar) y su particularización electrostática (azul).}
 \label{fig:contorno}
 \end{figure}

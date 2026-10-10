@@ -190,3 +190,44 @@
     \pgfmathtruncatemacro{\fin}{(\py<-0.0001||abs(\px)>3.1||abs(\py)>3.1)?1:0}%
     \xdef\parar{\fin}%
    \fi}}
+
+% =========================================================================
+%  Primitivas 3D para tdplot (vista fija: tdplotsetmaincoords{70}{125}).
+%  Convención: para un acimut de vista \VA, la mitad «frontal» de un círculo horizontal
+%  son los ángulos [\VA+90,\VA+270] (trazo continuo) y la «trasera» [\VA-90,\VA+90] (a trazos).
+% =========================================================================
+\def\VA{125}
+% \tdCirc[opciones]{radio}{z}   (mitad frontal = visible desde arriba, [\VA-180,\VA]; trasera a trazos)
+\newcommand{\tdCirc}[3][]{%
+  \draw[#1, domain=\VA-180:\VA, samples=36, variable=\tdt]
+    plot ({#2*cos(\tdt)},{#2*sin(\tdt)},{#3});
+  \draw[#1, densely dashed, domain=\VA:\VA+180, samples=36, variable=\tdt]
+    plot ({#2*cos(\tdt)},{#2*sin(\tdt)},{#3});}
+% \tdCilindro[relleno]{radio}{z0}{z1}{color de trazo}{anchura}
+\newcommand{\tdCilindro}[6][]{%
+  \fill[#1] plot[domain=\VA-180:\VA, samples=36, variable=\tdt] ({#2*cos(\tdt)},{#2*sin(\tdt)},{#3})
+    -- plot[domain=\VA:\VA+180, samples=36, variable=\tdt] ({#2*cos(\tdt)},{#2*sin(\tdt)},{#4}) -- cycle;
+  \draw[#5, line width=#6] ({#2*cos(\VA)},{#2*sin(\VA)},{#3}) -- ({#2*cos(\VA)},{#2*sin(\VA)},{#4})
+                           ({#2*cos(\VA+180)},{#2*sin(\VA+180)},{#3}) -- ({#2*cos(\VA+180)},{#2*sin(\VA+180)},{#4});
+  \tdCirc[#5, line width=#6]{#2}{#3}
+  \draw[#5, line width=#6, fill=#5, fill opacity=0.10, domain=0:360, samples=48, variable=\tdt]
+    plot ({#2*cos(\tdt)},{#2*sin(\tdt)},{#4}) -- cycle;}
+% \tdEsfera{radio}{color}  (esfera sombreada con ecuador)
+\newcommand{\tdEsfera}[2]{%
+  \begin{scope}[tdplot_screen_coords]
+    \shade[ball color=azulclaro!55, opacity=0.40] (0,0) circle (#1);
+    \draw[#2, line width=0.7pt] (0,0) circle (#1);
+  \end{scope}
+  \tdCirc[#2!60, line width=0.4pt]{#1}{0}}
+% \tdPlano[opciones]{semilado}{z}
+\newcommand{\tdPlano}[3][]{%
+  \fill[#1] (-#2,-#2,#3) -- (#2,-#2,#3) -- (#2,#2,#3) -- (-#2,#2,#3) -- cycle;}
+% \tdParche[opciones]{cx,cy,cz}{ux,uy,uz}{vx,vy,vz}: elipse con centro c y semiejes u, v
+\def\tdSplitC#1,#2,#3\relax{\def\pcx{#1}\def\pcy{#2}\def\pcz{#3}}
+\def\tdSplitU#1,#2,#3\relax{\def\pux{#1}\def\puy{#2}\def\puz{#3}}
+\def\tdSplitV#1,#2,#3\relax{\def\pvx{#1}\def\pvy{#2}\def\pvz{#3}}
+\newcommand{\tdParche}[4][]{%
+  \tdSplitC#2\relax\tdSplitU#3\relax\tdSplitV#4\relax
+  \draw[#1, domain=0:360, samples=40, variable=\tdt]
+    plot ({\pcx+cos(\tdt)*\pux+sin(\tdt)*\pvx},{\pcy+cos(\tdt)*\puy+sin(\tdt)*\pvy},{\pcz+cos(\tdt)*\puz+sin(\tdt)*\pvz}) -- cycle;}
+% Arco de ángulo en 3D entre dos direcciones (en un plano): \tdArcoAng... (se hace a mano en cada figura)

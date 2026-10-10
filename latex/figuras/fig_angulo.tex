@@ -2,69 +2,98 @@
 % (c) punto exterior: dos elementos opuestos recortados por el mismo cono.
 \begin{figure}[ht]
 \centering
-\begin{minipage}[t]{0.31\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), scale=0.82]
-  \draw[azulacero, line width=0.7pt] (0,0) circle (1.0);
-  \draw[azulprof, line width=0.7pt] (0,0) circle (2.0);
-  \draw[grispizarra, line width=0.4pt] (0,0) -- (35:2.9);
-  \draw[grispizarra, line width=0.4pt] (0,0) -- (13:2.9);
-  \draw[acento, line width=2.4pt] (13:1.0) arc (13:35:1.0);
-  \draw[acento, line width=2.4pt] (13:2.0) arc (13:35:2.0);
-  \fill[azulclaro, opacity=0.25] (0,0) -- (13:2.0) arc (13:35:2.0) -- cycle;
-  \fill[azulprof] (0,0) circle (1.6pt) node[below left, font=\small] {$O$};
-  \node[font=\small, text=acento, anchor=east] at (36:1.05) {};
-  \node[font=\scriptsize, text=acento, anchor=south east] at (46:1.0) {$\dif S_1$};
-  \node[font=\scriptsize, text=acento, anchor=south west] at (30:2.0) {$\dif S_2$};
-  \draw[grispizarra, line width=0.3pt, ->] (0,0) -- (-30:1.0) node[midway, below left, font=\scriptsize, text=azulacero] {$r_1$};
-  \draw[grispizarra, line width=0.3pt, ->] (0,0) -- (-72:2.0) node[midway, below left, font=\scriptsize, text=azulprof] {$r_2$};
+\tikzset{
+  parche/.style={draw=azulprof, line width=0.6pt, fill=azulclaro!70, fill opacity=0.9},
+  parche2/.style={draw=acento, line width=0.6pt, fill=acento!25, fill opacity=0.9},
+  cono/.style={azulacero, line width=0.45pt},
+  vn/.style={-{Stealth[length=5pt,width=4.5pt]}, line width=1.1pt}}
+\begin{minipage}[t]{0.50\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  % (a) dos esferas concéntricas
+  \shade[ball color=azulclaro!55, opacity=0.30] (0,0) circle (2.3);
+  \draw[azulprof, line width=0.8pt] (0,0) circle (2.3);
+  \shade[ball color=azulclaro!70, opacity=0.35] (0,0) circle (1.15);
+  \draw[azulacero, line width=0.8pt] (0,0) circle (1.15);
+  % ecuadores (círculos máximos en perspectiva)
+  \draw[acento, line width=0.8pt] (-2.3,0) arc (180:360:{2.3} and 0.5);
+  \draw[acento, line width=0.5pt, densely dashed] (-2.3,0) arc (180:0:{2.3} and 0.5);
+  \draw[acento, line width=0.8pt] (-1.15,0) arc (180:360:{1.15} and 0.25);
+  \draw[acento, line width=0.5pt, densely dashed] (-1.15,0) arc (180:0:{1.15} and 0.25);
+  % cono hacia los dos parches (dirección 52 grados)
+  \def\dirr{48}
+  \def\ra{0.86}\def\rb{1.72}
+  \draw[cono] (0,0) -- ($(\dirr+12:\rb)$) (0,0) -- ($(\dirr-12:\rb)$);
+  \begin{scope}[shift={(\dirr:\ra)}, rotate=\dirr+90]
+    \path[parche] (0,0) ellipse (0.19 and 0.075);
+  \end{scope}
+  \begin{scope}[shift={(\dirr:\rb)}, rotate=\dirr+90]
+    \path[parche] (0,0) ellipse (0.38 and 0.15);
+  \end{scope}
+  \fill[azulprof] (0,0) circle (1.6pt);
+  \node[font=\small, anchor=north east] at (-0.05,-0.12) {$O$};
+  \node[font=\small, text=azulprof, anchor=east] at ($(\dirr:\ra)+(-0.22,0.1)$) {$\dif S_1$};
+  \node[font=\small, text=azulprof, anchor=south west] at ($(\dirr:\rb)+(0.2,0.12)$) {$\dif S_2$};
+  % radios sobre el plano ecuatorial
+  \draw[vn, verdeteo, line width=0.9pt] (0,0) -- (194:1.08) node[pos=0.55, above, font=\scriptsize, text=verdeteo] {$r_1$};
+  \draw[vn, verdeteo, line width=0.9pt] (0,0) -- (-12:2.2) node[pos=0.72, above, font=\scriptsize, text=verdeteo] {$r_2$};
 \end{tikzpicture}\\[2pt]{\small\scshape (a)}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.34\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), scale=0.8]
-  \draw[azulacero, line width=0.5pt, densely dashed] (0,0) circle (2.0);
-  \draw[azulprof, line width=0.8pt, fill=azulfondo, fill opacity=0.5]
-    plot[smooth cycle, tension=0.8] coordinates {(-60:2.6) (0:2.0) (30:2.0) (60:3.1) (120:2.8) (180:2.4) (240:2.9)};
-  \node[font=\small, text=azulprof] at (150:1.5) {$S$};
-  \node[font=\small, text=azulacero] at (-40:1.55) {$S'$};
-  \fill[azulprof] (0,0) circle (1.6pt);
-  \node[font=\small, anchor=north east] at (0,0) {$O$};
-  \coordinate (E) at (30:2.0);
-  \draw[azulacero, line width=2.2pt] ($(E)+(120:0.28)$) -- ($(E)+(-60:0.28)$);
-  \draw[acento, line width=2.6pt] ($(E)+(100:0.3)$) -- ($(E)+(-80:0.3)$);
-  \draw[vect, azulprof] (0,0) -- (E) node[pos=0.5, below right=-1pt, font=\small] {$\vc{R}$};
-  \draw[vectverde] (E) -- ($(E)+(10:0.9)$) node[right, font=\small, text=verdeteo] {$\dS$};
-  \draw[verdeteo, line width=0.5pt] ($(E)+(10:0.55)$) arc (10:30:0.55);
-  \node[font=\scriptsize, text=verdeteo] at ($(E)+(21:0.78)$) {$\theta$};
-  \node[font=\scriptsize, text=azulacero, anchor=east] at ($(E)+(130:0.3)$) {$\dif S'$};
+\begin{minipage}[t]{0.49\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  % (b) superficie cerrada S, esfera unidad y esfera S' de radio R
+  \draw[azulprof, line width=0.9pt, fill=azulfondo, fill opacity=0.6]
+    plot[smooth cycle, tension=0.75] coordinates {(-0.4:2.7) (30:3.0) (68:3.4) (120:3.0) (172:2.6) (220:3.0) (268:2.6) (318:3.1)};
+  \draw[azulacero, line width=0.5pt] (0,0) circle (0.9);
+  \draw[azulacero, line width=0.9pt] (6:2.9) arc (6:70:2.9);
+  \draw[azulacero, line width=0.9pt, densely dashed] (70:2.9) arc (70:92:2.9);
+  \draw[azulacero, line width=0.9pt, densely dashed] (6:2.9) arc (6:-26:2.9);
+  \fill[azulprof] (0,0) circle (1.6pt); \node[font=\small, anchor=north east] at (-0.05,-0.1) {$O$};
+  \node[font=\scriptsize, text=azulprof] at (0.0,0.42) {$1$};
+  \node[font=\small, text=azulprof] at (150:2.2) {$S$};
+  \node[font=\small, text=azulacero] at (-20:2.45) {$S'$};
+  % cono
+  \def\dirr{30}
+  \draw[cono] (0,0) -- ($(\dirr+9:2.9)$) (0,0) -- ($(\dirr-9:2.9)$);
+  \begin{scope}[shift={(\dirr:0.9)}, rotate=\dirr+90] \path[parche] (0,0) ellipse (0.14 and 0.05); \end{scope}
+  % dS' (proyección sobre S') y dS (inclinado un ángulo theta)
+  \begin{scope}[shift={(\dirr:2.9)}, rotate=\dirr+90] \path[parche] (0,0) ellipse (0.46 and 0.15); \end{scope}
+  \begin{scope}[shift={(\dirr:2.9)}, rotate=\dirr+90+30] \path[parche2] (0,0) ellipse (0.52 and 0.16); \end{scope}
+  \draw[vn, azulacero] (\dirr:2.9) -- ($(\dirr:2.9)+(\dirr:0.95)$) node[right, font=\small, text=azulacero] {$\dif\vc{S}'$};
+  \draw[vn, acento] (\dirr:2.9) -- ($(\dirr:2.9)+(\dirr+30:0.95)$) node[left=1pt, font=\small, text=acento] {$\dif\vc{S}$};
+  \draw[verdeteo, line width=0.5pt] ($(\dirr:2.9)+(\dirr:0.55)$) arc (\dirr:\dirr+30:0.55);
+  \node[font=\scriptsize, text=verdeteo] at ($(\dirr+15:2.9)+(\dirr+15:0.85)$) {$\theta$};
+  \draw[vn, azulprof, line width=0.9pt] (0,0) -- ($(\dirr:2.9)-(\dirr:0.2)$) node[pos=0.55, below right=-1pt, font=\small, text=azulprof] {$\vc{R}$};
 \end{tikzpicture}\\[2pt]{\small\scshape (b)}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.31\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), scale=0.82]
-  \def\dd{3.2}\def\Rr{1.25}
-  \draw[azulprof, line width=0.8pt, fill=azulfondo, fill opacity=0.5] (\dd,0) circle (\Rr);
-  \fill[azulprof] (0,0) circle (1.6pt) node[left, font=\small] {$O$};
-  \foreach \dir/\nm in {-9/a,9/b}{
-    \pgfmathsetmacro{\tn}{\dd*cos(\dir)-sqrt(\Rr*\Rr-\dd*\dd*sin(\dir)*sin(\dir))}
-    \pgfmathsetmacro{\tf}{\dd*cos(\dir)+sqrt(\Rr*\Rr-\dd*\dd*sin(\dir)*sin(\dir))}
-    \coordinate (N\nm) at (\dir:\tn);
-    \coordinate (F\nm) at (\dir:\tf);
-    \draw[grispizarra, line width=0.4pt] (0,0) -- (F\nm);}
-  \fill[azulclaro, opacity=0.35] (0,0) -- (Na) -- (Nb) -- cycle;
-  \draw[acento, line width=2.6pt] (Na) -- (Nb);
-  \draw[acento, line width=2.6pt] (Fa) -- (Fb);
-  \coordinate (MN) at ($(Na)!0.5!(Nb)$);
-  \coordinate (MF) at ($(Fa)!0.5!(Fb)$);
-  \draw[vectverde] (MN) -- ++(-0.8,0);
-  \draw[vectverde] (MF) -- ++(0.8,0);
-  \node[font=\scriptsize, text=verdeteo, anchor=south east] at ($(MN)+(-0.45,0.05)$) {$\dS_2$};
-  \node[font=\scriptsize, text=verdeteo, anchor=south west] at ($(MF)+(0.45,0.05)$) {$\dS_1$};
-  \node[font=\small, text=azulprof] at (\dd,0.55) {$S$};
+\end{minipage}\\[10pt]
+\begin{minipage}[t]{0.8\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  % (c) O fuera de S: el cono recorta dos elementos en lados opuestos
+  \def\ang{7.5}
+  \fill[azulprof] (0,0) circle (1.6pt); \node[font=\small, anchor=east] at (-0.1,0) {$O$};
+  \draw[azulprof, line width=0.9pt, fill=azulfondo, fill opacity=0.6]
+    plot[smooth cycle, tension=0.8] coordinates {(4.2,0.7) (5.0,1.25) (6.2,1.3) (7.3,0.95) (7.9,-0.1) (7.2,-1.2) (5.9,-1.3) (4.7,-0.9)};
+  \draw[cono] (0,0) -- (7.55,{7.55*tan(\ang)}) (0,0) -- (7.55,{-7.55*tan(\ang)});
+  \draw[azulprof, densely dashed, line width=0.6pt] (0,0) -- (6.9,0);
+  % parche de la esfera unidad
+  \draw[azulacero, line width=0.5pt] (0.9,0.6) arc (36:-36:1.0);
+  \begin{scope}[shift={(1.0,0)}] \path[parche] (0,0) ellipse (0.045 and 0.135); \end{scope}
+  \node[font=\scriptsize, text=azulprof, anchor=south] at (0.55,0.07) {$1$};
+  % elemento cercano dS2 (entrada) y lejano dS1 (salida)
+  \begin{scope}[shift={(4.85,0)}, rotate=20] \path[parche2] (0,0) ellipse (0.14 and 0.46); \end{scope}
+  \begin{scope}[shift={(7.35,0)}, rotate=-10] \path[parche] (0,0) ellipse (0.18 and 0.62); \end{scope}
+  \draw[vn, acento] (4.85,0) -- ++(150:0.95) node[above left=-1pt, font=\small, text=acento] {$\dif\vc{S}_2$};
+  \draw[vn, azulacero] (7.35,0) -- ++(25:0.95) node[above right, font=\small, text=azulacero] {$\dif\vc{S}_1$};
+  \draw[verdeteo, line width=0.5pt] (5.3,0) arc (0:150:0.45);
+  \node[font=\scriptsize, text=verdeteo] at (4.55,0.55) {$\theta_2$};
+  \draw[verdeteo, line width=0.5pt] (7.75,0) arc (0:25:0.4);
+  \node[font=\scriptsize, text=verdeteo, anchor=west] at (7.78,0.12) {$\theta_1$};
+  \node[font=\scriptsize, text=azulprof, anchor=north] at (2.6,-0.05) {$\vc{R}_2$};
+  \node[font=\scriptsize, text=azulprof, anchor=north] at (6.15,-0.05) {$\vc{R}_1$};
+  \node[font=\small, text=azulprof] at (6.3,0.85) {$S$};
 \end{tikzpicture}\\[2pt]{\small\scshape (c)}
 \end{minipage}
-
-\caption{Ángulo sólido. (a)~Dos elementos de esferas concéntricas recortados por el mismo cono: $\dif S_1/r_1^{2}=\dif S_2/r_2^{2}=\dOm$.
-(b)~Para un elemento $\dS$ cualquiera de una superficie cerrada $S$ que rodea a $O$ basta proyectarlo sobre la esfera $S'$ de
-radio $R$: $\dif S'=\dsc\cos\theta$ y $\dOm=\dif S'/R^{2}$. (c)~Si $O$ queda fuera de $S$, el mismo cono recorta dos elementos
-en lados opuestos de $S$; el de entrada ($\theta_2>\pi/2$) aporta $-\dOm$ y el de salida $+\dOm$, y se anulan.}
+\caption{Ángulo sólido. (a)~Dos elementos de esferas concéntricas, $\dif S_1$ y $\dif S_2$, recortados por el mismo cono de vértice $O$: $\dif S_1/r_1^{2}=\dif S_2/r_2^{2}=\dOm$.
+(b)~Para un elemento $\dS$ cualquiera de una superficie cerrada $S$ que rodea a $O$ basta proyectarlo sobre la esfera $S'$ de radio $R$: $\dif S'=\dsc\cos\theta$ y $\dOm=\dif S'/R^{2}$.
+(c)~Si $O$ queda fuera de $S$, el mismo cono recorta dos elementos en lados opuestos de $S$; el de entrada ($\theta_2>\pi/2$) aporta $-\dOm$ y el de salida ($\theta_1<\pi/2$) aporta $+\dOm$, y se anulan.}
 \label{fig:angulo}
 \end{figure}

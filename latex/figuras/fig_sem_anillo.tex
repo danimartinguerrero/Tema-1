@@ -1,39 +1,54 @@
 % Figura (Problema 1.7): anillo y disco; campos y potenciales sobre el eje.
 \begin{figure}[ht]
 \centering
-\tdplotsetmaincoords{66}{125}
+\tdplotsetmaincoords{60}{125}
 \begin{minipage}[t]{0.48\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=0.9, baseline=(current bounding box.north)]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.95, baseline=(current bounding box.north)]
+  \def\aa{1.9}
   \draw[eje] (0,0,0) -- (3.0,0,0) node[below left] {\small $x$};
   \draw[eje] (0,0,0) -- (0,3.0,0) node[right] {\small $y$};
-  \draw[eje] (0,0,0) -- (0,0,3.4) node[above] {\small $z$};
-  \draw[azulprof, line width=2.0pt, domain=0:360, samples=90] plot ({1.9*cos(\x)},{1.9*sin(\x)},0);
-  \coordinate (P) at (0,0,2.3); \coordinate (S) at ({1.9*cos(35)},{1.9*sin(35)},0);
-  \draw[vect, azulclaro!70!azulacero, line width=0.8pt] (S) -- (P) node[pos=0.45, right, font=\small, text=azulprof] {$\vc{R}$};
-  \draw[vectrojo, line width=1.0pt] (P) -- ++({-0.55*cos(35)*0.62},{-0.55*sin(35)*0.62},-0.55*0.5)  node[below left, font=\scriptsize, text=acento] {$\dif\vE$};
-  \draw[vectrojo, line width=1.4pt] (P) -- ++(0,0,0.9) node[right, font=\small, text=acento] {$\vE_{\mathrm{anillo}}$};
-  \fill[acento] (S) circle (1.6pt) node[above right, font=\small, text=acento] {$\dif q'$};
-  \draw[grispizarra, densely dotted] (0,0,0) -- (S);
-  \node[font=\scriptsize, text=azulprof, anchor=south west] at (0.3,-0.2,0) {$a$};
-  \node[font=\small, text=azulprof] at (-2.2,0.4,0) {$Q$};
-  \fill[azulprof] (P) circle (1.4pt) node[left, font=\small] {$z$};
+  % anillo: mitad frontal gruesa, trasera discontinua
+  \tdCirc[azulprof, line width=2.2pt]{\aa}{0}
+  \draw[eje] (0,0,0) -- (0,0,4.0) node[above] {\small $z$};
+  \coordinate (P) at (0,0,2.5);
+  \coordinate (S1) at ({\aa*cos(80)},{\aa*sin(80)},0);
+  \coordinate (S2) at ({\aa*cos(260)},{\aa*sin(260)},0);
+  \fill[acento] (S1) circle (2pt); \fill[acento] (S2) circle (2pt);
+  \node[font=\small, text=acento, anchor=south west] at ($(S1)+(0.05,0.05,0.05)$) {$\dif q'$};
+  \draw[vect, azulclaro!70!azulacero, line width=0.8pt] (S1) -- (P);
+  \draw[vect, azulclaro!70!azulacero, line width=0.8pt] (S2) -- (P);
+  \node[font=\small, text=azulprof, anchor=west] at ($(S1)!0.5!(P)+(0.06,0,0)$) {$\vc{R}$};
+  % campos elementales: componente axial suma, la perpendicular se cancela
+  \draw[vectrojo, line width=0.9pt] (P) -- ++(-0.094,-0.534,0.714);
+  \draw[vectrojo, line width=0.9pt] (P) -- ++(0.094,0.534,0.714) node[right=1pt, font=\scriptsize, text=acento] {$\dif\vE$};
+  \draw[acento, densely dashed, line width=0.5pt] ($(P)+(-0.094,-0.534,0.714)$) -- ++(0.094,0.534,0) ($(P)+(0.094,0.534,0.714)$) -- ++(-0.094,-0.534,0);
+  \draw[vectrojo, line width=1.7pt] (P) -- (0,0,3.6) node[above=1pt, font=\small, text=acento] {$\vE_{\mathrm{anillo}}$};
+  \fill[azulprof] (P) circle (1.5pt) node[right=3pt, font=\small] {$z$};
+  \draw[grispizarra, densely dotted, line width=0.5pt] (0,0,0) -- (S1);
+  \node[font=\scriptsize, text=azulprof, anchor=north east] at ($(0,0,0)!0.55!(S1)$) {$a$};
+  \node[font=\small, text=azulprof] at ({2.35*cos(170)},{2.35*sin(170)},0) {$Q$};
 \end{tikzpicture}\\[2pt]{\small\scshape (a)\; anillo}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=0.9, baseline=(current bounding box.north)]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.95, baseline=(current bounding box.north)]
+  \def\aa{2.1}\def\rp{1.2}\def\rq{1.45}
   \draw[eje] (0,0,0) -- (3.0,0,0) node[below left] {\small $x$};
   \draw[eje] (0,0,0) -- (0,3.0,0) node[right] {\small $y$};
-  \draw[eje] (0,0,0) -- (0,0,3.4) node[above] {\small $z$};
-  \draw[azulprof, line width=0.8pt, fill=grisclaro!70, opacity=0.9, domain=0:360, samples=90] plot ({2.1*cos(\x)},{2.1*sin(\x)},0) -- cycle;
-  \draw[azulprof, line width=2.4pt, domain=0:360, samples=90] plot ({1.3*cos(\x)},{1.3*sin(\x)},0);
-  \draw[azulclaro!80!azulacero, line width=2.4pt, domain=0:360, samples=90, opacity=0.0] plot ({1.35*cos(\x)},{1.35*sin(\x)},0);
-  \coordinate (P) at (0,0,2.3);
-  \draw[vectrojo, line width=1.4pt] (P) -- ++(0,0,0.9) node[right, font=\small, text=acento] {$\vE_{\mathrm{disco}}$};
-  \draw[grispizarra, densely dotted] (0,0,0) -- ({1.3*cos(200)},{1.3*sin(200)},0) node[midway, below, font=\scriptsize, text=azulprof] {$r'$};
-  \node[font=\scriptsize, text=azulprof, anchor=north west] at ({1.5*cos(-40)},{1.5*sin(-40)},0) {$\dif r'$};
-  \node[font=\small, text=azulprof] at (-2.3,1.2,0) {$\sigma$};
-  \draw[grispizarra, densely dotted] (0,0,0) -- ({2.1*cos(300)},{2.1*sin(300)},0) node[midway, below left, font=\scriptsize, text=azulprof] {$a$};
-  \fill[azulprof] (P) circle (1.4pt) node[left, font=\small] {$z$};
+  \draw[azulprof, line width=0.8pt, fill=grisclaro!75, domain=0:360, samples=70, variable=\tdt] plot ({\aa*cos(\tdt)},{\aa*sin(\tdt)},0) -- cycle;
+  % anillo elemental entre r' y r'+dr' (relleno ámbar)
+  \fill[acento!45, even odd rule] plot[domain=0:360, samples=70, variable=\tdt] ({\rq*cos(\tdt)},{\rq*sin(\tdt)},0) plot[domain=0:360, samples=70, variable=\tdt] ({\rp*cos(\tdt)},{\rp*sin(\tdt)},0);
+  \draw[acento, line width=0.6pt, domain=0:360, samples=70, variable=\tdt] plot ({\rp*cos(\tdt)},{\rp*sin(\tdt)},0) -- cycle;
+  \draw[acento, line width=0.6pt, domain=0:360, samples=70, variable=\tdt] plot ({\rq*cos(\tdt)},{\rq*sin(\tdt)},0) -- cycle;
+  \draw[eje] (0,0,0) -- (0,0,4.0) node[above] {\small $z$};
+  \coordinate (P) at (0,0,2.5);
+  \draw[vectrojo, line width=1.7pt] (P) -- (0,0,3.5) node[left, font=\small, text=acento] {$\vE_{\mathrm{disco}}$};
+  \fill[azulprof] (P) circle (1.5pt) node[right=3pt, font=\small] {$z$};
+  % radios r', dr' y a
+  \draw[grispizarra, line width=0.45pt] (0,0,0) -- ({\aa*cos(260)},{\aa*sin(260)},0) node[pos=0.5, below left, font=\scriptsize, text=azulprof] {$a$};
+  \draw[verdeteo, <->, line width=0.55pt] (0,0,0) -- ({\rp*cos(205)},{\rp*sin(205)},0);
+  \node[font=\scriptsize, text=verdeteo, anchor=south east] at ({0.6*cos(205)},{0.6*sin(205)},0) {$r'$};
+  \node[font=\scriptsize, text=acento, anchor=south west] at ({(\rp+\rq)/2*cos(95)},{(\rp+\rq)/2*sin(95)},0.05) {$\dif r'$};
+  \node[font=\small, text=azulprof] at (-2.0,1.2,0) {$\sigma$};
 \end{tikzpicture}\\[2pt]{\small\scshape (b)\; disco}
 \end{minipage}\\[8pt]
 \pgfplotsset{anax/.style={tema, width=0.40\textwidth, height=3.6cm, xlabel={$z/a$}, domain=-6:6, samples=140}}

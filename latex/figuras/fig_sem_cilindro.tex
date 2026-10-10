@@ -2,27 +2,18 @@
 \begin{figure}[ht]
 \centering
 \begin{minipage}[t]{0.34\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=0.82cm, y=0.82cm]
-  \def\rx{1.1}\def\ry{0.34}\def\hc{3.6}\def\rg{1.9}\def\ryg{0.58}
-  % cilindro cargado
-  \fill[azulclaro!45] (-\rx,0) -- (-\rx,\hc) arc (180:360:{\rx} and \ry) -- (\rx,0) arc (0:-180:{\rx} and \ry) -- cycle;
-  \draw[azulprof, line width=0.8pt] (-\rx,0) -- (-\rx,\hc) (\rx,0) -- (\rx,\hc);
-  \draw[azulprof, line width=0.8pt, fill=azulclaro!70] (0,\hc) ellipse ({\rx} and \ry);
-  \draw[azulprof, line width=0.8pt] (-\rx,0) arc (180:360:{\rx} and \ry);
-  \draw[azulprof, line width=0.4pt, densely dashed] (-\rx,0) arc (180:0:{\rx} and \ry);
-  \node[font=\small, text=azulprof] at (0,\hc+0.0) {$\rho$};
-  \draw[grispizarra, <->, line width=0.4pt] (0,\hc-0.45) -- (\rx,\hc-0.45) node[midway, below, font=\scriptsize, text=azulprof] {$a$};
-  % gaussiana exterior
-  \def\ya{1.0}\def\yb{2.8}
-  \draw[verdeteo, line width=0.8pt] (-\rg,\ya) -- (-\rg,\yb) (\rg,\ya) -- (\rg,\yb);
-  \draw[verdeteo, line width=0.8pt] (0,\yb) ellipse ({\rg} and \ryg);
-  \draw[verdeteo, line width=0.8pt] (-\rg,\ya) arc (180:360:{\rg} and \ryg);
-  \draw[verdeteo, line width=0.5pt, densely dashed] (-\rg,\ya) arc (180:0:{\rg} and \ryg);
-  \foreach \z in {1.4,2.4}{
-    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (\rg,\z) -- (\rg+0.65,\z);
-    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (-\rg,\z) -- (-\rg-0.65,\z);}
-  \draw[grispizarra, <->, line width=0.4pt] (\rg+1.0,\ya) -- (\rg+1.0,\yb) node[midway, right, font=\scriptsize] {$h$};
-  \node[font=\scriptsize, text=verdeteo, anchor=east] at (-\rg-0.05,\yb+0.3) {$S_{\mathrm{G}}$};
+\tdplotsetmaincoords{66}{125}
+\begin{tikzpicture}[tdplot_main_coords, scale=0.80, baseline=(current bounding box.north)]
+  \def\Rc{1.1}\def\Rg{1.9}
+  \tdCilindro[azulclaro!45]{\Rc}{-1.6}{1.9}{azulprof}{0.8pt}
+  \node[font=\small, text=azulprof] at (0,0,-0.9) {$\rho$};
+  % gaussiana exterior coaxial
+  \tdCilindro[verdeteo, fill opacity=0.05]{\Rg}{-0.2}{1.5}{verdeteo}{0.8pt}
+  \foreach \zz in {0.2,0.9}{\foreach \aa in {35,125,215,305}{
+    \draw[-{Stealth[length=4pt]}, cm1, line width=0.65pt] ({\Rg*cos(\aa)},{\Rg*sin(\aa)},\zz) -- ({(\Rg+0.65)*cos(\aa)},{(\Rg+0.65)*sin(\aa)},\zz);}}
+  \draw[grispizarra, <->, line width=0.4pt] ({(\Rg+0.9)*cos(125)},{(\Rg+0.9)*sin(125)},-0.2) -- ({(\Rg+0.9)*cos(125)},{(\Rg+0.9)*sin(125)},1.5) node[midway, left, font=\scriptsize] {$h$};
+  \draw[grispizarra, <->, line width=0.4pt] (0,0,-1.6) -- ({\Rc*cos(125)},{\Rc*sin(125)},-1.6) node[pos=0.5, below, font=\scriptsize, text=azulprof] {$a$};
+  \node[font=\scriptsize, text=verdeteo, anchor=west] at ({\Rg*cos(125)+0.1},{\Rg*sin(125)},1.7) {$S_{\mathrm{G}}$};
 \end{tikzpicture}\\[2pt]{\small\scshape (a)}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.32\textwidth}\centering
@@ -32,7 +23,7 @@
     \addplot[azulprof, line width=1.1pt, domain=0:1] {x};
     \addplot[azulprof, line width=1.1pt, domain=1:3] {1/x};
     \addplot[grispizarra, densely dashed] coordinates {(1,0) (1,1)};
-    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:1.3,0.55) {$\propto 1/r$};
+    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:1.35,0.62) {$\propto 1/r$};
     \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:0.1,0.45) {$\propto r$};
   \end{axis}
 \end{tikzpicture}\\[2pt]{\small\scshape (b)}
@@ -40,7 +31,7 @@
 \begin{minipage}[t]{0.32\textwidth}\centering
 \begin{tikzpicture}[baseline=(current bounding box.north)]
   \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$r/a$}, ylabel={$\phi/(\rho a^{2}/2\eo)$}, xmin=0, xmax=3, ymin=-2.4, ymax=1.9,
-     xtick={0,1,2,3}, ytick={-2,-1,0,1}, domain=0:3, samples=120, legend style={at={(0.97,0.03)}, anchor=south east, font=\tiny}]
+     xtick={0,1,2,3}, ytick={-2,-1,0,1}, domain=0:3, samples=120, legend style={at={(0.03,0.04)}, anchor=south west, font=\tiny}]
     % phi(r0)=0 con r0=3a
     \addplot[azulacero, line width=1.1pt, domain=0.001:1] {0.5*(1-x^2)+ln(3)};
     \addplot[azulacero, line width=1.1pt, domain=1:3] {ln(3/x)};

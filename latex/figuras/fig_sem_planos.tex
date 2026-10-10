@@ -3,35 +3,40 @@
 \centering
 \tdplotsetmaincoords{62}{128}
 \begin{minipage}[t]{0.48\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=0.88, baseline=(current bounding box.north)]
+\begin{tikzpicture}[tdplot_main_coords, scale=0.92, baseline=(current bounding box.north)]
   \def\L{2.3}
-  \fill[azulclaro, opacity=0.30] (0,-\L,-\L) -- (0,\L,-\L) -- (0,\L,\L) -- (0,-\L,\L) -- cycle;   % x=0
-  \fill[verdeteo, opacity=0.18] (-\L,0,-\L) -- (\L,0,-\L) -- (\L,0,\L) -- (-\L,0,\L) -- cycle;   % y=0
-  \fill[acento, opacity=0.20] (-\L,-\L,0) -- (\L,-\L,0) -- (\L,\L,0) -- (-\L,\L,0) -- cycle;      % z=0
-  \draw[azulacero, line width=0.4pt] (0,-\L,-\L) -- (0,\L,-\L) -- (0,\L,\L) -- (0,-\L,\L) -- cycle;
-  \draw[verdeteo, line width=0.4pt] (-\L,0,-\L) -- (\L,0,-\L) -- (\L,0,\L) -- (-\L,0,\L) -- cycle;
-  \draw[acento, line width=0.4pt] (-\L,-\L,0) -- (\L,-\L,0) -- (\L,\L,0) -- (-\L,\L,0) -- cycle;
-  \draw[eje] (0,0,0) -- (3.0,0,0) node[below left] {\small $x$};
-  \draw[eje] (0,0,0) -- (0,3.0,0) node[right] {\small $y$};
-  \draw[eje] (0,0,0) -- (0,0,3.0) node[above] {\small $z$};
-  \node[font=\scriptsize, text=azulprof] at (0,-1.6,1.9) {$\sigma_a$};
-  \node[font=\scriptsize, text=verdeteo] at (-1.9,0,1.9) {$\sigma_b$};
-  \node[font=\scriptsize, text=acento] at (1.9,1.9,0) {$\sigma_c$};
-\end{tikzpicture}\\[2pt]{\small\scshape (a)}
+  \draw[eje] (0,0,0) -- (3.1,0,0) node[below left] {\small $x$};
+  \draw[eje] (0,0,0) -- (0,3.1,0) node[right] {\small $y$};
+  \draw[eje] (0,0,0) -- (0,0,3.1) node[above] {\small $z$};
+  \fill[azulclaro, opacity=0.32] (0,-\L,-\L) -- (0,\L,-\L) -- (0,\L,\L) -- (0,-\L,\L) -- cycle;
+  \fill[verdeteo, opacity=0.18] (-\L,0,-\L) -- (\L,0,-\L) -- (\L,0,\L) -- (-\L,0,\L) -- cycle;
+  \fill[acento, opacity=0.22] (-\L,-\L,0) -- (\L,-\L,0) -- (\L,\L,0) -- (-\L,\L,0) -- cycle;
+  \draw[azulacero, line width=0.45pt] (0,-\L,-\L) -- (0,\L,-\L) -- (0,\L,\L) -- (0,-\L,\L) -- cycle;
+  \draw[verdeteo, line width=0.45pt] (-\L,0,-\L) -- (\L,0,-\L) -- (\L,0,\L) -- (-\L,0,\L) -- cycle;
+  \draw[acento, line width=0.45pt] (-\L,-\L,0) -- (\L,-\L,0) -- (\L,\L,0) -- (-\L,\L,0) -- cycle;
+  \node[font=\small, text=azulacero, anchor=south] at (0,-1.5,1.7) {$\sigma_a$};
+  \node[font=\small, text=verdeteo, anchor=south] at (-1.5,0,1.7) {$\sigma_b$};
+  \node[font=\small, text=acento, anchor=north] at (1.7,1.7,0) {$\sigma_c$};
+\end{tikzpicture}\\[2pt]{\small\scshape (a)\; planos $x=0$, $y=0$, $z=0$}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=0.88, baseline=(current bounding box.north)]
-  \draw[eje] (-2.6,0,0) -- (2.8,0,0) node[below left] {\small $x$};
-  \draw[eje] (0,-2.6,0) -- (0,2.8,0) node[right] {\small $y$};
-  \draw[eje] (0,0,-2.6) -- (0,0,2.8) node[above] {\small $z$};
-  % un vector por octante: E = (sgn x, sgn y, sgn z)/2e0 con sigma=1 (módulo constante)
+\begin{tikzpicture}[tdplot_main_coords, scale=0.92, baseline=(current bounding box.north)]
+  \draw[eje] (-2.9,0,0) -- (3.1,0,0) node[below left] {\small $x$};
+  \draw[eje] (0,-2.9,0) -- (0,3.1,0) node[right] {\small $y$};
+  \draw[eje] (0,0,-2.9) -- (0,0,3.1) node[above] {\small $z$};
+  \fill[azulclaro, opacity=0.14] (0,-2.6,-2.6) -- (0,2.6,-2.6) -- (0,2.6,2.6) -- (0,-2.6,2.6) -- cycle;
+  \fill[verdeteo, opacity=0.08] (-2.6,0,-2.6) -- (2.6,0,-2.6) -- (2.6,0,2.6) -- (-2.6,0,2.6) -- cycle;
+  \fill[acento, opacity=0.10] (-2.6,-2.6,0) -- (2.6,-2.6,0) -- (2.6,2.6,0) -- (-2.6,2.6,0) -- cycle;
+  % un vector por octante: E = (±1,±1,±1) sigma/2e0 (flechas coloreadas por la altura z)
   \foreach \sx in {-1,1}{\foreach \sy in {-1,1}{\foreach \sz in {-1,1}{%
-    \pgfmathsetmacro{\ft}{0.55+0.25*(\sx*\sy*\sz)}%
+    \pgfmathsetmacro{\ft}{0.5+0.3*\sz+0.1*\sx*\sy}%
     \mapcolor{\ft}%
-    \draw[-{Stealth[length=4.5pt,width=4.5pt]}, line width=1.3pt, mapc] ({1.0*\sx},{1.0*\sy},{1.0*\sz}) -- ++({1.0*\sx},{1.0*\sy},{1.0*\sz});}}}
-\end{tikzpicture}\\[2pt]{\small\scshape (b)}
+    \draw[-{Stealth[length=5pt,width=5pt]}, line width=1.3pt, mapc] ({1.0*\sx},{1.0*\sy},{1.0*\sz}) -- ++({0.95*\sx},{0.95*\sy},{0.95*\sz});
+    \fill[mapc] ({1.0*\sx},{1.0*\sy},{1.0*\sz}) circle (1.3pt);}}}
+  
+\end{tikzpicture}\\[2pt]{\small\scshape (b)\; campo en cada octante ($\sigma_a=\sigma_b=\sigma_c=\sigma$)}
 \end{minipage}
-\caption{Problema 1.11. (a)~Tres planos ortogonales $x=0$, $y=0$ y $z=0$ con densidades $\sigma_a$, $\sigma_b$ y $\sigma_c$. (b)~Para $\sigma_a=\sigma_b=\sigma_c>0$ el campo, suma
+\caption{Problema 1.11. (a)~Tres planos ortogonales $x=0$, $y=0$ y $z=0$ con densidades $\sigma_a$, $\sigma_b$ y $\sigma_c$. (b)~Para $\sigma_a=\sigma_b=\sigma_c=\sigma>0$ el campo, suma
 de tres campos uniformes de módulo $\sigma/2\eo$ que cambian de sentido al cruzar su plano, es en cada octante $\frac{\sigma}{2\eo}(\pm\ux\pm\uy\pm\uz)$: constante a trozos y
 siempre saliente.}
 \label{fig:sem-planos}

@@ -1,47 +1,50 @@
-% Figura (Problemas 1.2 y 1.9): superficies gaussianas y gráficas E(r), phi(r) para esfera maciza y cáscara.
+% Figura (Problema 1.2): superficies gaussianas y gráficas E(r), phi(r) para la esfera maciza.
 \begin{figure}[ht]
 \centering
-\begin{minipage}[t]{0.30\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), scale=0.95]
-  \shade[ball color=azulclaro!50, opacity=0.30] (0,0) circle (1.2);
-  \draw[azulprof, line width=0.8pt] (0,0) circle (1.2);
-  \draw[verdeteo, densely dashed, line width=0.7pt] (0,0) circle (0.7);
-  \draw[verdeteo, densely dashed, line width=0.7pt] (0,0) circle (2.0);
-  \foreach \a in {0,45,...,315}{\draw[-{Stealth[length=4pt]}, cm1, line width=0.6pt] (\a:2.0) -- (\a:2.45);}
-  \foreach \a in {0,45,...,315}{\draw[-{Stealth[length=3pt]}, cm1, line width=0.6pt] (\a:0.7) -- (\a:0.95);}
-  \foreach \p in {(-0.4,0.9),(0.9,0.3),(-0.95,-0.35),(0.3,-0.95)}{\node[font=\tiny, text=azulacero] at \p {$+$};}
-  \draw[grispizarra, ->, line width=0.4pt] (0,0) -- (-125:1.2) node[pos=0.5, left, font=\scriptsize, text=azulprof] {$a$};
-  \node[font=\scriptsize, text=verdeteo, anchor=south west] at (40:0.62) {$r$};
-  \node[font=\scriptsize, text=verdeteo, anchor=north west] at (-45:2.05) {$r$};
-  \node[font=\scriptsize, text=verdeteo] at (0,2.7) {$S_{\mathrm{G}}$};
+\begin{minipage}[t]{0.31\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), scale=0.92]
+  \def\ra{1.25}\def\rin{0.62}\def\rout{2.15}
+  \shade[ball color=azulclaro!55, opacity=0.40] (0,0) circle (\ra);
+  \draw[azulprof, line width=0.9pt] (0,0) circle (\ra);
+  \draw[verdeteo, densely dashed, line width=0.8pt] (0,0) circle (\rin);
+  \draw[verdeteo, densely dashed, line width=0.8pt] (0,0) circle (\rout);
+  \foreach \a in {0,45,...,315}{\draw[-{Stealth[length=4pt]}, cm1, line width=0.65pt] (\a:\rout) -- (\a:{\rout+0.45});}
+  \foreach \a in {22.5,67.5,...,337.5}{\draw[-{Stealth[length=3pt]}, cm1, line width=0.65pt] (\a:\rin) -- (\a:{\rin+0.25});}
+  \fill[azulprof] (0,0) circle (1.2pt);
+  \draw[verdeteo, ->, line width=0.5pt] (0,0) -- (205:\rin) node[pos=0.55, above left=-1pt, font=\scriptsize] {$r$};
+  \draw[azulprof, ->, line width=0.5pt] (0,0) -- (120:\ra) node[pos=0.5, left=1pt, font=\scriptsize] {$a$};
+  \draw[verdeteo, ->, line width=0.5pt] (0,0) -- (-35:\rout) node[pos=0.65, below left=-1pt, font=\scriptsize] {$r$};
+  \node[font=\small, text=azulprof] at (0.45,0.55) {$\rho$};
+  \node[font=\scriptsize, text=verdeteo, anchor=south west] at (45:\rout) {};
+  \node[font=\scriptsize, text=verdeteo] at (0,-2.9) {$S_{\mathrm{G}}$: $r<a$ y $r>a$};
 \end{tikzpicture}\\[2pt]{\small\scshape (a)}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.33\textwidth}\centering
 \begin{tikzpicture}[baseline=(current bounding box.north)]
-  \begin{axis}[tema, width=\textwidth, height=4.2cm, xlabel={$r/a$}, ylabel={$E/E(a)$}, xmin=0, xmax=3, ymin=0, ymax=1.15,
+  \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$r/a$}, ylabel={$E/E(a)$}, xmin=0, xmax=3, ymin=0, ymax=1.2,
      xtick={0,1,2,3}, ytick={0,0.5,1}, domain=0:3, samples=120]
-    \addplot[azulprof, line width=1.1pt, domain=0:1] {x};
-    \addplot[azulprof, line width=1.1pt, domain=1:3] {1/x^2};
+    \addplot[azulprof, line width=1.2pt, domain=0:1] {x};
+    \addplot[azulprof, line width=1.2pt, domain=1:3] {1/x^2};
     \addplot[grispizarra, densely dashed] coordinates {(1,0) (1,1)};
-    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:0.15,0.35) {$\propto r$};
-    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:1.3,0.55) {$\propto 1/r^{2}$};
+    \node[font=\scriptsize, text=azulprof, anchor=east] at (axis cs:0.62,0.82) {$\propto r$};
+    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:1.55,0.75) {$\propto 1/r^{2}$};
   \end{axis}
 \end{tikzpicture}\\[2pt]{\small\scshape (b)}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.33\textwidth}\centering
 \begin{tikzpicture}[baseline=(current bounding box.north)]
-  \begin{axis}[tema, width=\textwidth, height=4.2cm, xlabel={$r/a$}, ylabel={$\phi/\phi(a)$}, xmin=0, xmax=3, ymin=0, ymax=1.6,
+  \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$r/a$}, ylabel={$\phi/\phi(a)$}, xmin=0, xmax=3, ymin=0, ymax=1.7,
      xtick={0,1,2,3}, ytick={0,0.5,1,1.5}, domain=0:3, samples=120]
-    \addplot[azulacero, line width=1.1pt, domain=0:1] {(3-x^2)/2};
-    \addplot[azulacero, line width=1.1pt, domain=1:3] {1/x};
+    \addplot[azulacero, line width=1.2pt, domain=0:1] {(3-x^2)/2};
+    \addplot[azulacero, line width=1.2pt, domain=1:3] {1/x};
     \addplot[grispizarra, densely dashed] coordinates {(1,0) (1,1)};
-    \node[font=\scriptsize, text=azulacero, anchor=south west] at (axis cs:1.35,0.5) {$\propto 1/r$};
-    \node[font=\scriptsize, text=azulacero, anchor=south west] at (axis cs:0.05,0.75) {$\tfrac{3}{2}-\tfrac{r^{2}}{2a^{2}}$};
+    \node[font=\scriptsize, text=azulacero, anchor=south west] at (axis cs:1.5,0.62) {$\propto 1/r$};
+    \node[font=\scriptsize, text=azulacero, anchor=south west] at (axis cs:0.08,0.12) {$\tfrac32-\tfrac{r^{2}}{2a^{2}}$};
   \end{axis}
 \end{tikzpicture}\\[2pt]{\small\scshape (c)}
 \end{minipage}
 \caption{Problema 1.2. (a)~Corte de la esfera uniformemente cargada y de las dos superficies gaussianas esféricas (a trazos), una
-interior ($r<a$) y otra exterior ($r>a$). (b)~El campo crece linealmente dentro y decae como $1/r^{2}$ fuera, con
+interior ($r<a$) y otra exterior ($r>a$), con el campo radial saliente. (b)~El campo crece linealmente dentro y decae como $1/r^{2}$ fuera, con
 valor máximo $E(a)$ en la superficie. (c)~El potencial, máximo en el centro, es parabólico dentro y decae como $1/r$ fuera; $E$ y $\phi$ son continuos en $r=a$.}
 \label{fig:sem-gauss-esfera}
 \end{figure}

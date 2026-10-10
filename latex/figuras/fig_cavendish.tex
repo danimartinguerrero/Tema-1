@@ -1,57 +1,70 @@
 % Figura: experimento de Cavendish y argumento de la cáscara esférica.
 \begin{figure}[ht]
 \centering
-\begin{minipage}[t]{0.47\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  % (a) esfera interior dentro de dos hemisferios conductores
-  \shade[ball color=azulclaro!55, opacity=0.35] (0,0) circle (1.7);
-  \draw[azulprof, line width=0.8pt] (0,0) circle (1.7);
-  \draw[azulprof, densely dashed, line width=0.5pt] (-1.7,0) -- (1.7,0);
-  \shade[ball color=azulacero!60, opacity=0.8] (0,0) circle (0.5);
-  \draw[azulprof, line width=0.6pt] (0,0) circle (0.5);
-  \draw[grispizarra, line width=0.7pt] (0.5,0) -- (2.4,0.9) -- (2.9,0.9);
-  \node[font=\footnotesize, anchor=west] at (2.0,1.35) {hilo conductor};
-  \draw[grispizarra, line width=0.3pt] (2.2,1.2) -- (1.9,0.83);
-  \node[font=\footnotesize, anchor=west] at (1.85,-1.0) {cáscara};
-  \node[font=\footnotesize] at (0,-0.1) {$a$};
-  \node[font=\footnotesize, anchor=north] at (0,-1.8) {esfera interior};
-  \draw[grispizarra, line width=0.3pt] (0,-1.78) -- (0,-0.52);
+\tikzset{
+  parche/.style={draw=azulprof, line width=0.6pt, fill=azulclaro!70, fill opacity=0.9},
+  parche2/.style={draw=acento, line width=0.6pt, fill=acento!25, fill opacity=0.9},
+  vn/.style={-{Stealth[length=5pt,width=4.5pt]}, line width=1.1pt}}
+\begin{minipage}[t]{0.50\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=0.82cm, y=0.82cm]
+  % (a) cáscara de dos hemisferios con esfera interior unida por un hilo conductor
+  \def\Re{1.9}\def\Ri{0.6}
+  \shade[ball color=azulclaro!55, opacity=0.35] (0,0) circle (\Re);
+  \draw[azulprof, line width=0.8pt] (0,0) circle (\Re);
+  \draw[azulprof, line width=0.8pt] (-\Re,0) arc (180:360:{\Re} and 0.45);
+  \draw[azulprof, line width=0.5pt, densely dashed] (-\Re,0) arc (180:0:{\Re} and 0.45);
+  \shade[ball color=azulacero!70, opacity=0.95] (0,0) circle (\Ri);
+  \draw[azulprof, line width=0.7pt] (0,0) circle (\Ri);
+  % hilo conductor vertical con collar aislante en la cáscara y terminal exterior
+  \draw[grispizarra, line width=1.0pt] (0,\Ri) -- (0,2.55);
+  \draw[azulprof, line width=0.6pt, fill=white] (0,\Re) ellipse (0.13 and 0.05);
+  \fill[acento] (0,2.55) circle (2.0pt);
+  % rótulos con líneas de llamada rectas
+  \node[font=\footnotesize, anchor=west] at (0.35,2.55) {hilo conductor};
+  \draw[grispizarra, line width=0.3pt] (-2.65,0.45) -- (-1.85,0.45); \node[font=\footnotesize, anchor=east] at (-2.7,0.45) {hemisferios};
+  \draw[grispizarra, line width=0.3pt] (2.7,-0.9) -- (1.5,-0.9); \node[font=\footnotesize, anchor=west] at (2.75,-0.9) {cáscara};
+  \draw[grispizarra, line width=0.3pt] (2.7,0.0) -- (0.62,0.0); \node[font=\footnotesize, anchor=west] at (2.75,0.0) {esfera interior};
+  \draw[verdeteo, <->, line width=0.5pt] (0,0) -- (-35:\Ri) node[pos=0.7, below=1pt, font=\scriptsize, text=verdeteo] {$a$};
 \end{tikzpicture}\\[2pt]{\small\scshape (a)}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.50\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  % (b) cono de ángulo sólido que corta a la cáscara en dos elementos
-  \def\Rr{1.75}
-  \draw[azulprof, line width=0.8pt, name path=circ] (0,0) circle (\Rr);
-  \coordinate (P) at (0.55,0.30);
-  \foreach \dir/\nm in {14/a,26/b}{
-    \path[name path=ray\nm] (P) -- ++(\dir:4);
-    \path[name path=rev\nm] (P) -- ++({\dir+180}:4);
+\begin{minipage}[t]{0.48\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1.05cm, y=1.05cm]
+  % (b) cono desde un punto interior P que recorta dos elementos opuestos de la cáscara
+  \def\Rr{2.0}
+  \draw[azulprof, line width=0.9pt, name path=circ, fill=azulfondo, fill opacity=0.5] (0,0) circle (\Rr);
+  \coordinate (O) at (0,0); \fill[azulprof] (O) circle (1.2pt); \node[font=\scriptsize, anchor=north east] at (O) {$C$};
+  \coordinate (P) at (0.7,-0.25);
+  \def\dd{24}\def\ap{9}
+  \foreach \dir/\nm in {\dd-\ap/a,\dd+\ap/b,\dd/m}{
+    \path[name path=ray\nm] (P) -- ++({\dir}:5);
+    \path[name path=rev\nm] (P) -- ++({\dir+180}:5);
     \path[name intersections={of=circ and ray\nm, by=A\nm}];
-    \path[name intersections={of=circ and rev\nm, by=B\nm}];
-    \draw[azulacero, line width=0.5pt] (B\nm) -- (A\nm);}
-  \draw[acento, line width=2.4pt] (Aa) -- (Ab);
-  \draw[acento, line width=2.4pt] (Ba) -- (Bb);
-  \fill[azulclaro, opacity=0.25] (P) -- (Aa) -- (Ab) -- cycle;
-  \fill[azulclaro, opacity=0.25] (P) -- (Ba) -- (Bb) -- cycle;
-  \fill[azulprof] (P) circle (1.6pt) node[below right, font=\small] {$P$};
-  % normales en los puntos de impacto, con el mismo ángulo respecto a la cuerda
-  \path (Aa) -- (Ab) coordinate[pos=0.5] (A);
-  \path (Ba) -- (Bb) coordinate[pos=0.5] (B);
-  \draw[verdeteo, ->, line width=0.6pt, shorten >=0pt] (0,0) -- (A);
-  \draw[verdeteo, ->, line width=0.6pt] (0,0) -- (B);
-  \node[font=\small, text=acento, anchor=south west] at ($(A)+(0.1,0.15)$) {$\dif S_2$};
-  \node[font=\small, text=acento, anchor=north east] at ($(B)+(-0.1,-0.15)$) {$\dif S_1$};
-  \node[font=\scriptsize, text=azulprof, above=3pt] at ($(P)!0.5!(A)$) {$r_2$};
-  \node[font=\scriptsize, text=azulprof, below=3pt] at ($(P)!0.5!(B)$) {$r_1$};
-  \node[font=\scriptsize, text=verdeteo] at ($(A)!0.5!(0,0)+(0.1,-0.12)$) {};
+    \path[name intersections={of=circ and rev\nm, by=B\nm}];}
+  \fill[azulclaro, opacity=0.40] (P) -- (Aa) -- (Ab) -- cycle;
+  \fill[azulclaro, opacity=0.40] (P) -- (Ba) -- (Bb) -- cycle;
+  \draw[azulacero, line width=0.45pt] (Aa) -- (Ba) (Ab) -- (Bb);
+  \draw[azulprof, line width=0.8pt] (Bm) -- (Am);
+  \draw[acento, line width=2.8pt] (Aa) -- (Ab);
+  \draw[acento, line width=2.8pt] (Ba) -- (Bb);
+  \draw[verdeteo, line width=0.6pt, densely dashed] (0,0) -- (Am) (0,0) -- (Bm);
+  \fill[azulprof] (P) circle (1.5pt) node[below=2pt, font=\small] {$P$};
+  \node[font=\scriptsize, text=azulprof, anchor=south east] at ($(P)!0.55!(Am)$) {$r_2$};
+  \node[font=\scriptsize, text=azulprof, anchor=north west] at ($(P)!0.55!(Bm)$) {$r_1$};
+  \node[font=\small, text=acento, anchor=south west] at ($(Am)+(0.1,0.12)$) {$\dif S_2$};
+  \node[font=\small, text=acento, anchor=north east] at ($(Bm)+(-0.12,-0.2)$) {$\dif S_1$};
+  % ángulo alpha entre la cuerda y el radio en cada extremo (arcos dibujados a mano)
+  \draw[verdeteo, line width=0.55pt] let \p1=(Am), \n1={atan2(\y1,\x1)+180} in
+     (Am) ++(\n1:0.45) arc[start angle=\n1, end angle=\dd+180, radius=0.45];
+  \draw let \p1=(Am), \n1={atan2(\y1,\x1)+180} in
+     node[font=\scriptsize, text=verdeteo] at ($(Am)+({(\n1+\dd+180)/2}:0.78)$) {$\alpha$};
+  \draw[verdeteo, line width=0.55pt] let \p1=(Bm), \n1={atan2(\y1,\x1)+180} in
+     (Bm) ++(\n1:0.45) arc[start angle=\n1, end angle=\dd, radius=0.45];
+  \draw let \p1=(Bm), \n1={atan2(\y1,\x1)+180} in
+     node[font=\scriptsize, text=verdeteo] at ($(Bm)+({(\n1+\dd)/2}:0.78)$) {$\alpha$};
 \end{tikzpicture}\\[2pt]{\small\scshape (b)}
 \end{minipage}
-\caption{(a)~Experimento de Cavendish: una esfera conductora interior se conecta, mediante un hilo,
-a una cáscara formada por dos hemisferios, y se cargan; al retirar el hilo y separar los hemisferios,
-la esfera interior resulta descargada. (b)~Argumento geométrico: un cono de ángulo sólido
-$\dOm$ con vértice en un punto interior $P$ recorta dos elementos, $\dif S_1$ y $\dif S_2$, a
-distancias $r_1$ y $r_2$ de $P$; ambos forman con la cuerda el mismo ángulo $\alpha$ (el triángulo
-formado por los radios y la cuerda es isósceles).}
+\caption{(a)~Experimento de Cavendish: una esfera conductora interior se conecta, mediante un hilo, a una cáscara formada por dos hemisferios, y se cargan; al retirar el hilo y separar los hemisferios,
+la esfera interior resulta descargada. (b)~Argumento geométrico: un cono de ángulo sólido $\dOm$ con vértice en un punto interior $P$ recorta dos elementos, $\dif S_1$ y $\dif S_2$,
+a distancias $r_1$ y $r_2$ de $P$; ambos forman con la cuerda el mismo ángulo $\alpha$ (el triángulo formado por los dos radios y la cuerda es isósceles).}
 \label{fig:cavendish}
 \end{figure}

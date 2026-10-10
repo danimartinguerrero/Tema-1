@@ -1,26 +1,34 @@
 % Figura (Problema 1.12): semiesfera cargada; campo en el centro.
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[x=1cm, y=1cm]
-  \def\RR{2.0}\def\ee{0.55}
-  \path[left color=azulclaro!30, right color=azulclaro!75, opacity=0.8] (-\RR,0) arc (180:360:\RR) arc (0:180:{\RR} and \ee) -- cycle;
-  \draw[azulprof, line width=0.8pt] (-\RR,0) arc (180:360:\RR);
-  \draw[azulprof, line width=0.8pt] (0,0) ellipse ({\RR} and \ee);
-  \draw[azulprof!60, line width=0.4pt] (-\RR,0) arc (180:360:{\RR} and {1.15});
-  \draw[eje] (0,-2.4) -- (0,0); \draw[eje] (0,0) -- (0,2.7) node[above] {\small $z$};
-  \draw[eje] (0,0) -- (3.1,0) node[right] {\small $y$};
-  \draw[eje] (0,0) -- (-2.3,-1.7) node[below left] {\small $x$};
-  \coordinate (S) at (-125:1.9);
-  \draw[->, azulclaro!80!azulacero, line width=0.8pt] (0,0) -- (S) node[pos=0.78, below left=-1pt, font=\small, text=azulprof] {$\vc{r}\,'$};
-  \draw[vect, azulprof, line width=1.1pt] (S) -- (0,0);
-  \node[font=\small, text=azulprof, anchor=west] at ($(S)!0.45!(0,0)+(0.08,-0.05)$) {$\vc{R}$};
-  \draw[vectrojo, line width=1.1pt] (0,0) -- ($(0,0)!0.55!(S)!-1.0!(0,0)$) node[right, font=\small, text=acento] {$\dif\vE$};
-  \draw[vectrojo, line width=1.6pt] (0,0) -- (0,1.6) node[left, font=\small, text=acento] {$\vE_{0}$};
-  \fill[acento] (S) circle (1.7pt) node[below left, font=\small, text=acento] {$\dif S'$};
-  \node[font=\small, text=azulprof] at (1.5,-1.35) {$\sigma$};
-  \draw[verdeteo, line width=0.5pt] (0,-0.55) arc (-90:-125:0.55);
-  \node[font=\scriptsize, text=verdeteo] at (-0.18,-0.75) {$\theta'$};
-  \fill[azulprof] (0,0) circle (1.5pt) node[above left=-1pt, font=\small] {$O$};
+\tdplotsetmaincoords{66}{125}
+\begin{tikzpicture}[tdplot_main_coords, scale=1.25]
+  \def\RR{1.8}
+  % semicáscara inferior: casquete sombreado, borde ecuatorial y meridianos
+  \begin{scope}
+    \clip plot[domain=\VA-180:\VA, samples=40, variable=\tdt] ({\RR*cos(\tdt)},{\RR*sin(\tdt)},0) -- plot[domain=\VA:\VA-180, samples=2, variable=\tdt] ({\RR*cos(\tdt)},{\RR*sin(\tdt)},0) -- (0,0,-\RR*1.01) -- cycle;
+  \end{scope}
+  \shade[left color=azulclaro!30, right color=azulclaro!80, opacity=0.85]
+    plot[domain=0:180, samples=60, variable=\tdt] ({\RR*cos(\VA)*cos(\tdt)},{\RR*sin(\VA)*cos(\tdt)},{-\RR*sin(\tdt)})
+    -- plot[domain=\VA-180:\VA, samples=40, variable=\tdt] ({\RR*cos(\tdt)},{\RR*sin(\tdt)},0) -- cycle;
+  \draw[azulprof, line width=0.8pt] plot[domain=0:180, samples=60, variable=\tdt] ({\RR*cos(\VA)*cos(\tdt)},{\RR*sin(\VA)*cos(\tdt)},{-\RR*sin(\tdt)});
+  \tdCirc[azulprof, line width=0.8pt]{\RR}{0}
+  \foreach \mm in {35,80,170,215,260,305}{
+    \draw[azulprof!45, line width=0.4pt, domain=0:90, samples=30, variable=\tdt] plot ({\RR*cos(\mm)*sin(\tdt)},{\RR*sin(\mm)*sin(\tdt)},{-\RR*cos(\tdt)});}
+  \draw[eje] (0,0,-2.3) -- (0,0,0); \draw[eje] (0,0,0) -- (0,0,2.6) node[above] {\small $z$};
+  \draw[eje] (0,0,0) -- (2.9,0,0) node[below left] {\small $x$};
+  \draw[eje] (0,0,0) -- (0,2.9,0) node[right] {\small $y$};
+  \def\ph{60}\def\th{140}
+  \coordinate (S) at ({\RR*sin(\th)*cos(\ph)},{\RR*sin(\th)*sin(\ph)},{\RR*cos(\th)});
+  \draw[vect, azulprof, line width=1.0pt] (S) -- (0,0,0);
+  \node[font=\small, text=azulprof, anchor=west] at ($(S)!0.5!(0,0,0)+(0.06,0,0)$) {$\vc{R}=-\vc{r}\,'$};
+  \draw[vectrojo, line width=1.0pt] (0,0,0) -- ({0.75*sin(\th)*cos(\ph)*(-1)},{0.75*sin(\th)*sin(\ph)*(-1)},{0.75*cos(\th)*(-1)}) node[left=1pt, font=\scriptsize, text=acento] {$\dif\vE$};
+  \draw[vectrojo, line width=1.7pt] (0,0,0) -- (0,0,1.7) node[left, font=\small, text=acento] {$\vE_{0}$};
+  \tdParche[acento, fill=acento!45, line width=0.6pt]{\RR*sin(\th)*cos(\ph)*0.985,\RR*sin(\th)*sin(\ph)*0.985,\RR*cos(\th)*0.985}{0.2,-0.1,0}{0.0,0.0,0.2}
+  \fill[acento] (S) circle (1.2pt);
+  \node[font=\small, text=acento, anchor=north west] at ($(S)+(0.05,0.05,-0.12)$) {$\dif S'$};
+  \node[font=\small, text=azulprof] at (1.1,-0.5,-1.3) {$\sigma$};
+  \fill[azulprof] (0,0,0) circle (1.4pt) node[above right=1pt, font=\small] {$O$};
 \end{tikzpicture}
 \caption{Problema 1.12. Semicáscara esférica de radio $a$ (la mitad $z<0$) con carga $Q$ uniforme. El campo creado en el centro $O$ por un elemento $\dif S'$ apunta
 según $\vc{R}=-\vc{r}\,'$; las componentes horizontales se cancelan por simetría y el campo total $\vE_0$ es axial (positivo en $z$).}
