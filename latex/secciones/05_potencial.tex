@@ -1,1 +1,202 @@
-\section{Provisional potencial}
+% =========================================================================
+\section{El potencial eléctrico}\label{sec:potencial}
+% =========================================================================
+Hasta ahora hemos descrito los efectos electrostáticos únicamente mediante el campo vectorial $\vE$. Escribiendo el campo de una
+carga puntual de otra forma podremos expresar la misma información mediante un \emph{campo escalar}, lo cual es más
+conveniente para muchos propósitos: un número por punto en lugar de tres.
+
+% -------------------------------------------------------------------------
+\subsection{Definición del potencial}\label{sec:def-potencial}
+% -------------------------------------------------------------------------
+Partimos del campo de una carga puntual (\cref{eq:campo-puntual}) y usamos que $\vc{R}/R^{3}=-\nab(1/R)$, que es el caso $n=-1$ del
+gradiente de $R^{n}$~\cite{TEMA0} ($\nab R^{n}=nR^{n-1}\uR$):
+\begin{equation}\label{eq:campo-grad}
+  \vE(\vc{r})=\frac{\qp}{4\pi\eo}\,\frac{\vc{R}}{R^{3}}=-\frac{\qp}{4\pi\eo}\,\nab\Bigl(\frac{1}{R}\Bigr)
+  =-\nab\Bigl(\frac{\qp}{4\pi\eo R}\Bigr).
+\end{equation}
+
+\begin{definicion}[Potencial electrostático]\label{def:potencial}
+Se llama \emph{potencial eléctrico} (o escalar) de una carga puntual $\qp$ al campo escalar
+\begin{equation}\label{eq:potencial-puntual}
+  \phi(\vc{r})=\frac{1}{4\pi\eo}\,\frac{\qp}{R}+\text{cte},\qquad R=\norm{\vc{r}-\vc{r}\,'}.
+\end{equation}
+La relación entre el campo vectorial $\vE:\R^{3}\to\R^{3}$ y el campo escalar $\phi:\R^{3}\to\R$ es
+\begin{equation}\label{eq:E-grad-phi}
+  \boxed{\;\vE(\vc{r})=-\nab\phi(\vc{r})\;}
+\end{equation}
+\end{definicion}
+
+\begin{observacion}[Propiedades del potencial]\label{obs:potencial}
+\begin{enumerate}[label=(\alph*)]
+  \item \emph{Significado del gradiente.} $\norm{\nab\phi}$ es la derivada de $\phi$ en la dirección de máxima variación, y $\nab\phi$
+        apunta en esa dirección, que coincide con la de $\vE$ en cada punto; pero, por el signo menos, $\vE$ y $\nabla\phi$ tienen
+        sentidos opuestos: el potencial \emph{aumenta} al movernos en sentido contrario al campo. Como $\dif\phi=\nab\phi\cdot\dl$,
+        resulta $\dif\phi=-\vE\cdot\dl$.
+  \item \emph{Unidades.} En el SI, $[\phi]=\mathrm{V}$ (voltio $=\mathrm{N\,m/C}$), y de aquí $[\vE]=\mathrm{V/m}$.
+  \item \emph{No está unívocamente definido.} Sumándole cualquier constante se obtiene el mismo campo (el gradiente de una constante
+        es nulo). Ocurre como con la altitud de un lugar: siempre se da respecto de una referencia, el nivel del mar. En electrostática se toma
+        habitualmente como nivel de referencia (al que se asigna el valor cero) un punto infinitamente alejado de las cargas: si
+        $r\to\infty$, $\phi=\lim\bigl(\frac{1}{4\pi\eo}\frac{\qp}{R}+\text{cte}\bigr)=\text{cte}$, luego $\text{cte}=0$. Pero hay
+        problemas ideales en los que las cargas llegan al infinito (un hilo o un plano infinitos); en ellos hay que tomar otro punto como
+        origen de potencial, e incluso a veces se asigna el cero a la superficie de la Tierra. En cada problema hay que especificarlo, y
+        como el potencial no es único conviene hablar de \emph{diferencias de potencial}. A partir de ahora escribimos $\phi$ para el potencial con
+        la constante ya elegida.
+\end{enumerate}
+\end{observacion}
+
+Por el principio de superposición, el potencial de un sistema de cargas es la suma de los potenciales de cada una, y el de una
+distribución continua la integral correspondiente:
+
+\begin{proposicion}[Potencial de sistemas y distribuciones de carga]\label{prop:potencial-dist}
+\begin{align}
+  \phi(\vc{r})&=\frac{1}{4\pi\eo}\sum_{i=1}^{N}\frac{\qp_i}{R_i}+\text{cte}, &&\text{(discreta)}\label{eq:pot-discreto}\\
+  \phi(\vc{r})&=\frac{1}{4\pi\eo}\int_{V'}\frac{\rho(\vc{r}\,')\,\dVp}{R}+\text{cte}, &&\text{(volúmica)}\label{eq:pot-vol}\\
+  \phi(\vc{r})&=\frac{1}{4\pi\eo}\int_{S'}\frac{\sigma(\vc{r}\,')\,\dSp}{R}+\text{cte}, \quad
+  \phi(\vc{r})=\frac{1}{4\pi\eo}\int_{l'}\frac{\lambda(\vc{r}\,')\,\dlp}{R}+\text{cte}. &&\text{(superficial, lineal)}\label{eq:pot-sup-lin}
+\end{align}
+\end{proposicion}
+\begin{proof}
+El gradiente es lineal y $\vE=-\nab\phi$ para cada carga puntual, con la misma constante aditiva; la superposición de campos
+(\cref{eq:campo-discreto,eq:campo-vol,eq:campo-sup-lin}) es entonces la superposición de potenciales.
+\end{proof}
+
+% -------------------------------------------------------------------------
+\subsection{Significado físico: el potencial como trabajo por unidad de carga}\label{sec:potencial-signif}
+% -------------------------------------------------------------------------
+Consideremos una carga puntual $q$ (de prueba, $q\to0$) en equilibrio bajo la acción de la fuerza electrostática $\vF_q=q\vE$ y de
+una fuerza \emph{mecánica} externa $\vF$ (\cref{fig:trabajo}a): $\vF_q+\vF=q\vE+\vF=\vc{0}$. Supongamos que la carga se mueve
+\emph{infinitamente despacio} (de forma reversible) de un punto $A=\vc{r}_1$ a otro $B=\vc{r}_2$ por una trayectoria dada $\Gamma$. La
+velocidad es esencialmente nula en todo momento, también la energía cinética, y la carga está siempre en equilibrio o casi, de modo que la
+ecuación anterior es aplicable. Este procedimiento permite calcular el trabajo reversible, en sentido termodinámico, que realiza la fuerza
+mecánica contra las del campo, sin efectos disipativos ni de fricción.
+
+\input{figuras/fig_trabajo}
+
+\begin{proposicion}[Trabajo y diferencia de potencial]\label{prop:trabajo}
+El trabajo realizado por la fuerza mecánica $\vF=-q\vE$ para llevar la carga $q$ de $A$ a $B$ por cualquier camino $\Gamma$ es
+\begin{equation}\label{eq:trabajo}
+  W_{AB}=\int_{A}^{B}\vF\cdot\dl=-q\int_{A}^{B}\vE\cdot\dl=q\int_{A}^{B}\nab\phi\cdot\dl=q\bigl[\phi(B)-\phi(A)\bigr].
+\end{equation}
+En particular, para mover una carga \emph{positiva unidad} desde el infinito hasta un punto $P$ (con $\phi(\infty)=0$),
+\begin{equation}\label{eq:trabajo-unidad}
+  W=\int_{\infty}^{P}\vF\cdot\dif\vc{r}=-\int_{\infty}^{P}\vE\cdot\dif\vc{r}=\int_{\infty}^{P}\dif\phi=\phi_P-\phi_\infty=\phi_P.
+\end{equation}
+\end{proposicion}
+\begin{proof}
+Se sustituye $\vF=-q\vE$, se usa $\vE=-\nab\phi$ y el teorema fundamental de las integrales de línea (\emph{teorema del gradiente}~\cite{TEMA0}):
+$\int_A^B\nab\phi\cdot\dl=\phi(B)-\phi(A)$, que no depende de $\Gamma$.
+\end{proof}
+
+El potencial no es, pues, más que el \emph{trabajo por unidad de carga} necesario para desplazar una carga unidad desde el infinito
+hasta el punto, \emph{sin importar el camino seguido} (si la fuente es positiva, es trabajo realizado contra el campo). Si el
+trabajo suministrado fuese mayor que $q\phi_P$, el exceso de energía se transformaría en energía cinética, el sistema dejaría de estar
+en reposo y abandonaríamos la electrostática.
+
+% -------------------------------------------------------------------------
+\subsection{El campo electrostático es conservativo e irrotacional}\label{sec:rotacional}
+% -------------------------------------------------------------------------
+\begin{teorema}[Circulación nula: el campo electrostático es conservativo]\label{teo:conservativo}
+Entre dos puntos arbitrarios,
+\begin{equation}\label{eq:int-linea}
+  -\int_{1}^{2}\vE\cdot\dif\vc{r}=\int_{1}^{2}\nab\phi\cdot\dif\vc{r}=\int_{1}^{2}\dif\phi=\phi(\vc{r}_2)-\phi(\vc{r}_1),
+\end{equation}
+luego la integral de línea de $\vE$ es independiente del camino seguido y, para cualquier circuito cerrado $C$,
+\begin{equation}\label{eq:circulacion}
+  \oint_{C}\vE\cdot\dif\vc{r}=\int_{1}^{2}\vE\cdot\dif\vc{r}+\int_{2}^{1}\vE\cdot\dif\vc{r}=0 .
+\end{equation}
+\end{teorema}
+\begin{proof}
+La primera cadena de igualdades es el teorema del gradiente. Para la segunda, descomponemos $C$ en dos tramos de $1$ a $2$ y de $2$ a $1$
+(\cref{fig:trabajo}b); como $\int_{2}^{1}=-\int_{1}^{2}$ y la integral entre 1 y 2 no depende del camino, la suma es cero.
+\end{proof}
+
+\begin{teorema}[El campo electrostático es irrotacional]\label{teo:irrotacional}
+En electrostática,
+\begin{equation}\label{eq:rotacional}
+  \boxed{\;\nab\times\vE=\vc{0}\;}
+\end{equation}
+\end{teorema}
+\begin{proof}
+Por el teorema de Stokes~\cite{TEMA0} y \cref{eq:circulacion}, para toda superficie $S$ con borde $C=\partial S$,
+\[
+  \oint_{C}\vE\cdot\dif\vc{r}=\iint_{S}(\nab\times\vE)\cdot\dS=0 .
+\]
+El resultado es válido para cualquier trayectoria $C$ y, por tanto, para cualquier superficie $S$; como en la demostración de la ley
+de Gauss diferencial, esto obliga a que el integrando $\nab\times\vE$ sea idénticamente nulo.
+\end{proof}
+
+\begin{observacion}[Comprobación directa y alcance]\label{obs:rotacional}
+La anulación del rotacional se comprueba también directamente: para una distribución volúmica,
+$\nab\times\vE=\frac{1}{4\pi\eo}\int_{V'}\rho(\vc{r}\,')\,\nab\times\bigl(\vc{R}/R^{3}\bigr)\dVp=\vc{0}$, pues
+$\nab\times(R^{n}\uR)=\vc{0}$ para todo $n$ (caso $n=-2$)~\cite{TEMA0}. \emph{Cuidado}: $\nab\times\vE=\vc{0}$ es un resultado de la
+\emph{electrostática}; con campos magnéticos variables en el tiempo (Faraday) dejará de cumplirse. Y a la inversa: si $\vE=-\nab\phi$, entonces
+$\nab\times\vE=-\nab\times(\nab\phi)=\vc{0}$ porque el rotacional de un gradiente siempre es nulo (si $\phi$ es suficientemente regular);
+un campo con $\nab\times\vE=\vc{0}$ en una región simplemente conexa puede escribirse como el gradiente de un campo escalar~\cite{TEMA0}.
+\end{observacion}
+
+Conocidas la divergencia y el rotacional de un campo vectorial en todos los puntos de una región, el campo queda determinado. Es el contenido
+del siguiente resultado.
+
+\begin{teorema}[Teorema de Helmholtz~\cite{HELMHOLTZ}]\label{teo:helmholtz}
+Sea $\vc{F}$ un campo vectorial con $\nab\cdot\vc{F}=b(\vc{r})$ y $\nab\times\vc{F}=\vc{c}(\vc{r})$ dados en todo el espacio, y tal que $\vc{F}\to\vc{0}$
+en el infinito suficientemente deprisa (y las fuentes $b,\vc{c}$ están localizadas). Entonces $\vc{F}$ queda determinado de forma única.
+\end{teorema}
+
+En electrostática, $\nab\cdot\vE=\rho/\eo$ y $\nab\times\vE=\vc{0}$ (con las condiciones de regularidad del teorema, que el campo cumple), de modo que el
+campo electrostático está \emph{unívocamente determinado} por la distribución de carga. Es la razón por la que la ley de Gauss en forma diferencial y la
+irrotacionalidad contienen toda la información del campo, y no solo una parte.
+
+% -------------------------------------------------------------------------
+\subsection{Ecuaciones de Poisson y de Laplace}\label{sec:poisson}
+% -------------------------------------------------------------------------
+¿Qué debemos conocer para calcular $\phi$? Sustituimos $\vE=-\nab\phi$ en las ecuaciones del campo.
+
+\begin{teorema}[Ecuaciones de Poisson y de Laplace]\label{teo:poisson}
+El potencial electrostático satisface la \emph{ecuación de Poisson}
+\begin{equation}\label{eq:poisson}
+  \boxed{\;\Lap\phi=-\frac{\rho}{\eo}\;}
+\end{equation}
+y, en recintos sin fuentes ($\rho=0$), la \emph{ecuación de Laplace}
+\begin{equation}\label{eq:laplace}
+  \Lap\phi=0 .
+\end{equation}
+\end{teorema}
+\begin{proof}
+Con $\vE=-\nab\phi$ en la ley de Gauss diferencial,
+$\nab\cdot\vE=\nab\cdot\bigl(-\nab\phi\bigr)=-\Lap\phi=\rho/\eo$. En una región con $\rho=0$ se obtiene \cref{eq:laplace}.
+\end{proof}
+
+Si en lugar de la divergencia sustituimos en el rotacional, $\nab\times\vE=\nab\times(-\nab\phi)=\vc{0}$ se cumple idénticamente: la irrotacionalidad
+\emph{no aporta} ninguna ecuación adicional para $\phi$; basta una sola ecuación, la de Poisson. Es una ventaja práctica: para los campos vectoriales
+hacen falta dos ecuaciones (divergencia y rotacional), pero para los escalares solo una, y al ser $\phi$ una función escalar resulta más sencillo resolverla y
+calcular después $\vE=-\nab\phi$. Para una carga puntual, $\Lap\phi=\frac{\qp}{4\pi\eo}\Lap(1/R)=-\frac{\qp}{\eo}\delta^{3}(\vc{R})$, coherente con
+el \cref{teo:delta}.
+
+% -------------------------------------------------------------------------
+\subsection{Líneas de campo y superficies equipotenciales}\label{sec:lineas}
+% -------------------------------------------------------------------------
+El campo eléctrico se suele representar, en cada punto, mediante un vector; globalmente, mediante sus líneas de fuerza.
+
+\begin{definicion}[Líneas de campo y superficies equipotenciales]\label{def:lineas}
+Las \emph{líneas de fuerza} (o \emph{de campo}) son las líneas que en cada punto son tangentes al vector $\vE$ en ese punto. Las
+\emph{superficies equipotenciales} son aquellas en las que $\phi(\vc{r})$ es constante.
+\end{definicion}
+
+\begin{proposicion}[Propiedades de las líneas de campo y de las equipotenciales]\label{prop:lineas}
+\begin{enumerate}[label=(\alph*)]
+  \item Las líneas de fuerza \emph{no se cortan}: si lo hicieran, $\vE$ tendría dos direcciones en un punto y no estaría unívocamente definido.
+  \item Salen de las cargas positivas y terminan en las negativas (son líneas abiertas), y se dibujan de modo que su densidad sea
+        proporcional a $\norm{\vE}$: el campo es más intenso donde están más juntas.
+  \item Las superficies equipotenciales son perpendiculares en cada punto a las líneas de fuerza.
+  \item Las líneas de fuerza apuntan siempre hacia donde el potencial disminuye.
+\end{enumerate}
+\end{proposicion}
+\begin{proof}
+(c) De $\phi(\vc{r})=-\int\vE\cdot\dif\vc{r}+\text{cte}$ se tiene $\dif\phi=-\vE\cdot\dif\vc{r}$. Si nos movemos sobre una superficie equipotencial,
+$\dif\phi=0$, luego $\vE\perp\dif\vc{r}$ para todo desplazamiento tangente a la superficie. (d) Si nos desplazamos en el sentido del campo,
+$\dif\vc{r}\parallel\vE$ y $\dif\phi=-\norm{\vE}\,\dif r<0$.
+\end{proof}
+
+La \cref{fig:lineas} muestra las líneas de campo y las equipotenciales de una carga puntual, de un dipolo y de dos cargas iguales.
+
+\input{figuras/fig_lineas}

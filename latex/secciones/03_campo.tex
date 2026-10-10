@@ -1,1 +1,110 @@
-\section{Provisional campo}
+% =========================================================================
+\section{El campo eléctrico}\label{sec:campo}
+% =========================================================================
+La ley de Coulomb dice qué fuerza sufre una carga, pero no cómo repartir el trabajo entre «quien crea» y
+«quien siente». Para separar ambos papeles, llamamos \emph{carga fuente} $\qp$ a la que crea la perturbación,
+situada en el \emph{punto fuente} $\vc{r}\,'$, y \emph{carga de prueba} $q$ (que tomamos positiva) a la que
+experimenta la fuerza, situada en el \emph{punto campo} $\vc{r}$. La carga de prueba no se incluye entre las
+fuentes: ninguna carga ejerce fuerza sobre sí misma (\cref{fig:campo}a).
+
+% -------------------------------------------------------------------------
+\subsection{Definición del campo eléctrico}\label{sec:def-campo}
+% -------------------------------------------------------------------------
+Dividiendo la fuerza de Coulomb por la carga de prueba, desaparece toda dependencia de $q$ y queda algo asociado
+únicamente a las fuentes.
+
+\begin{definicion}[Campo eléctrico]\label{def:campo}
+El \emph{campo eléctrico} en el punto $\vc{r}$ es la fuerza por unidad de carga que experimentaría una carga de prueba
+en ese punto:
+\begin{equation}\label{eq:campo-def}
+  \vE(\vc{r})=\lim_{q\to0}\frac{\vF_q}{q}.
+\end{equation}
+Para una carga fuente puntual $\qp$ situada en $\vc{r}\,'$,
+\begin{equation}\label{eq:campo-puntual}
+  \boxed{\;\vE(\vc{r})=\frac{1}{4\pi\eo}\,\frac{\qp}{R^{2}}\,\uR
+  =\frac{1}{4\pi\eo}\,\frac{\qp}{\norm{\vc{R}}^{3}}\,\vc{R},\qquad\vc{R}=\vc{r}-\vc{r}\,'\;}
+\end{equation}
+Su unidad en el SI es el N/C, aunque se usa con más frecuencia el V/m (\cref{sec:potencial-signif}).
+\end{definicion}
+
+\begin{observacion}[Por qué el límite $q\to0$]\label{obs:limite}
+Con $\vE=\vF_q/q$ bastaría para una carga fuente «rígida», pero si la fuente es, por ejemplo, una esfera
+conductora, acercar una carga de prueba apreciable redistribuye la carga $\qp$ sobre la esfera y el campo que
+se quiere medir cambia, haciéndose dependiente de la propia carga de prueba. El límite $q\to0$ corrige esto: la
+carga de prueba debe ser tan pequeña que no perturbe la distribución que crea el campo. Es una idealización, pues
+existe una carga mínima, la del electrón.
+\end{observacion}
+
+Con esta definición, el campo es una función $\vE:\R^{3}\to\R^{3}$ (un \emph{campo vectorial}) y la fuerza
+sobre cualquier carga $q$ colocada en $\vc{r}$ se obtiene como $\vF_q=q\,\vE(\vc{r})$.
+
+\input{figuras/fig_campo}
+
+% -------------------------------------------------------------------------
+\subsection{Campo de una distribución discreta de cargas}\label{sec:campo-discreto}
+% -------------------------------------------------------------------------
+\begin{proposicion}[Campo de un sistema de cargas puntuales]\label{prop:campo-discreto}
+El campo eléctrico creado en $\vc{r}$ por las cargas puntuales $\qp_1,\dots,\qp_N$ situadas en
+$\vc{r}\,'_1,\dots,\vc{r}\,'_N$ es
+\begin{equation}\label{eq:campo-discreto}
+  \vE(\vc{r})=\frac{1}{4\pi\eo}\sum_{i=1}^{N}\frac{\qp_i}{R_i^{2}}\,\uh{R_i}
+  =\frac{1}{4\pi\eo}\sum_{i=1}^{N}\frac{\qp_i}{\norm{\vc{R}_i}^{3}}\,\vc{R}_i,\qquad
+  \vc{R}_i=\vc{r}-\vc{r}\,'_i .
+\end{equation}
+\end{proposicion}
+\begin{proof}
+Por el principio de superposición (\cref{eq:superposicion}), la fuerza sobre una carga de prueba $q$ es la
+suma de las fuerzas de cada $\qp_i$. Dividiendo por $q$ y tomando el límite $q\to0$ se obtiene
+\cref{eq:campo-discreto}.
+\end{proof}
+
+% -------------------------------------------------------------------------
+\subsection{Distribuciones continuas de carga}\label{sec:campo-continuo}
+% -------------------------------------------------------------------------
+Cuando las cargas están muy próximas entre sí en comparación con las demás distancias de interés, resulta conveniente
+tratarlas como un continuo y definir densidades de carga.
+
+\begin{definicion}[Densidades de carga]\label{def:densidades}
+Sea $\dif q'$ la carga contenida en un elemento de volumen $\dVp$ (respectivamente, de superficie $\dSp$ o de
+línea $\dlp$) situado en $\vc{r}\,'$. Se definen las densidades \emph{volúmica}, \emph{superficial} y \emph{lineal}:
+\begin{align}
+  \rho(\vc{r}\,')&=\frac{\dif q'}{\dVp}, & Q&=\int_{V'}\rho(\vc{r}\,')\,\dVp,\label{eq:rho}\\
+  \sigma(\vc{r}\,')&=\frac{\dif q'}{\dSp}, & Q&=\int_{S'}\sigma(\vc{r}\,')\,\dSp,\label{eq:sigma}\\
+  \lambda(\vc{r}\,')&=\frac{\dif q'}{\dlp}, & Q&=\int_{l'}\lambda(\vc{r}\,')\,\dlp.\label{eq:lambda}
+\end{align}
+\end{definicion}
+
+\begin{observacion}[Elemento macroscópico]\label{obs:macro}
+En \cref{eq:rho}, $\dVp$ debe ser un volumen \emph{pequeño a escala macroscópica}, de modo que permita seguir las
+variaciones de la distribución y tratar $\dif q'$ como una carga puntual, pero \emph{grande a escala microscópica},
+de modo que contenga muchos átomos o moléculas. Si $\dVp$ fuese menor que un átomo, en casi todas las posiciones no
+habría carga y $\rho$ sería nula, salvo cuando $\dVp$ incluyese un electrón, y esto produciría fluctuaciones enormes en
+$\rho$ que lo harían inservible como concepto. Así, $\rho$ representa un valor \emph{medio} que varía de forma suave
+y que podemos considerar una función continua de la posición.
+\end{observacion}
+
+\begin{proposicion}[Campo de una distribución continua]\label{prop:campo-continuo}
+El campo eléctrico creado en $\vc{r}$ por una distribución continua de carga es
+\begin{align}
+  \vE(\vc{r})&=\frac{1}{4\pi\eo}\int_{V'}\frac{\dif q'}{R^{2}}\,\uR
+  =\frac{1}{4\pi\eo}\int_{V'}\frac{\rho(\vc{r}\,')}{\norm{\vc{R}}^{3}}\,\vc{R}\;\dVp,\label{eq:campo-vol}\\
+  \vE(\vc{r})&=\frac{1}{4\pi\eo}\int_{S'}\frac{\sigma(\vc{r}\,')}{\norm{\vc{R}}^{3}}\,\vc{R}\;\dSp,\qquad
+  \vE(\vc{r})=\frac{1}{4\pi\eo}\int_{l'}\frac{\lambda(\vc{r}\,')}{\norm{\vc{R}}^{3}}\,\vc{R}\;\dlp,\label{eq:campo-sup-lin}
+\end{align}
+con $\vc{R}=\vc{r}-\vc{r}\,'$.
+\end{proposicion}
+\begin{proof}
+Cada elemento $\dif q'$ de la distribución se comporta como una carga puntual en $\vc{r}\,'$, que crea un campo
+elemental $\dif\vE=\frac{1}{4\pi\eo}\frac{\dif q'}{R^{3}}\vc{R}$ por \cref{eq:campo-puntual}. El principio de
+superposición, con la suma sobre elementos convertida en integral (el límite de las sumas de
+Riemann de \cref{eq:campo-discreto}), da \cref{eq:campo-vol,eq:campo-sup-lin}, sin más que expresar
+$\dif q'$ como $\rho\,\dVp$, $\sigma\,\dSp$ o $\lambda\,\dlp$.
+\end{proof}
+
+\begin{observacion}[Cuidado con las variables]\label{obs:variables}
+Dentro de la integral, $\vc{r}\,'$ y, por tanto, $\vc{R}$ \emph{varían} para cada elemento de la distribución;
+$\vc{r}$, en cambio, es el punto campo y permanece fijo. Si la distribución tiene la simetría adecuada, $\vE$ puede
+calcularse por integración directa de las expresiones anteriores (veremos varios casos en los
+seminarios, \cref{sec:seminarios}), pero esto no es lo habitual: en la mayoría de los casos la integral es difícil, y
+obtendremos mucho más partido de las ecuaciones diferenciales que se deducen en las secciones siguientes.
+\end{observacion}

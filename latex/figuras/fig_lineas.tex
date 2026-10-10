@@ -1,0 +1,72 @@
+% Figura: líneas de campo y superficies equipotenciales (corte meridiano).
+\begin{figure}[ht]
+\centering
+\IfFileExists{rapido.flag}{\fbox{\parbox{0.9\textwidth}{\centering\small Figura omitida (modo rápido)}}}{%
+\newcommand{\marcoL}{\draw[grispizarra, line width=0.5pt] (-3,-3) rectangle (3,3);}
+\tikzset{lcampo/.style={cm1, line width=0.55pt, postaction={decorate}, decoration={markings, mark=at position 0.5 with {\arrow{Stealth[length=3.6pt]}}}},
+         lequi/.style={azulacero, line width=0.5pt}}
+\begin{minipage}[t]{0.32\textwidth}\centering
+\begin{tikzpicture}[x=0.8cm, y=0.8cm, baseline=(current bounding box.north)]
+  \begin{scope}
+    \clip (-3,-3) rectangle (3,3);
+    \foreach \r in {0.5,1.0,1.5,2.0,2.5,3.0}{\draw[lequi] (0,0) circle (\r);}
+    \foreach \a in {0,22.5,...,337.5}{%
+      \draw[lcampo] (\a:0.2) -- (\a:3.3);}
+  \end{scope}
+  \marcoL
+  \node[cargapos] at (0,0) {$+$};
+\end{tikzpicture}\\[2pt]{\small\scshape (a)\; carga puntual}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}\centering
+\begin{tikzpicture}[x=0.8cm, y=0.8cm, baseline=(current bounding box.north)]
+  \def\qs{-1}
+  \begin{scope}
+    \clip (-3,-3) rectangle (3,3);
+    % equipotenciales (positivas: línea continua; negativas, por simetría: discontinua)
+    \foreach \xs in {-1.25,-1.4,-1.65,-2.0,-2.6}{
+      \equipC{\xs}{0}{0.05}{140}{-1}
+      \draw[lequi] \ruta; \begin{scope}[yscale=-1]\draw[lequi] \ruta;\end{scope}
+      \begin{scope}[xscale=-1]\draw[lequi, densely dashed] \ruta;\end{scope}
+      \begin{scope}[xscale=-1,yscale=-1]\draw[lequi, densely dashed] \ruta;\end{scope}}
+    \draw[lequi] (0,-3) -- (0,3);
+    % líneas de campo (8 conos de igual flujo desde la carga positiva)
+    \foreach \k in {1,...,8}{
+      \pgfmathsetmacro{\psi}{acos(1-(2*\k-1)/8)}
+      \pgfmathsetmacro{\sx}{-1+0.13*cos(\psi)}\pgfmathsetmacro{\sy}{0.13*sin(\psi)}
+      \lineaC{\sx}{\sy}{0.05}{200}{1}
+      \draw[lcampo] \ruta;
+      \begin{scope}[yscale=-1]\draw[lcampo] \ruta;\end{scope}}
+  \end{scope}
+  \marcoL
+  \node[cargapos] at (-1,0) {$+$};
+  \node[carganeg] at (1,0) {$-$};
+\end{tikzpicture}\\[2pt]{\small\scshape (b)\; dipolo}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}\centering
+\begin{tikzpicture}[x=0.8cm, y=0.8cm, baseline=(current bounding box.north)]
+  \def\qs{1}
+  \begin{scope}
+    \clip (-3,-3) rectangle (3,3);
+    \foreach \xs in {-1.2,-1.3,-1.45,-1.8,-2.2,-2.7}{
+      \equipC{\xs}{0}{0.05}{150}{-1}
+      \foreach \sxx/\syy in {1/1,1/-1,-1/1,-1/-1}{\begin{scope}[xscale=\sxx,yscale=\syy]\draw[lequi] \ruta;\end{scope}}}
+    \foreach \k in {1,...,8}{
+      \pgfmathsetmacro{\psi}{acos(1-(2*\k-1)/8)}
+      \pgfmathsetmacro{\sx}{-1+0.13*cos(\psi)}\pgfmathsetmacro{\sy}{0.13*sin(\psi)}
+      \lineaC{\sx}{\sy}{0.05}{200}{1}
+      \foreach \sxx/\syy in {1/1,1/-1,-1/1,-1/-1}{\begin{scope}[xscale=\sxx,yscale=\syy]\draw[lcampo] \ruta;\end{scope}}}
+  \end{scope}
+  \marcoL
+  \node[cargapos] at (-1,0) {$+$};
+  \node[cargapos] at (1,0) {$+$};
+\end{tikzpicture}\\[2pt]{\small\scshape (c)\; dos cargas iguales}
+\end{minipage}
+}%
+\caption{Líneas de campo (púrpura, con el sentido del campo) y superficies equipotenciales (azul, vistas en
+un plano meridiano) de (a)~una carga puntual, (b)~un dipolo y (c)~dos cargas iguales. Las líneas se trazan con
+igual flujo entre dos consecutivas, de modo que su densidad es proporcional a $\norm{\vE}$. Salen de las cargas
+positivas y llegan a las negativas, nunca se cortan y son perpendiculares a las equipotenciales, hacia donde
+el potencial disminuye. En (b) las equipotenciales de potencial negativo se trazan a trazos y la mediatriz es la
+de potencial nulo; en (c) hay un punto de campo nulo en el punto medio.}
+\label{fig:lineas}
+\end{figure}

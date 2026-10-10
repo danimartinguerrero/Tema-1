@@ -1,1 +1,267 @@
-\section{Provisional gauss}
+% =========================================================================
+\section{La ley de Gauss}\label{sec:gauss}
+% =========================================================================
+Comenzamos a estudiar las propiedades del campo electrostático. La naturaleza de \emph{cuadrado inverso} de la ley de
+Coulomb permite conocer el flujo de $\vE$ a través de cualquier superficie cerrada y, de ahí, su divergencia. La herramienta
+geométrica que lo hace posible es el ángulo sólido.
+
+% -------------------------------------------------------------------------
+\subsection{El ángulo sólido}\label{sec:angulo-solido}
+% -------------------------------------------------------------------------
+La razón entre las áreas totales de dos esferas concéntricas y los cuadrados de sus radios es constante:
+$4\pi r_1^{2}/r_1^{2}=4\pi r_2^{2}/r_2^{2}=4\pi$. Lo mismo ocurre con áreas elementales vistas desde el centro
+común $O$ (\cref{fig:angulo}a): si dos elementos $\dif S_1$ y $\dif S_2$ de esferas de radios $r_1$ y $r_2$ están
+recortados por el mismo cono con vértice en $O$, entonces $\dif S_1/r_1^{2}=\dif S_2/r_2^{2}$. Esa constante es el
+ángulo sólido, la versión tridimensional del ángulo en radianes (que es la razón entre un arco y su radio).
+
+\begin{definicion}[Ángulo sólido]\label{def:angulo-solido}
+El \emph{ángulo sólido elemental} bajo el que se ve desde un punto $O$ un elemento de superficie esférica
+$\dif S$ de radio $r$ centrado en $O$ es
+\begin{equation}\label{eq:angulo-esfera}
+  \dOm=\frac{\dif S_1}{r_1^{2}}=\frac{\dif S_2}{r_2^{2}}
+\end{equation}
+(\emph{estereorradianes}, sr). Con $r=1$, es el área de la porción de esfera unidad bajo la cual se ve el elemento.
+Para un elemento $\dS=\un\,\dsc$ \emph{cualquiera}, situado en un punto cuyo vector de posición relativa a $O$ es
+$\vc{R}$, se proyecta sobre la esfera de radio $R$ centrada en $O$ (\cref{fig:angulo}b): el área proyectada
+es $\dif S'=\dsc\cos\theta$, con $\theta$ el ángulo entre $\dS$ y $\vc{R}$, y
+\begin{equation}\label{eq:angulo-general}
+  \dOm=\frac{\dif S'}{R^{2}}=\frac{\dsc\cos\theta}{R^{2}}=\frac{\dS\cdot\vc{R}}{R^{3}}=\frac{\dS\cdot\uR}{R^{2}}.
+\end{equation}
+El signo de $\dOm$ es el de $\cos\theta$: positivo si $\vc{R}$ atraviesa el elemento «de dentro hacia fuera»
+(según $\un$) y negativo en caso contrario.
+\end{definicion}
+
+\input{figuras/fig_angulo}
+
+\begin{lema}[Ángulo sólido total de una superficie cerrada]\label{lema:omega-4pi}
+Sea $S$ una superficie cerrada, orientada con la normal exterior. Entonces
+\begin{equation}\label{eq:omega}
+  \oint_{S}\dOm=\oint_{S}\frac{\dS\cdot\uR}{R^{2}}=\begin{cases}4\pi,&\text{si $O$ está en el interior de $S$,}\\[2pt]0,&\text{si $O$ está en el exterior de $S$.}\end{cases}
+\end{equation}
+\end{lema}
+\begin{proof}
+\emph{(a) $O$ en el interior.} Cada semirrecta que sale de $O$ corta a $S$ un número impar de veces, y la
+normal exterior forma ángulos alternadamente agudos (salida) y obtusos (entrada) con la dirección de la semirrecta:
+$+\dOm_0,-\dOm_0,+\dOm_0,\dots$, donde $\dOm_0$ es el ángulo sólido del cono. Como el último cruce es una
+salida, la contribución neta de la dirección es $+\dOm_0$, y sumando sobre todas las direcciones se obtiene el ángulo sólido
+total del espacio. Para una superficie estrellada respecto de $O$ (un único cruce por semirrecta) basta proyectar sobre una esfera
+$S'$ de radio $R$ centrada en $O$, en la que $R$ es constante:
+\[
+  \Omega=\oint_{S}\dOm=\oint_{S'}\frac{\dif S'}{R^{2}}=\frac{1}{R^{2}}\oint_{S'}\dif S'=\frac{4\pi R^{2}}{R^{2}}=4\pi .
+\]
+\emph{(b) $O$ en el exterior.} Ahora cada semirrecta que corta a $S$ lo hace un número \emph{par} de veces, con entradas y
+salidas alternadas (\cref{fig:angulo}c). Para un elemento de entrada, $\theta_2>\pi/2$ y por tanto
+$\dS_2\cdot\vc{R}_2/R_2^{3}=\dsc_2\cos\theta_2/R_2^{2}=-\dOm_0$, mientras que para el de salida
+$\dS_1\cdot\vc{R}_1/R_1^{3}=\dsc_1\cos\theta_1/R_1^{2}=+\dOm_0$. Se anulan por parejas y la integral es nula.
+\end{proof}
+
+% -------------------------------------------------------------------------
+\subsection{Ley de Gauss en forma integral}\label{sec:gauss-integral}
+% -------------------------------------------------------------------------
+Calculemos ahora el flujo del campo eléctrico $\flujo=\oint_{S}\vE\cdot\dS$ en distintos supuestos. Observemos de entrada que
+para una carga puntual en $\vc{r}\,'$, con $\vc{R}=\vc{r}-\vc{r}\,'$, el integrando contiene exactamente el ángulo sólido:
+\[
+  \vE\cdot\dS=\frac{\qp}{4\pi\eo}\,\frac{\uR\cdot\dS}{R^{2}}=\frac{\qp}{4\pi\eo}\,\dOm .
+\]
+
+\begin{teorema}[Ley de Gauss, forma integral]\label{teo:gauss-integral}
+El flujo del campo eléctrico a través de una superficie cerrada cualquiera $S$ es igual a la carga
+encerrada por ella dividida entre $\eo$:
+\begin{equation}\label{eq:gauss-int}
+  \boxed{\;\flujo=\oiint_{S}\vE\cdot\dS=\frac{\Qenc}{\eo}\;}
+\end{equation}
+con independencia de que la carga sea una distribución discreta o continua. Si hay una distribución volúmica,
+$\Qenc=\int_{V}\rho\,\dV$, con $V$ el volumen contenido en $S$.
+\end{teorema}
+\begin{proof}
+\emph{Carga puntual fuera de $S$.} Usando el \cref{lema:omega-4pi}(b),
+\[
+  \flujo=\oiint_{S}\frac{\qp}{4\pi\eo}\frac{\uR\cdot\dS}{R^{2}}=\frac{\qp}{4\pi\eo}\oiint_{S}\dOm=\frac{\qp}{4\pi\eo}\,(\Omega-\Omega)=0 .
+\]
+\emph{Carga puntual dentro de $S$.} Por el \cref{lema:omega-4pi}(a),
+\[
+  \flujo=\frac{\qp}{4\pi\eo}\oiint_{S}\dOm=\frac{\qp}{4\pi\eo}\,4\pi=\frac{\qp}{\eo}.
+\]
+\emph{Sistema de cargas puntuales.} Por superposición, el flujo es la suma de los flujos de cada carga; solo las
+interiores aportan:
+\[
+  \flujo=\sum_{\text{dentro}}\frac{\qp_i}{\eo}+\sum_{\text{fuera}}0=\frac{\Qenc}{\eo}.
+\]
+\emph{Distribución continua.} Se aplica el resultado anterior a cada elemento $\dif q'=\rho\,\dVp$ y se integra:
+$\flujo=\frac{1}{\eo}\int_{V}\rho\,\dV$.
+\end{proof}
+
+\begin{observacion}[Alcance de la ley de Gauss]\label{obs:alcance-gauss}
+\begin{enumerate}[label=(\alph*)]
+  \item El flujo de $\vE$ a través de una superficie cerrada depende \emph{solo} de la carga encerrada.
+  \item El valor del campo puede variar de un punto a otro de la superficie, ser nulo o no, aunque el flujo sea nulo: en un
+        dipolo, el flujo a través de una superficie que lo rodee es nulo, pero el campo no se anula en ningún punto de ella.
+  \item Las cargas exteriores no afectan al flujo, pero sí al valor del campo en la superficie.
+  \item La posición de las cargas interiores no afecta al flujo, pero sí al valor del campo.
+\end{enumerate}
+\end{observacion}
+
+\input{figuras/fig_flujo}
+
+% -------------------------------------------------------------------------
+\subsection{Ley de Gauss en forma diferencial}\label{sec:gauss-diferencial}
+% -------------------------------------------------------------------------
+La forma integral es una afirmación sobre regiones extensas; la forma diferencial es su traducción local, punto a punto. Para
+pasar de una a otra usamos el teorema de la divergencia del Tema~0 (\cref{eq:div-teorema} más abajo).
+
+\begin{teorema}[Teorema de la divergencia o de Gauss~\cite{TEMA0}]\label{teo:divergencia}
+Si $\vc{A}$ es un campo vectorial de clase $C^{1}$ en un entorno de un sólido acotado $V$ de borde $S=\partial V$ orientado con
+la normal exterior,
+\begin{equation}\label{eq:div-teorema}
+  \iiint_{V}\nab\cdot\vc{A}\,\dV=\oiint_{\partial V}\vc{A}\cdot\dS.
+\end{equation}
+\end{teorema}
+
+\begin{teorema}[Ley de Gauss, forma diferencial: primera ecuación de Maxwell]\label{teo:gauss-dif}
+En el vacío, el campo electrostático generado por una densidad volúmica de carga $\rho$ cumple
+\begin{equation}\label{eq:gauss-dif}
+  \boxed{\;\nab\cdot\vE(\vc{r})=\frac{\rho(\vc{r})}{\eo}\;}
+\end{equation}
+\end{teorema}
+\begin{proof}
+Sea $V$ un volumen cualquiera. Por la forma integral (\cref{eq:gauss-int}) y por el teorema de la divergencia
+(\cref{eq:div-teorema}),
+\[
+  \iiint_{V}\nab\cdot\vE\,\dV=\oiint_{\partial V}\vE\cdot\dS=\frac{1}{\eo}\iiint_{V}\rho\,\dV .
+\]
+Igualando, $\iiint_{V}\bigl(\nab\cdot\vE-\rho/\eo\bigr)\dV=0$ para \emph{todo} volumen $V$. Si el integrando fuese no nulo en
+algún punto, por continuidad tendría signo constante en un entorno suyo y la integral sobre ese entorno no sería cero;
+por tanto, el integrando es idénticamente nulo.
+\end{proof}
+
+Esta ecuación pone de manifiesto que las \emph{fuentes} del campo eléctrico son las cargas, cuya densidad es $\rho$: donde
+$\rho>0$ el campo «diverge» (nacen líneas de campo) y donde $\rho<0$ «converge». Es una consecuencia de la ley de Coulomb
+y de su dependencia con el inverso del cuadrado de la distancia, y es válida siempre que estemos en el vacío. Falta aún
+resolver el caso de las cargas puntuales: en el punto donde está la carga, $\rho$ diverge, y necesitamos una herramienta
+matemática para escribir la ecuación. Es la delta de Dirac.
+
+% -------------------------------------------------------------------------
+\subsection{La delta de Dirac}\label{sec:delta}
+% -------------------------------------------------------------------------
+\begin{definicion}[Delta de Dirac]\label{def:delta}
+La \emph{delta de Dirac} se define como el límite, cuando $\alpha\to\infty$, de una sucesión de funciones $f_\alpha(x)$ (por
+ejemplo, un pulso rectangular de anchura $1/\alpha$ y altura $\alpha$, un triángulo de base $2/\alpha$ y altura $\alpha$ o una
+gaussiana estrecha de área unidad) (\cref{fig:delta}):
+\[
+  \delta(x)=\lim_{\alpha\to\infty}f_\alpha(x),\qquad
+  \delta(x)=\begin{cases}0,&x\neq0,\\\infty,&x=0,\end{cases}\qquad
+  \int_{-\infty}^{\infty}\delta(x)\,\dif x=1 .
+\]
+Análogamente, $\delta(x-a)$ es nula salvo en $x=a$, donde diverge. Su propiedad esencial es la de \emph{muestreo}:
+\begin{equation}\label{eq:delta-muestreo}
+  \int_{-\infty}^{\infty}f(x)\,\delta(x-a)\,\dif x=f(a)
+\end{equation}
+para toda $f$ continua en $a$.
+\end{definicion}
+
+\input{figuras/fig_delta}
+
+Estrictamente, la delta no es una función sino una \emph{función generalizada} o \emph{distribución}, y solo adquiere sentido
+bajo el signo integral. La propiedad de muestreo se entiende así: como $\delta(x-a)=0$ para $x\neq a$, en la integral solo cuenta el
+valor de $f$ en $x=a$, que sale fuera de ella: $\int f(x)\delta(x-a)\dif x=f(a)\int\delta(x-a)\dif x=f(a)$.
+
+\begin{ejemplo}[Cálculos con la delta]\label{ej:delta}
+Con \cref{eq:delta-muestreo} (la delta cae en el interior del intervalo de integración):
+\[
+  \int_{-\infty}^{\infty}(3x-1)\,\delta(x+1)\,\dif x=3(-1)-1=-4,\qquad
+  \int_{0}^{3}x^{3}\,\delta(x-2)\,\dif x=2^{3}=8 .
+\]
+\end{ejemplo}
+
+En tres dimensiones se define $\delta^{3}(\vc{r})=\delta(x)\,\delta(y)\,\delta(z)$ y, para un punto $\vc{a}$ del espacio,
+\begin{equation}\label{eq:delta3}
+  \delta^{3}(\vc{r}-\vc{a})=\begin{cases}0,&\vc{r}\neq\vc{a},\\\infty,&\vc{r}=\vc{a},\end{cases}\qquad
+  \int_{V}\delta^{3}(\vc{r}-\vc{a})\,\dV=\begin{cases}1,&\vc{a}\in V,\\0,&\vc{a}\notin V,\end{cases}\qquad
+  \int_{V}f(\vc{r})\,\delta^{3}(\vc{r}-\vc{a})\,\dV=\begin{cases}f(\vc{a}),&\vc{a}\in V,\\0,&\vc{a}\notin V.\end{cases}
+\end{equation}
+
+\begin{ejemplo}[Delta tridimensional]\label{ej:delta3}
+$\displaystyle\int_{\R^{3}}\bigl(r^{2}+\vc{r}\cdot\vc{a}+a^{2}\bigr)\,\delta^{3}(\vc{r}-\vc{a})\,\dV=a^{2}+a^{2}+a^{2}=3a^{2}$.
+\end{ejemplo}
+
+Con ella podemos precisar qué ocurre con el campo de una carga puntual.
+
+\begin{teorema}[Divergencia del campo coulombiano y laplaciano de $1/R$]\label{teo:delta}
+Sea $\vc{R}=\vc{r}-\vc{r}\,'$. Entonces, derivando respecto de $\vc{r}$,
+\begin{equation}\label{eq:div-delta}
+  \nab\cdot\Bigl(\frac{\uR}{R^{2}}\Bigr)=\nab\cdot\Bigl(\frac{\vc{R}}{R^{3}}\Bigr)=4\pi\,\delta^{3}(\vc{R}),
+  \qquad
+  \Lap\Bigl(\frac{1}{R}\Bigr)=-4\pi\,\delta^{3}(\vc{R}).
+\end{equation}
+\end{teorema}
+\begin{proof}
+Tomemos el origen en la fuente ($\vc{r}\,'=\vc{0}$, $\vc{R}=\vc{r}$). Para $R\neq0$ el campo es radial, $A_R=1/R^{2}$, y en coordenadas
+esféricas $\nab\cdot\vc{A}=\frac{1}{R^{2}}\pd{}{R}\bigl(R^{2}A_R\bigr)=\frac{1}{R^{2}}\pd{(1)}{R}=0$. Pero en $R=0$ el campo diverge. Para
+ver qué ocurre allí, integramos sobre un volumen $V$ cualquiera con el teorema de la divergencia y el \cref{lema:omega-4pi}:
+\[
+  \int_{V}\nab\cdot\Bigl(\frac{\uR}{R^{2}}\Bigr)\dV=\oiint_{\partial V}\frac{\uR\cdot\dS}{R^{2}}=\oiint_{\partial V}\dOm
+  =\begin{cases}0,&\text{si }R=0\text{ no está en }V,\\4\pi,&\text{si }R=0\text{ sí está en }V.\end{cases}
+\]
+Una cantidad que vale cero fuera del origen y cuya integral sobre cualquier volumen que lo contiene es $4\pi$ es, por definición,
+$4\pi\,\delta^{3}(\vc{R})$. Para el laplaciano, como $\nab(1/R)=-\vc{R}/R^{3}$, se tiene
+$\Lap(1/R)=\nab\cdot\nab(1/R)=-\nab\cdot(\vc{R}/R^{3})=-4\pi\delta^{3}(\vc{R})$.
+\end{proof}
+
+\begin{observacion}[Ni cero ni infinito]\label{obs:delta-div}
+En coordenadas esféricas, $\Lap(1/R)=\frac{1}{R^{2}}\pd{}{R}\bigl(R^{2}\pd{}{R}\frac{1}{R}\bigr)$ vale cero para $R\neq0$ y no está definido en
+$R=0$, donde diverge, igual que $\delta(R)$. El teorema precisa cuánto: lo suficiente para que la integral sobre un entorno
+del origen sea $-4\pi$. Un cálculo ingenuo que olvide el origen diría que $\nab\cdot(\uR/R^{2})=0$ en todas partes y
+que el flujo $4\pi$ de este campo sale «de la nada»; la delta es lo que restituye la coherencia entre la divergencia y el flujo.
+\end{observacion}
+
+\begin{corolario}[Ley de Gauss diferencial de una carga puntual]\label{cor:gauss-puntual}
+Para una carga puntual $\qp$ en $\vc{r}\,'$, $\rho(\vc{r})=\qp\,\delta^{3}(\vc{r}-\vc{r}\,')$ y
+\[
+  \nab\cdot\vE(\vc{r})=\frac{\qp}{4\pi\eo}\,\nab\cdot\Bigl(\frac{\vc{R}}{R^{3}}\Bigr)=\frac{\qp}{4\pi\eo}\,4\pi\,\delta^{3}(\vc{R})
+  =\frac{\qp}{\eo}\,\delta^{3}(\vc{R})=\frac{\rho}{\eo}.
+\]
+La divergencia del campo de una carga puntual es nula en todas partes salvo en el punto que ocupa la carga, donde diverge.
+\end{corolario}
+
+Con la delta podemos dar una segunda demostración, directa, de la ley de Gauss diferencial \emph{sin pasar por la forma integral}.
+
+\begin{proof}[Demostración directa de \cref{eq:gauss-dif}]
+Partimos del campo de una distribución volúmica (\cref{eq:campo-vol}) y derivamos respecto del punto campo $\vc{r}$, es decir, respecto de las
+coordenadas del punto campo y no de las de la fuente, de modo que $\nab$ actúa solo sobre $\vc{R}/R^{3}$ y se puede introducir bajo
+la integral:
+\[
+  \nab\cdot\vE(\vc{r})=\frac{1}{4\pi\eo}\int_{V'}\rho(\vc{r}\,')\,\nab\cdot\Bigl(\frac{\vc{R}}{R^{3}}\Bigr)\dVp
+  =\frac{1}{4\pi\eo}\int_{V'}\rho(\vc{r}\,')\,4\pi\,\delta^{3}(\vc{r}-\vc{r}\,')\,\dVp=\frac{\rho(\vc{r})}{\eo},
+\]
+por el \cref{teo:delta} y la propiedad de muestreo (\cref{eq:delta3}).
+\end{proof}
+
+% -------------------------------------------------------------------------
+\subsection{Cálculo del campo con la ley de Gauss: simetrías}\label{sec:gauss-simetria}
+% -------------------------------------------------------------------------
+Si la distribución de carga posee suficiente simetría, la ley de Gauss permite calcular $\vE$ de manera sencilla. Hay que hacer
+hincapié en que la ley es válida \emph{siempre}, pero que despejar $\vE$ de ella solo es posible si existe la simetría adecuada:
+hay que elegir una superficie de integración (\emph{superficie gaussiana}, una construcción matemática que no tiene por qué ser real)
+en la cual, en todos sus puntos, $\vE$ sea constante en módulo y, además, paralelo o perpendicular a $\dS$. Sólo hay tres
+simetrías que funcionan:
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Simetría & Superficie de Gauss & Campo\\
+\midrule
+Esférica & esfera de radio $r$ & $\vE=E(r)\,\ur$\\
+Cilíndrica & cilindro coaxial de radio $r$ y altura $\ell$ & $\vE=E(r)\,\urho$\\
+Plana & cilindro (o paralelepípedo) recto que atraviesa el plano & $\vE=E(z)\,\uz$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+En esos casos, $\oiint_{S}\vE\cdot\dS=E\,S$ y se despeja $E(\vc{r})=\Qenc(\vc{r})/(\eo\,S(\vc{r}))$. Los seminarios
+\cref{sem:esfera,sem:hilo-gauss,sem:plano-gauss,sem:lamina,sem:cascara,sem:cilindro} aplican el método a cada una de ellas.
+
+\begin{ejemplo}[De los campos a las fuentes]\label{ej:inverso}
+La ley de Gauss diferencial también se usa en sentido inverso: dado el campo, \emph{deducir la carga}. Si $\vE(\vc{r})=k\,z\,\uz$,
+entonces $\nab\cdot\vE=k$ y por \cref{eq:gauss-dif} la densidad es $\rho=k\,\eo$: una distribución volúmica de carga \emph{uniforme} en todo el espacio.
+\end{ejemplo}

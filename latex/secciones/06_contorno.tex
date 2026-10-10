@@ -1,1 +1,132 @@
-\section{Provisional contorno}
+% =========================================================================
+\section{Condiciones de contorno}\label{sec:contorno}
+% =========================================================================
+Al estudiar distintas situaciones se observa que el campo eléctrico sufre una discontinuidad al atravesar una superficie cargada con densidad $\sigma$
+(un plano, una cáscara esférica). Interesa saber qué ocurre exactamente en esa frontera. Es de esperar que, en un caso real, ninguna propiedad
+electromagnética cambie de forma abrupta, sino continuamente a lo largo de una \emph{capa de transición} de anchura $h$: los campos físicos son continuos y con
+derivadas continuas. Pero no podemos esperar conocer los detalles de esa transición, y por eso se sustituye la situación real por una idealizada, en la que
+$h\to0$ (\cref{fig:capa}). Como consecuencia, los campos pueden mostrar una discontinuidad al pasar la frontera.
+
+\input{figuras/fig_capa}
+
+Lo analizamos primero para un campo vectorial genérico $\vc{F}$ y luego particularizamos a $\vE$ y a $\phi$.
+
+% -------------------------------------------------------------------------
+\subsection{Hipótesis de regularidad}\label{sec:hipotesis}
+% -------------------------------------------------------------------------
+\begin{definicion}[Campo con discontinuidad en una superficie]\label{def:salto}
+Sea $S$ una superficie que separa dos regiones $V_1$ y $V_2$, y sea $\un$ la normal a $S$ que apunta del medio~1 al~2. Decimos que el campo
+$\vc{F}:\R^{3}\to\R^{3}$ \emph{presenta una discontinuidad de salto en $S$} si $\vc{F}\in C^{1}(V_1)\cap C^{1}(V_2)$ y admite límites laterales finitos al
+aproximarse a $S$,
+\[
+  \vc{F}_1(\vc{r})=\lim_{\vc{r}\to S^{-}}\vc{F},\qquad\vc{F}_2(\vc{r})=\lim_{\vc{r}\to S^{+}}\vc{F},\qquad
+  \norm{\vc{F}_1}<\infty,\quad\norm{\vc{F}_2}<\infty ,
+\]
+para los puntos de $S$.
+\end{definicion}
+En términos intuitivos: $\vc{F}$ puede ser discontinuo al atravesar $S$, pero no puede divergir en $S$; debe permanecer acotado en un entorno de la superficie
+y ser regular a cada lado.
+
+\begin{observacion}[Qué permite esta hipótesis]\label{obs:hipotesis}
+En la condición que obtendremos con el teorema de Gauss, la superficie lateral del cilindro tiene área $O(h)$ y, como $\vc{F}=O(1)$, su flujo es $O(h)\to0$. En la que se
+obtiene con Stokes, los dos lados verticales del circuito tienen longitud $O(h)$ y por tanto $\int\vc{F}\cdot\dl=O(h)\to0$. La misma hipótesis justifica, entonces, que despreciemos
+estas partes de la superficie y del contorno.
+\end{observacion}
+
+% -------------------------------------------------------------------------
+\subsection{Condiciones de contorno de un campo vectorial}\label{sec:contorno-general}
+% -------------------------------------------------------------------------
+Sea $\vc{F}$ un campo del que conocemos sus fuentes,
+\begin{equation}\label{eq:fuentes}
+  \nab\cdot\vc{F}(\vc{r})=b(\vc{r}),\qquad\nab\times\vc{F}(\vc{r})=\vc{c}(\vc{r}).
+\end{equation}
+Estas ecuaciones no se pueden aplicar directamente a la discontinuidad. Las usaremos en la capa de transición, donde todo es continuo y con derivada continua, y después
+tomaremos límites cuando $h\to0$.
+
+\begin{teorema}[Condiciones de contorno generales]\label{teo:contorno}
+Bajo las hipótesis de la \cref{def:salto}, con $\nab\cdot\vc{F}=b$ y $\nab\times\vc{F}=\vc{c}$ en la capa de transición, los saltos de las componentes normal y
+tangencial de $\vc{F}$ al cruzar $S$ son
+\begin{equation}\label{eq:contorno-normal}
+  \boxed{\;F_{2n}-F_{1n}=(\vc{F}_2-\vc{F}_1)\cdot\un=\lim_{h\to0}\bigl(h\,\nab\cdot\vc{F}\bigr)=\lim_{h\to0}(h\,b)\;}
+\end{equation}
+\begin{equation}\label{eq:contorno-tangencial}
+  \boxed{\;\un\times(\vc{F}_2-\vc{F}_1)=\lim_{h\to0}h\,\vc{c}\quad\Longleftrightarrow\quad
+  \vc{F}_{2t}-\vc{F}_{1t}=\lim_{h\to0}h\,\bigl(\nab\times\vc{F}\bigr)\times\un\;}
+\end{equation}
+\end{teorema}
+\begin{proof}
+\emph{Componente normal.} Escogemos un cilindro de altura $h$ construido en la capa de transición, con bases de área $\Delta S$ paralelas a la superficie
+(\cref{fig:contorno}a) y normales $\un_2=\un$ y $\un_1=-\un$. Integrando $\nab\cdot\vc{F}$ en el volumen $V$ del cilindro y usando el teorema de la divergencia,
+\[
+  \iiint_{V}\nab\cdot\vc{F}\,\dV=\oiint_{S_V}\vc{F}\cdot\dS=\iiint_{V}b\,\dV .
+\]
+Si el cilindro es suficientemente pequeño como para que $\vc{F}$ sea constante en sus bases y $b$ constante en todo el volumen,
+\[
+  \oiint_{S_V}\vc{F}\cdot\dS=\vc{F}_2\cdot\un\,\Delta S+\vc{F}_1\cdot(-\un)\,\Delta S+\iint_{S_{\mathrm{lat}}}\vc{F}\cdot\dS=b\,\Delta S\,h .
+\]
+Tomando límites con $h\to0$ la integral lateral se anula (\cref{obs:hipotesis}); sin embargo, como $b$ puede tener un valor muy alto en la discontinuidad
+(una singularidad concentrada en la superficie), el producto $b\,\Delta S\,h$ puede ser distinto de cero. Dividiendo por $\Delta S$ se obtiene \cref{eq:contorno-normal}.
+
+\emph{Componente tangencial.} Escogemos un pequeño circuito rectangular $C$ en un plano perpendicular a la superficie (\cref{fig:contorno}b), con dos lados de longitud $\Delta l$
+paralelos a $S$, uno a cada lado de ella, y otros dos de longitud $h$ en la capa de transición. Sea $\un'$ la normal al rectángulo (que sale del papel) y $\vc{t}=\un'\times\un$ el
+versor tangente a la superficie en el plano del circuito, de modo que $\Delta\vc{l}_2=\Delta l\,\vc{t}$ y $\Delta\vc{l}_1=-\Delta l\,\vc{t}$. Por el teorema de Stokes,
+\[
+  \iint_{S_C}(\nab\times\vc{F})\cdot\dS=\oint_{C}\vc{F}\cdot\dl=\iint_{S_C}\vc{c}\cdot\dS,
+\]
+y suponiendo el rectángulo suficientemente pequeño para tomar $\vc{F}$ y $\vc{c}$ constantes,
+\[
+  \oint_{C}\vc{F}\cdot\dl=\vc{F}_2\cdot\Delta\vc{l}_2+\vc{F}_1\cdot\Delta\vc{l}_1+\int_{\text{lados verticales}}\vc{F}\cdot\dl=\vc{c}\cdot\un'\,h\,\Delta l .
+\]
+Los lados verticales miden $O(h)$ y contribuyen $O(h)\to0$. Tomando el límite $h\to0$ queda
+$(\vc{F}_2-\vc{F}_1)\cdot\vc{t}\,\Delta l=\lim\vc{c}\cdot\un'\,h\,\Delta l$, es decir,
+$(\vc{F}_2-\vc{F}_1)\cdot(\un'\times\un)=\lim\vc{c}\cdot\un'\,h$. Con la propiedad del producto mixto
+$\vc{A}\cdot(\vc{B}\times\vc{C})=\vc{B}\cdot(\vc{C}\times\vc{A})$, el primer miembro es
+$\un'\cdot\bigl[\un\times(\vc{F}_2-\vc{F}_1)\bigr]$, y sacando factor común a $\un'$,
+\[
+  \un'\cdot\Bigl[\un\times(\vc{F}_2-\vc{F}_1)-\lim_{h\to0}h\,\vc{c}\Bigr]=0 .
+\]
+Como el circuito puede orientarse con cualquier $\un'$ tangente a la superficie, se obtiene \cref{eq:contorno-tangencial}. Multiplicando vectorialmente por $\un$ (con
+$\un\times[\un\times\vc{u}]=-\vc{u}_t$) se obtiene la forma equivalente para las componentes tangenciales.
+\end{proof}
+
+% -------------------------------------------------------------------------
+\subsection{Condiciones de contorno del campo y del potencial electrostáticos}\label{sec:contorno-electrico}
+% -------------------------------------------------------------------------
+\begin{corolario}[Condiciones de contorno de $\vE$]\label{cor:contorno-E}
+Sea $\sigma$ la densidad superficial de carga en la frontera, entendida como el límite $\sigma=\lim_{h\to0}(\rho\,h)$ de una densidad volúmica
+muy grande en la capa de transición. Entonces
+\begin{equation}\label{eq:contorno-E}
+  \boxed{\;\un\cdot(\vE_2-\vE_1)=\lim_{h\to0}\Bigl(h\,\frac{\rho}{\eo}\Bigr)=\frac{\sigma}{\eo},\qquad
+  \un\times(\vE_2-\vE_1)=\vc{0}\;}
+\end{equation}
+Es decir: las componentes normales a la superficie de separación son \emph{discontinuas}, con un salto $\sigma/\eo$, si existe densidad superficial de carga en la
+frontera, mientras que las componentes tangenciales \emph{siempre se conservan}: $\vE_{2t}=\vE_{1t}$.
+\end{corolario}
+\begin{proof}
+Basta tomar $b=\rho/\eo$ y $\vc{c}=\vc{0}$ (porque $\nab\times\vE=\vc{0}$) en el \cref{teo:contorno}; el límite del segundo miembro de la ecuación del rotacional es $\lim h\cdot0=0$.
+\end{proof}
+
+\begin{corolario}[Continuidad del potencial]\label{cor:contorno-phi}
+El potencial electrostático es continuo al atravesar cualquier superficie de separación: $\phi_2=\phi_1$.
+\end{corolario}
+\begin{proof}
+Sean $\phi_1$ y $\phi_2$ los valores del potencial a cada lado de la capa de transición. La integral puede hacerse sobre cualquier trayectoria a través de la capa
+(\cref{eq:int-linea}); tomamos una perpendicular a la superficie (\cref{fig:contorno}c):
+\[
+  \phi_2-\phi_1=-\int_{1}^{2}\vE\cdot\dl=-\int_{1}^{2}E_n\,\dif l=-\langle E_n\rangle\,h,
+\]
+donde $\langle E_n\rangle$ es el valor medio de la componente normal de $\vE$ en la capa de anchura $h$. Tomando el límite,
+$\phi_2-\phi_1=-\lim_{h\to0}\langle E_n\rangle\,h=0$, puesto que el campo eléctrico nunca es infinito (a lo sumo $E_n$ tiene una discontinuidad, pero sigue siendo finito).
+\end{proof}
+
+\input{figuras/fig_contorno}
+
+\begin{observacion}[Consecuencias y comprobaciones]\label{obs:contorno-ejemplos}
+Las condiciones se pueden reformular con el potencial: como $\vE=-\nab\phi$, la continuidad de $\vE_t$ equivale a la de $\phi$ (que ya hemos demostrado) y el salto de la
+derivada normal es $\partial_n\phi|_2-\partial_n\phi|_1=-\sigma/\eo$. Algunos ejemplos que se comprueban en los seminarios:
+\begin{itemize}
+  \item \emph{Plano infinito} (\cref{sem:plano}): $\vE=\frac{\sigma}{2\eo}\,\mathrm{sgn}(z)\,\uz$, de modo que el salto en $z=0$ es $\frac{\sigma}{2\eo}-\bigl(-\frac{\sigma}{2\eo}\bigr)=\frac{\sigma}{\eo}$.
+  \item \emph{Cáscara esférica} (\cref{sem:cascara}): $E=0$ para $r<a$ y $E=\frac{Q}{4\pi\eo a^{2}}=\frac{\sigma}{\eo}$ para $r=a^{+}$, mientras que $\phi$ es continuo.
+  \item \emph{Lámina con densidad volúmica} (\cref{sem:lamina}): no hay carga superficial ($\sigma=0$) y por eso $\vE$ es \emph{continuo} en las caras de la lámina.
+\end{itemize}
+\end{observacion}

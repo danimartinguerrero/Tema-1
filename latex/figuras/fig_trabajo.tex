@@ -1,0 +1,33 @@
+% Figura: trabajo de la fuerza externa contra el campo y circulación nula.
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.52\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  \coordinate (A) at (0,0); \coordinate (B) at (5.2,2.2);
+  \draw[trayecto] (A) .. controls (0.8,2.2) and (2.0,-0.9) .. (3.0,0.9) .. controls (3.6,1.9) and (4.4,1.2) .. (B);
+  \draw[vect, cm1, line width=0.9pt] (3.0,0.9) -- ++(-0.15,-0.9) node[below, font=\small, text=cm1] {$\vc{F}_{q}=q\vE$};
+  \draw[vectrojo, line width=0.9pt] (3.0,0.9) -- ++(0.15,0.9) node[above, font=\small, text=acento] {$\vc{F}=-q\vE$};
+  \draw[-{Stealth[length=4pt]}, azulprof, line width=0.8pt] (3.0,0.9) -- ++(0.55,0.72) node[right, font=\scriptsize] {$\dl$};
+  \node[cargapru, minimum size=8pt] at (3.0,0.9) {};
+  \fill[azulprof] (A) circle (1.8pt) node[below left, font=\small] {$A$};
+  \fill[azulprof] (B) circle (1.8pt) node[above right, font=\small] {$B$};
+  \node[font=\small, text=acento, anchor=north west] at (0.7,2.1) {$\Gamma$};
+\end{tikzpicture}\\[2pt]{\small\scshape (a)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.44\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  \draw[trayecto, orienta] (0,0) .. controls (0.7,1.8) and (2.3,2.0) .. (3.2,0.2);
+  \draw[trayecto, orienta, azulacero] (3.2,0.2) .. controls (2.8,-1.2) and (0.7,-1.5) .. (0,0);
+  \fill[azulprof] (0,0) circle (1.8pt) node[left, font=\small] {$1$};
+  \fill[azulprof] (3.2,0.2) circle (1.8pt) node[right, font=\small] {$2$};
+  \node[font=\small, text=acento] at (1.6,1.75) {$1\to2$};
+  \node[font=\small, text=azulacero] at (1.6,-1.2) {$2\to1$};
+  \node[font=\small, text=azulprof] at (1.6,0.2) {$C$};
+\end{tikzpicture}\\[2pt]{\small\scshape (b)}
+\end{minipage}
+\caption{(a)~Una fuerza externa $\vF$ lleva, muy despacio, una carga de prueba de $A$ a $B$
+contra la fuerza del campo $q\vE$; en cada punto ambas se compensan. (b)~Un circuito cerrado $C$ se
+descompone en dos tramos de $1$ a $2$ y de $2$ a $1$; si la integral de línea de $\vE$ no depende del
+camino, la circulación a lo largo de $C$ es nula.}
+\label{fig:trabajo}
+\end{figure}

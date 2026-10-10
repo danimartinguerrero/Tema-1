@@ -1,0 +1,26 @@
+% Figura: capa de transición real frente a la discontinuidad idealizada.
+\begin{figure}[ht]
+\centering
+\pgfplotsset{capaax/.style={tema, width=0.44\textwidth, height=3.8cm, xmin=-1.6, xmax=1.6, ymin=-0.1, ymax=1.2,
+   xtick=\empty, ytick=\empty, grid=none, xlabel={$x$}, ylabel={$\vc{E}$}, axis lines=left, clip=false}}
+\begin{tikzpicture}
+  \begin{axis}[capaax, name=R, title={\small\scshape (a)\; real}]
+    \fill[azulfondo] (axis cs:-0.4,-0.1) rectangle (axis cs:0.4,1.2);
+    \draw[grispizarra, densely dashed, line width=0.4pt] (axis cs:-0.4,-0.1) -- (axis cs:-0.4,1.2);
+    \draw[grispizarra, densely dashed, line width=0.4pt] (axis cs:0.4,-0.1) -- (axis cs:0.4,1.2);
+    \addplot[azulprof, line width=1.2pt, domain=-1.6:1.6, samples=100] {0.15+0.85/(1+exp(-9*x))};
+    \draw[<->, grispizarra, line width=0.4pt] (axis cs:-0.4,-0.02) -- (axis cs:0.4,-0.02);
+    \node[font=\scriptsize, text=grispizarra, anchor=north] at (axis cs:0,-0.04) {$h$};
+    \node[font=\scriptsize, text=azulprof, align=center] at (axis cs:0,0.55) {capa de\\transición};
+  \end{axis}
+  \begin{axis}[capaax, at={(R.east)}, anchor=west, xshift=0.8cm, title={\small\scshape (b)\; ideal ($h\to0$)}]
+    \draw[grispizarra, densely dashed, line width=0.4pt] (axis cs:0,-0.1) -- (axis cs:0,1.2);
+    \addplot[azulprof, line width=1.2pt, const plot, mark=none] coordinates {(-1.6,0.15) (0,0.15) (0,1.0) (1.6,1.0)};
+    \node[font=\scriptsize, text=azulprof, anchor=west, align=left] at (axis cs:0.05,0.55) {superficie de\\[-2pt]discontinuidad};
+  \end{axis}
+\end{tikzpicture}
+\caption{Un campo físico varía de forma continua (y con derivadas continuas) a través de una capa
+de transición de anchura $h$ (a); como no se conocen los detalles de esa transición, se sustituye por una
+superficie de discontinuidad, el límite $h\to0$ (b).}
+\label{fig:capa}
+\end{figure}

@@ -1,0 +1,36 @@
+% Figura: flujo de una carga puntual dentro y fuera de una superficie cerrada.
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.48\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), scale=0.95]
+  \draw[azulprof, line width=0.8pt, fill=azulfondo, fill opacity=0.55] plot[smooth cycle, tension=0.8] coordinates {(1.9,0.2) (1.3,1.4) (-0.2,1.7) (-1.6,1.1) (-1.9,-0.3) (-0.9,-1.5) (0.6,-1.3)};
+  \node[font=\small, text=azulprof] at (1.35,-1.05) {$S$};
+  \foreach \a in {0,30,...,330}{\draw[-{Stealth[length=4pt]}, cm1, line width=0.6pt] (0.2,0.0) ++(\a:0.15) -- ++(\a:2.5);}
+  \node[cargapos] at (0.2,0.0) {$+$};
+  \node[font=\small, anchor=south west] at (0.3,0.1) {$\qp$};
+\end{tikzpicture}\\[2pt]{\small\scshape (a)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), scale=0.95]
+  \draw[azulprof, line width=0.8pt, fill=azulfondo, fill opacity=0.55, name path=blob] plot[smooth cycle, tension=0.8] coordinates {(1.9,0.2) (1.3,1.4) (-0.2,1.7) (-1.6,1.1) (-1.9,-0.3) (-0.9,-1.5) (0.6,-1.3)};
+  \node[font=\small, text=azulprof] at (1.35,-1.05) {$S$};
+  \coordinate (Q) at (-3.4,0.1);
+  \foreach \a in {-34,-22,-10,2,14,26}{
+    \path[name path=r\a] (Q) -- ++(\a:7.0);
+    \path[name intersections={of=blob and r\a, name=I\a, total=\t}];
+    \draw[-{Stealth[length=4pt]}, cm1, line width=0.6pt] (Q) ++(\a:0.15) -- ++(\a:6.0);}
+  \foreach \a in {-10,2,14}{
+    \path[name path=r\a] (Q) -- ++(\a:7.0);
+    \path[name intersections={of=blob and r\a, sort by=r\a, name=J\a}];
+    \draw[azulprof, fill=white, line width=0.5pt] (J\a-1) circle (1.8pt);
+    \fill[azulprof] (J\a-2) circle (1.8pt);}
+  \node[cargapos] at (Q) {$+$};
+  \node[font=\small, anchor=south east] at ($(Q)+(-0.1,0.1)$) {$\qp$};
+\end{tikzpicture}\\[2pt]{\small\scshape (b)}
+\end{minipage}
+\caption{Flujo de una carga puntual. (a)~Carga interior: todas las líneas de campo que parten de $\qp$
+atraviesan $S$ hacia fuera y el flujo vale $\qp/\eo$ (equivale a $4\pi$ de ángulo sólido). (b)~Carga exterior:
+cada línea que entra por $S$ ($\circ$) sale después por otro punto ($\bullet$); el flujo de entrada compensa
+el de salida y el flujo neto es nulo, aunque el campo no lo sea en $S$.}
+\label{fig:flujo-gauss}
+\end{figure}

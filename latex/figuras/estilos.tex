@@ -132,3 +132,61 @@
   \marcoD{-2}{2}{-2}{2}{-2,-1,0,1,2}{-2,-1,0,1,2}
   \ejesD{-2}{2}{-2}{2}}
 
+
+% =========================================================================
+%  Trazado de líneas de campo y equipotenciales de dos cargas puntuales
+%  en el plano meridiano (campo con simetría axial), sin datos externos.
+%  Cargas: +1 en (-1,0) y \qs en (1,0) (\qs=-1 dipolo, \qs=1 cargas iguales).
+%  \FE{x}{y} fija \ex,\ey (campo) y \pv (potencial); se usan inversas de la distancia
+%  para no desbordar la aritmética de pgfmath.
+% =========================================================================
+\def\qs{-1}
+\newcommand{\FE}[2]{%
+  \pgfmathsetmacro{\dxa}{#1+1}\pgfmathsetmacro{\dxb}{#1-1}\pgfmathsetmacro{\yy}{#2}%
+  \pgfmathsetmacro{\ia}{1/sqrt(\dxa*\dxa+\yy*\yy)}%
+  \pgfmathsetmacro{\ib}{1/sqrt(\dxb*\dxb+\yy*\yy)}%
+  \pgfmathsetmacro{\ex}{\dxa*\ia*\ia*\ia+\qs*\dxb*\ib*\ib*\ib}%
+  \pgfmathsetmacro{\ey}{\yy*\ia*\ia*\ia+\qs*\yy*\ib*\ib*\ib}%
+  \pgfmathsetmacro{\pv}{\ia+\qs*\ib}}
+% condición de parada de las líneas de campo: cerca de una carga o fuera de la ventana
+\def\STOP{(((\px+1)*(\px+1)+\py*\py)<0.016||((\px-1)*(\px-1)+\py*\py)<0.016||abs(\px)>3.0||abs(\py)>3.0)?1:0}
+% \lineaC{x0}{y0}{paso}{n pasos}{sentido}  ->  \ruta (directa) y \rutainv (invertida)
+\newcommand{\lineaC}[5]{%
+  \pgfmathsetmacro{\px}{#1}\pgfmathsetmacro{\py}{#2}%
+  \xdef\ruta{(\px,\py)}\xdef\rutainv{(\px,\py)}\gdef\parar{0}%
+  \foreach \i in {1,...,#4}{%
+   \ifnum\parar=0
+    \FE{\px}{\py}%
+    \pgfmathsetmacro{\mm}{#5*#3/sqrt(\ex*\ex+\ey*\ey)}%
+    \pgfmathsetmacro{\mx}{\px+0.5*\mm*\ex}\pgfmathsetmacro{\my}{\py+0.5*\mm*\ey}%
+    \FE{\mx}{\my}%
+    \pgfmathsetmacro{\mm}{#5*#3/sqrt(\ex*\ex+\ey*\ey)}%
+    \pgfmathsetmacro{\nx}{\px+\mm*\ex}\pgfmathsetmacro{\ny}{\py+\mm*\ey}%
+    \xdef\px{\nx}\xdef\py{\ny}%
+    \xdef\ruta{\ruta -- (\px,\py)}%
+    \xdef\rutainv{(\px,\py) -- \rutainv}%
+    \pgfmathtruncatemacro{\fin}{\STOP}%
+    \xdef\parar{\fin}%
+   \fi}}
+% \equipC{x0}{y0}{paso}{n pasos}{sentido}: contorno de nivel del potencial por el punto semilla;
+% termina al cruzar de nuevo el eje (y<0) o al salir de la ventana  ->  \ruta
+\newcommand{\equipC}[5]{%
+  \pgfmathsetmacro{\px}{#1}\pgfmathsetmacro{\py}{#2}%
+  \FE{\px}{\py}\xdef\Vlev{\pv}%
+  \xdef\ruta{(\px,\py)}\gdef\parar{0}%
+  \foreach \i in {1,...,#4}{%
+   \ifnum\parar=0
+    \FE{\px}{\py}%
+    \pgfmathsetmacro{\mm}{#5*#3/sqrt(\ex*\ex+\ey*\ey)}%
+    \pgfmathsetmacro{\mx}{\px-0.5*\mm*\ey}\pgfmathsetmacro{\my}{\py+0.5*\mm*\ex}%
+    \FE{\mx}{\my}%
+    \pgfmathsetmacro{\mm}{#5*#3/sqrt(\ex*\ex+\ey*\ey)}%
+    \pgfmathsetmacro{\nx}{\px-\mm*\ey}\pgfmathsetmacro{\ny}{\py+\mm*\ex}%
+    \FE{\nx}{\ny}%
+    \pgfmathsetmacro{\cc}{(\pv-\Vlev)/(\ex*\ex+\ey*\ey)}%
+    \pgfmathsetmacro{\nx}{\nx+\cc*\ex}\pgfmathsetmacro{\ny}{\ny+\cc*\ey}%
+    \xdef\px{\nx}\xdef\py{\ny}%
+    \xdef\ruta{\ruta -- (\px,\py)}%
+    \pgfmathtruncatemacro{\fin}{(\py<-0.0001||abs(\px)>3.1||abs(\py)>3.1)?1:0}%
+    \xdef\parar{\fin}%
+   \fi}}

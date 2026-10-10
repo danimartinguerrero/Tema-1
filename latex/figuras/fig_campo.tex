@@ -1,0 +1,56 @@
+% Figura: carga fuente, punto campo y distribuciones continuas de carga.
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.40\textwidth}\centering
+\tdplotsetmaincoords{72}{125}
+\begin{tikzpicture}[tdplot_main_coords, scale=0.95, baseline=(current bounding box.north)]
+  \draw[eje] (0,0,0) -- (3.0,0,0) node[below left] {\small $x$};
+  \draw[eje] (0,0,0) -- (0,3.2,0) node[right] {\small $y$};
+  \draw[eje] (0,0,0) -- (0,0,3.0) node[above] {\small $z$};
+  \coordinate (S) at (2.4,0.3,0.4);
+  \coordinate (P) at (0.4,2.6,2.2);
+  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0,0) -- (S) node[pos=0.5, below, font=\small, text=azulprof] {$\vc{r}\,'$};
+  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0,0) -- (P) node[pos=0.45, left, font=\small, text=azulprof] {$\vc{r}$};
+  \draw[vect, azulprof, line width=1.2pt] (S) -- (P) node[pos=0.55, right=2pt, font=\small, text=azulprof] {$\vc{R}$};
+  \draw[vectrojo, line width=1.2pt] (P) -- ($(P)+(-0.45,0.7,0.65)$) node[above, font=\small, text=acento] {$\vE(\vc{r})$};
+  \node[cargapos] at (S) {$+$};
+  \node[cargapru] at (P) {$q$};
+  \node[font=\small, anchor=south west] at ($(S)+(0.1,0.1,0.1)$) {$\qp$};
+\end{tikzpicture}\\[2pt]{\small\scshape (a)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.56\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  % (b) volumen
+  \begin{scope}[shift={(0,0)}]
+    \draw[azulprof, fill=azulfondo, line width=0.6pt] (0,0.2) .. controls (-0.2,1.2) and (0.4,1.9) .. (1.1,1.8) .. controls (1.9,1.9) and (2.2,0.9) .. (1.7,0.3) .. controls (1.2,-0.3) and (0.4,-0.2) .. cycle;
+    \fill[azulacero] (1.0,1.0) circle (1.3pt);
+    \draw[azulacero, fill=azulclaro!60, line width=0.4pt] (0.95,0.98) rectangle (1.12,1.13);
+    \node[font=\scriptsize, anchor=south east] at (0.95,1.1) {$\dif V\,'$};
+    \node[font=\scriptsize, text=azulprof] at (0.4,0.35) {$V'$};
+    \node[font=\scriptsize, anchor=north] at (1.0,-0.5) {$\dif q'=\rho\,\dVp$};
+  \end{scope}
+  % (c) superficie
+  \begin{scope}[shift={(2.8,0)}]
+    \draw[azulprof, fill=azulfondo, line width=0.6pt] (0,0.1) -- (0.3,1.5) .. controls (1.0,1.9) and (1.5,1.4) .. (2.0,1.7) -- (1.8,0.4) .. controls (1.2,0.0) and (0.8,0.4) .. cycle;
+    \draw[azulacero, fill=azulclaro!60, line width=0.4pt] (0.9,0.8) -- (1.15,0.85) -- (1.1,1.1) -- (0.85,1.05) -- cycle;
+    \node[font=\scriptsize, anchor=south east] at (0.85,1.1) {$\dSp$};
+    \node[font=\scriptsize, text=azulprof] at (0.4,0.45) {$S'$};
+    \node[font=\scriptsize, anchor=north] at (1.0,-0.5) {$\dif q'=\sigma\,\dSp$};
+  \end{scope}
+  % (d) línea
+  \begin{scope}[shift={(5.6,0)}]
+    \draw[azulprof, line width=1.1pt] (0,0.3) .. controls (0.5,1.5) and (1.0,-0.4) .. (1.6,1.0) .. controls (1.9,1.5) and (2.0,1.6) .. (2.1,1.7);
+    \draw[azulacero, line width=2.8pt] (0.78,0.64) -- (0.99,0.62);
+    \node[font=\scriptsize, anchor=south] at (0.85,0.95) {$\dlp$};
+    \node[font=\scriptsize, text=azulprof] at (0.05,0.7) {$l'$};
+    \node[font=\scriptsize, anchor=north] at (1.0,-0.5) {$\dif q'=\lambda\,\dlp$};
+  \end{scope}
+\end{tikzpicture}\\[2pt]{\small\scshape (b)}
+\end{minipage}
+\caption{(a)~Carga fuente $\qp$ en $\vc{r}\,'$ y carga de prueba $q$ en el punto campo $\vc{r}$;
+$\vc{R}=\vc{r}-\vc{r}\,'$ va de la fuente al punto campo, y el campo $\vE(\vc{r})$ de una
+fuente positiva apunta en su dirección. (b)~Distribuciones continuas: de volumen $V'$
+($\dif q'=\rho\,\dVp$), de superficie $S'$ ($\dif q'=\sigma\,\dSp$) y de línea $l'$ ($\dif q'=\lambda\,\dlp$);
+cada elemento actúa como una carga puntual $\dif q'$ en su propia posición $\vc{r}\,'$.}
+\label{fig:campo}
+\end{figure}
