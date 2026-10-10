@@ -56,7 +56,7 @@ tangencial de $\vc{F}$ al cruzar $S$ son
 \end{teorema}
 \begin{proof}
 \emph{Componente normal.} Escogemos un cilindro de altura $h$ construido en la capa de transición, con bases de área $\Delta S$ paralelas a la superficie
-(\cref{fig:contorno}a) y normales $\un_2=\un$ y $\un_1=-\un$. Integrando $\nab\cdot\vc{F}$ en el volumen $V$ del cilindro y usando el teorema de la divergencia,
+(\figpanel{fig:contorno}{a}) y normales $\un_2=\un$ y $\un_1=-\un$. Integrando $\nab\cdot\vc{F}$ en el volumen $V$ del cilindro y usando el teorema de la divergencia,
 \[
   \iiint_{V}\nab\cdot\vc{F}\,\dV=\oiint_{S_V}\vc{F}\cdot\dS=\iiint_{V}b\,\dV .
 \]
@@ -67,7 +67,7 @@ Si el cilindro es suficientemente pequeño como para que $\vc{F}$ sea constante 
 Tomando límites con $h\to0$ la integral lateral se anula (\cref{obs:hipotesis}); sin embargo, como $b$ puede tener un valor muy alto en la discontinuidad
 (una singularidad concentrada en la superficie), el producto $b\,\Delta S\,h$ puede ser distinto de cero. Dividiendo por $\Delta S$ se obtiene \cref{eq:contorno-normal}.
 
-\emph{Componente tangencial.} Escogemos un pequeño circuito rectangular $C$ en un plano perpendicular a la superficie (\cref{fig:contorno}b), con dos lados de longitud $\Delta l$
+\emph{Componente tangencial.} Escogemos un pequeño circuito rectangular $C$ en un plano perpendicular a la superficie (\figpanel{fig:contorno}{b}), con dos lados de longitud $\Delta l$
 paralelos a $S$, uno a cada lado de ella, y otros dos de longitud $h$ en la capa de transición. Sea $\un'$ la normal al rectángulo (que sale del papel) y $\vc{t}=\un'\times\un$ el
 versor tangente a la superficie en el plano del circuito, de modo que $\Delta\vc{l}_2=\Delta l\,\vc{t}$ y $\Delta\vc{l}_1=-\Delta l\,\vc{t}$. Por el teorema de Stokes,
 \[
@@ -111,7 +111,7 @@ El potencial electrostático es continuo al atravesar cualquier superficie de se
 \end{corolario}
 \begin{proof}
 Sean $\phi_1$ y $\phi_2$ los valores del potencial a cada lado de la capa de transición. La integral puede hacerse sobre cualquier trayectoria a través de la capa
-(\cref{eq:int-linea}); tomamos una perpendicular a la superficie (\cref{fig:contorno}c):
+(\cref{eq:int-linea}); tomamos una perpendicular a la superficie (\figpanel{fig:contorno}{c}):
 \[
   \phi_2-\phi_1=-\int_{1}^{2}\vE\cdot\dl=-\int_{1}^{2}E_n\,\dif l=-\langle E_n\rangle\,h,
 \]

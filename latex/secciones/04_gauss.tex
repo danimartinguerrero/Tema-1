@@ -10,7 +10,7 @@ geométrica que lo hace posible es el ángulo sólido.
 % -------------------------------------------------------------------------
 La razón entre las áreas totales de dos esferas concéntricas y los cuadrados de sus radios es constante:
 $4\pi r_1^{2}/r_1^{2}=4\pi r_2^{2}/r_2^{2}=4\pi$. Lo mismo ocurre con áreas elementales vistas desde el centro
-común $O$ (\cref{fig:angulo}a): si dos elementos $\dif S_1$ y $\dif S_2$ de esferas de radios $r_1$ y $r_2$ están
+común $O$ (\figpanel{fig:angulo}{a}): si dos elementos $\dif S_1$ y $\dif S_2$ de esferas de radios $r_1$ y $r_2$ están
 recortados por el mismo cono con vértice en $O$, entonces $\dif S_1/r_1^{2}=\dif S_2/r_2^{2}$. Esa constante es el
 ángulo sólido, la versión tridimensional del ángulo en radianes (que es la razón entre un arco y su radio).
 
@@ -22,7 +22,7 @@ $\dif S$ de radio $r$ centrado en $O$ es
 \end{equation}
 (\emph{estereorradianes}, sr). Con $r=1$, es el área de la porción de esfera unidad bajo la cual se ve el elemento.
 Para un elemento $\dS=\un\,\dsc$ \emph{cualquiera}, situado en un punto cuyo vector de posición relativa a $O$ es
-$\vc{R}$, se proyecta sobre la esfera de radio $R$ centrada en $O$ (\cref{fig:angulo}b): el área proyectada
+$\vc{R}$, se proyecta sobre la esfera de radio $R$ centrada en $O$ (\figpanel{fig:angulo}{b}): el área proyectada
 es $\dif S'=\dsc\cos\theta$, con $\theta$ el ángulo entre $\dS$ y $\vc{R}$, y
 \begin{equation}\label{eq:angulo-general}
   \dOm=\frac{\dif S'}{R^{2}}=\frac{\dsc\cos\theta}{R^{2}}=\frac{\dS\cdot\vc{R}}{R^{3}}=\frac{\dS\cdot\uR}{R^{2}}.
@@ -50,7 +50,7 @@ $S'$ de radio $R$ centrada en $O$, en la que $R$ es constante:
   \Omega=\oint_{S}\dOm=\oint_{S'}\frac{\dif S'}{R^{2}}=\frac{1}{R^{2}}\oint_{S'}\dif S'=\frac{4\pi R^{2}}{R^{2}}=4\pi .
 \]
 \emph{(b) $O$ en el exterior.} Ahora cada semirrecta que corta a $S$ lo hace un número \emph{par} de veces, con entradas y
-salidas alternadas (\cref{fig:angulo}c). Para un elemento de entrada, $\theta_2>\pi/2$ y por tanto
+salidas alternadas (\figpanel{fig:angulo}{c}). Para un elemento de entrada, $\theta_2>\pi/2$ y por tanto
 $\dS_2\cdot\vc{R}_2/R_2^{3}=\dsc_2\cos\theta_2/R_2^{2}=-\dOm_0$, mientras que para el de salida
 $\dS_1\cdot\vc{R}_1/R_1^{3}=\dsc_1\cos\theta_1/R_1^{2}=+\dOm_0$. Se anulan por parejas y la integral es nula.
 \end{proof}

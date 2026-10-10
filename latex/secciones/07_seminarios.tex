@@ -83,7 +83,7 @@ Representar gráficamente cómo varían el potencial y el campo en función de l
 
 \begin{resolucion}
 \textbf{Idea.} La distribución es esféricamente simétrica, así que $\vE=E(r)\,\ur$ (puramente radial y dependiente solo de la distancia al centro). Elegimos como superficie gaussiana
-una esfera $S_{\mathrm{G}}$ concéntrica de radio $r$ (\cref{fig:sem-gauss-esfera}a). En ella $E(r)$ es constante y $\vE\parallel\dS=\dsc\,\ur$, de modo que
+una esfera $S_{\mathrm{G}}$ concéntrica de radio $r$ (\figpanel{fig:sem-gauss-esfera}{a}). En ella $E(r)$ es constante y $\vE\parallel\dS=\dsc\,\ur$, de modo que
 \[
   \oiint_{S_{\mathrm{G}}}\vE\cdot\dS=E(r)\oiint_{S_{\mathrm{G}}}\dsc=4\pi r^{2}\,E(r)=\frac{\Qenc}{\eo}.
 \]
@@ -117,7 +117,7 @@ usando $\rho/6\eo=Q/(8\pi\eo a^{3})$. Agrupando términos,
 Comprobación de continuidad: en $r=a$, $\frac{Q}{8\pi\eo a}(3-1)=\frac{Q}{4\pi\eo a}$, igual que la expresión exterior. Además, $\phi(0)=3Q/(8\pi\eo a)$, así que el potencial es máximo en el centro (con $Q>0$) mientras que
 el campo allí es nulo, $\vE(0)=\vc{0}$.
 
-\textbf{Gráficas} (\cref{fig:sem-gauss-esfera}b,c). El campo crece linealmente hasta un máximo en la superficie y luego cae como $1/r^{2}$; el potencial decrece parabólicamente en el interior y como $1/r$ fuera. No hay que confundir la dependencia
+\textbf{Gráficas} (\figpanel{fig:sem-gauss-esfera}{b) y~(c}). El campo crece linealmente hasta un máximo en la superficie y luego cae como $1/r^{2}$; el potencial decrece parabólicamente en el interior y como $1/r$ fuera. No hay que confundir la dependencia
 $\phi\propto1/r$ del exterior con la $E\propto1/r^{2}$ del campo.
 \end{resolucion}
 
@@ -152,7 +152,7 @@ Calcular por integración directa el campo y el potencial creados por un hilo in
 
 \begin{resolucion}
 \textbf{Idea.} Colocamos el hilo sobre el eje $z$ y usamos coordenadas cilíndricas. Por la simetría de traslación a lo largo del hilo y de rotación en torno a él, el campo solo puede depender de la distancia $r$ al hilo y
-no puede tener componente en $z$: para cada elemento en $z'$ hay otro simétrico en $-z'$ cuya componente axial lo cancela (\cref{fig:sem-hilo}a).
+no puede tener componente en $z$: para cada elemento en $z'$ hay otro simétrico en $-z'$ cuya componente axial lo cancela (\figpanel{fig:sem-hilo}{a}).
 
 \textbf{Campo.} El punto campo es $\vc{r}=r\,\urho$ y el fuente $\vc{r}\,'=z'\,\uz$, con $\dif q'=\lambda\,\dif z'$ ($\dlp=\dif z'$). Entonces
 $\vc{R}=r\,\urho-z'\,\uz$, $R=(r^{2}+z'^{2})^{1/2}$ y, con la \cref{eq:campo-sup-lin},
@@ -185,7 +185,7 @@ Para un hilo \emph{finito} de longitud $L$, sobre $-L/2\le z'\le L/2$, la misma 
   &\quad-\frac{\lambda}{4\pi\eo}\left[\frac{1}{\sqrt{r^{2}+(z+L/2)^{2}}}-\frac{1}{\sqrt{r^{2}+(z-L/2)^{2}}}\right]\uz .
 \end{align*}
 Si $L\to\infty$, el corchete radial tiende a $2$ y el axial a $0$, y se recupera la aproximación de hilo infinito, $\vE_{\mathrm{ap}}=\frac{\lambda}{2\pi\eo r}\,\urho$ (en el esquema de la hoja del curso aparece $4\pi$ en el denominador;
-el factor correcto es $2\pi$, porque el corchete vale $2$). La \cref{fig:sem-hilo}b,c muestra qué tan buena es esa aproximación para un hilo finito: cerca del hilo y lejos de sus extremos el error es pequeño, y crece a medida que nos
+el factor correcto es $2\pi$, porque el corchete vale $2$). La \figpanel{fig:sem-hilo}{b) y~(c} muestra qué tan buena es esa aproximación para un hilo finito: cerca del hilo y lejos de sus extremos el error es pequeño, y crece a medida que nos
 alejamos radialmente de él, y también al acercarnos a la altura de los extremos.
 \end{observacion}
 
@@ -231,7 +231,7 @@ Calcular por integración directa el campo $\vE$ creado por una superficie plana
 
 \begin{resolucion}
 \textbf{Idea.} Situamos el plano en $z'=0$. Como la distribución es invariante frente a traslaciones en $x$ e $y$, el campo solo puede depender de $z$, y podemos tomar el punto campo sobre el eje $z$: $\vc{r}=z\,\uz$
-(\cref{fig:sem-plano}a). Por la simetría especular respecto del plano, el campo en $-z$ es el reflejado del campo en $+z$.
+(\figpanel{fig:sem-plano}{a}). Por la simetría especular respecto del plano, el campo en $-z$ es el reflejado del campo en $+z$.
 
 \textbf{Geometría.} El elemento de carga está en $\vc{r}\,'=x'\,\ux+y'\,\uy$, con $\dif q'=\sigma\,\dSp$. Para aprovechar la simetría pasamos a coordenadas polares en el plano (usamos $s'$ y no $\rho$, para no
 confundirlo con la densidad volúmica de carga): $x'=s'\cos\varphi'$, $y'=s'\sen\varphi'$, $\dSp=s'\,\dif s'\,\dif\varphi'$, $s'\in[0,\infty)$, $\varphi'\in[0,2\pi)$. Entonces
@@ -265,7 +265,7 @@ Calcular mediante el teorema de Gauss el campo creado por una superficie plana i
 
 \begin{resolucion}
 \textbf{Idea.} Simetría plana (especular): $\vE=E_z(z)\,\uz$, y $E_z(-z)=-E_z(z)$. La superficie gaussiana es un cilindro recto de radio $R_c$ con eje $z$, cuyas dos tapas, de área $S_{\mathrm{tapa}}=\pi R_c^{2}$, están a ambos lados del plano y a la misma
-distancia $\lvert z\rvert$ (\cref{fig:sem-plano}b).
+distancia $\lvert z\rvert$ (\figpanel{fig:sem-plano}{b}).
 
 \textbf{Flujo.} Sobre la superficie lateral, $\vE\perp\dS$ y no hay flujo; en las tapas, $\vE\parallel\dS$ y $E$ es el mismo:
 \[
@@ -291,7 +291,7 @@ y un plano infinito uniformemente cargados.
 \begin{resolucion}
 \textbf{Idea.} El anillo es una distribución lineal; el disco es una colección de anillos concéntricos y el plano es un disco con $a\to\infty$. Así, solo hay que \emph{integrar} una vez el resultado del anillo.
 
-\textbf{Anillo.} Con el anillo en el plano $z'=0$ y el punto campo en $\vc{r}=z\,\uz$ (\cref{fig:sem-anillo}a), todos los puntos del anillo están a la misma distancia $R=\sqrt{a^{2}+z^{2}}$ del punto campo. Con $\lambda=Q/2\pi a$ y $\dlp=a\,\dif\varphi'$,
+\textbf{Anillo.} Con el anillo en el plano $z'=0$ y el punto campo en $\vc{r}=z\,\uz$ (\figpanel{fig:sem-anillo}{a}), todos los puntos del anillo están a la misma distancia $R=\sqrt{a^{2}+z^{2}}$ del punto campo. Con $\lambda=Q/2\pi a$ y $\dlp=a\,\dif\varphi'$,
 \[
   \phi(z)=\frac{1}{4\pi\eo}\int\frac{\lambda\,\dlp}{R}=\frac{1}{4\pi\eo}\,\frac{Q}{\sqrt{a^{2}+z^{2}}},\qquad\boxed{\;\phi_{\mathrm{anillo}}(z)=\frac{Q}{4\pi\eo\,(a^{2}+z^{2})^{1/2}}\;}
 \]
@@ -302,7 +302,7 @@ y otra perpendicular al eje que se anula al sumar sobre elementos diametralmente
 \]
 Coincide con $-\partial_z\phi$ \emph{sobre el eje}: $-\frac{\dif}{\dif z}\frac{Q}{4\pi\eo}(a^{2}+z^{2})^{-1/2}=\frac{Q}{4\pi\eo}\frac{z}{(a^{2}+z^{2})^{3/2}}$ (derivar $\phi$ respecto de $z$ solo da la componente axial, y es lo único que hay en el eje).
 
-\textbf{Disco.} Un disco de radio $a$ con densidad $\sigma$ se descompone en anillos de radio $r'\in[0,a]$ y anchura $\dif r'$, con carga $\dif q'=\sigma\,2\pi r'\,\dif r'$ (\cref{fig:sem-anillo}b). Sumando los potenciales y los campos de los anillos:
+\textbf{Disco.} Un disco de radio $a$ con densidad $\sigma$ se descompone en anillos de radio $r'\in[0,a]$ y anchura $\dif r'$, con carga $\dif q'=\sigma\,2\pi r'\,\dif r'$ (\figpanel{fig:sem-anillo}{b}). Sumando los potenciales y los campos de los anillos:
 \[
   \phi_{\mathrm{disco}}(z)=\int_{0}^{a}\frac{\sigma\,2\pi r'\,\dif r'}{4\pi\eo\sqrt{r'^{2}+z^{2}}}=\frac{\sigma}{2\eo}\Bigl[\sqrt{r'^{2}+z^{2}}\Bigr]_{0}^{a}=\frac{\sigma}{2\eo}\Bigl(\sqrt{a^{2}+z^{2}}-\lvert z\rvert\Bigr),
 \]
@@ -329,7 +329,7 @@ está definido salvo una constante, la restamos (equivale a tomar $\phi(0)=0$ co
         también $\frac{Q}{4\pi\eo z^{2}}$: visto desde lejos, todo objeto cargado es una carga puntual.
   \item \emph{El máximo del anillo.} $E_{\mathrm{anillo}}$ se anula en $z=0$ (en el centro las contribuciones opuestas se cancelan) y en el infinito; tiene un máximo en $\frac{\dif}{\dif z}\bigl[z(a^{2}+z^{2})^{-3/2}\bigr]=0\Leftrightarrow z=a/\sqrt2$,
         de valor $\frac{Q}{4\pi\eo a^{2}}\frac{2}{3\sqrt3}$ (\cref{fig:sem-anillo}).
-  \item \emph{El salto del disco.} $\vE_{\mathrm{disco}}$ es discontinuo en $z=0$ para cualquier radio $a$, con salto $\frac{\sigma}{2\eo}-\bigl(-\frac{\sigma}{2\eo}\bigr)=\frac{\sigma}{\eo}$ (la ampliación de la \cref{fig:sem-anillo}c): es la condición de contorno
+  \item \emph{El salto del disco.} $\vE_{\mathrm{disco}}$ es discontinuo en $z=0$ para cualquier radio $a$, con salto $\frac{\sigma}{2\eo}-\bigl(-\frac{\sigma}{2\eo}\bigr)=\frac{\sigma}{\eo}$ (la ampliación de la \figpanel{fig:sem-anillo}{c}): es la condición de contorno
         de \cref{eq:contorno-E}, que solo depende de la densidad local de carga y no del tamaño del disco. En cambio, el potencial es continuo.
 \end{enumerate}
 \end{observacion}
@@ -360,7 +360,7 @@ con $\rho a$ la carga por unidad de superficie: igual que un plano con $\sigma=\
 \end{resolucion}
 
 \begin{observacion}[Interpretación]
-El campo \emph{crece linealmente} con $z$ dentro de la lámina (dependencia lineal, $\vE\propto z$) hasta alcanzar $\rho a/2\eo$ en las caras ($z=\pm a/2$), y es constante fuera (\cref{fig:sem-lamina}c). Con una densidad volúmica de carga \emph{el campo es continuo}: en $z=\pm a/2$ las dos expresiones dan $\rho a/2\eo$,
+El campo \emph{crece linealmente} con $z$ dentro de la lámina (dependencia lineal, $\vE\propto z$) hasta alcanzar $\rho a/2\eo$ en las caras ($z=\pm a/2$), y es constante fuera (\figpanel{fig:sem-lamina}{c}). Con una densidad volúmica de carga \emph{el campo es continuo}: en $z=\pm a/2$ las dos expresiones dan $\rho a/2\eo$,
 porque no hay carga superficial, de acuerdo con las condiciones de contorno. Si adelgazamos la lámina con $\rho\to\infty$ manteniendo $\sigma=\rho a$ fijo, la rampa interior se hace infinitamente empinada y se recupera el plano de los problemas 1.5--1.6, con su salto $\sigma/\eo$.
 \end{observacion}
 
@@ -402,7 +402,7 @@ Hallar el campo y el potencial asociados a una distribución uniforme de carga c
 \end{ejercicio}
 
 \begin{resolucion}
-\textbf{Idea.} Simetría cilíndrica, como en el hilo, pero con la carga repartida por el volumen. Gaussiana: cilindro coaxial de radio $r$ y altura $h$ (\cref{fig:sem-cilindro}a). Flujo: solo la superficie lateral, $2\pi r h\,E$.
+\textbf{Idea.} Simetría cilíndrica, como en el hilo, pero con la carga repartida por el volumen. Gaussiana: cilindro coaxial de radio $r$ y altura $h$ (\figpanel{fig:sem-cilindro}{a}). Flujo: solo la superficie lateral, $2\pi r h\,E$.
 
 \textbf{Campo.} Exterior ($r>a$): $\Qenc=\rho\,\pi a^{2}h$, luego $2\pi rh\,E=\rho\pi a^{2}h/\eo$. Interior ($r<a$): $\Qenc=\rho\,\pi r^{2}h$ y $2\pi rh\,E=\rho\pi r^{2}h/\eo$:
 \[
@@ -430,7 +430,7 @@ independiente de $r_0$ (la referencia se cancela en toda diferencia de potencial
 \end{resolucion}
 
 \begin{observacion}[La referencia del potencial]
-Como la carga se extiende hasta el infinito, el potencial depende de una elección arbitraria de $r_0$. La \cref{fig:sem-cilindro}c lo muestra para dos referencias, $\phi(r_0)=0$ y $\phi(0)=0$: las curvas están desplazadas una respecto de la otra por una constante, pero tienen la misma forma, el mismo campo y la misma diferencia de potencial. Eso es lo físicamente relevante.
+Como la carga se extiende hasta el infinito, el potencial depende de una elección arbitraria de $r_0$. La \figpanel{fig:sem-cilindro}{c} lo muestra para dos referencias, $\phi(r_0)=0$ y $\phi(0)=0$: las curvas están desplazadas una respecto de la otra por una constante, pero tienen la misma forma, el mismo campo y la misma diferencia de potencial. Eso es lo físicamente relevante.
 \end{observacion}
 
 \input{figuras/fig_sem_cilindro}
@@ -456,7 +456,7 @@ Sumando,
 
 \begin{observacion}[Interpretación]
 El espacio queda dividido en ocho octantes, y en cada uno el campo es \emph{uniforme} y cambia de signo en las componentes que atraviesan un plano. Si las tres densidades son iguales y positivas, el campo es siempre saliente: de módulo $\frac{\sqrt3\,\sigma}{2\eo}$ y dirección
-$(\pm\ux\pm\uy\pm\uz)/\sqrt3$ en cada octante (\cref{fig:sem-planos}b). Cada componente tiene su propio salto $\sigma_i/\eo$ al cruzar su plano, como exigen las condiciones de contorno: las componentes tangenciales a un plano (las de los otros dos) son continuas a su paso.
+$(\pm\ux\pm\uy\pm\uz)/\sqrt3$ en cada octante (\figpanel{fig:sem-planos}{b}). Cada componente tiene su propio salto $\sigma_i/\eo$ al cruzar su plano, como exigen las condiciones de contorno: las componentes tangenciales a un plano (las de los otros dos) son continuas a su paso.
 \end{observacion}
 
 \input{figuras/fig_sem_planos}

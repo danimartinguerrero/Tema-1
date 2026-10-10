@@ -1,41 +1,49 @@
 % Figura: ley de Coulomb (geometría) y principio de superposición.
 \begin{figure}[ht]
 \centering
-\tdplotsetmaincoords{72}{125}
-\begin{minipage}[t]{0.49\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=1.0, baseline=(current bounding box.north)]
-  \draw[eje] (0,0,0) -- (3.2,0,0) node[below left] {\small $x$};
-  \draw[eje] (0,0,0) -- (0,3.4,0) node[right] {\small $y$};
-  \draw[eje] (0,0,0) -- (0,0,3.2) node[above] {\small $z$};
-  \coordinate (Q1) at (2.6,0.4,0.6);
-  \coordinate (Q2) at (0.4,2.7,2.3);
-  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0,0) -- (Q1) node[pos=0.5, below, font=\small, text=azulprof] {$\vc{r}_1$};
-  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0,0) -- (Q2) node[pos=0.45, left, font=\small, text=azulprof] {$\vc{r}_2$};
-  \draw[vect, azulprof, line width=1.2pt] (Q1) -- (Q2) node[pos=0.62, above left, font=\small, text=azulprof] {$\vc{R}_{12}$};
-  \draw[vectrojo] (Q2) -- ($(Q2)+(-0.45,0.7,0.65)$) node[above, font=\small, text=acento] {$\vc{F}_{12}$};
-  \draw[vectrojo] (Q1) -- ($(Q1)+(0.45,-0.7,-0.65)$) node[left, font=\small, text=acento] {$\vc{F}_{21}$};
+\newcommand{\ejesObl}{%
+  \draw[eje] (0,0) -- (0,3.2) node[above] {\small $z$};
+  \draw[eje] (0,0) -- (3.4,-0.45) node[right] {\small $y$};
+  \draw[eje] (0,0) -- (-1.35,-1.0) node[below left] {\small $x$};}
+\begin{minipage}[b]{0.49\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \ejesObl
+  \coordinate (Q1) at (-0.6,1.25);
+  \coordinate (Q2) at (2.5,2.35);
+  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0) -- (Q1);
+  \node[font=\small, text=azulprof, anchor=east] at ($(0,0)!0.5!(Q1)+(-0.08,0)$) {$\vc{r}_1$};
+  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0) -- (Q2);
+  \node[font=\small, text=azulprof, anchor=north west] at ($(0,0)!0.55!(Q2)+(0.05,-0.02)$) {$\vc{r}_2$};
+  \draw[vect, azulprof, line width=1.2pt] (Q1) -- (Q2);
+  \node[font=\small, text=azulprof, anchor=south east] at ($(Q1)!0.5!(Q2)+(0,0.08)$) {$\vc{R}_{12}$};
+  \draw[vectrojo] (Q2) -- ($(Q2)!-0.33!(Q1)$);
+  \node[font=\small, text=acento, anchor=south] at ($(Q2)!-0.33!(Q1)+(0,0.05)$) {$\vc{F}_{12}$};
+  \draw[vectrojo] (Q1) -- ($(Q1)!-0.33!(Q2)$);
+  \node[font=\small, text=acento, anchor=north] at ($(Q1)!-0.33!(Q2)+(0,-0.05)$) {$\vc{F}_{21}$};
   \node[cargapos] at (Q1) {$+$};
   \node[cargapos] at (Q2) {$+$};
-  \node[font=\small, anchor=south west] at ($(Q1)+(0.1,0.1,0.1)$) {$q_1$};
-  \node[font=\small, anchor=south east] at ($(Q2)+(-0.1,0,0.15)$) {$q_2$};
+  \node[font=\small, anchor=south] at ($(Q1)+(0,0.15)$) {$q_1$};
+  \node[font=\small, anchor=north] at ($(Q2)+(0.05,-0.15)$) {$q_2$};
 \end{tikzpicture}\\[2pt]{\small\scshape (a)}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.49\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=0.95, baseline=(current bounding box.north)]
-  \draw[eje] (0,0,0) -- (3.0,0,0) node[below left] {\small $x$};
-  \draw[eje] (0,0,0) -- (0,3.2,0) node[right] {\small $y$};
-  \draw[eje] (0,0,0) -- (0,0,3.0) node[above] {\small $z$};
-  \coordinate (P) at (1.3,1.6,1.1);
-  \foreach \n/\a/\b/\c/\l in {1/2.9/0.0/0.3/{q_1}, 2/2.5/1.5/2.4/{q_2}, 3/0.2/3.1/1.8/{q_3}}{
-     \coordinate (S\n) at (\a,\b,\c);
-     \draw[vect, azulclaro!90!black, line width=0.7pt] (S\n) -- (P);
-     \node[cargapos] at (S\n) {$+$};
-     \node[font=\small, anchor=south east] at ($(S\n)+(-0.1,0,0.1)$) {$\l$};}
-  \draw[vectrojo, line width=1.3pt] (P) -- ($(P)+(-0.9,0.6,0.45)$) node[above left, font=\small, text=acento] {$\vc{F}_{q}$};
+\begin{minipage}[b]{0.49\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \ejesObl
+  \coordinate (P) at (1.3,1.6);
+  \coordinate (S1) at (-0.9,0.65);
+  \coordinate (S2) at (1.05,3.05);
+  \coordinate (S3) at (2.95,0.75);
+  \foreach \n in {1,2,3}{\draw[vect, azulclaro!80!azulacero, line width=0.7pt] (S\n) -- ($(S\n)!0.9!(P)$);}
+  \node[font=\scriptsize, text=azulprof, anchor=north] at ($(S1)!0.3!(P)+(0.0,-0.05)$) {$\vc{R}_1$};
+  \node[font=\scriptsize, text=azulprof, anchor=west] at ($(S2)!0.45!(P)+(0.06,0.0)$) {$\vc{R}_2$};
+  \node[font=\scriptsize, text=azulprof, anchor=south] at ($(S3)!0.45!(P)+(0.05,0.05)$) {$\vc{R}_3$};
+  \draw[vectrojo, line width=1.3pt] (P) -- ++(0.55,-0.7);
+  \node[font=\small, text=acento, anchor=north west] at ($(P)+(0.5,-0.7)$) {$\vc{F}_{q}$};
+  \foreach \n in {1,2,3}{\node[cargapos] at (S\n) {$+$};}
+  \node[font=\small, anchor=east] at ($(S1)+(-0.15,0)$) {$q_1$};
+  \node[font=\small, anchor=west] at ($(S2)+(0.15,0.05)$) {$q_2$};
+  \node[font=\small, anchor=west] at ($(S3)+(0.15,0)$) {$q_3$};
   \node[cargapru] at (P) {$q$};
-  \node[font=\scriptsize, text=azulprof, anchor=north] at ($(S1)!0.5!(P)$) {$\vc{R}_1$};
-  \node[font=\scriptsize, text=azulprof, anchor=east] at ($(S2)!0.5!(P)$) {$\vc{R}_2$};
-  \node[font=\scriptsize, text=azulprof, anchor=west] at ($(S3)!0.45!(P)$) {$\vc{R}_3$};
 \end{tikzpicture}\\[2pt]{\small\scshape (b)}
 \end{minipage}
 \caption{(a)~Ley de Coulomb para dos cargas puntuales del mismo signo:

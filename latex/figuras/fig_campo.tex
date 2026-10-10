@@ -1,88 +1,69 @@
 % Figura: carga fuente, punto campo y distribuciones continuas de carga.
 \begin{figure}[ht]
 \centering
-\tdplotsetmaincoords{70}{125}
-\begin{minipage}[t]{0.99\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=0.95]
-  \draw[eje] (0,0,0) -- (3.0,0,0) node[below left] {\small $x$};
-  \draw[eje] (0,0,0) -- (0,3.3,0) node[right] {\small $y$};
-  \draw[eje] (0,0,0) -- (0,0,3.1) node[above] {\small $z$};
-  \coordinate (S) at (2.5,0.3,0.5);
-  \coordinate (P) at (0.3,2.5,2.2);
-  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0,0) -- (S);
-  \node[font=\small, text=azulprof, anchor=south west] at ($(0,0,0)!0.5!(S)+(0,0.1,0.05)$) {$\vc{r}\,'$};
-  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0,0) -- (P);
-  \node[font=\small, text=azulprof, anchor=south east] at ($(0,0,0)!0.5!(P)$) {$\vc{r}$};
-  \draw[vect, azulprof, line width=1.2pt] (S) -- (P);
-  \node[font=\small, text=azulprof, anchor=north west] at ($(S)!0.5!(P)$) {$\vc{R}$};
-  \draw[vectrojo, line width=1.3pt] (P) -- ++(-0.5,0.7,0.7);
-  \node[font=\small, text=acento, anchor=south] at ($(P)+(-0.5,0.7,0.7)$) {$\vE(\vc{r})$};
+\begin{minipage}{0.99\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \draw[eje] (0,0) -- (0,3.0) node[above] {\small $z$};
+  \draw[eje] (0,0) -- (3.4,-0.45) node[right] {\small $y$};
+  \draw[eje] (0,0) -- (-1.35,-1.0) node[below left] {\small $x$};
+  \coordinate (S) at (-0.9,1.0);
+  \coordinate (P) at (2.3,2.1);
+  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0) -- (S);
+  \node[font=\small, text=azulprof, anchor=east] at ($(0,0)!0.5!(S)+(-0.08,0)$) {$\vc{r}\,'$};
+  \draw[->, azulclaro!80!azulacero, line width=0.7pt] (0,0) -- (P);
+  \node[font=\small, text=azulprof, anchor=north west] at ($(0,0)!0.55!(P)+(0.05,0)$) {$\vc{r}$};
+  \draw[vect, azulprof, line width=1.2pt] (S) -- ($(S)!0.93!(P)$);
+  \node[font=\small, text=azulprof, anchor=south] at ($(S)!0.62!(P)+(0,0.08)$) {$\vc{R}$};
+  \draw[vectrojo, line width=1.3pt] (P) -- ($(P)!-0.3!(S)$);
+  \node[font=\small, text=acento, anchor=west] at ($(P)!-0.3!(S)+(0.05,0)$) {$\vE(\vc{r})$};
   \node[cargapos] at (S) {$+$};
+  \node[font=\small, anchor=south] at ($(S)+(0,0.15)$) {$\qp$};
   \node[cargapru] at (P) {$q$};
-  \node[font=\small, anchor=east] at ($(S)+(-0.1,-0.05,0.0)$) {$\qp$};
-\end{tikzpicture}
-\end{minipage}\\[2pt]{\small\scshape (a)\; carga fuente y punto campo}\\[10pt]
-% (b--d) distribuciones continuas
-\begin{minipage}[t]{0.40\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  % volumen V' sombreado con el elemento diminuto y, a la derecha, el elemento ampliado
-  \shade[ball color=azulclaro!55, opacity=0.45] (0,0) ellipse (1.35 and 1.1);
-  \draw[azulprof, line width=0.7pt] (0,0) ellipse (1.35 and 1.1);
-  \node[font=\small, text=azulprof] at (-0.75,0.65) {$V'$};
-  \def\sx{0.35}\def\sy{-0.05}
-  \fill[azulacero!70, draw=azulprof, line width=0.4pt] (\sx,\sy) rectangle ++(0.14,0.12);
-  % cubo ampliado en proyección oblicua
-  \def\ox{2.3}\def\oy{-0.9}\def\w{1.3}\def\h{1.0}\def\dpx{0.55}\def\dpy{0.42}
-  \draw[grispizarra, densely dotted, line width=0.4pt] (\sx+0.14,\sy+0.12) -- (\ox+\w+\dpx,\oy+\h+\dpy) (\sx+0.14,\sy) -- (\ox+\w,\oy);
-  \draw[azulprof, line width=0.5pt, densely dashed] (\ox,\oy) -- (\ox+\dpx,\oy+\dpy) -- (\ox+\w+\dpx,\oy+\dpy) (\ox+\dpx,\oy+\dpy) -- (\ox+\dpx,\oy+\h+\dpy);
-  \fill[azulclaro!85] (\ox,\oy+\h) -- (\ox+\w,\oy+\h) -- (\ox+\w+\dpx,\oy+\h+\dpy) -- (\ox+\dpx,\oy+\h+\dpy) -- cycle;
-  \fill[azulacero!55] (\ox+\w,\oy) -- (\ox+\w+\dpx,\oy+\dpy) -- (\ox+\w+\dpx,\oy+\h+\dpy) -- (\ox+\w,\oy+\h) -- cycle;
-  \fill[azulacero!32] (\ox,\oy) rectangle (\ox+\w,\oy+\h);
-  \draw[azulprof, line width=0.7pt] (\ox,\oy) rectangle (\ox+\w,\oy+\h);
-  \draw[azulprof, line width=0.7pt] (\ox,\oy+\h) -- (\ox+\dpx,\oy+\h+\dpy) -- (\ox+\w+\dpx,\oy+\h+\dpy) -- (\ox+\w,\oy+\h);
-  \draw[azulprof, line width=0.7pt] (\ox+\w,\oy) -- (\ox+\w+\dpx,\oy+\dpy) -- (\ox+\w+\dpx,\oy+\h+\dpy);
-  % cotas
-  \draw[acento, <->, line width=0.6pt] (\ox,\oy-0.22) -- (\ox+\w,\oy-0.22) node[midway, below, font=\scriptsize, text=acento] {$\dif x'$};
-  \draw[acento, <->, line width=0.6pt] (\ox+\w+0.22,\oy-0.1) -- ($(\ox+\w+0.22,\oy-0.1)+(\dpx,\dpy)$) node[midway, below right=-1pt, font=\scriptsize, text=acento] {$\dif y'$};
-  \draw[acento, <->, line width=0.6pt] (\ox-0.22,\oy) -- (\ox-0.22,\oy+\h) node[midway, left, font=\scriptsize, text=acento] {$\dif z'$};
-  \node[font=\small, text=azulprof] at (\ox+0.5*\w,\oy+0.5*\h) {$\dV'$};
-\end{tikzpicture}\\[2pt]{\small\scshape (b)\; volumen: $\dif q'=\rho\,\dV'$}
+\end{tikzpicture}\\[2pt]{\small\scshape (a)\; carga fuente y punto campo}
+\end{minipage}\\[10pt]
+\begin{minipage}[b]{0.32\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  % volumen V' de forma arbitraria con un elemento dV' diminuto
+  \draw[azulprof, line width=0.8pt, fill=azulfondo]
+    plot[smooth cycle, tension=0.75] coordinates {(0,0) (1.2,-0.35) (2.5,0.05) (2.85,1.0) (2.2,1.75) (1.0,1.6) (0.25,1.15)};
+  \node[font=\small, text=azulprof] at (0.55,0.35) {$V'$};
+  % cubo diminuto en proyección oblicua (lado 0.18)
+  \def\cx{1.75}\def\cy{0.85}\def\cl{0.18}\def\co{0.08}
+  \fill[azulacero!60] (\cx,\cy) rectangle ++(\cl,\cl);
+  \fill[azulclaro] (\cx,\cy+\cl) -- ++(\co,\co) -- ++(\cl,0) -- ++(-\co,-\co) -- cycle;
+  \fill[azulacero!85] (\cx+\cl,\cy) -- ++(\co,\co) -- ++(0,\cl) -- ++(-\co,-\co) -- cycle;
+  \draw[azulprof, line width=0.35pt] (\cx,\cy) rectangle ++(\cl,\cl) (\cx,\cy+\cl) -- ++(\co,\co) -- ++(\cl,0) -- ++(-\co,-\co) (\cx+\cl+\co,\cy+\cl+\co) -- ++(0,-\cl) -- ++(-\co,-\co);
+  \draw[grispizarra, line width=0.3pt] (\cx+0.28,\cy+0.1) -- (3.25,0.55);
+  \node[font=\small, text=azulprof, anchor=west] at (3.25,0.55) {$\dV'$};
+\end{tikzpicture}\\[2pt]{\small\scshape (b)\; $\dif q'=\rho\,\dV'$}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.29\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  \fill[azulclaro!45] (0,0.2) .. controls (0.9,-0.15) and (1.8,0.45) .. (2.9,0.15) -- (3.45,1.75) .. controls (2.5,2.1) and (1.6,1.45) .. (0.55,1.85) -- cycle;
-  \draw[azulprof, line width=0.7pt] (0,0.2) .. controls (0.9,-0.15) and (1.8,0.45) .. (2.9,0.15) -- (3.45,1.75) .. controls (2.5,2.1) and (1.6,1.45) .. (0.55,1.85) -- cycle;
-  \foreach \t in {0.33,0.66}{
-    \draw[azulprof!35, line width=0.35pt] ($(0,0.2)!\t!(0.55,1.85)$) .. controls +(0.9,-0.1) and +(-0.9,0.1) .. ($(2.9,0.15)!\t!(3.45,1.75)$);
-    \draw[azulprof!35, line width=0.35pt] ($(0,0.2)!\t!(2.9,0.15)$) .. controls +(0.1,0.7) and +(-0.1,-0.7) .. ($(0.55,1.85)!\t!(3.45,1.75)$);}
-  \fill[azulacero!72, draw=azulprof, line width=0.7pt] (1.45,0.72) -- (2.15,0.78) -- (2.22,1.32) -- (1.52,1.26) -- cycle;
-  \draw[vect, azulacero, line width=0.9pt] (1.84,1.02) -- ++(0.12,0.9);
-  \node[font=\scriptsize, text=azulacero, anchor=east] at (1.8,1.95) {$\un$};
-  \draw[grispizarra, line width=0.3pt] (2.2,1.1) -- (2.8,1.0);
-  \node[font=\small, text=azulprof, anchor=west] at (2.82,1.0) {$\dSp$};
+\begin{minipage}[b]{0.32\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  % superficie S' (lámina curva en perspectiva) con un parche dS'
+  \draw[azulprof, line width=0.8pt, fill=azulfondo]
+    (0,0.2) .. controls (1.0,-0.15) and (1.8,0.35) .. (2.7,0.1) -- (3.2,1.45) .. controls (2.3,1.75) and (1.5,1.25) .. (0.5,1.6) -- cycle;
   \node[font=\small, text=azulprof] at (0.55,0.55) {$S'$};
-\end{tikzpicture}\\[2pt]{\small\scshape (c)\; superficie: $\dif q'=\sigma\,\dSp$}
+  \fill[azulacero!70] (1.55,0.7) -- (1.83,0.71) -- (1.88,0.94) -- (1.6,0.93) -- cycle;
+  \draw[azulprof, line width=0.35pt] (1.55,0.7) -- (1.83,0.71) -- (1.88,0.94) -- (1.6,0.93) -- cycle;
+  \draw[grispizarra, line width=0.3pt] (1.86,0.8) -- (3.35,0.55);
+  \node[font=\small, text=azulprof, anchor=west] at (3.35,0.55) {$\dSp$};
+\end{tikzpicture}\\[2pt]{\small\scshape (c)\; $\dif q'=\sigma\,\dSp$}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.29\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
-  % curva paramétrica; dl' es el intervalo [t0,t1] de la propia curva
-  \def\cur#1{({3.4*(#1)},{0.3+1.3*(#1)+0.75*sin(430*(#1))})}
-  \draw[azulprof, line width=1.0pt, domain=0:1, samples=80, variable=\tt] plot ({3.4*\tt},{0.3+1.3*\tt+0.75*sin(430*\tt)});
-  \draw[acento, line width=2.4pt, line cap=round, domain=0.33:0.45, samples=12, variable=\tt] plot ({3.4*\tt},{0.3+1.3*\tt+0.75*sin(430*\tt)});
-  % marcas de extremos del intervalo y cota
-  \pgfmathsetmacro{\xa}{3.4*0.33}\pgfmathsetmacro{\ya}{0.3+1.3*0.33+0.75*sin(430*0.33)}
-  \pgfmathsetmacro{\xb}{3.4*0.45}\pgfmathsetmacro{\yb}{0.3+1.3*0.45+0.75*sin(430*0.45)}
-  \draw[acento, line width=0.5pt] (\xa,\ya) -- ++(-0.12,0.28);
-  \draw[acento, line width=0.5pt] (\xb,\yb) -- ++(-0.12,0.28);
-  \draw[acento, <->, line width=0.5pt] ($(\xa,\ya)+(-0.09,0.21)$) -- ($(\xb,\yb)+(-0.09,0.21)$);
-  \node[font=\small, text=acento, anchor=south east] at ($(\xa,\ya)!0.5!(\xb,\yb)+(-0.12,0.34)$) {$\dlp$};
-  \node[font=\small, text=azulprof] at (0.15,0.05) {$l'$};
-  \fill[azulprof] (0,0.3) circle (1.3pt); \fill[azulprof] (3.4,1.6) circle (1.3pt);
-\end{tikzpicture}\\[2pt]{\small\scshape (d)\; línea: $\dif q'=\lambda\,\dlp$}
+\begin{minipage}[b]{0.32\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  % curva l' y el intervalo dl' sobre ella (mismo grosor, en ámbar)
+  \draw[azulprof, line width=0.9pt, domain=0:1, samples=80, variable=\tt] plot ({3.2*\tt},{0.3+1.1*\tt+0.6*sin(430*\tt)});
+  \draw[acento, line width=0.9pt, domain=0.36:0.46, samples=12, variable=\tt] plot ({3.2*\tt},{0.3+1.1*\tt+0.6*sin(430*\tt)});
+  \pgfmathsetmacro{\xa}{3.2*0.36}\pgfmathsetmacro{\ya}{0.3+1.1*0.36+0.6*sin(430*0.36)}
+  \pgfmathsetmacro{\xb}{3.2*0.46}\pgfmathsetmacro{\yb}{0.3+1.1*0.46+0.6*sin(430*0.46)}
+  \fill[acento] (\xa,\ya) circle (0.9pt); \fill[acento] (\xb,\yb) circle (0.9pt);
+  \node[font=\small, text=acento, anchor=north] at ($(\xa,\ya)!0.5!(\xb,\yb)+(0.12,-0.25)$) {$\dlp$};
+  \node[font=\small, text=azulprof, anchor=east] at (-0.05,0.3) {$l'$};
+\end{tikzpicture}\\[2pt]{\small\scshape (d)\; $\dif q'=\lambda\,\dlp$}
 \end{minipage}
 \caption{(a)~Carga fuente $\qp$ en $\vc{r}\,'$ y carga de prueba $q$ en el punto campo $\vc{r}$; $\vc{R}=\vc{r}-\vc{r}\,'$ va de la fuente al punto
 campo, y el campo $\vE(\vc{r})$ de una fuente positiva apunta en su dirección. (b--d)~Distribuciones continuas: cada elemento ---un paralelepípedo
-$\dV'=\dif x'\,\dif y'\,\dif z'$ en el volumen $V'$, un parche $\dSp$ de la superficie $S'$, o un intervalo $\dlp$ de la curva $l'$--- se comporta como una carga puntual
+$\dV'$ del volumen $V'$, un parche $\dSp$ de la superficie $S'$ o un intervalo $\dlp$ de la curva $l'$--- se comporta como una carga puntual
 $\dif q'$ en su propia posición $\vc{r}\,'$.}
 \label{fig:campo}
 \end{figure}
