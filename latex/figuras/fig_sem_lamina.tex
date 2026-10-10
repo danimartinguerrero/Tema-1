@@ -1,49 +1,81 @@
-% Figura (Problema 1.8): lámina con densidad volúmica; superficies gaussianas y campo.
+% Figura (Problema 1.8): lámina con densidad volúmica; superficies gaussianas en perspectiva y en corte.
 \begin{figure}[ht]
 \centering
-\tdplotsetmaincoords{66}{125}
-\newcommand{\laminaBox}[1]{%
-  % caja de espesor 1 (z de -0.5 a 0.5): caras visibles +x, +y y superior
-  \fill[azulclaro!55, opacity=#1] (2.2,-2.2,-0.5) -- (2.2,2.2,-0.5) -- (2.2,2.2,0.5) -- (2.2,-2.2,0.5) -- cycle;
-  \fill[azulclaro!75, opacity=#1] (-2.2,2.2,-0.5) -- (2.2,2.2,-0.5) -- (2.2,2.2,0.5) -- (-2.2,2.2,0.5) -- cycle;
-  \fill[azulclaro!35, opacity=#1] (-2.2,-2.2,0.5) -- (2.2,-2.2,0.5) -- (2.2,2.2,0.5) -- (-2.2,2.2,0.5) -- cycle;
-  \draw[azulprof, line width=0.6pt] (2.2,-2.2,-0.5) -- (2.2,2.2,-0.5) -- (-2.2,2.2,-0.5) (2.2,2.2,-0.5) -- (2.2,2.2,0.5);
-  \draw[azulprof, line width=0.6pt] (-2.2,-2.2,0.5) -- (2.2,-2.2,0.5) -- (2.2,2.2,0.5) -- (-2.2,2.2,0.5) -- cycle;
-  \draw[azulprof, line width=0.6pt] (2.2,-2.2,-0.5) -- (2.2,-2.2,0.5) (-2.2,2.2,-0.5) -- (-2.2,2.2,0.5);}
-\begin{minipage}[t]{0.31\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=0.78, baseline=(current bounding box.north)]
-  \laminaBox{0.85}
-  \tdCilindro[verdeteo!10]{0.8}{-1.7}{1.7}{verdeteo}{0.8pt}
-  \draw[vectrojo, line width=1.2pt] (0,0,1.7) -- (0,0,2.5); \draw[vectrojo, line width=1.2pt] (0,0,-1.7) -- (0,0,-2.5);
-  \node[font=\small, text=azulprof, anchor=west] at (2.25,0.0,0.0) {$\rho$};
-  \node[font=\scriptsize, text=verdeteo, anchor=west] at ({0.95*cos(125)},{0.95*sin(125)},1.55) {$S_{\mathrm{G}}$};
-  \draw[grispizarra, <->, line width=0.4pt] (2.45,-2.45,-0.5) -- (2.45,-2.45,0.5) node[midway, left, font=\scriptsize] {$a$};
-\end{tikzpicture}\\[2pt]{\small\scshape (a)\; $\lvert z\rvert>a/2$}
+\tikzset{
+  lam1/.style={fill=grisclaro!70},  % cara superior
+  lam2/.style={fill=grisclaro!100}, % cara frontal
+  lam3/.style={fill=grispizarra!45},% cara lateral
+  cil/.style={azulacero, line width=0.9pt},
+  cilo/.style={azulacero!35, line width=0.7pt},
+  cota/.style={arrows={Stealth[length=3.5pt]-Stealth[length=3.5pt]}, line width=0.45pt, black!80},
+  aux/.style={densely dashed, line width=0.35pt, black!60}}
+% --- bloque en perspectiva oblicua: frente [0,4.6]x[0,0.8], profundidad (1.5,1.4)
+\newcommand{\bloqueLamina}{%
+  \path[lam2] (0,0) rectangle (4.6,0.8);
+  \path[lam1] (0,0.8) -- (4.6,0.8) -- (6.1,2.2) -- (1.5,2.2) -- cycle;
+  \path[lam3] (4.6,0) -- (6.1,1.4) -- (6.1,2.2) -- (4.6,0.8) -- cycle;}
+% --- cilindro: centro (cx,yc), semiejes rx,ry, extremos y0<y1
+\newcommand{\cilindroFull}[6][cilo]{%
+  \draw[#1] (#2-#4,#5) -- (#2-#4,#6) (#2+#4,#5) -- (#2+#4,#6);
+  \draw[#1] (#2,#5) ellipse ({#4} and 0.15);
+  \draw[#1] (#2,#6) ellipse ({#4} and 0.15);}
+% ------------------------------------------------------------- caso |z|>a/2
+\begin{minipage}[c]{0.55\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \bloqueLamina
+  \def\cx{3.05}\def\ym{1.1}\def\rr{0.42}\def\ytop{1.9}
+  % parte oculta (dentro y debajo de la lámina)
+  \cilindroFull{\cx}{0}{\rr}{\ym-1.6}{\ytop}
+  % parte visible por encima de la cara superior
+  \fill[white, opacity=0.55] (\cx-\rr,\ytop) -- (\cx-\rr,\ym+1.6) arc (180:0:{\rr} and 0.15) -- (\cx+\rr,\ytop) arc (0:-180:{\rr} and 0.15) -- cycle;
+  \draw[cil] (\cx-\rr,\ytop) -- (\cx-\rr,\ym+1.6) (\cx+\rr,\ytop) -- (\cx+\rr,\ym+1.6);
+  \draw[cil] (\cx,\ym+1.6) ellipse ({\rr} and 0.15);
+  \draw[cil] (\cx-\rr,\ytop) arc (180:360:{\rr} and 0.15);
+  \draw[azulacero, line width=0.5pt, -{Stealth[length=4pt]}] (\cx+0.75,\ym+2.15) -- (\cx+0.12,\ym+1.65);
+  \node[font=\small, anchor=south west] at (\cx+0.7,\ym+2.1) {$A$};
+  \node[font=\small, text=azulprof] at (1.0,0.4) {$\rho$};
+\end{tikzpicture}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.31\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=0.78, baseline=(current bounding box.north)]
-  \laminaBox{0.55}
-  \tdCilindro[verdeteo!14]{0.8}{-0.25}{0.25}{verdeteo}{0.8pt}
-  \draw[vectrojo, line width=1.2pt] (0,0,0.25) -- (0,0,1.3); \draw[vectrojo, line width=1.2pt] (0,0,-0.25) -- (0,0,-1.3);
-  \node[font=\small, text=azulprof, anchor=west] at (2.25,0.0,0.0) {$\rho$};
-  \node[font=\scriptsize, text=verdeteo, anchor=west] at ({1.0*cos(125)},{1.0*sin(125)},0.45) {$S_{\mathrm{G}}$};
-  \draw[grispizarra, <->, line width=0.4pt] ({1.05*cos(305)},{1.05*sin(305)},-0.25) -- ({1.05*cos(305)},{1.05*sin(305)},0.25) node[midway, left, font=\scriptsize] {$2z$};
-\end{tikzpicture}\\[2pt]{\small\scshape (b)\; $\lvert z\rvert<a/2$}
+\begin{minipage}[c]{0.42\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \fill[grisclaro!100] (-1.9,-0.4) rectangle (2.4,0.4);
+  \draw[->, line width=0.5pt, black!80] (0,0) -- (2.9,0);
+  \draw[->, line width=0.5pt, black!80] (0,0) -- (0,2.15) node[above, font=\scriptsize] {$z$};
+  \draw[azulacero, line width=1.0pt] (-0.75,-1.6) rectangle (0.3,1.6);
+  \node[font=\small, anchor=south] at (-0.5,1.62) {$A$};
+  \draw[aux] (0.3,1.6) -- (1.15,1.6) (0.3,-1.6) -- (1.15,-1.6);
+  \draw[cota] (1.0,0) -- (1.0,1.6) node[midway, right, font=\small] {$z$};
+  \draw[cota] (1.0,0) -- (1.0,-1.6) node[midway, right, font=\small] {$z$};
+  \draw[cota] (-1.4,-0.4) -- (-1.4,0.4) node[midway, left, font=\small] {$a$};
+\end{tikzpicture}
+\end{minipage}\\[2pt]
+{\small\scshape (a)\; $\lvert z\rvert>a/2$: el cilindro atraviesa la lámina}\\[12pt]
+% ------------------------------------------------------------- caso |z|<a/2
+\begin{minipage}[c]{0.55\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \bloqueLamina
+  \def\cx{3.05}\def\ym{1.1}\def\rr{0.42}
+  \cilindroFull{\cx}{0}{\rr}{\ym-0.22}{\ym+0.22}
+  \node[font=\small, text=azulprof] at (1.0,0.4) {$\rho$};
+\end{tikzpicture}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.35\textwidth}\centering
-\begin{tikzpicture}[baseline=(current bounding box.north)]
-  \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$z/a$}, ylabel={$E_z/(\rho a/2\eo)$}, xmin=-1.5, xmax=1.5, ymin=-1.3, ymax=1.3,
-     xtick={-1,-0.5,0,0.5,1}, xticklabels={$-1$,$-\tfrac12$,0,$\tfrac12$,1}, ytick={-1,0,1}, domain=-1.5:1.5, samples=100]
-    \addplot[azulprof, line width=1.2pt, domain=-0.5:0.5] {2*x};
-    \addplot[azulprof, line width=1.2pt, domain=0.5:1.5] {1};
-    \addplot[azulprof, line width=1.2pt, domain=-1.5:-0.5] {-1};
-    \addplot[grispizarra, densely dashed] coordinates {(-0.5,-1.3) (-0.5,1.3)};
-    \addplot[grispizarra, densely dashed] coordinates {(0.5,-1.3) (0.5,1.3)};
-  \end{axis}
-\end{tikzpicture}\\[2pt]{\small\scshape (c)}
-\end{minipage}
-\caption{Problema 1.8. Lámina de espesor $a$ con densidad volúmica uniforme $\rho$ y superficies gaussianas (cilindros de área de base $A$ con tapas simétricas
-respecto del plano medio). (a)~Fuera de la lámina el cilindro la atraviesa y encierra $\rho A a$. (b)~Dentro, encierra solo la parte de espesor $2z$. (c)~El campo es lineal en el interior
-y constante, de módulo $\rho a/2\eo$, fuera; es continuo en las caras, porque no hay carga superficial.}
+\begin{minipage}[c]{0.42\textwidth}\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \fill[grisclaro!100] (-1.9,-0.4) rectangle (2.4,0.4);
+  \draw[->, line width=0.5pt, black!80] (0,0) -- (2.9,0);
+  \draw[->, line width=0.5pt, black!80] (0,0) -- (0,1.5) node[above, font=\scriptsize] {$z$};
+  \draw[azulacero, line width=1.0pt] (-0.75,-0.22) rectangle (0.3,0.22);
+  \draw[aux] (0.3,0.22) -- (1.15,0.22) (0.3,-0.22) -- (1.15,-0.22);
+  \draw[cota] (1.0,0) -- (1.0,0.22);
+  \draw[cota] (1.0,0) -- (1.0,-0.22);
+  \node[font=\small, anchor=west] at (1.05,0.16) {$z$};
+  \node[font=\small, anchor=west] at (1.05,-0.16) {$z$};
+  \draw[cota] (-1.4,-0.4) -- (-1.4,0.4) node[midway, left, font=\small] {$a$};
+\end{tikzpicture}
+\end{minipage}\\[2pt]
+{\small\scshape (b)\; $\lvert z\rvert<a/2$: el cilindro queda dentro de la lámina}
+\caption{Problema 1.8. Lámina de espesor $a$ con densidad volúmica uniforme $\rho$ y superficies gaussianas: cilindros de bases de área $A$ paralelas a la lámina y simétricas
+respecto de su plano medio, en perspectiva (izquierda) y en corte (derecha). (a)~Si las tapas están fuera ($\lvert z\rvert>a/2$), el cilindro atraviesa la lámina y encierra la carga $\rho Aa$.
+(b)~Si están dentro ($\lvert z\rvert<a/2$), solo encierra la parte de espesor $2z$, de carga $2\rho Az$.}
 \label{fig:sem-lamina}
 \end{figure}

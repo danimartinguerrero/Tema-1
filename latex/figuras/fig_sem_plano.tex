@@ -31,19 +31,36 @@
 \end{tikzpicture}\\[2pt]{\small\scshape (a)\; integración directa}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.46\textwidth}\centering
-\begin{tikzpicture}[tdplot_main_coords, scale=1.0, baseline=(current bounding box.north)]
-  \def\Rc{1.05}\def\Hc{1.25}
-  \tdPlano[grisclaro!70, opacity=0.55]{2.4}{0}
-  \draw[grispizarra!70, line width=0.4pt] (-2.4,-2.4,0) -- (2.4,-2.4,0) -- (2.4,2.4,0) -- (-2.4,2.4,0) -- cycle;
-  \tdCilindro[verdeteo!10]{\Rc}{-\Hc}{\Hc}{verdeteo}{0.8pt}
-  \draw[eje] (0,0,-2.1) -- (0,0,2.9) node[above] {\small $z$};
-  \draw[vectrojo, line width=1.3pt] (0,0,\Hc) -- (0,0,{\Hc+0.75}) node[left, font=\small, text=acento] {$\vE$};
-  \draw[vectrojo, line width=1.3pt] (0,0,-\Hc) -- (0,0,{-\Hc-0.75}) node[left, font=\small, text=acento] {$\vE$};
-  \draw[vectverde, line width=0.9pt] (0.55,0.4,\Hc) -- ++(0,0,0.55) node[right=1pt, font=\scriptsize, text=verdeteo] {$\dS$};
-  \draw[vectverde, line width=0.9pt] (0.55,0.4,-\Hc) -- ++(0,0,-0.55) node[right=1pt, font=\scriptsize, text=verdeteo] {$\dS$};
-  \node[font=\small, text=verdeteo, anchor=west] at ({\Rc*cos(35)+0.15},{\Rc*sin(35)},0.7) {$S_{\mathrm{G}}$};
-  \node[font=\small, text=azulprof] at (-1.6,1.6,0) {$\sigma$};
-  \draw[grispizarra, <->, line width=0.4pt] (1.7,-1.4,-\Hc) -- (1.7,-1.4,\Hc) node[midway, right, font=\scriptsize] {$2\lvert z\rvert$};
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1.15cm, y=1.15cm]
+  \def\rx{0.85}\def\ry{0.26}\def\hh{1.35}
+  % 1) mitad inferior del cilindro (detrás del plano): trazos tenues
+  \draw[verdeteo!55, line width=0.6pt] (-\rx,-\hh) -- (-\rx,0) (\rx,-\hh) -- (\rx,0);
+  \draw[verdeteo!55, line width=0.6pt] (-\rx,-\hh) arc (180:360:{\rx} and \ry);
+  \draw[verdeteo!55, line width=0.5pt, densely dashed] (-\rx,-\hh) arc (180:0:{\rx} and \ry);
+  \draw[vectrojo, line width=1.3pt, acento!60] (0,-\hh) -- (0,-\hh-0.8);
+  \node[font=\small, text=acento, anchor=west] at (0.08,-\hh-0.7) {$\vE$};
+  \draw[vectverde, line width=0.9pt, verdeteo!60] (-0.45,-\hh-\ry*0.85) -- ++(0,-0.6);
+  \node[font=\scriptsize, text=verdeteo, anchor=east] at (-0.48,-\hh-0.75) {$\un$};
+  % 2) plano semitransparente
+  \fill[grisclaro!80, opacity=0.75] (-2.6,-0.75) -- (1.4,-0.75) -- (2.6,0.75) -- (-1.4,0.75) -- cycle;
+  \draw[grispizarra!70, line width=0.4pt] (-2.6,-0.75) -- (1.4,-0.75) -- (2.6,0.75) -- (-1.4,0.75) -- cycle;
+  \node[font=\small, text=azulprof] at (1.75,0.35) {$\sigma$};
+  % 3) intersección del cilindro con el plano (disco de carga encerrada)
+  \fill[acento!35] (0,0) ellipse ({\rx} and \ry);
+  \draw[acento, line width=0.7pt] (0,0) ellipse ({\rx} and \ry);
+  % 4) mitad superior del cilindro (delante del plano)
+  \fill[verdeteo!8, opacity=0.85] (-\rx,0) arc (180:360:{\rx} and \ry) -- (\rx,\hh) arc (0:180:{\rx} and \ry) -- cycle;
+  \draw[verdeteo, line width=0.8pt] (-\rx,0) -- (-\rx,\hh) (\rx,0) -- (\rx,\hh);
+  \draw[verdeteo, line width=0.8pt] (-\rx,0) arc (180:360:{\rx} and \ry);
+  \draw[verdeteo, line width=0.8pt, fill=verdeteo!15] (0,\hh) ellipse ({\rx} and \ry);
+  \draw[vectrojo, line width=1.3pt] (0,\hh) -- (0,\hh+0.8);
+  \node[font=\small, text=acento, anchor=west] at (0.08,\hh+0.7) {$\vE$};
+  \draw[vectverde, line width=0.9pt] (-0.45,\hh) -- ++(0,0.6);
+  \node[font=\scriptsize, text=verdeteo, anchor=east] at (-0.48,\hh+0.5) {$\un$};
+  \node[font=\small, text=verdeteo, anchor=west] at (\rx+0.05,1.0) {$S_{\mathrm{G}}$};
+  \node[font=\scriptsize, text=acento, anchor=north west] at (0.55,-0.22) {$\sigma S_{\mathrm{tapa}}$};
+  % cota de la altura
+  \draw[grispizarra, <->, line width=0.4pt] (-\rx-0.4,-\hh) -- (-\rx-0.4,\hh) node[midway, left, font=\scriptsize] {$2\lvert z\rvert$};
 \end{tikzpicture}\\[2pt]{\small\scshape (b)\; superficie gaussiana}
 \end{minipage}
 \caption{Problemas 1.5 y 1.6. (a)~Plano $z'=0$ con densidad superficial uniforme $\sigma$; el punto campo $P$ está sobre el eje $z$, el elemento $\dSp=s'\,\dif s'\,\dif\varphi'$ en
