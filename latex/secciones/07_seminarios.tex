@@ -500,30 +500,29 @@ factor geométrico $\langle\cos\theta\rangle=1/2$ del promedio de la proyección
 \input{figuras/fig_sem_semiesfera}
 
 % -------------------------------------------------------------------------
+\needspace{22\baselineskip}
 \subsection{Resumen de resultados}\label{sec:resumen-seminarios}
 % -------------------------------------------------------------------------
-\begin{table}[ht]
-\centering
-\caption{Resultados de los problemas del tema ($\vE$ en V/m; $\phi$ en V).}
-\label{tab:resultados}
-\small
-\renewcommand{\arraystretch}{1.55}
-\begin{tabular}{@{}cp{3.1cm}p{5.2cm}p{4.2cm}@{}}
+\begin{center}
+\captionof{table}{Resultados de los problemas del tema ($\vE$ en V/m; $\phi$ en V).}\label{tab:resultados}
+\footnotesize
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{@{}p{1.0cm}p{2.4cm}p{6.2cm}p{4.6cm}@{}}
 \toprule
 Prob. & Distribución & Campo $\vE$ & Potencial $\phi$\\
 \midrule
 1.1, 1.2 & Esfera maciza, $Q$, $a$ &
-  $\dfrac{Q\,r}{4\pi\eo a^{3}}\,\ur\ (r<a)$; $\dfrac{Q}{4\pi\eo r^{2}}\,\ur\ (r>a)$ &
-  $\dfrac{Q}{8\pi\eo a}\bigl(3-\tfrac{r^{2}}{a^{2}}\bigr)$; $\dfrac{Q}{4\pi\eo r}$\\
+  $\dfrac{Q\,r}{4\pi\eo a^{3}}\,\ur$\ \ ($r<a$)\newline $\dfrac{Q}{4\pi\eo r^{2}}\,\ur$\ \ ($r>a$) &
+  $\dfrac{Q}{8\pi\eo a}\Bigl(3-\dfrac{r^{2}}{a^{2}}\Bigr)$\ \ ($r<a$)\newline $\dfrac{Q}{4\pi\eo r}$\ \ ($r>a$)\\
 1.3, 1.4 & Hilo infinito, $\lambda$ & $\dfrac{\lambda}{2\pi\eo r}\,\urho$ & $\dfrac{\lambda}{2\pi\eo}\ln\dfrac{r_0}{r}$\\
 1.5, 1.6 & Plano infinito, $\sigma$ & $\dfrac{\sigma}{2\eo}\,\sgn(z)\,\uz$ & $-\dfrac{\sigma}{2\eo}\lvert z\rvert$\\
 1.7 & Anillo, $Q$, $a$ (eje) & $\dfrac{Qz}{4\pi\eo(a^{2}+z^{2})^{3/2}}\,\uz$ & $\dfrac{Q}{4\pi\eo\sqrt{a^{2}+z^{2}}}$\\
-1.7 & Disco, $\sigma$, $a$ (eje) & $\dfrac{\sigma}{2\eo}\bigl(\sgn z-\tfrac{z}{\sqrt{a^{2}+z^{2}}}\bigr)\uz$ & $\dfrac{\sigma}{2\eo}\bigl(\sqrt{a^{2}+z^{2}}-\lvert z\rvert\bigr)$\\
-1.8 & Lámina, $\rho$, espesor $a$ & $\dfrac{\rho a}{2\eo}\sgn(z)\,\uz\ (\lvert z\rvert>\tfrac a2)$; $\dfrac{\rho z}{\eo}\,\uz\ (\lvert z\rvert<\tfrac a2)$ & ---\\
-1.9 & Cáscara esférica, $Q$, $a$ & $\vc{0}\ (r<a)$; $\dfrac{Q}{4\pi\eo r^{2}}\,\ur\ (r>a)$ & $\dfrac{Q}{4\pi\eo a}$; $\dfrac{Q}{4\pi\eo r}$\\
-1.10 & Cilindro, $\rho$, $a$ & $\dfrac{\rho r}{2\eo}\,\urho\ (r<a)$; $\dfrac{\rho a^{2}}{2\eo r}\,\urho\ (r>a)$ & $\phi(0)-\phi(a)=\dfrac{\rho a^{2}}{4\eo}$\\
+1.7 & Disco, $\sigma$, $a$ (eje) & $\dfrac{\sigma}{2\eo}\Bigl(\sgn z-\dfrac{z}{\sqrt{a^{2}+z^{2}}}\Bigr)\uz$ & $\dfrac{\sigma}{2\eo}\bigl(\sqrt{a^{2}+z^{2}}-\lvert z\rvert\bigr)$\\
+1.8 & Lámina, $\rho$, espesor $a$ & $\dfrac{\rho a}{2\eo}\sgn(z)\,\uz$\ \ ($\lvert z\rvert>\tfrac a2$)\newline $\dfrac{\rho z}{\eo}\,\uz$\ \ ($\lvert z\rvert<\tfrac a2$) & ---\\
+1.9 & Cáscara esférica, $Q$, $a$ & $\vc{0}$\ \ ($r<a$)\newline $\dfrac{Q}{4\pi\eo r^{2}}\,\ur$\ \ ($r>a$) & $\dfrac{Q}{4\pi\eo a}$\ \ ($r\le a$)\newline $\dfrac{Q}{4\pi\eo r}$\ \ ($r\ge a$)\\
+1.10 & Cilindro, $\rho$, $a$ & $\dfrac{\rho r}{2\eo}\,\urho$\ \ ($r<a$)\newline $\dfrac{\rho a^{2}}{2\eo r}\,\urho$\ \ ($r>a$) & $\phi(0)-\phi(a)=\dfrac{\rho a^{2}}{4\eo}$\\
 1.11 & Tres planos & $\dfrac{1}{2\eo}\bigl(\sigma_a\sgn x\,\ux+\sigma_b\sgn y\,\uy+\sigma_c\sgn z\,\uz\bigr)$ & ---\\
 1.12 & Semicáscara, $Q$, $a$ (centro) & $\dfrac{Q}{8\pi\eo a^{2}}\,\uz$ & ---\\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{center}
