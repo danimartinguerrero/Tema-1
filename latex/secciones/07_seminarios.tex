@@ -1,1 +1,529 @@
-\section{Provisional seminarios}
+% =========================================================================
+\section{Seminarios prácticos}\label{sec:seminarios}
+% =========================================================================
+Esta sección resuelve, con todo detalle, los doce problemas de la relación del tema~\cite{PROBLEMAS-T1}. Cada uno sigue la misma estructura: el
+\emph{enunciado}, la \emph{idea} que guía la resolución (qué estamos buscando y por qué el método funciona), la \emph{resolución} paso a paso
+y, cuando merece la pena, un breve comentario sobre la \emph{interpretación} física del resultado. Los problemas son de dos familias:
+\begin{itemize}
+  \item \emph{Integración directa} (problemas 1.1, 1.3, 1.5, 1.7, 1.12): se aplica la definición del campo (\cref{eq:campo-vol,eq:campo-sup-lin}) o del potencial
+        (\cref{eq:pot-vol,eq:pot-sup-lin}). Funciona siempre, pero exige elegir bien el sistema de coordenadas y aprovechar la simetría para anular componentes.
+  \item \emph{Ley de Gauss} (problemas 1.2, 1.4, 1.6, 1.8, 1.9, 1.10): se elige una superficie gaussiana adaptada a la simetría (\cref{sec:gauss-simetria}) y se despeja $E$ de
+        $\oiint\vE\cdot\dS=\Qenc/\eo$. Es mucho más corta, pero solo posible cuando la simetría es esférica, cilíndrica o plana. El potencial se obtiene después
+        integrando el campo, $\phi(\vc{r})-\phi(\vc{r}_0)=-\int_{\vc{r}_0}^{\vc{r}}\vE\cdot\dl$.
+\end{itemize}
+El problema 1.11 se resuelve por superposición de los campos de tres planos, calculados antes. La \cref{tab:resultados} recoge, al final de la sección, todos los resultados.
+
+% =========================================================================
+\subsection{Problema 1.1. Esfera uniformemente cargada: campo exterior por integración directa}\label{sem:esfera-directa}
+% =========================================================================
+\begin{ejercicio}[Campo exterior de una esfera, por integración directa]\label{ejer:esfera-directa}
+Calcular, por integración directa, el campo eléctrico creado por una carga $Q$ uniformemente distribuida en una esfera de radio $a$ en los puntos exteriores a dicha esfera.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} La esfera es una distribución volúmica: cada elemento $\rho\,\dVp$ crea un campo coulombiano y hay que sumarlos todos (\cref{eq:campo-vol}). La simetría nos deja elegir el
+punto campo donde más nos convenga: como el problema es invariante frente a rotaciones, basta calcular el campo \emph{en el eje $z$} (\cref{fig:sem-esfera}); el resultado en un punto
+cualquiera se obtiene luego sustituyendo $z$ por la distancia $r$ y $\uz$ por $\ur$.
+
+\textbf{Paso 1: geometría.} El punto campo es $\vc{r}=z\,\uz$ con $z>a$, y el punto fuente, en esféricas,
+$\vc{r}\,'=r'\bigl[\cos\theta'\,\uz+\sen\theta'(\cos\varphi'\,\ux+\sen\varphi'\,\uy)\bigr]$. Entonces
+\[
+  \vc{R}=\vc{r}-\vc{r}\,'=(z-r'\cos\theta')\,\uz-r'\sen\theta'(\cos\varphi'\,\ux+\sen\varphi'\,\uy),\qquad
+  R=\bigl(z^{2}+r'^{2}-2zr'\cos\theta'\bigr)^{1/2}.
+\]
+La densidad es constante, $\rho=Q/(\tfrac43\pi a^{3})$, y $\dVp=r'^{2}\sen\theta'\,\dif r'\,\dif\theta'\,\dif\varphi'$.
+
+\textbf{Paso 2: la simetría anula dos componentes.} En la integral de $\vE$, las componentes $x$ e $y$ llevan $\cos\varphi'$ y $\sen\varphi'$, cuya integral sobre $[0,2\pi]$ es cero. Solo
+sobrevive la componente $z$:
+\[
+  E_z=\frac{\rho}{4\pi\eo}\int_{0}^{a}\!\!\int_{0}^{\pi}\!\!\int_{0}^{2\pi}\frac{(z-r'\cos\theta')\,r'^{2}\sen\theta'}{\bigl(z^{2}+r'^{2}-2zr'\cos\theta'\bigr)^{3/2}}\,\dif\varphi'\,\dif\theta'\,\dif r'
+  =\frac{\rho}{2\eo}\int_{0}^{a}r'^{2}\,I(r')\,\dif r',
+\]
+donde hemos integrado en $\varphi'$ (que da $2\pi$) y llamado
+\[
+  I(r')=\int_{0}^{\pi}\frac{(z-r'\cos\theta')\,\sen\theta'}{\bigl(z^{2}+r'^{2}-2zr'\cos\theta'\bigr)^{3/2}}\,\dif\theta' .
+\]
+
+\textbf{Paso 3: la integral angular.} Con el cambio $\mu=\cos\theta'$ ($\dif\mu=-\sen\theta'\,\dif\theta'$) la integral se hace racional. Es más cómodo todavía tomar como variable la propia distancia
+$R$: de $R^{2}=z^{2}+r'^{2}-2zr'\mu$ se tiene $\dif\mu=-R\,\dif R/(zr')$ y $z-r'\mu=(z^{2}-r'^{2}+R^{2})/(2z)$, de modo que
+\[
+  I(r')=\int_{|z-r'|}^{z+r'}\frac{z^{2}-r'^{2}+R^{2}}{2z\,R^{3}}\,\frac{R\,\dif R}{zr'}
+  =\frac{1}{2z^{2}r'}\Bigl[-\frac{z^{2}-r'^{2}}{R}+R\Bigr]_{|z-r'|}^{z+r'} .
+\]
+(Es la integral $\int\frac{ax-b}{(a^{2}+b^{2}-2abx)^{3/2}}\dif x$ de la hoja de problemas.) Como el punto campo es exterior, $z>a\ge r'$, y por tanto $|z-r'|=z-r'$:
+\[
+  I(r')=\frac{1}{2z^{2}r'}\Bigl[\bigl(-(z-r')+(z+r')\bigr)-\bigl(-(z+r')+(z-r')\bigr)\Bigr]=\frac{1}{2z^{2}r'}\,(2r'+2r')=\frac{2}{z^{2}} .
+\]
+
+\textbf{Paso 4: la integral radial.} Queda
+\[
+  E_z=\frac{\rho}{2\eo}\int_{0}^{a}r'^{2}\,\frac{2}{z^{2}}\,\dif r'=\frac{\rho}{\eo z^{2}}\,\frac{a^{3}}{3}=\frac{\rho\,\frac43\pi a^{3}}{4\pi\eo z^{2}}=\frac{Q}{4\pi\eo z^{2}},
+\]
+y, restituyendo el vector,
+\[
+  \boxed{\;\vE(\vc{r})=\frac{Q}{4\pi\eo\,r^{2}}\,\ur\qquad(r>a)\;}
+\]
+\end{resolucion}
+
+\begin{observacion}[Interpretación]
+El campo exterior de una esfera uniforme es \emph{exactamente} el de una carga puntual $Q$ situada en su centro, un resultado análogo al teorema de Newton para la gravedad. Lo notable es
+que la cancelación se produce a pesar de que los elementos más cercanos al punto campo pesan más: el factor $1/R^{2}$ hace que la contribución de los cercanos y de los lejanos se compense exactamente,
+y esto solo ocurre para el exponente 2 (\cref{prop:cavendish}). Con la ley de Gauss (\cref{sem:esfera}) se llega al mismo resultado en tres líneas, pero aquí hemos comprobado que ambos métodos coinciden.
+\end{observacion}
+
+\input{figuras/fig_sem_esfera}
+
+% =========================================================================
+\subsection{Problema 1.2. Esfera uniformemente cargada: campo y potencial en todo el espacio}\label{sem:esfera}
+% =========================================================================
+\begin{ejercicio}[Campo y potencial de una esfera maciza]\label{ejer:esfera}
+Calcular mediante el teorema de Gauss el campo y el potencial eléctrico para una distribución uniforme de carga $Q$ en una esfera de radio $a$ en todos los puntos del espacio.
+Representar gráficamente cómo varían el potencial y el campo en función de la distancia al origen. Comprobar que se cumplen las ecuaciones de Maxwell estudiadas.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} La distribución es esféricamente simétrica, así que $\vE=E(r)\,\ur$ (puramente radial y dependiente solo de la distancia al centro). Elegimos como superficie gaussiana
+una esfera $S_{\mathrm{G}}$ concéntrica de radio $r$ (\cref{fig:sem-gauss-esfera}a). En ella $E(r)$ es constante y $\vE\parallel\dS=\dsc\,\ur$, de modo que
+\[
+  \oiint_{S_{\mathrm{G}}}\vE\cdot\dS=E(r)\oiint_{S_{\mathrm{G}}}\dsc=4\pi r^{2}\,E(r)=\frac{\Qenc}{\eo}.
+\]
+Distinguimos dos regiones, según la superficie gaussiana encierre solo una parte de la carga o toda ella. La densidad es $\rho=Q/(\frac43\pi a^{3})=3Q/(4\pi a^{3})$.
+
+\textbf{Campo, caso I: $r<a$.} La esfera de radio $r$ encierra solo una parte, $\Qenc=\rho\,\tfrac43\pi r^{3}$. Entonces $4\pi r^{2}E=\frac{1}{\eo}\rho\frac43\pi r^{3}$ y
+\[
+  E(r)=\frac{\rho\,r}{3\eo}=\frac{Q\,r}{4\pi\eo\,a^{3}}\qquad(r<a).
+\]
+\textbf{Campo, caso II: $r\ge a$.} Ahora $\Qenc=Q$, y $E(r)=Q/(4\pi\eo r^{2})$. En conjunto,
+\[
+  \boxed{\;\vE(\vc{r})=\begin{cases}\dfrac{Q\,r}{4\pi\eo a^{3}}\,\ur,&0\le r<a,\\[8pt]\dfrac{Q}{4\pi\eo r^{2}}\,\ur,&r\ge a.\end{cases}\;}
+\]
+Ambas expresiones coinciden en $r=a$: $E(a)=Q/(4\pi\eo a^{2})$. Es lo esperable, porque no hay carga superficial (\cref{cor:contorno-E}).
+
+\textbf{Potencial.} Integramos el campo a lo largo de una trayectoria radial, $\dl=\dif r\,\ur$, de modo que $\vE\cdot\dl=E(r)\,\dif r$. Con la referencia en el infinito, $\phi(\infty)=0$,
+para $r\ge a$:
+\[
+  \phi(r)=-\int_{\infty}^{r}\frac{Q}{4\pi\eo r'^{2}}\,\dif r'=\frac{Q}{4\pi\eo}\Bigl[\frac{1}{r'}\Bigr]_{\infty}^{r}=\frac{Q}{4\pi\eo\,r},\qquad\text{en particular}\quad\phi(a)=\frac{Q}{4\pi\eo a}.
+\]
+Para $r<a$ \emph{no podemos} volver a tomar el infinito como origen de la integral, porque la expresión del campo cambia en $r=a$. Partimos del valor ya conocido $\phi(a)$:
+\[
+  \phi(r)-\phi(a)=-\int_{a}^{r}\frac{\rho\,r'}{3\eo}\,\dif r'=-\frac{\rho}{6\eo}\,(r^{2}-a^{2})
+  \;\Longrightarrow\;
+  \phi(r)=\frac{Q}{4\pi\eo a}+\frac{Q}{8\pi\eo a^{3}}(a^{2}-r^{2}),
+\]
+usando $\rho/6\eo=Q/(8\pi\eo a^{3})$. Agrupando términos,
+\[
+  \boxed{\;\phi(r)=\begin{cases}\dfrac{Q}{8\pi\eo a}\Bigl(3-\dfrac{r^{2}}{a^{2}}\Bigr),&0\le r\le a,\\[8pt]\dfrac{Q}{4\pi\eo\,r},&r\ge a.\end{cases}\;}
+\]
+Comprobación de continuidad: en $r=a$, $\frac{Q}{8\pi\eo a}(3-1)=\frac{Q}{4\pi\eo a}$, igual que la expresión exterior. Además, $\phi(0)=3Q/(8\pi\eo a)$, así que el potencial es máximo en el centro (con $Q>0$) mientras que
+el campo allí es nulo, $\vE(0)=\vc{0}$.
+
+\textbf{Gráficas} (\cref{fig:sem-gauss-esfera}b,c). El campo crece linealmente hasta un máximo en la superficie y luego cae como $1/r^{2}$; el potencial decrece parabólicamente en el interior y como $1/r$ fuera. No hay que confundir la dependencia
+$\phi\propto1/r$ del exterior con la $E\propto1/r^{2}$ del campo.
+\end{resolucion}
+
+\textbf{Tarea: comprobación de las ecuaciones de Maxwell.} Verifiquemos que los resultados anteriores son compatibles con $\nab\cdot\vE=\rho/\eo$, $\nab\times\vE=\vc{0}$ y $\Lap\phi=-\rho/\eo$.
+
+\begin{resolucion}[Comprobación]
+\textbf{1) Divergencia} (primera ecuación de Maxwell). Para un campo radial $\vE=E_r(r)\,\ur$, en esféricas $\nab\cdot\vE=\frac{1}{r^{2}}\frac{\dif}{\dif r}(r^{2}E_r)$.
+\begin{itemize}
+  \item \emph{Interior} ($r<a$): $r^{2}E_r=\frac{Q}{4\pi\eo a^{3}}\,r^{3}$, luego $\nab\cdot\vE=\frac{1}{r^{2}}\frac{3Q\,r^{2}}{4\pi\eo a^{3}}=\frac{3Q}{4\pi\eo a^{3}}=\frac{\rho}{\eo}>0$ (hay fuentes, el campo diverge).
+  \item \emph{Exterior} ($r>a$): $r^{2}E_r=Q/4\pi\eo=\text{cte}$, luego $\nab\cdot\vE=0=\rho/\eo$, ya que fuera de la esfera no hay carga.
+\end{itemize}
+En $r=a$ debemos tratar aparte la posible contribución superficial; aquí no existe carga superficial ($\sigma\to0$), por lo que tanto $\vE$ como $\phi$ son continuos.
+
+\textbf{2) Rotacional.} Un campo de la forma $\vE=E_r(r)\,\ur$ tiene $E_\theta=E_\varphi=0$ y $E_r$ solo depende de $r$ ($\partial_\theta E_r=\partial_\varphi E_r=0$); todas las componentes del rotacional en esféricas se anulan,
+$\nab\times\vE=\vc{0}$ para todo $r$. Igualmente, $\vE=-\nab\phi$ implica $\nab\times\vE=-\nab\times(\nab\phi)=\vc{0}$.
+
+\textbf{3) Ecuación de Poisson.} Como $\phi=\phi(r)$, $\Lap\phi=\frac{1}{r^{2}}\frac{\dif}{\dif r}\bigl(r^{2}\frac{\dif\phi}{\dif r}\bigr)$.
+\begin{itemize}
+  \item \emph{Interior}: $\phi'=-\frac{Q\,r}{4\pi\eo a^{3}}$, $r^{2}\phi'=-\frac{Q\,r^{3}}{4\pi\eo a^{3}}$, y $\Lap\phi=\frac{1}{r^{2}}\bigl(-\frac{3Q\,r^{2}}{4\pi\eo a^{3}}\bigr)=-\frac{3Q}{4\pi\eo a^{3}}=-\frac{\rho}{\eo}$.
+  \item \emph{Exterior}: $\phi'=-\frac{Q}{4\pi\eo r^{2}}$, $r^{2}\phi'=\text{cte}$, luego $\Lap\phi=0$: se cumple la ecuación de Laplace, como corresponde a una región sin carga.
+\end{itemize}
+\end{resolucion}
+
+\input{figuras/fig_sem_gauss_esfera}
+
+% =========================================================================
+\subsection{Problema 1.3. Hilo infinito: campo y potencial por integración directa}\label{sem:hilo}
+% =========================================================================
+\begin{ejercicio}[Hilo infinito, integración directa]\label{ejer:hilo}
+Calcular por integración directa el campo y el potencial creados por un hilo infinito con una densidad lineal de carga uniforme $\lambda$.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Colocamos el hilo sobre el eje $z$ y usamos coordenadas cilíndricas. Por la simetría de traslación a lo largo del hilo y de rotación en torno a él, el campo solo puede depender de la distancia $r$ al hilo y
+no puede tener componente en $z$: para cada elemento en $z'$ hay otro simétrico en $-z'$ cuya componente axial lo cancela (\cref{fig:sem-hilo}a).
+
+\textbf{Campo.} El punto campo es $\vc{r}=r\,\urho$ y el fuente $\vc{r}\,'=z'\,\uz$, con $\dif q'=\lambda\,\dif z'$ ($\dlp=\dif z'$). Entonces
+$\vc{R}=r\,\urho-z'\,\uz$, $R=(r^{2}+z'^{2})^{1/2}$ y, con la \cref{eq:campo-sup-lin},
+\[
+  \vE(\vc{r})=\frac{\lambda}{4\pi\eo}\int_{-\infty}^{\infty}\frac{r\,\urho-z'\,\uz}{(r^{2}+z'^{2})^{3/2}}\,\dif z' .
+\]
+La componente $z$ contiene el integrando impar $z'/(r^{2}+z'^{2})^{3/2}$ sobre un intervalo simétrico: es nula (\emph{la componente $z$ se anula por la simetría del problema}). Para la radial usamos la primitiva
+$\int\frac{\dif z'}{(r^{2}+z'^{2})^{3/2}}=\frac{z'}{r^{2}\sqrt{r^{2}+z'^{2}}}$ (se comprueba derivando; es el caso $\int\frac{\dif x}{(x^{2}+c^{2})^{3/2}}=\frac{x}{c^{2}\sqrt{x^{2}+c^{2}}}$):
+\[
+  E_r=\frac{\lambda\,r}{4\pi\eo}\Bigl[\frac{z'}{r^{2}\sqrt{r^{2}+z'^{2}}}\Bigr]_{-\infty}^{\infty}=\frac{\lambda}{4\pi\eo\,r}\bigl[1-(-1)\bigr]=\frac{\lambda}{2\pi\eo\,r},
+\]
+pues $z'/\sqrt{r^{2}+z'^{2}}\to\pm1$ cuando $z'\to\pm\infty$. Por tanto
+\[
+  \boxed{\;\vE(\vc{r})=\frac{\lambda}{2\pi\eo\,r}\,\urho\;}
+\]
+
+\textbf{Potencial.} Como $\vE=E_r(r)\,\urho$ y $\vE=-\nab\phi$, basta integrar la componente radial. Observemos que \emph{no podemos} tomar $\phi(\infty)=0$: una carga que se extiende hasta el infinito hace divergir la integral
+($\int^{\infty}E_r\dif r\propto\ln r\to\infty$). Tomamos entonces una referencia a distancia $r_0$, $\phi(r_0)=0$:
+\[
+  \phi(r)=-\int_{r_0}^{r}\frac{\lambda}{2\pi\eo\,r'}\,\dif r'=-\frac{\lambda}{2\pi\eo}\ln\frac{r}{r_0}
+  \;\Longrightarrow\;\boxed{\;\phi(r)=\frac{\lambda}{2\pi\eo}\,\ln\frac{r_0}{r}\;}
+\]
+El potencial decrece logarítmicamente con la distancia al hilo (positivo para $r<r_0$ si $\lambda>0$).
+\end{resolucion}
+
+\begin{observacion}[Hilo finito y el límite de hilo infinito]\label{obs:hilo-finito}
+Para un hilo \emph{finito} de longitud $L$, sobre $-L/2\le z'\le L/2$, la misma integral, con $\vc{R}=r\,\urho+(z-z')\,\uz$, da (se sustituye $u=z-z'$ y se usa la primitiva anterior y $\int\frac{u\,\dif u}{(r^{2}+u^{2})^{3/2}}=-\frac{1}{\sqrt{r^{2}+u^{2}}}$)
+\begin{align*}
+  \vE_{\mathrm{ex}}&=\frac{\lambda}{4\pi\eo\,r}\left[\frac{z+L/2}{\sqrt{r^{2}+(z+L/2)^{2}}}-\frac{z-L/2}{\sqrt{r^{2}+(z-L/2)^{2}}}\right]\urho\\
+  &\quad-\frac{\lambda}{4\pi\eo}\left[\frac{1}{\sqrt{r^{2}+(z+L/2)^{2}}}-\frac{1}{\sqrt{r^{2}+(z-L/2)^{2}}}\right]\uz .
+\end{align*}
+Si $L\to\infty$, el corchete radial tiende a $2$ y el axial a $0$, y se recupera la aproximación de hilo infinito, $\vE_{\mathrm{ap}}=\frac{\lambda}{2\pi\eo r}\,\urho$ (en el esquema de la hoja del curso aparece $4\pi$ en el denominador;
+el factor correcto es $2\pi$, porque el corchete vale $2$). La \cref{fig:sem-hilo}b,c muestra qué tan buena es esa aproximación para un hilo finito: cerca del hilo y lejos de sus extremos el error es pequeño, y crece a medida que nos
+alejamos radialmente de él, y también al acercarnos a la altura de los extremos.
+\end{observacion}
+
+\input{figuras/fig_sem_hilo}
+
+% =========================================================================
+\subsection{Problema 1.4. Hilo infinito: campo por la ley de Gauss}\label{sem:hilo-gauss}
+% =========================================================================
+\begin{ejercicio}[Hilo infinito, ley de Gauss]\label{ejer:hilo-gauss}
+Calcular mediante el teorema de Gauss el campo creado por un hilo infinito con una densidad lineal de carga uniforme $\lambda$.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Simetría cilíndrica: $\vE=E(r)\,\urho$ (la dirección radial cilíndrica, que en la hoja de problemas se escribe $\uh{r}$). La superficie gaussiana es un cilindro coaxial de radio $r$ y longitud $\ell$
+(\cref{fig:sem-gauss-cil}), formado por la superficie lateral $S_L$ y dos tapas.
+
+\textbf{Flujo.} En las tapas $\vE\perp\dS$ (el campo es radial y la normal de la tapa es axial), luego su flujo es cero. En la superficie lateral $\vE\parallel\dS$ y $E$ es constante:
+\[
+  \oiint_{S}\vE\cdot\dS=\iint_{S_L}\vE\cdot\dS+\iint_{\text{tapas}}\vE\cdot\dS=E\iint_{S_L}\dsc+0=E\cdot2\pi r\ell .
+\]
+La carga encerrada es $\Qenc=\lambda\,\ell$. Por la ley de Gauss,
+\[
+  2\pi r\ell\,E=\frac{\lambda\,\ell}{\eo}\quad\Longrightarrow\quad E(r)=\frac{\lambda}{2\pi\eo\,r}.
+\]
+Como sabemos que el campo tiene dirección radial, podemos escribirlo en forma vectorial:
+\[
+  \boxed{\;\vE(\vc{r})=\frac{\lambda}{2\pi\eo\,r}\,\urho\;}
+\]
+\end{resolucion}
+
+\begin{observacion}[Comparación]
+Coincide con el resultado por integración directa (\cref{sem:hilo}), donde costó varios pasos. La longitud $\ell$ de la superficie gaussiana se cancela, como debe: ninguna propiedad del campo puede depender de una elección arbitraria.
+\end{observacion}
+
+\input{figuras/fig_sem_gauss_cil}
+
+% =========================================================================
+\subsection{Problema 1.5. Plano infinito: campo por integración directa}\label{sem:plano}
+% =========================================================================
+\begin{ejercicio}[Plano infinito, integración directa]\label{ejer:plano}
+Calcular por integración directa el campo $\vE$ creado por una superficie plana infinitamente grande con una densidad superficial de carga uniforme $\sigma$.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Situamos el plano en $z'=0$. Como la distribución es invariante frente a traslaciones en $x$ e $y$, el campo solo puede depender de $z$, y podemos tomar el punto campo sobre el eje $z$: $\vc{r}=z\,\uz$
+(\cref{fig:sem-plano}a). Por la simetría especular respecto del plano, el campo en $-z$ es el reflejado del campo en $+z$.
+
+\textbf{Geometría.} El elemento de carga está en $\vc{r}\,'=x'\,\ux+y'\,\uy$, con $\dif q'=\sigma\,\dSp$. Para aprovechar la simetría pasamos a coordenadas polares en el plano (usamos $s'$ y no $\rho$, para no
+confundirlo con la densidad volúmica de carga): $x'=s'\cos\varphi'$, $y'=s'\sen\varphi'$, $\dSp=s'\,\dif s'\,\dif\varphi'$, $s'\in[0,\infty)$, $\varphi'\in[0,2\pi)$. Entonces
+\[
+  \vc{R}=\vc{r}-\vc{r}\,'=-s'\cos\varphi'\,\ux-s'\sen\varphi'\,\uy+z\,\uz,\qquad R=\sqrt{s'^{2}+z^{2}} .
+\]
+\textbf{Integral.} Con la \cref{eq:campo-sup-lin},
+\[
+  \vE(z)=\frac{\sigma}{4\pi\eo}\int_{0}^{2\pi}\!\!\int_{0}^{\infty}\frac{-s'\cos\varphi'\,\ux-s'\sen\varphi'\,\uy+z\,\uz}{(s'^{2}+z^{2})^{3/2}}\;s'\,\dif s'\,\dif\varphi' .
+\]
+Las componentes $x$ e $y$ contienen $\cos\varphi'$ y $\sen\varphi'$ y su integral en $\varphi'$ sobre un período completo es nula: $E_x=E_y=0$ (traslación simétrica en $x$ e $y$). Solo queda
+\[
+  \vE(z)=\frac{\sigma z}{4\pi\eo}\,2\pi\int_{0}^{\infty}\frac{s'\,\dif s'}{(s'^{2}+z^{2})^{3/2}}\,\uz=\frac{\sigma z}{2\eo}\Bigl[-\frac{1}{\sqrt{s'^{2}+z^{2}}}\Bigr]_{0}^{\infty}\uz=\frac{\sigma z}{2\eo}\,\frac{1}{\sqrt{z^{2}}}\,\uz,
+\]
+y como $\sqrt{z^{2}}=\lvert z\rvert$,
+\[
+  \boxed{\;\vE(\vc{r})=\frac{\sigma}{2\eo}\,\frac{z}{\lvert z\rvert}\,\uz=\frac{\sigma}{2\eo}\,\sgn(z)\,\uz\;}
+\]
+\end{resolucion}
+
+\begin{observacion}[Un campo uniforme a cada lado, y un salto]
+El campo no depende de la distancia al plano: a cada lado es uniforme, de módulo $\sigma/2\eo$, saliente si $\sigma>0$. (Al alejarnos, cada elemento del plano crea menos campo, pero son más los elementos que contribuyen con una componente axial apreciable; la compensación es exacta.) La densidad superficial de carga implica una discontinuidad de $\sigma/2\eo-(-\sigma/2\eo)=\sigma/\eo$ en $z=0$, exactamente la que predicen las condiciones de contorno (\cref{cor:contorno-E}).
+\end{observacion}
+
+% =========================================================================
+\subsection{Problema 1.6. Plano infinito: campo por la ley de Gauss}\label{sem:plano-gauss}
+% =========================================================================
+\begin{ejercicio}[Plano infinito, ley de Gauss]\label{ejer:plano-gauss}
+Calcular mediante el teorema de Gauss el campo creado por una superficie plana infinitamente grande con una densidad superficial de carga uniforme $\sigma$.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Simetría plana (especular): $\vE=E_z(z)\,\uz$, y $E_z(-z)=-E_z(z)$. La superficie gaussiana es un cilindro recto de radio $R_c$ con eje $z$, cuyas dos tapas, de área $S_{\mathrm{tapa}}=\pi R_c^{2}$, están a ambos lados del plano y a la misma
+distancia $\lvert z\rvert$ (\cref{fig:sem-plano}b).
+
+\textbf{Flujo.} Sobre la superficie lateral, $\vE\perp\dS$ y no hay flujo; en las tapas, $\vE\parallel\dS$ y $E$ es el mismo:
+\[
+  \flujo=\iint_{S_L}\vE\cdot\dS+\iint_{\text{tapas}}\vE\cdot\dS=0+E\,(2S_{\mathrm{tapa}}).
+\]
+La carga encerrada es la del disco del plano interior al cilindro: $\Qenc=\sigma\,\pi R_c^{2}=\sigma S_{\mathrm{tapa}}$. Entonces $2E\,S_{\mathrm{tapa}}=\sigma S_{\mathrm{tapa}}/\eo$, y
+\[
+  \boxed{\;\vE(\vc{r})=\frac{\sigma}{2\eo}\,\frac{z}{\lvert z\rvert}\,\uz\;}
+\]
+igual que en el problema anterior. El área de las tapas se simplifica, y $E$ no depende de $z$.
+\end{resolucion}
+
+\input{figuras/fig_sem_plano}
+
+% =========================================================================
+\subsection{Problema 1.7. Anillo, disco y plano: campo y potencial sobre el eje}\label{sem:anillo}
+% =========================================================================
+\begin{ejercicio}[Del anillo al plano]\label{ejer:anillo}
+Calcular el campo y el potencial en el eje de simetría perpendicular a un anillo de radio $a$ con una carga total $Q$ uniformemente distribuida. Utilizar dicho resultado para calcular el campo y el potencial para un disco de radio $a$
+y un plano infinito uniformemente cargados.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} El anillo es una distribución lineal; el disco es una colección de anillos concéntricos y el plano es un disco con $a\to\infty$. Así, solo hay que \emph{integrar} una vez el resultado del anillo.
+
+\textbf{Anillo.} Con el anillo en el plano $z'=0$ y el punto campo en $\vc{r}=z\,\uz$ (\cref{fig:sem-anillo}a), todos los puntos del anillo están a la misma distancia $R=\sqrt{a^{2}+z^{2}}$ del punto campo. Con $\lambda=Q/2\pi a$ y $\dlp=a\,\dif\varphi'$,
+\[
+  \phi(z)=\frac{1}{4\pi\eo}\int\frac{\lambda\,\dlp}{R}=\frac{1}{4\pi\eo}\,\frac{Q}{\sqrt{a^{2}+z^{2}}},\qquad\boxed{\;\phi_{\mathrm{anillo}}(z)=\frac{Q}{4\pi\eo\,(a^{2}+z^{2})^{1/2}}\;}
+\]
+(el potencial es mucho más sencillo que el campo, pues $R$ es constante y no hay que descomponer vectores). Para el campo, el elemento $\dif q'$ crea un $\dif\vE$ con una componente axial $\dif E_z=\frac{\dif q'}{4\pi\eo R^{2}}\cos\alpha=\frac{\dif q'}{4\pi\eo R^{2}}\frac{z}{R}$
+y otra perpendicular al eje que se anula al sumar sobre elementos diametralmente opuestos. Por tanto
+\[
+  \boxed{\;\vE_{\mathrm{anillo}}(z)=\frac{Q\,z}{4\pi\eo\,(a^{2}+z^{2})^{3/2}}\,\uz\;}
+\]
+Coincide con $-\partial_z\phi$ \emph{sobre el eje}: $-\frac{\dif}{\dif z}\frac{Q}{4\pi\eo}(a^{2}+z^{2})^{-1/2}=\frac{Q}{4\pi\eo}\frac{z}{(a^{2}+z^{2})^{3/2}}$ (derivar $\phi$ respecto de $z$ solo da la componente axial, y es lo único que hay en el eje).
+
+\textbf{Disco.} Un disco de radio $a$ con densidad $\sigma$ se descompone en anillos de radio $r'\in[0,a]$ y anchura $\dif r'$, con carga $\dif q'=\sigma\,2\pi r'\,\dif r'$ (\cref{fig:sem-anillo}b). Sumando los potenciales y los campos de los anillos:
+\[
+  \phi_{\mathrm{disco}}(z)=\int_{0}^{a}\frac{\sigma\,2\pi r'\,\dif r'}{4\pi\eo\sqrt{r'^{2}+z^{2}}}=\frac{\sigma}{2\eo}\Bigl[\sqrt{r'^{2}+z^{2}}\Bigr]_{0}^{a}=\frac{\sigma}{2\eo}\Bigl(\sqrt{a^{2}+z^{2}}-\lvert z\rvert\Bigr),
+\]
+\[
+  \vE_{\mathrm{disco}}(z)=\int_{0}^{a}\frac{\sigma\,2\pi r'\,z\,\dif r'}{4\pi\eo\,(r'^{2}+z^{2})^{3/2}}\,\uz=\frac{\sigma z}{2\eo}\Bigl[-\frac{1}{\sqrt{r'^{2}+z^{2}}}\Bigr]_{0}^{a}\uz
+  =\boxed{\;\frac{\sigma}{2\eo}\Bigl(\frac{z}{\lvert z\rvert}-\frac{z}{\sqrt{a^{2}+z^{2}}}\Bigr)\uz\;}
+\]
+(en el potencial, $\sqrt{z^{2}}=\lvert z\rvert$ en el extremo inferior).
+
+\textbf{Plano infinito.} Es el límite $a\to\infty$. El campo del disco tiende a
+\[
+  \boxed{\;\vE_{\mathrm{plano}}(z)=\frac{\sigma}{2\eo}\,\frac{z}{\lvert z\rvert}\,\uz\;}
+\]
+(el término $z/\sqrt{a^{2}+z^{2}}\to0$), que es el resultado de los problemas 1.5 y 1.6. En cambio, el potencial \emph{diverge}: $\phi_{\mathrm{disco}}=\frac{\sigma}{2\eo}(a-\lvert z\rvert+O(1/a))$, con una constante $\sigma a/2\eo\to\infty$ independiente de $z$. Como el potencial
+está definido salvo una constante, la restamos (equivale a tomar $\phi(0)=0$ como referencia) y queda
+\[
+  \boxed{\;\phi_{\mathrm{plano}}(z)=-\frac{\sigma}{2\eo}\,\lvert z\rvert\;}\qquad\Bigl(\text{y se comprueba que }-\frac{\dif\phi}{\dif z}=\frac{\sigma}{2\eo}\,\frac{z}{\lvert z\rvert}\Bigr).
+\]
+\end{resolucion}
+
+\begin{observacion}[Interpretación y casos límite]
+\begin{enumerate}[label=(\alph*)]
+  \item \emph{Lejos del anillo o del disco}, $\lvert z\rvert\gg a$: $\vE_{\mathrm{anillo}}\to\frac{Q}{4\pi\eo z^{2}}\,\uz$, y para el disco (con $Q=\sigma\pi a^{2}$) el desarrollo $\frac{z}{\lvert z\rvert}-\frac{z}{\sqrt{a^{2}+z^{2}}}\simeq\frac{a^{2}}{2z^{2}}$ da
+        también $\frac{Q}{4\pi\eo z^{2}}$: visto desde lejos, todo objeto cargado es una carga puntual.
+  \item \emph{El máximo del anillo.} $E_{\mathrm{anillo}}$ se anula en $z=0$ (en el centro las contribuciones opuestas se cancelan) y en el infinito; tiene un máximo en $\frac{\dif}{\dif z}\bigl[z(a^{2}+z^{2})^{-3/2}\bigr]=0\Leftrightarrow z=a/\sqrt2$,
+        de valor $\frac{Q}{4\pi\eo a^{2}}\frac{2}{3\sqrt3}$ (\cref{fig:sem-anillo}).
+  \item \emph{El salto del disco.} $\vE_{\mathrm{disco}}$ es discontinuo en $z=0$ para cualquier radio $a$, con salto $\frac{\sigma}{2\eo}-\bigl(-\frac{\sigma}{2\eo}\bigr)=\frac{\sigma}{\eo}$ (la ampliación de la \cref{fig:sem-anillo}c): es la condición de contorno
+        de \cref{eq:contorno-E}, que solo depende de la densidad local de carga y no del tamaño del disco. En cambio, el potencial es continuo.
+\end{enumerate}
+\end{observacion}
+
+\input{figuras/fig_sem_anillo}
+
+% =========================================================================
+\subsection{Problema 1.8. Lámina con densidad volúmica de carga}\label{sem:lamina}
+% =========================================================================
+\begin{ejercicio}[Lámina cargada en volumen]\label{ejer:lamina}
+Calcular el campo asociado a una distribución volúmica de carga uniformemente distribuida (densidad $\rho$) entre los dos planos infinitos $z=+a/2$ y $z=-a/2$.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Es una distribución con simetría plana, aunque no infinitamente delgada: $\vE=E_z(z)\,\uz$ con $E_z(-z)=-E_z(z)$. La integración directa sería muy trabajosa, pero la ley de Gauss es inmediata. Tomamos un cilindro recto, de bases de área $A$ paralelas a la lámina y
+simétricas respecto de ella, de modo que sus tapas están en $\pm z$ (\cref{fig:sem-lamina}). Sobre la superficie lateral $\vE\perp\dS$, y el flujo es $2E\,A$ en ambos casos.
+
+\textbf{Fuera, $\lvert z\rvert>a/2$.} El cilindro atraviesa toda la lámina y encierra $\Qenc=\rho\,A\,a$:
+\[
+  2E\,A=\frac{1}{\eo}\rho A a\quad\Longrightarrow\quad\boxed{\;\vE(\vc{r})=\frac{\rho\,a}{2\eo}\,\frac{z}{\lvert z\rvert}\,\uz\qquad\bigl(\lvert z\rvert>a/2\bigr)\;}
+\]
+con $\rho a$ la carga por unidad de superficie: igual que un plano con $\sigma=\rho a$.
+
+\textbf{Dentro, $\lvert z\rvert<a/2$.} Ahora el cilindro solo encierra un espesor $2\lvert z\rvert$ de lámina: $\Qenc=\rho\,A\cdot2z$ (tomando $z>0$; por simetría se obtiene lo mismo para $z<0$ con el signo adecuado). Entonces $2E\,A=\frac{1}{\eo}\,2z\,\rho A$ y
+\[
+  \boxed{\;\vE(\vc{r})=\frac{\rho\,z}{\eo}\,\uz\qquad\bigl(\lvert z\rvert<a/2\bigr)\;}
+\]
+\end{resolucion}
+
+\begin{observacion}[Interpretación]
+El campo \emph{crece linealmente} con $z$ dentro de la lámina (dependencia lineal, $\vE\propto z$) hasta alcanzar $\rho a/2\eo$ en las caras ($z=\pm a/2$), y es constante fuera (\cref{fig:sem-lamina}c). Con una densidad volúmica de carga \emph{el campo es continuo}: en $z=\pm a/2$ las dos expresiones dan $\rho a/2\eo$,
+porque no hay carga superficial, de acuerdo con las condiciones de contorno. Si adelgazamos la lámina con $\rho\to\infty$ manteniendo $\sigma=\rho a$ fijo, la rampa interior se hace infinitamente empinada y se recupera el plano de los problemas 1.5--1.6, con su salto $\sigma/\eo$.
+\end{observacion}
+
+\input{figuras/fig_sem_lamina}
+
+% =========================================================================
+\subsection{Problema 1.9. Superficie esférica cargada}\label{sem:cascara}
+% =========================================================================
+\begin{ejercicio}[Cáscara esférica]\label{ejer:cascara}
+Calcular el campo y el potencial creados por una superficie esférica de radio $a$ con una carga total $Q$ uniformemente distribuida. Representar gráficamente cómo varían el campo y el potencial en función de la distancia al origen.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Es el mismo problema que el 1.2, pero con la carga concentrada en la superficie; la simetría esférica sigue permitiendo $\vE=E(r)\,\ur$ y una gaussiana esférica de radio $r$: $4\pi r^{2}E=\Qenc/\eo$.
+
+\textbf{Campo.} Si $r<a$, la gaussiana no encierra carga ($\Qenc=0$): $\vE=\vc{0}$. Si $r>a$, encierra toda la carga: $E=Q/4\pi\eo r^{2}$:
+\[
+  \boxed{\;\vE(\vc{r})=\begin{cases}\vc{0},&r<a,\\[4pt]\dfrac{Q}{4\pi\eo r^{2}}\,\ur,&r>a.\end{cases}\;}
+\]
+\textbf{Potencial.} Con $\phi(\infty)=0$, fuera es $\phi=Q/4\pi\eo r$ y en $r=a$ vale $Q/4\pi\eo a$. Dentro el campo es nulo, luego $\phi(r)-\phi(a)=-\int_a^r0\,\dif r'=0$ y el potencial es \emph{constante}:
+\[
+  \boxed{\;\phi(r)=\begin{cases}\dfrac{Q}{4\pi\eo\,a},&r\le a,\\[6pt]\dfrac{Q}{4\pi\eo\,r},&r\ge a.\end{cases}\;}
+\]
+\end{resolucion}
+
+\begin{observacion}[Interpretación y condiciones de contorno]
+Dentro de la cáscara no hay campo: es la propiedad en que se basa el experimento de Cavendish (\cref{prop:cavendish}) y el análogo del teorema de Newton de las cáscaras. Aunque el interior esté a un potencial no nulo, no hay fuerza (el potencial es constante, su gradiente es nulo).
+Al cruzar la superficie, el campo \emph{salta} de $0$ a $Q/4\pi\eo a^{2}=\sigma/\eo$, con $\sigma=Q/4\pi a^{2}$, exactamente lo que dice el \cref{cor:contorno-E}; el potencial, en cambio, es continuo (\cref{cor:contorno-phi}), pero su derivada no: se «dobla» en $r=a$ (\cref{fig:sem-cascara}).
+Observemos la diferencia con la esfera maciza (\cref{sem:esfera}), donde $E$ y $\phi$ eran continuos.
+\end{observacion}
+
+\input{figuras/fig_sem_cascara}
+
+% =========================================================================
+\subsection{Problema 1.10. Cilindro infinito con densidad volúmica de carga}\label{sem:cilindro}
+% =========================================================================
+\begin{ejercicio}[Cilindro cargado]\label{ejer:cilindro}
+Hallar el campo y el potencial asociados a una distribución uniforme de carga con densidad $\rho$ en un cilindro infinitamente largo de radio $a$. Calcular la diferencia de potencial entre el eje ($r=0$) y el borde ($r=a$) del cilindro.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Simetría cilíndrica, como en el hilo, pero con la carga repartida por el volumen. Gaussiana: cilindro coaxial de radio $r$ y altura $h$ (\cref{fig:sem-cilindro}a). Flujo: solo la superficie lateral, $2\pi r h\,E$.
+
+\textbf{Campo.} Exterior ($r>a$): $\Qenc=\rho\,\pi a^{2}h$, luego $2\pi rh\,E=\rho\pi a^{2}h/\eo$. Interior ($r<a$): $\Qenc=\rho\,\pi r^{2}h$ y $2\pi rh\,E=\rho\pi r^{2}h/\eo$:
+\[
+  \boxed{\;\vE(\vc{r})=\begin{cases}\dfrac{\rho\,r}{2\eo}\,\urho,&r<a,\\[8pt]\dfrac{\rho\,a^{2}}{2\eo\,r}\,\urho,&r>a.\end{cases}\;}
+\]
+Coinciden en $r=a$ ($E=\rho a/2\eo$). Fuera, es el del hilo infinito con $\lambda=\rho\pi a^{2}$ (el cilindro se ve como una línea).
+
+\textbf{Potencial.} Al igual que en el hilo infinito, la carga llega al infinito y no se puede tomar $\phi(\infty)=0$; tomamos $\phi(r_0)=0$ con $r_0>a$. Exterior ($r\ge a$):
+\[
+  \phi(r)=-\int_{r_0}^{r}\frac{\rho a^{2}}{2\eo r'}\,\dif r'=\frac{\rho a^{2}}{2\eo}\,\ln\frac{r_0}{r}.
+\]
+En el borde, $\phi(a)=\frac{\rho a^{2}}{2\eo}\ln\frac{r_0}{a}$. Interior ($r<a$), partiendo de $\phi(a)$ (no podemos integrar desde $r_0$ de una vez porque la expresión del campo cambia en $r=a$):
+\[
+  \phi(r)=\phi(a)-\int_{a}^{r}\frac{\rho\,r'}{2\eo}\,\dif r'=\frac{\rho a^{2}}{2\eo}\ln\frac{r_0}{a}-\frac{\rho}{4\eo}\,(r^{2}-a^{2}),
+\]
+es decir,
+\[
+  \boxed{\;\phi(r)=\begin{cases}-\dfrac{\rho}{4\eo}\Bigl[\,r^{2}-a^{2}-2a^{2}\ln\dfrac{r_0}{a}\Bigr],&r\le a,\\[8pt]\dfrac{\rho\,a^{2}}{2\eo}\,\ln\dfrac{r_0}{r},&r\ge a.\end{cases}\;}
+\]
+\textbf{Diferencia de potencial entre el eje y el borde.} Del resultado interior, $\phi(0)=\frac{\rho}{4\eo}\bigl(a^{2}+2a^{2}\ln\frac{r_0}{a}\bigr)$ y $\phi(a)=\frac{\rho}{4\eo}\,2a^{2}\ln\frac{r_0}{a}$, y por tanto
+\[
+  \boxed{\;\phi(0)-\phi(a)=\frac{\rho\,a^{2}}{4\eo}\;}
+\]
+independiente de $r_0$ (la referencia se cancela en toda diferencia de potencial; directamente, $\phi(0)-\phi(a)=\int_0^a E\,\dif r=\int_0^a\frac{\rho r}{2\eo}\dif r$).
+\end{resolucion}
+
+\begin{observacion}[La referencia del potencial]
+Como la carga se extiende hasta el infinito, el potencial depende de una elección arbitraria de $r_0$. La \cref{fig:sem-cilindro}c lo muestra para dos referencias, $\phi(r_0)=0$ y $\phi(0)=0$: las curvas están desplazadas una respecto de la otra por una constante, pero tienen la misma forma, el mismo campo y la misma diferencia de potencial. Eso es lo físicamente relevante.
+\end{observacion}
+
+\input{figuras/fig_sem_cilindro}
+
+% =========================================================================
+\subsection{Problema 1.11. Tres planos ortogonales cargados}\label{sem:planos}
+% =========================================================================
+\begin{ejercicio}[Tres planos]\label{ejer:planos}
+Calcular el campo creado por tres planos ortogonales ($x=0$, $y=0$ y $z=0$) infinitamente grandes y cargados uniformemente con densidades superficiales $\sigma_a$, $\sigma_b$ y $\sigma_c$.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Es un ejercicio de \emph{superposición}: la fuerza (y el campo) es lineal en las cargas, así que el campo total es la suma de los campos de cada plano, tomados como si los demás no existieran (\cref{def:superposicion}). Cada uno es el
+del plano infinito (\cref{sem:plano}) con la normal adecuada:
+\[
+  \vE_a=\frac{\sigma_a}{2\eo}\,\frac{x}{\lvert x\rvert}\,\ux,\qquad\vE_b=\frac{\sigma_b}{2\eo}\,\frac{y}{\lvert y\rvert}\,\uy,\qquad\vE_c=\frac{\sigma_c}{2\eo}\,\frac{z}{\lvert z\rvert}\,\uz .
+\]
+Sumando,
+\[
+  \boxed{\;\vE(\vc{r})=\frac{1}{2\eo}\Bigl(\sigma_a\,\frac{x}{\lvert x\rvert}\,\ux+\sigma_b\,\frac{y}{\lvert y\rvert}\,\uy+\sigma_c\,\frac{z}{\lvert z\rvert}\,\uz\Bigr)\;}
+\]
+\end{resolucion}
+
+\begin{observacion}[Interpretación]
+El espacio queda dividido en ocho octantes, y en cada uno el campo es \emph{uniforme} y cambia de signo en las componentes que atraviesan un plano. Si las tres densidades son iguales y positivas, el campo es siempre saliente: de módulo $\frac{\sqrt3\,\sigma}{2\eo}$ y dirección
+$(\pm\ux\pm\uy\pm\uz)/\sqrt3$ en cada octante (\cref{fig:sem-planos}b). Cada componente tiene su propio salto $\sigma_i/\eo$ al cruzar su plano, como exigen las condiciones de contorno: las componentes tangenciales a un plano (las de los otros dos) son continuas a su paso.
+\end{observacion}
+
+\input{figuras/fig_sem_planos}
+
+% =========================================================================
+\subsection{Problema 1.12. Semicáscara esférica: campo en el centro}\label{sem:semiesfera}
+% =========================================================================
+\begin{ejercicio}[Semicáscara esférica]\label{ejer:semiesfera}
+Una carga $Q$ está uniformemente distribuida sobre una superficie semiesférica de radio $a$. Hallar el campo eléctrico en su centro.
+\end{ejercicio}
+
+\begin{resolucion}
+\textbf{Idea.} Es una integral directa (\cref{eq:campo-sup-lin}), sobre una superficie esférica. Colocamos el centro en el origen, el punto campo $\vc{r}=\vc{0}$, y la semicáscara en la mitad $z<0$, es decir, $\theta'\in[\pi/2,\pi]$ (\cref{fig:sem-semiesfera}).
+La densidad superficial es $\sigma=Q/(2\pi a^{2})$ (media esfera: $2\pi a^{2}$).
+
+\textbf{Geometría.} Un punto de la semicáscara: $\vc{r}\,'=a\,\ur'=a\bigl[\cos\theta'\,\uz+\sen\theta'(\cos\varphi'\,\ux+\sen\varphi'\,\uy)\bigr]$, y $\dSp=a^{2}\sen\theta'\,\dif\theta'\,\dif\varphi'$. Entonces
+\[
+  \vc{R}=\vc{0}-\vc{r}\,'=-a\bigl[\cos\theta'\,\uz+\sen\theta'(\cos\varphi'\,\ux+\sen\varphi'\,\uy)\bigr],\qquad R=a .
+\]
+\textbf{Integral.} Las componentes $x$, $y$ contienen $\cos\varphi'$, $\sen\varphi'$ y se anulan al integrar en $\varphi'$; solo sobrevive la componente $z$:
+\[
+  \vE_0=\frac{\sigma}{4\pi\eo}\int\frac{\vc{R}}{R^{3}}\,\dSp=\frac{\sigma}{4\pi\eo}\int_{\pi/2}^{\pi}\!\!\int_{0}^{2\pi}\frac{-a\cos\theta'}{a^{3}}\,a^{2}\sen\theta'\,\dif\varphi'\,\dif\theta'\;\uz
+  =-\frac{\sigma}{2\eo}\int_{\pi/2}^{\pi}\cos\theta'\sen\theta'\,\dif\theta'\;\uz .
+\]
+Como $\int\cos\theta'\sen\theta'\,\dif\theta'=\tfrac12\sen^{2}\theta'$,
+\[
+  \vE_0=-\frac{\sigma}{2\eo}\Bigl[\tfrac12\sen^{2}\theta'\Bigr]_{\pi/2}^{\pi}\uz=-\frac{\sigma}{2\eo}\Bigl(0-\frac12\Bigr)\uz=\frac{\sigma}{4\eo}\,\uz,
+\]
+y con $\sigma=Q/2\pi a^{2}$,
+\[
+  \boxed{\;\vE_0=\frac{\sigma}{4\eo}\,\uz=\frac{Q}{8\pi\eo\,a^{2}}\,\uz\;}
+\]
+\end{resolucion}
+
+\begin{observacion}[Comprobaciones]
+El campo apunta en $+\uz$, alejándose de la carga, como debe: la semicáscara está en $z<0$ y empuja una carga positiva de prueba hacia arriba. Un chequeo independiente: una cáscara esférica \emph{completa} no crea campo en su interior (\cref{sem:cascara}), de modo que la semicáscara
+superior debe crear en el centro el campo opuesto, $-\frac{\sigma}{4\eo}\uz$: las dos mitades se cancelan. Además, el valor es justo la mitad del que crearía $Q$ concentrada a distancia $a$ \emph{si} las contribuciones se sumasen sin proyectar, $Q/(4\pi\eo a^{2})$, multiplicada por el
+factor geométrico $\langle\cos\theta\rangle=1/2$ del promedio de la proyección sobre el eje: $\frac{Q}{4\pi\eo a^{2}}\cdot\frac12$.
+\end{observacion}
+
+\input{figuras/fig_sem_semiesfera}
+
+% -------------------------------------------------------------------------
+\subsection{Resumen de resultados}\label{sec:resumen-seminarios}
+% -------------------------------------------------------------------------
+\begin{table}[ht]
+\centering
+\caption{Resultados de los problemas del tema ($\vE$ en V/m; $\phi$ en V).}
+\label{tab:resultados}
+\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}cp{3.1cm}p{5.2cm}p{4.2cm}@{}}
+\toprule
+Prob. & Distribución & Campo $\vE$ & Potencial $\phi$\\
+\midrule
+1.1, 1.2 & Esfera maciza, $Q$, $a$ &
+  $\dfrac{Q\,r}{4\pi\eo a^{3}}\,\ur\ (r<a)$; $\dfrac{Q}{4\pi\eo r^{2}}\,\ur\ (r>a)$ &
+  $\dfrac{Q}{8\pi\eo a}\bigl(3-\tfrac{r^{2}}{a^{2}}\bigr)$; $\dfrac{Q}{4\pi\eo r}$\\
+1.3, 1.4 & Hilo infinito, $\lambda$ & $\dfrac{\lambda}{2\pi\eo r}\,\urho$ & $\dfrac{\lambda}{2\pi\eo}\ln\dfrac{r_0}{r}$\\
+1.5, 1.6 & Plano infinito, $\sigma$ & $\dfrac{\sigma}{2\eo}\,\sgn(z)\,\uz$ & $-\dfrac{\sigma}{2\eo}\lvert z\rvert$\\
+1.7 & Anillo, $Q$, $a$ (eje) & $\dfrac{Qz}{4\pi\eo(a^{2}+z^{2})^{3/2}}\,\uz$ & $\dfrac{Q}{4\pi\eo\sqrt{a^{2}+z^{2}}}$\\
+1.7 & Disco, $\sigma$, $a$ (eje) & $\dfrac{\sigma}{2\eo}\bigl(\sgn z-\tfrac{z}{\sqrt{a^{2}+z^{2}}}\bigr)\uz$ & $\dfrac{\sigma}{2\eo}\bigl(\sqrt{a^{2}+z^{2}}-\lvert z\rvert\bigr)$\\
+1.8 & Lámina, $\rho$, espesor $a$ & $\dfrac{\rho a}{2\eo}\sgn(z)\,\uz\ (\lvert z\rvert>\tfrac a2)$; $\dfrac{\rho z}{\eo}\,\uz\ (\lvert z\rvert<\tfrac a2)$ & ---\\
+1.9 & Cáscara esférica, $Q$, $a$ & $\vc{0}\ (r<a)$; $\dfrac{Q}{4\pi\eo r^{2}}\,\ur\ (r>a)$ & $\dfrac{Q}{4\pi\eo a}$; $\dfrac{Q}{4\pi\eo r}$\\
+1.10 & Cilindro, $\rho$, $a$ & $\dfrac{\rho r}{2\eo}\,\urho\ (r<a)$; $\dfrac{\rho a^{2}}{2\eo r}\,\urho\ (r>a)$ & $\phi(0)-\phi(a)=\dfrac{\rho a^{2}}{4\eo}$\\
+1.11 & Tres planos & $\dfrac{1}{2\eo}\bigl(\sigma_a\sgn x\,\ux+\sigma_b\sgn y\,\uy+\sigma_c\sgn z\,\uz\bigr)$ & ---\\
+1.12 & Semicáscara, $Q$, $a$ (centro) & $\dfrac{Q}{8\pi\eo a^{2}}\,\uz$ & ---\\
+\bottomrule
+\end{tabular}
+\end{table}

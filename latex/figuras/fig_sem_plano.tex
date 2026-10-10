@@ -1,0 +1,45 @@
+% Figura (Problemas 1.5 y 1.6): plano infinito cargado, integración directa y superficie gaussiana.
+\begin{figure}[ht]
+\centering
+\tdplotsetmaincoords{66}{125}
+\begin{minipage}[t]{0.50\textwidth}\centering
+\begin{tikzpicture}[tdplot_main_coords, scale=0.95, baseline=(current bounding box.north)]
+  \fill[grisclaro!70, opacity=0.8] (-2.6,-2.6,0) -- (2.6,-2.6,0) -- (2.6,2.6,0) -- (-2.6,2.6,0) -- cycle;
+  \draw[grispizarra!70, line width=0.4pt] (-2.6,-2.6,0) -- (2.6,-2.6,0) -- (2.6,2.6,0) -- (-2.6,2.6,0) -- cycle;
+  \draw[eje] (0,0,0) -- (3.0,0,0) node[below left] {\small $x$};
+  \draw[eje] (0,0,0) -- (0,3.0,0) node[right] {\small $y$};
+  \draw[eje] (0,0,0) -- (0,0,3.6) node[above] {\small $z$};
+  \coordinate (P) at (0,0,2.4); \coordinate (S) at (1.4,0.9,0);
+  \draw[azulprof, densely dotted, line width=0.5pt] (0,0,0) -- (1.4,0,0) -- (S);
+  \draw[verdeteo, line width=0.5pt, domain=0:32, samples=20] plot ({0.8*cos(\x)},{0.8*sin(\x)},0);
+  \node[font=\scriptsize, text=verdeteo] at (1.0,0.25,0) {$\varphi'$};
+  \draw[->, azulclaro!80!azulacero, line width=0.8pt] (0,0,0) -- (S) node[pos=0.55, below, font=\small, text=azulprof] {$\vc{r}\,'$};
+  \draw[vect, azulprof, line width=1.1pt] (S) -- (P) node[pos=0.5, right, font=\small] {$\vc{R}$};
+  \draw[vectrojo, line width=1.2pt] (P) -- ++(0,0,0.9) node[right, font=\small, text=acento] {$\vE$};
+  \fill[acento] (S) circle (1.5pt) node[above right, font=\small, text=acento] {$\dSp$};
+  \node[font=\small, text=azulprof] at (-1.8,1.6,0) {$\sigma$};
+  \fill[azulprof] (P) circle (1.5pt) node[left, font=\small] {$P$};
+\end{tikzpicture}\\[2pt]{\small\scshape (a)\; integración directa}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\textwidth}\centering
+\begin{tikzpicture}[tdplot_main_coords, scale=0.95, baseline=(current bounding box.north)]
+  \def\Rc{0.9}\def\Hc{1.4}
+  \fill[grisclaro!70, opacity=0.8] (-2.6,-2.6,0) -- (2.6,-2.6,0) -- (2.6,2.6,0) -- (-2.6,2.6,0) -- cycle;
+  \draw[grispizarra!70, line width=0.4pt] (-2.6,-2.6,0) -- (2.6,-2.6,0) -- (2.6,2.6,0) -- (-2.6,2.6,0) -- cycle;
+  \draw[eje] (0,0,-2.0) -- (0,0,3.2) node[above] {\small $z$};
+  \foreach \zz in {\Hc,-\Hc}{
+    \draw[verdeteo, line width=0.8pt, domain=0:360, samples=60, fill=verdeteo, fill opacity=0.08] plot ({\Rc*cos(\x)},{\Rc*sin(\x)},\zz);}
+  \draw[verdeteo, line width=0.8pt] ({\Rc*cos(35)},{\Rc*sin(35)},-\Hc) -- ({\Rc*cos(35)},{\Rc*sin(35)},\Hc);
+  \draw[verdeteo, line width=0.8pt] ({\Rc*cos(215)},{\Rc*sin(215)},-\Hc) -- ({\Rc*cos(215)},{\Rc*sin(215)},\Hc);
+  \draw[vectrojo, line width=1.1pt] (0,0,\Hc) -- (0,0,\Hc+0.9) node[right, font=\small, text=acento] {$\vE$};
+  \draw[vectrojo, line width=1.1pt] (0,0,-\Hc) -- (0,0,-\Hc-0.9) node[right, font=\small, text=acento] {$\vE$};
+  \draw[vectverde, line width=0.9pt] (0.5,0.3,\Hc) -- ++(0,0,0.5) node[right, font=\scriptsize, text=verdeteo] {$\dS$};
+  \node[font=\small, text=verdeteo] at (1.3,1.3,\Hc-0.4) {$S_{\mathrm{G}}$};
+  \node[font=\small, text=azulprof] at (-1.8,1.6,0) {$\sigma$};
+\end{tikzpicture}\\[2pt]{\small\scshape (b)\; superficie gaussiana}
+\end{minipage}
+\caption{Problemas 1.5 y 1.6. (a)~Plano $z'=0$ con densidad superficial uniforme $\sigma$; el punto campo está sobre el eje $z$, el elemento $\dSp$ en
+coordenadas polares $(s',\varphi')$ y $\vc{R}=\vc{r}-\vc{r}\,'$. (b)~Superficie gaussiana: cilindro recto que atraviesa el plano, con las dos tapas a la misma distancia.
+Por la simetría especular, $\vE$ es perpendicular al plano y de módulo igual a ambos lados, con sentidos opuestos.}
+\label{fig:sem-plano}
+\end{figure}

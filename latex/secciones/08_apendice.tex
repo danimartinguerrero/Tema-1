@@ -1,1 +1,133 @@
-\section{Provisional apendice}
+% =========================================================================
+\appendix
+\section{Cálculo diferencial e integral: significado físico}\label{app:calculo}
+% =========================================================================
+A lo largo del tema hemos usado el gradiente, la divergencia y el rotacional, definidos y estudiados en el Tema~0~\cite{TEMA0}. Aquí nos detenemos en su \emph{significado físico}, que es el que
+da sentido a las ecuaciones del tema, y en dos identidades que se usan continuamente.
+
+% -------------------------------------------------------------------------
+\subsection{El gradiente}\label{app:gradiente}
+% -------------------------------------------------------------------------
+El potencial eléctrico es un campo escalar: a cada punto del espacio le corresponde un valor. Su variación a lo largo de un camino es, en cartesianas,
+\[
+  \dif\phi=\pd{\phi}{x}\,\dif x+\pd{\phi}{y}\,\dif y+\pd{\phi}{z}\,\dif z=\Bigl(\pd{\phi}{x}\,\ux+\pd{\phi}{y}\,\uy+\pd{\phi}{z}\,\uz\Bigr)\cdot\bigl(\dif x\,\ux+\dif y\,\uy+\dif z\,\uz\bigr)=\nab\phi\cdot\dif\vc{r},
+\]
+producto escalar del gradiente por el diferencial del vector de posición. Por la definición del producto escalar, $\dif\phi=\norm{\nab\phi}\,\dif r\cos\theta$, con $\theta$ el ángulo entre $\nab\phi$ y $\dif\vc{r}$.
+
+\begin{proposicion}[Significado del gradiente]\label{prop:grad-maximo}
+Fijado el módulo $\dif r$ del desplazamiento, la variación $\dif\phi$ es máxima cuando $\theta=0$, es decir, cuando $\dif\vc{r}\parallel\nab\phi$. Por tanto, $\nab\phi$ es el vector que, en cada punto, apunta en la dirección y sentido de máximo crecimiento de
+$\phi$, y cuyo módulo es esa tasa máxima de variación, $\norm{\nab\phi}$.
+\end{proposicion}
+\begin{proof}
+$\dif\phi/\dif r=\norm{\nab\phi}\cos\theta\le\norm{\nab\phi}$, con igualdad si y solo si $\cos\theta=1$.
+\end{proof}
+De aquí que $\vE=-\nab\phi$ apunte hacia donde el potencial decrece más deprisa, y que las líneas de campo sean perpendiculares a las equipotenciales ($\cos\theta=0$ para $\dif\phi=0$).
+
+% -------------------------------------------------------------------------
+\subsection{La divergencia}\label{app:divergencia}
+% -------------------------------------------------------------------------
+La divergencia de un campo vectorial es una magnitud escalar; en cartesianas,
+$\nab\cdot\vE=\partial_xE_x+\partial_yE_y+\partial_zE_z$. El nombre está bien escogido: mide cómo el campo \emph{diverge} (se expande) o \emph{converge} (se encoge) en un punto (\cref{fig:div3}).
+Dice, por tanto, si en ese punto hay \emph{fuentes} (divergencia positiva) o \emph{sumideros} (negativa).
+
+\input{figuras/fig_div3}
+
+Otra forma de entender su significado es mediante el teorema de la divergencia, $\iiint_{V}\nab\cdot\vE\,\dV=\oiint_{S}\vE\cdot\dS$: la integral de la divergencia en un volumen es el flujo a través de la superficie que lo limita. Si el flujo es positivo, sale más de lo que entra y hay fuentes encerradas;
+en caso contrario hay sumideros. Dividiendo por el volumen y haciéndolo tender a cero,
+\begin{equation}\label{eq:div-limite}
+  \nab\cdot\vE(\vc{r})=\lim_{V\to\{\vc{r}\}}\frac{1}{V}\oiint_{\partial V}\vE\cdot\dS,
+\end{equation}
+la divergencia es el flujo neto por unidad de volumen, es decir, una medida de que en un punto haya fuentes o sumideros.
+
+\begin{ejemplo}[Un caso que parece contradecir el teorema de la divergencia]\label{ej:div-r2}
+Comprobar que el campo $\vc{A}=\dfrac{1}{r^{2}}\,\ur$ verifica el teorema de la divergencia en una esfera centrada en el origen.
+
+\emph{Flujo.} En esféricas, con $\dS=r^{2}\sen\theta\,\dif\theta\,\dif\varphi\,\ur$,
+\[
+  \oiint_{S}\vc{A}\cdot\dS=\int_{0}^{\pi}\!\!\int_{0}^{2\pi}\frac{1}{r^{2}}\,r^{2}\sen\theta\,\dif\varphi\,\dif\theta=2\pi\int_{0}^{\pi}\sen\theta\,\dif\theta=4\pi .
+\]
+\emph{Divergencia, a primera vista.} $\nab\cdot\vc{A}=\frac{1}{r^{2}}\pd{}{r}\bigl(r^{2}\cdot\frac{1}{r^{2}}\bigr)=\frac{1}{r^{2}}\pd{(1)}{r}=0$, de modo que $\iiint_{V}\nab\cdot\vc{A}\,\dV=0$ y el teorema parece no cumplirse: $0\overset{?}{=}4\pi$.
+Resulta extraño obtener una divergencia nula para un campo cuyas líneas, obviamente, se expanden desde el origen.
+
+\emph{Resolución.} El cálculo olvida que el campo \emph{diverge} en $r=0$: $\nab\cdot\vc{A}=0$ en todos los puntos salvo en $r=0$, donde diverge. Como el volumen de integración contiene el origen, no se puede sustituir la divergencia por cero. Lo correcto es usar la delta de Dirac (\cref{teo:delta}):
+$\nab\cdot\bigl(\ur/r^{2}\bigr)=4\pi\,\delta^{3}(\vc{r})$. Entonces
+\[
+  \iiint_{V}\nab\cdot\vc{A}\,\dV=\iiint_{V}4\pi\,\delta^{3}(\vc{r})\,\dV=4\pi=\oiint_{S}\vc{A}\cdot\dS\ \checkmark
+\]
+Es, de nuevo, el contenido del campo de una carga puntual.
+\end{ejemplo}
+
+% -------------------------------------------------------------------------
+\subsection{El rotacional}\label{app:rotacional}
+% -------------------------------------------------------------------------
+El rotacional es una magnitud vectorial; en cartesianas,
+\[
+  \nab\times\vE=\Bigl(\pd{E_z}{y}-\pd{E_y}{z}\Bigr)\ux+\Bigl(\pd{E_x}{z}-\pd{E_z}{x}\Bigr)\uy+\Bigl(\pd{E_y}{x}-\pd{E_x}{y}\Bigr)\uz .
+\]
+Mide cuánto \emph{gira} el campo alrededor de un punto; si el campo de la \cref{fig:campos_rot} (izquierda) representa un movimiento de fluido, una pequeña rueda con paletas colocada en cualquier punto giraría, y el rotacional apunta en el eje
+de giro, con el sentido que da la regla de la mano derecha (en el ejemplo, $+\uz$). Con el teorema de Stokes, $\iint_{S}(\nab\times\vE)\cdot\dS=\oint_{C}\vE\cdot\dl$: el flujo del rotacional por una superficie abierta es la \emph{suma total de remolinos}, que
+se determina también observando cómo el campo sigue el contorno. A la integral de línea cerrada se la denomina \emph{circulación} del campo.
+
+\input{figuras/fig_campos_rot}
+
+% -------------------------------------------------------------------------
+\subsection{Dos identidades fundamentales}\label{app:identidades}
+% -------------------------------------------------------------------------
+Las aplicaciones reiteradas del operador $\nab$ llevan a dos identidades de gran interés en electromagnetismo.
+
+\begin{proposicion}[Rotacional de un gradiente]\label{prop:rot-grad}
+Para todo campo escalar $\phi$ de clase $C^{2}$, $\nab\times(\nab\phi)=\vc{0}$. Recíprocamente, si un campo vectorial es irrotacional en una región simplemente conexa, se puede expresar como el gradiente de un campo escalar.
+\end{proposicion}
+\begin{proof}
+Por el teorema de Stokes y el del gradiente, para toda superficie $S$ de borde $C$,
+\[
+  \iint_{S}\bigl[\nab\times(\nab\phi)\bigr]\cdot\dS=\oint_{C}\nab\phi\cdot\dl=\oint_{C}\dif\phi=0,
+\]
+y como $S$ es arbitraria, el integrando es nulo. El recíproco es la proposición correspondiente del Tema~0~\cite{TEMA0}.
+\end{proof}
+Los campos irrotacionales se denominan \emph{conservativos} y siempre se pueden expresar como el gradiente de una función escalar. El campo electrostático es el ejemplo característico: $\nab\times\vE=\vc{0}$ y $\vE=-\nab\phi$.
+
+\begin{proposicion}[Divergencia de un rotacional]\label{prop:div-rot}
+Para todo campo vectorial $\vc{A}$ de clase $C^{2}$, $\nab\cdot(\nab\times\vc{A})=0$. Recíprocamente, un campo con divergencia nula en una región adecuada puede escribirse como rotacional de otro campo vectorial.
+\end{proposicion}
+\begin{proof}
+Por el teorema de la divergencia, $\iiint_{V}\nab\cdot(\nab\times\vc{A})\,\dV=\oiint_{S}(\nab\times\vc{A})\cdot\dS$, con $S=\partial V$ cerrada. Cortemos $S$ por una curva cerrada $C$ en dos superficies abiertas $S_1$ y $S_2$ con el mismo borde $C$ y
+orientaciones inducidas opuestas. Por Stokes, $\iint_{S_1}(\nabla\times\vc{A})\cdot\dS=\oint_{C}\vc{A}\cdot\dl$ y $\iint_{S_2}(\nabla\times\vc{A})\cdot\dS=-\oint_{C}\vc{A}\cdot\dl$; la suma es cero. Como $V$ es arbitrario, la divergencia del rotacional
+es nula en todo punto.
+\end{proof}
+A los vectores de divergencia nula se les denomina \emph{solenoidales}. Un ejemplo característico es la inducción magnética, $\nab\cdot\vc{B}=0$, que se escribe en función del potencial vector magnético: $\vc{B}=\nab\times\vc{A}$.
+
+% =========================================================================
+\section{Formulario del tema}\label{app:formulario}
+% =========================================================================
+Reunimos las expresiones fundamentales del Tema~1 (cf.~\cite{FORMULARIO}).
+
+\begin{table}[ht]
+\centering
+\caption{Resumen de fórmulas del Tema~1.}
+\label{tab:formulario}
+\small
+\renewcommand{\arraystretch}{1.7}
+\begin{tabular}{@{}p{4.2cm}p{10.2cm}@{}}
+\toprule
+\emph{Ley de Coulomb} & $\displaystyle\vF_{12}=\frac{1}{4\pi\eo}\frac{q_1q_2}{R_{12}^{2}}\,\uh{R_{12}},\quad\vc{R}_{12}=\vc{r}_2-\vc{r}_1$\\
+Constantes & $K=\frac{1}{4\pi\eo}=8{,}988\cdot10^{9}\,\mathrm{N\,m^{2}/C^{2}}$; $\eo=8{,}85\cdot10^{-12}\,\mathrm{F/m}$; $c^{2}=\frac{1}{\eo\mu_0}$; $e=1{,}6\cdot10^{-19}\,\mathrm{C}$\\
+Superposición & $\displaystyle\vF_q=\frac{q}{4\pi\eo}\sum_i\frac{q_i}{R_i^{2}}\,\uh{R_i}$\\
+\midrule
+\emph{Campo eléctrico} & $\displaystyle\vE=\lim_{q\to0}\frac{\vF_q}{q}=\frac{1}{4\pi\eo}\frac{\qp}{R^{2}}\,\uR$, \quad $\vc{R}=\vc{r}-\vc{r}\,'$\\
+Distribuciones & $\displaystyle\vE=\frac{1}{4\pi\eo}\int_{V'}\rho\,\frac{\vc{R}}{R^{3}}\,\dVp$ \ (análogo con $\sigma\,\dSp$ y $\lambda\,\dlp$); $\ \rho=\frac{\dif q'}{\dVp}$, $\sigma=\frac{\dif q'}{\dSp}$, $\lambda=\frac{\dif q'}{\dlp}$\\
+\midrule
+\emph{Ángulo sólido} & $\displaystyle\dOm=\frac{\dS\cdot\uR}{R^{2}}$; \quad $\oint_S\dOm=4\pi$ (punto interior), $0$ (exterior)\\
+\emph{Ley de Gauss} & $\displaystyle\oiint_{S}\vE\cdot\dS=\frac{\Qenc}{\eo},\qquad\nab\cdot\vE=\frac{\rho}{\eo}$\\
+Delta de Dirac & $\displaystyle\nab\cdot\frac{\uR}{R^{2}}=4\pi\delta^{3}(\vc{R}),\quad\Lap\frac{1}{R}=-4\pi\delta^{3}(\vc{R}),\quad\int f(\vc{r})\delta^{3}(\vc{r}-\vc{a})\dV=f(\vc{a})$\\
+\midrule
+\emph{Potencial} & $\displaystyle\vE=-\nab\phi,\quad\phi=\frac{1}{4\pi\eo}\int\frac{\rho\,\dVp}{R}+\text{cte};\quad\phi(\vc{r}_2)-\phi(\vc{r}_1)=-\int_{1}^{2}\vE\cdot\dl$\\
+Rotacional y circulación & $\displaystyle\nab\times\vE=\vc{0},\qquad\oint_C\vE\cdot\dl=0$\\
+Poisson y Laplace & $\displaystyle\Lap\phi=-\frac{\rho}{\eo},\qquad\Lap\phi=0\ \ (\rho=0)$\\
+Trabajo & $W_{AB}=q\,[\phi(B)-\phi(A)]$\\
+\midrule
+\emph{Condiciones de contorno} & $\displaystyle F_{2n}-F_{1n}=\lim_{h\to0}h\,\nab\cdot\vc{F},\quad\vc{F}_{2t}-\vc{F}_{1t}=\lim_{h\to0}h\,(\nab\times\vc{F})\times\un$\\
+En electrostática & $\displaystyle\un\cdot(\vE_2-\vE_1)=\frac{\sigma}{\eo},\quad\un\times(\vE_2-\vE_1)=\vc{0},\quad\phi_2=\phi_1$\\
+\bottomrule
+\end{tabular}
+\end{table}

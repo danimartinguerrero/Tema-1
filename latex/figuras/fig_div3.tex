@@ -1,0 +1,28 @@
+% Figura: campos con divergencia negativa, nula y positiva.
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.325\textwidth}\centering
+\begin{tikzpicture}[x=0.68cm, y=0.68cm, baseline=(current bounding box.north)]
+  \marcoD{-2.7}{2.7}{-2.7}{2.7}{-2,-1,0,1,2}{-2,-1,0,1,2}
+  \ejesD{-2.7}{2.7}{-2.7}{2.7}
+  \clipD{-2.7}{2.7}{-2.7}{2.7}{\flechas{-\x}{-\y}{-2.4,-1.8,...,2.4}{-2.4,-1.8,...,2.4}{0.20}{3.4}}
+\end{tikzpicture}\\[3pt]{\small (a)\; $\nab\cdot\vc{A}<0$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.325\textwidth}\centering
+\begin{tikzpicture}[x=0.68cm, y=0.68cm, baseline=(current bounding box.north)]
+  \marcoD{-2.7}{2.7}{-2.7}{2.7}{-2,-1,0,1,2}{-2,-1,0,1,2}
+  \ejesD{-2.7}{2.7}{-2.7}{2.7}
+  \clipD{-2.7}{2.7}{-2.7}{2.7}{\flechas{1}{0}{-2.4,-1.8,...,2.4}{-2.4,-1.8,...,2.4}{0.34}{1.2}}
+\end{tikzpicture}\\[3pt]{\small (b)\; $\nab\cdot\vc{A}=0$}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.325\textwidth}\centering
+\begin{tikzpicture}[x=0.68cm, y=0.68cm, baseline=(current bounding box.north)]
+  \marcoD{-2.7}{2.7}{-2.7}{2.7}{-2,-1,0,1,2}{-2,-1,0,1,2}
+  \ejesD{-2.7}{2.7}{-2.7}{2.7}
+  \clipD{-2.7}{2.7}{-2.7}{2.7}{\flechas{\x}{\y}{-2.4,-1.8,...,2.4}{-2.4,-1.8,...,2.4}{0.20}{3.4}}
+\end{tikzpicture}\\[3pt]{\small (c)\; $\nab\cdot\vc{A}>0$}
+\end{minipage}
+\caption{Significado de la divergencia. (a)~$\vc{A}=-\vc{r}$: las flechas convergen hacia el origen (sumidero, divergencia $-2$). (b)~Campo uniforme:
+lo que entra por un lado sale por el otro (divergencia nula). (c)~$\vc{A}=\vc{r}$: el campo se expande desde el origen (fuente, divergencia $+2$). El color codifica $\norm{\vc{A}}$.}
+\label{fig:div3}
+\end{figure}

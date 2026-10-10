@@ -175,9 +175,11 @@ Con \cref{eq:delta-muestreo} (la delta cae en el interior del intervalo de integ
 
 En tres dimensiones se define $\delta^{3}(\vc{r})=\delta(x)\,\delta(y)\,\delta(z)$ y, para un punto $\vc{a}$ del espacio,
 \begin{equation}\label{eq:delta3}
+\begin{gathered}
   \delta^{3}(\vc{r}-\vc{a})=\begin{cases}0,&\vc{r}\neq\vc{a},\\\infty,&\vc{r}=\vc{a},\end{cases}\qquad
-  \int_{V}\delta^{3}(\vc{r}-\vc{a})\,\dV=\begin{cases}1,&\vc{a}\in V,\\0,&\vc{a}\notin V,\end{cases}\qquad
+  \int_{V}\delta^{3}(\vc{r}-\vc{a})\,\dV=\begin{cases}1,&\vc{a}\in V,\\0,&\vc{a}\notin V,\end{cases}\\[4pt]
   \int_{V}f(\vc{r})\,\delta^{3}(\vc{r}-\vc{a})\,\dV=\begin{cases}f(\vc{a}),&\vc{a}\in V,\\0,&\vc{a}\notin V.\end{cases}
+\end{gathered}
 \end{equation}
 
 \begin{ejemplo}[Delta tridimensional]\label{ej:delta3}

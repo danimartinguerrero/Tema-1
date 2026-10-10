@@ -1,0 +1,30 @@
+% Figura (Problema 1.1): esfera uniforme, punto campo en el eje z.
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \def\RR{1.6}
+  \shade[ball color=azulclaro!55, opacity=0.35] (0,0) circle (\RR);
+  \draw[azulprof!60, line width=0.6pt] (0,0) circle (\RR);
+  \draw[azulprof!40, line width=0.4pt] (-\RR,0) arc (180:360:{\RR} and 0.45);
+  \draw[azulprof!40, line width=0.4pt, densely dashed] (-\RR,0) arc (180:0:{\RR} and 0.45);
+  \draw[eje] (0,0) -- (0,4.3) node[above] {\small $z$};
+  \draw[eje] (0,0) -- (3.0,0) node[right] {\small $y$};
+  \draw[eje] (0,0) -- (-1.5,-1.0) node[below left] {\small $x$};
+  \coordinate (S) at (0.95,0.95);
+  \coordinate (P) at (0,3.2);
+  \draw[->, azulclaro!80!azulacero, line width=0.9pt] (0,0) -- (S) node[pos=0.55, below right, font=\small, text=azulprof] {$\vc{r}\,'$};
+  \draw[vect, azulprof, line width=1.1pt] (S) -- (P) node[pos=0.5, right, font=\small] {$\vc{R}$};
+  \draw[->, azulacero, line width=1pt] (0,0) -- (P) node[pos=0.85, left, font=\small, text=azulprof] {$\vc{r}=z\,\uz$};
+  \draw[vectrojo, line width=1.3pt] (P) -- ++(0,0.8) node[right, font=\small, text=acento] {$\vE$};
+  \fill[acento] (S) circle (2pt) node[above right, font=\small, text=acento] {$\dV'$};
+  \fill[azulprof] (P) circle (1.6pt);
+  \draw[verdeteo, line width=0.5pt] (0,0.62) arc (90:45:0.62);
+  \node[font=\scriptsize, text=verdeteo] at (0.2,0.9) {$\theta'$};
+  \node[font=\small, text=azulprof] at (-1.15,0.75) {$\rho$};
+  \draw[grispizarra, <->, line width=0.4pt] (-1.9,0) -- (-1.9,1.6) node[midway, left, font=\scriptsize] {$a$};
+\end{tikzpicture}
+\caption{Problema 1.1. Esfera de radio $a$ con densidad volúmica uniforme $\rho$. El punto campo está en el eje $z$ a distancia $z>a$ del centro,
+$\vc{r}=z\,\uz$; el elemento $\dV'$ está en $\vc{r}\,'=r'\,\ur'$ y $\vc{R}=\vc{r}-\vc{r}\,'$ lo une con el punto campo. Por simetría
+solo sobrevive la componente $z$ del campo.}
+\label{fig:sem-esfera}
+\end{figure}

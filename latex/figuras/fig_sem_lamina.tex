@@ -1,0 +1,44 @@
+% Figura (Problema 1.8): lámina con densidad volúmica; superficies gaussianas y campo.
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.60\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=1cm, y=1cm]
+  \foreach \xo/\tit in {0/{(a)\;$\ent{z}>a/2$}, 4.6/{(b)\;$\ent{z}<a/2$}}{
+    \begin{scope}[shift={(\xo,0)}]
+      \fill[azulclaro!45] (-1.7,-0.7) rectangle (1.7,0.7);
+      \draw[azulprof, line width=0.5pt] (-1.7,0.7) -- (1.7,0.7) (-1.7,-0.7) -- (1.7,-0.7);
+      \draw[eje] (-1.9,0) -- (1.9,0) node[right, font=\scriptsize] {$x$};
+      \draw[eje] (0,-2.0) -- (0,2.0) node[above, font=\scriptsize] {$z$};
+      \node[font=\scriptsize, text=azulprof, anchor=south west] at (-1.65,0.05) {$\rho$};
+      \draw[<->, azulprof, line width=0.4pt] (-1.9,-0.7) -- (-1.9,0.7) node[midway, left, font=\scriptsize] {$a$};
+    \end{scope}}
+  % (a) gaussiana alta
+  \draw[verdeteo, line width=0.9pt, fill=verdeteo, fill opacity=0.08] (-0.6,-1.5) rectangle (0.6,1.5);
+  \draw[vectrojo, line width=1.0pt] (0,1.5) -- (0,1.95); \draw[vectrojo, line width=1.0pt] (0,-1.5) -- (0,-1.95);
+  \node[font=\scriptsize, text=verdeteo, anchor=west] at (0.62,1.25) {$S_{\mathrm{G}}$};
+  \node[font=\scriptsize, text=azulprof, anchor=west] at (0.65,-1.2) {$A$};
+  \draw[vectverde, line width=0.7pt] (-0.35,1.5) -- ++(0,0.3) node[above, font=\tiny, text=verdeteo] {$\dS$};
+  % (b) gaussiana interior
+  \draw[verdeteo, line width=0.9pt, fill=verdeteo, fill opacity=0.10] (4.0,-0.35) rectangle (5.2,0.35);
+  \draw[vectrojo, line width=1.0pt] (4.6,0.35) -- (4.6,0.65); \draw[vectrojo, line width=1.0pt] (4.6,-0.35) -- (4.6,-0.65);
+  \node[font=\scriptsize, text=verdeteo, anchor=west] at (5.25,0.35) {$S_{\mathrm{G}}$};
+  \draw[<->, grispizarra, line width=0.4pt] (3.8,-0.35) -- (3.8,0.35) node[midway, left, font=\scriptsize] {$2z$};
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.36\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]
+  \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$z/a$}, ylabel={$E_z/(\rho a/2\eo)$}, xmin=-1.5, xmax=1.5, ymin=-1.3, ymax=1.3,
+     xtick={-1,-0.5,0,0.5,1}, xticklabels={$-1$,$-\tfrac12$,0,$\tfrac12$,1}, ytick={-1,0,1}, domain=-1.5:1.5, samples=100]
+    \addplot[azulprof, line width=1.1pt, domain=-0.5:0.5] {2*x};
+    \addplot[azulprof, line width=1.1pt, domain=0.5:1.5] {1};
+    \addplot[azulprof, line width=1.1pt, domain=-1.5:-0.5] {-1};
+    \addplot[grispizarra, densely dashed] coordinates {(-0.5,-1.3) (-0.5,1.3)};
+    \addplot[grispizarra, densely dashed] coordinates {(0.5,-1.3) (0.5,1.3)};
+  \end{axis}
+\end{tikzpicture}
+\end{minipage}\\[2pt]{\small\scshape (c)}
+\caption{Problema 1.8. Lámina de espesor $a$ con densidad volúmica uniforme $\rho$, vista de canto, y superficies gaussianas (cilindros de área de base $A$ con tapas simétricas
+respecto del plano medio). (a)~Fuera de la lámina el cilindro la atraviesa y encierra $\rho A a$. (b)~Dentro, encierra solo la parte de espesor $2z$. (c)~El campo es lineal en el interior
+y constante, de módulo $\rho a/2\eo$, fuera; es continuo en las caras, porque no hay carga superficial.}
+\label{fig:sem-lamina}
+\end{figure}

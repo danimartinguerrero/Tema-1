@@ -1,0 +1,58 @@
+% Figura (Problema 1.10): cilindro infinito con densidad volúmica; campo y potencial.
+\begin{figure}[ht]
+\centering
+\begin{minipage}[t]{0.34\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=0.82cm, y=0.82cm]
+  \def\rx{1.1}\def\ry{0.34}\def\hc{3.6}\def\rg{1.9}\def\ryg{0.58}
+  % cilindro cargado
+  \fill[azulclaro!45] (-\rx,0) -- (-\rx,\hc) arc (180:360:{\rx} and \ry) -- (\rx,0) arc (0:-180:{\rx} and \ry) -- cycle;
+  \draw[azulprof, line width=0.8pt] (-\rx,0) -- (-\rx,\hc) (\rx,0) -- (\rx,\hc);
+  \draw[azulprof, line width=0.8pt, fill=azulclaro!70] (0,\hc) ellipse ({\rx} and \ry);
+  \draw[azulprof, line width=0.8pt] (-\rx,0) arc (180:360:{\rx} and \ry);
+  \draw[azulprof, line width=0.4pt, densely dashed] (-\rx,0) arc (180:0:{\rx} and \ry);
+  \node[font=\small, text=azulprof] at (0,\hc+0.0) {$\rho$};
+  \draw[grispizarra, <->, line width=0.4pt] (0,\hc-0.45) -- (\rx,\hc-0.45) node[midway, below, font=\scriptsize, text=azulprof] {$a$};
+  % gaussiana exterior
+  \def\ya{1.0}\def\yb{2.8}
+  \draw[verdeteo, line width=0.8pt] (-\rg,\ya) -- (-\rg,\yb) (\rg,\ya) -- (\rg,\yb);
+  \draw[verdeteo, line width=0.8pt] (0,\yb) ellipse ({\rg} and \ryg);
+  \draw[verdeteo, line width=0.8pt] (-\rg,\ya) arc (180:360:{\rg} and \ryg);
+  \draw[verdeteo, line width=0.5pt, densely dashed] (-\rg,\ya) arc (180:0:{\rg} and \ryg);
+  \foreach \z in {1.4,2.4}{
+    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (\rg,\z) -- (\rg+0.65,\z);
+    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (-\rg,\z) -- (-\rg-0.65,\z);}
+  \draw[grispizarra, <->, line width=0.4pt] (\rg+1.0,\ya) -- (\rg+1.0,\yb) node[midway, right, font=\scriptsize] {$h$};
+  \node[font=\scriptsize, text=verdeteo, anchor=east] at (-\rg-0.05,\yb+0.3) {$S_{\mathrm{G}}$};
+\end{tikzpicture}\\[2pt]{\small\scshape (a)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]
+  \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$r/a$}, ylabel={$E/(\rho a/2\eo)$}, xmin=0, xmax=3, ymin=0, ymax=1.2,
+     xtick={0,1,2,3}, ytick={0,0.5,1}, domain=0:3, samples=120]
+    \addplot[azulprof, line width=1.1pt, domain=0:1] {x};
+    \addplot[azulprof, line width=1.1pt, domain=1:3] {1/x};
+    \addplot[grispizarra, densely dashed] coordinates {(1,0) (1,1)};
+    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:1.3,0.55) {$\propto 1/r$};
+    \node[font=\scriptsize, text=azulprof, anchor=south west] at (axis cs:0.1,0.45) {$\propto r$};
+  \end{axis}
+\end{tikzpicture}\\[2pt]{\small\scshape (b)}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\textwidth}\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]
+  \begin{axis}[tema, width=\textwidth, height=4.4cm, xlabel={$r/a$}, ylabel={$\phi/(\rho a^{2}/2\eo)$}, xmin=0, xmax=3, ymin=-2.4, ymax=1.4,
+     xtick={0,1,2,3}, ytick={-2,-1,0,1}, domain=0:3, samples=120, legend style={at={(0.98,0.97)}, anchor=north east, font=\tiny}]
+    % phi(r0)=0 con r0=3a
+    \addplot[azulacero, line width=1.1pt, domain=0.001:1] {0.5*(1-x^2)+ln(3)};
+    \addplot[azulacero, line width=1.1pt, domain=1:3] {ln(3/x)};
+    % phi(0)=0
+    \addplot[acento, line width=1.1pt, domain=0.001:1] {-x^2/2};
+    \addplot[acento, line width=1.1pt, domain=1:3] {-ln(x)-0.5};
+    \legend{$\phi(r_0)=0$,,$\phi(0)=0$}
+  \end{axis}
+\end{tikzpicture}\\[2pt]{\small\scshape (c)}
+\end{minipage}
+\caption{Problema 1.10. (a)~Cilindro infinito de radio $a$ con densidad uniforme $\rho$ y superficie gaussiana exterior (coaxial, de radio $r>a$ y altura $h$).
+(b)~El campo, radial, crece linealmente en el interior y decae como $1/r$ fuera. (c)~Potencial con dos elecciones de referencia, para $r_0=3a$: $\phi(r_0)=0$ (azul) y
+$\phi(0)=0$ (ocre). Al ser la carga infinita no puede tomarse $\phi(\infty)=0$; la diferencia $\phi(0)-\phi(a)=\rho a^{2}/4\eo$ no depende de la referencia.}
+\label{fig:sem-cilindro}
+\end{figure}

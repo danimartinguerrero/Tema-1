@@ -1,0 +1,28 @@
+% Figura (Problema 1.4): superficie gaussiana cilíndrica alrededor de un hilo infinito.
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm]
+  \def\rx{1.4}\def\ry{0.42}\def\hc{3.2}
+  \draw[line width=2.2pt, azulprof] (0,-0.9) -- (0,\hc+0.9);
+  \node[font=\small, text=azulprof, anchor=west] at (0.08,\hc+0.7) {$\lambda$};
+  % cilindro de Gauss
+  \fill[verdeteo, opacity=0.06] (-\rx,0) -- (-\rx,\hc) arc (180:360:{\rx} and \ry) -- (\rx,0) arc (0:-180:{\rx} and \ry) -- cycle;
+  \draw[verdeteo, line width=0.8pt] (-\rx,0) -- (-\rx,\hc) (\rx,0) -- (\rx,\hc);
+  \draw[verdeteo, line width=0.8pt] (0,\hc) ellipse ({\rx} and \ry);
+  \draw[verdeteo, line width=0.8pt] (-\rx,0) arc (180:360:{\rx} and \ry);
+  \draw[verdeteo, line width=0.5pt, densely dashed] (-\rx,0) arc (180:0:{\rx} and \ry);
+  \node[font=\small, text=verdeteo, anchor=east] at (-\rx-0.05,\hc-0.2) {$S_{\mathrm{G}}$};
+  % campo radial sobre la superficie lateral
+  \foreach \z in {0.6,1.6,2.6}{
+    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (\rx,\z) -- (\rx+0.8,\z);
+    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (-\rx,\z) -- (-\rx-0.8,\z);
+    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (0.5,\z-\ry-0.0) ++(0,-0.0) -- ++(0.28,-0.38);
+    \draw[-{Stealth[length=4pt]}, cm1, line width=0.7pt] (-0.5,\z-\ry-0.0) -- ++(-0.28,-0.38);}
+  \draw[vectverde, line width=0.9pt] (\rx,1.1) -- ++(0.5,0) node[right, font=\scriptsize, text=verdeteo] {$\dS$};
+  \draw[grispizarra, <->, line width=0.4pt] (0,2.15) -- (\rx,2.15) node[midway, above, font=\scriptsize, text=azulprof] {$r$};
+  \draw[grispizarra, <->, line width=0.4pt] (\rx+1.25,0) -- (\rx+1.25,\hc) node[midway, right, font=\small] {$\ell$};
+\end{tikzpicture}
+\caption{Problema 1.4. Superficie gaussiana cilíndrica, coaxial con el hilo, de radio $r$ y altura $\ell$. El campo es radial, de módulo constante sobre la
+superficie lateral y paralelo a $\dS$ ($\vE\parallel\dS$); en las tapas $\vE\perp\dS$ y no hay flujo.}
+\label{fig:sem-gauss-cil}
+\end{figure}
